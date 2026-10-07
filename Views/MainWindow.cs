@@ -28,6 +28,20 @@ public sealed class MainWindow : Window
         panel.Children.Add(new TextBlock { Text = "Local queue • keep this app open and your Mac awake" });
         AddField("signal-cli executable", Editor(nameof(viewModel.Cli)));
         AddField("Linked account", Editor(nameof(viewModel.Account), "Your account: +countrycode… or ACI"));
+        var accounts = new ComboBox { PlaceholderText = "Choose a detected account", HorizontalAlignment = HorizontalAlignment.Stretch };
+        accounts.Bind(ItemsControl.ItemsSourceProperty, new Binding(nameof(viewModel.LinkedAccounts)));
+        accounts.Bind(ComboBox.SelectedItemProperty, new Binding(nameof(viewModel.Account)) { Mode = BindingMode.OneWay });
+        accounts.SelectionChanged += (_, _) =>
+        {
+            if (accounts.SelectedItem is string selected) viewModel.Account = selected;
+        };
+        panel.Children.Add(accounts);
+        var refreshAccounts = new Button { Content = "Refresh linked accounts" };
+        refreshAccounts.Click += async (_, _) => await viewModel.RefreshAccountsAsync();
+        panel.Children.Add(refreshAccounts);
+        var accountStatus = new TextBlock { TextWrapping = TextWrapping.Wrap };
+        accountStatus.Bind(TextBlock.TextProperty, new Binding(nameof(viewModel.AccountDiscoveryStatus)));
+        panel.Children.Add(accountStatus);
         AddField("Recipient", Editor(nameof(viewModel.Recipient), "Recipient phone number: +countrycode…"));
         var body = Editor(nameof(viewModel.Body), "Message");
         body.AcceptsReturn = true;

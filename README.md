@@ -17,6 +17,7 @@ Public screenshots will use synthetic content and redact account and recipient i
 ## Features
 
 - Schedule text and images to phone-number recipients.
+- Detect the local linked account automatically; choose explicitly when several accounts exist.
 - Select multiple photos or paste a screenshot from the macOS clipboard.
 - Review image thumbnails and remove attachments before scheduling.
 - Send images with or without a caption; up to 8 images and 20 MiB total per message.
@@ -119,7 +120,7 @@ The script detects the architecture, publishes a self-contained application and 
 ### Schedule a message
 
 1. Set the `signal-cli` executable path; Homebrew locations are detected by default.
-2. Enter the linked account identifier and recipient's international phone number.
+2. The linked account is detected on startup. If several accounts exist, choose one; after linking or changing the executable path, click **Refresh linked accounts**. Manual account entry remains available. Enter the recipient's international phone number.
 3. Add text or images. To capture a screenshot to the clipboard, press **Control + Shift + Command + 4**, then click **Paste screenshot**.
 4. Enter the local date and time as `yyyy-MM-dd HH:mm` and click **Schedule**.
 5. Keep the application open and the Mac awake with network access.

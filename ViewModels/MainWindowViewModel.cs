@@ -26,6 +26,9 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
     private string when = DateTime.Now.AddMinutes(30).ToString("yyyy-MM-dd HH:mm");
     private string status = "Opening encrypted queue…";
     private bool canSchedule;
+    private bool isDiscoveringAccounts, closed;
+    private IReadOnlyList<string> linkedAccounts = Array.Empty<string>();
+    private string accountDiscoveryStatus = "";
 
     public string Cli { get => cli; set => Set(ref cli, value); }
     public string Account { get => account; set => Set(ref account, value); }
@@ -35,6 +38,9 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
     public string Status { get => status; private set => Set(ref status, value); }
     public bool CanSchedule { get => canSchedule; private set => Set(ref canSchedule, value); }
     public bool IsBusy => dispatcher?.IsBusy ?? false;
+    public bool IsDiscoveringAccounts { get => isDiscoveringAccounts; private set => Set(ref isDiscoveringAccounts, value); }
+    public IReadOnlyList<string> LinkedAccounts { get => linkedAccounts; private set => Set(ref linkedAccounts, value); }
+    public string AccountDiscoveryStatus { get => accountDiscoveryStatus; private set => Set(ref accountDiscoveryStatus, value); }
     public IEnumerable<ScheduledMessage> Messages => store == null
         ? Enumerable.Empty<ScheduledMessage>()
         : store.Items.OrderByDescending(message => message.Due);
@@ -47,7 +53,7 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
     {
         timer.Tick += async (_, _) =>
         {
-            if (dispatcher != null) await dispatcher.DispatchDueAsync();
+            if (dispatcher != null && !IsDiscoveringAccounts) await dispatcher.DispatchDueAsync();
         };
     }
 
@@ -79,8 +85,47 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
             Status = "Ready. Account linking instructions are in README.";
             QueueChanged?.Invoke();
             timer.Start();
+            await RefreshAccountsAsync();
         }
         catch (Exception exception) { Status = "Cannot open queue: " + exception.Message; }
+    }
+
+    public async Task RefreshAccountsAsync()
+    {
+        if (closed || IsBusy || IsDiscoveringAccounts) return;
+        var executable = Cli;
+        var originalAccount = Account;
+        IsDiscoveringAccounts = true;
+        AccountDiscoveryStatus = "Looking for linked accounts…";
+        try
+        {
+            var accounts = await SignalAccountDiscovery.ListAsync(executable);
+            if (closed || Cli != executable) return;
+            LinkedAccounts = accounts;
+            if (Account == originalAccount)
+                Account = accounts.Count == 1 ? accounts[0]
+                    : accounts.Contains(Account, StringComparer.Ordinal) ? Account : "";
+            AccountDiscoveryStatus = accounts.Count switch
+            {
+                0 => "No local accounts found. Link signal-cli using the README instructions, then refresh.",
+                1 => "Linked account detected.",
+                _ => "Multiple accounts found. Choose the account to send from."
+            };
+        }
+        catch
+        {
+            if (!closed && Cli == executable)
+            {
+                LinkedAccounts = Array.Empty<string>();
+                AccountDiscoveryStatus = "Could not detect accounts. Check the executable path, refresh, or enter your account manually.";
+            }
+        }
+        finally
+        {
+            IsDiscoveringAccounts = false;
+            if (!closed && Cli != executable)
+                AccountDiscoveryStatus = "Executable path changed. Refresh accounts for the new path.";
+        }
     }
 
     public bool TryClose()
@@ -91,6 +136,7 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
             return false;
         }
         dispatcher?.Close();
+        closed = true;
         timer.Stop();
         store?.Dispose();
         return true;
@@ -99,6 +145,8 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
     public void Schedule()
     {
         if (store == null || IsBusy) return;
+        if (IsDiscoveringAccounts)
+        { Status = "Wait for account detection to finish."; return; }
         if (!Regex.IsMatch(Recipient ?? "", @"^\+[1-9]\d{6,14}$"))
         { Status = "Enter recipient in international format."; return; }
         if (!File.Exists(Cli) || string.IsNullOrWhiteSpace(Account))
