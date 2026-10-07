@@ -9,19 +9,7 @@ app='build/Signal Scheduler.app'
 mkdir -p "$app/Contents/MacOS"
 cp -R build/publish/. "$app/Contents/MacOS/"
 python3 packaging/bundle_dependencies.py --resources "$app/Contents/Resources" --architecture "$bundle_arch"
-cat > "$app/Contents/Info.plist" <<'PLIST'
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0"><dict>
-<key>CFBundleExecutable</key><string>SignalScheduler</string>
-<key>CFBundleIdentifier</key><string>local.SignalScheduler</string>
-<key>CFBundleName</key><string>Signal Scheduler</string>
-<key>CFBundleVersion</key><string>1</string>
-<key>CFBundleShortVersionString</key><string>0.2.0</string>
-<key>CFBundlePackageType</key><string>APPL</string>
-<key>NSHighResolutionCapable</key><true/>
-</dict></plist>
-PLIST
+python3 packaging/write_app_info.py "$app/Contents/Info.plist"
 codesign --force --deep --sign - "$app"
 python3 packaging/verify_bundle.py "$app"
 echo "Built: $app"

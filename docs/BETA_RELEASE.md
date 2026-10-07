@@ -9,7 +9,9 @@ The app bundles signal-cli and Java; Homebrew, Java and .NET are not required to
 This beta is for **Apple Silicon Macs**. Intel builds have not been validated.
 
 1. Download the DMG and its SHA-256 file from this release.
-2. Open the DMG and drag **Signal Scheduler** to **Applications**.
+2. Open the DMG and drag **Signal Scheduler** to **Applications**. For an update,
+   first quit the app and choose **Replace** when prompted. Eject the DMG and
+   launch from Applications. Your queue and linked account stay outside the app.
 3. Open the app from Applications. This beta is ad hoc signed, **not Developer ID
    signed or notarized**. If macOS blocks it because the developer cannot be verified,
    open **System Settings → Privacy & Security → Open Anyway**, then confirm.
@@ -52,6 +54,9 @@ and the visible error. Use synthetic text and redact phone numbers. Do not uploa
 linking URIs, Signal account directories, queue files, Keychain data or real conversations.
 
 ## Release-owner checklist — remove from published notes
+
+- [ ] Increment Version for the release and BuildNumber for the new build in Version.props.
+- [ ] Verify .NET metadata, Info.plist and DMG filename share the same version/build.
 
 - [x] Record operator-reported installation, QR and Note to Self checks on the development Mac.
 - [ ] Record clean-Mac verification separately.

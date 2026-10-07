@@ -125,3 +125,13 @@ prerequisites such as BoringSSL, inherited Maven licenses and NuGet notice cover
 Do not describe this collection as complete or publish the matching DMG until those
 items are resolved. The release draft and live test record are in `docs/BETA_RELEASE.md`
 and `docs/BETA_ACCEPTANCE.md`.
+
+## Version policy
+
+`Version.props` supplies the .NET application version and build number.
+`packaging/write_app_info.py` uses the same values for macOS Info.plist, and the
+DMG filename reads version/build from that plist. Increment BuildNumber before
+each new test/distribution build; increment Version for each released update.
+This policy is enforced by project instructions and the release checklist;
+automatic build-number allocation is not implemented. The next build is 0.2.1,
+build 2, distinct from the previously verified 0.2.0 artifact.

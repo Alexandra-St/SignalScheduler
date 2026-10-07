@@ -94,7 +94,8 @@ def make_dmg(app, output, local):
         stage.mkdir()
         run("/usr/bin/ditto", app, stage / app.name)
         (stage / "Applications").symlink_to("/Applications")
-        text = "Drag Signal Scheduler to Applications, then open it from Applications.\n"
+        text = "Drag Signal Scheduler to Applications, then eject the DMG and open the app from Applications.\n"
+        text += "Updating: quit the app first and choose Replace. Keep your queue, Keychain data and linked account.\n"
         if local:
             text += "Local development build: not Developer ID signed or notarized.\n"
         (stage / "Install.txt").write_text(text)
@@ -138,7 +139,7 @@ def main():
     destination = ROOT / "build/distribution"
     destination.mkdir(parents=True, exist_ok=True)
     suffix = "release" if args.release else "local"
-    image = destination / ("SignalScheduler-" + info["CFBundleShortVersionString"] + "-" + architecture + "-" + suffix + ".dmg")
+    image = destination / ("SignalScheduler-" + info["CFBundleShortVersionString"] + "-build." + info["CFBundleVersion"] + "-" + architecture + "-" + suffix + ".dmg")
     with tempfile.TemporaryDirectory(prefix="SignalScheduler-release-") as work:
         app = Path(work) / source.name
         run("/usr/bin/ditto", source, app)
