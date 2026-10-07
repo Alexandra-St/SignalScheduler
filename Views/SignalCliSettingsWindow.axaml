@@ -1,0 +1,23 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SignalScheduler.ViewModels"
+        x:Class="SignalScheduler.Views.SignalCliSettingsWindow"
+        x:DataType="vm:SignalCliConfiguration" x:CompileBindings="True"
+        Title="Settings → signal-cli" Width="560" Height="360">
+  <Window.Styles>
+    <StyleInclude Source="avares://SignalScheduler/Views/PresentationStyles.axaml" />
+  </Window.Styles>
+  <ScrollViewer>
+    <StackPanel Margin="24" Spacing="12">
+      <TextBlock Text="signal-cli" FontSize="22" />
+      <CheckBox Content="Automatic detection" IsChecked="{Binding AutomaticDetection, Mode=OneWay}"
+                IsHitTestVisible="False" Focusable="False" />
+      <TextBlock Text="Detected / selected executable" />
+      <TextBox Text="{Binding Cli, Mode=OneWay}" IsReadOnly="True" Watermark="No executable detected" />
+      <TextBlock Text="{Binding ExecutableVersion, StringFormat='Version: {0}'}" />
+      <TextBlock Text="{Binding ExecutableStatus}" />
+      <Button Content="Choose executable…" IsEnabled="{Binding CanConfigure}" Click="OnChooseExecutable" />
+      <Button Content="Use automatic detection" Command="{Binding UseAutomaticDetectionCommand}" />
+    </StackPanel>
+  </ScrollViewer>
+</Window>

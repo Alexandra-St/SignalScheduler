@@ -131,6 +131,8 @@ Start with a message to your own number and verify it in **Note to Self**. See [
 
 Quit the application, replace the source files and rebuild. Moving the source folder or rebuilding does not require relinking Signal. Preserve the existing queue and Keychain entry.
 
+Queue mutations go through `Add`, `Remove` and `ChangeStatus`, which persist automatically. `Items` is read-only; queue serialization and saving remain internal to the store.
+
 ## Project structure
 
 | Path | Responsibility |
@@ -142,9 +144,11 @@ Quit the application, replace the source files and rebuild. Moving the source fo
 | `Integrations/Signal/` | Signal sender boundary and `signal-cli` adapter |
 | `Security/` | AES-GCM queue envelope and macOS Keychain access |
 | `Infrastructure/` | Subprocess execution, macOS application paths and clipboard image import |
-| `Views/MainWindow.cs` | Controls, file picker, thumbnails and queue rendering |
-| `ViewModels/MainWindowViewModel.cs` | Composer state, validation, queue actions and UI lifecycle coordination |
-| `Tests/` | Queue compatibility, encryption, dispatcher and subprocess integration regression tests |
+| `Views/*.axaml` | Compiled bindings, shared styles and data templates for the composer, message cards and Settings |
+| `Views/*.axaml.cs` | Window lifecycle and native file pickers |
+| `Presentation/` | Property notifications, UI commands and status labels |
+| `ViewModels/` | Composer coordination, Signal configuration, message cards and attachment previews |
+| `Tests/` | Queue compatibility, encryption, dispatcher, subprocess integration and headless UI regression tests |
 | `SignalScheduler.csproj` | Application runtime and Avalonia dependencies |
 | `build-mac.sh` | Architecture detection, publishing and macOS bundle signing |
 | `.gitignore`, `.editorconfig` | Runtime-data exclusions and shared source formatting settings |
@@ -157,7 +161,7 @@ Quit the application, replace the source files and rebuild. Moving the source fo
 dotnet test Tests/SignalScheduler.Tests.csproj -c Release
 ```
 
-Tests use synthetic data and a fake Signal sender or local subprocess. They do not link an account or send real messages. Filesystem and subprocess checks are intended for macOS and Linux; they do not exercise Keychain, native clipboard permissions or live Signal delivery.
+Tests use synthetic data and a fake Signal sender or local subprocess. Headless Avalonia tests exercise XAML bindings, card actions, attachment removal and read-only Settings without opening a real queue or starting the scheduler. They do not link an account or send real messages. Filesystem and subprocess checks are intended for macOS and Linux; they do not exercise Keychain, native clipboard permissions or live Signal delivery.
 
 ## Security & privacy
 

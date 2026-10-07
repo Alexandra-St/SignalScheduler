@@ -40,16 +40,16 @@ public sealed class MessageDispatcher(EncryptedQueueStore store, ISignalSender s
         var outcome = DispatchOutcome.Interrupted;
         try
         {
-            store.Change(message.Id, MessageStatus.Sending);
+            store.ChangeStatus(message.Id, MessageStatus.Sending);
             QueueChanged?.Invoke();
             started = true;
             var result = await sender.SendAsync(message);
-            store.Change(message.Id, result.Code == 0 ? MessageStatus.Sent : MessageStatus.UnknownOrFailed);
+            store.ChangeStatus(message.Id, result.Code == 0 ? MessageStatus.Sent : MessageStatus.UnknownOrFailed);
             outcome = result.Code == 0 ? DispatchOutcome.Accepted : DispatchOutcome.Uncertain;
         }
         catch
         {
-            try { if (started) store.Change(message.Id, MessageStatus.Unknown); }
+            try { if (started) store.ChangeStatus(message.Id, MessageStatus.Unknown); }
             catch { IsFaulted = true; }
         }
         finally
@@ -62,7 +62,7 @@ public sealed class MessageDispatcher(EncryptedQueueStore store, ISignalSender s
 
     private void ChangeWithoutSending(Guid id, MessageStatus state)
     {
-        try { store.Change(id, state); QueueChanged?.Invoke(); }
+        try { store.ChangeStatus(id, state); QueueChanged?.Invoke(); }
         catch { QueueWriteFailed?.Invoke(); }
     }
 }

@@ -140,9 +140,8 @@ public sealed class QueueCompatibilityTests
                     DateTimeOffset.UtcNow.AddMinutes(10), MessageStatus.Pending, "account-placeholder", "cli-placeholder",
                     new() { new ImageAttachment("synthetic.png", new byte[] { 1, 2, 3 }) });
                 id = message.Id;
-                store.Items.Add(message);
-                store.Save();
-                store.Change(id, MessageStatus.Cancelled);
+                store.Add(message);
+                store.ChangeStatus(id, MessageStatus.Cancelled);
             }
             using var reopened = new EncryptedQueueStore(directory, key.ToArray());
             var loaded = Assert.Single(reopened.Items);
@@ -163,7 +162,8 @@ public sealed class QueueCompatibilityTests
         {
             using (var store = new EncryptedQueueStore(directory, key))
             {
-                store.Save();
+                store.Add(new ScheduledMessage(Guid.NewGuid(), "recipient-placeholder", "Synthetic",
+                    DateTimeOffset.UtcNow.AddHours(1), MessageStatus.Pending, "account-placeholder", "cli-placeholder"));
                 Assert.Equal(UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute,
                     File.GetUnixFileMode(directory));
                 Assert.Equal(UnixFileMode.UserRead | UnixFileMode.UserWrite,

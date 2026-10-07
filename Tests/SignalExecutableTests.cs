@@ -47,7 +47,7 @@ public sealed class SignalExecutableTests
     {
         using var queue = new TestQueue();
         Script(queue.Executable, "if [ \"$1\" = '--version' ]; then printf 'signal-cli 0.14.1'; else printf '[{\"number\":\"account-one\"}]'; fi");
-        var model = new MainWindowViewModel();
+        var model = new SignalCliConfiguration();
         await model.ConfigureExecutableAsync(queue.Executable, persist: false);
         Assert.False(model.AutomaticDetection);
         Assert.True(model.ExecutableReady);
@@ -55,18 +55,17 @@ public sealed class SignalExecutableTests
         Assert.Equal("0.14.1", model.ExecutableVersion);
         await model.ConfigureExecutableAsync(queue.Executable + "-missing", persist: false);
         Assert.False(model.ExecutableReady);
-        Assert.False(model.CanSchedule);
+        Assert.False(model.HasSelectedAccount);
         Assert.Empty(model.LinkedAccounts);
         Assert.Contains("Invalid executable", model.ExecutableStatus);
-        model.TryClose();
+        model.Close();
     }
 
     [Fact]
     public async Task QueueUsesCurrentExecutableWhenHistoricalPathIsMissing()
     {
         using var queue = new TestQueue();
-        var message = queue.Add(TimeSpan.FromSeconds(-1));
-        queue.Store.Items[0] = message with { Cli = queue.Executable + "-old-missing" };
+        queue.Add(TimeSpan.FromSeconds(-1), executable: queue.Executable + "-old-missing");
         var sender = new FakeSignalSender();
         await new MessageDispatcher(queue.Store, sender, () => queue.Executable).DispatchDueAsync();
         Assert.Single(sender.Attempts);

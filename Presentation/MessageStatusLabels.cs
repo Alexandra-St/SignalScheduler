@@ -1,6 +1,6 @@
 using SignalScheduler.Models;
 
-namespace SignalScheduler.Views;
+namespace SignalScheduler.Presentation;
 
 internal static class MessageStatusLabels
 {

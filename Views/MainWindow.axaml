@@ -1,0 +1,97 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SignalScheduler.ViewModels"
+        xmlns:models="using:SignalScheduler.Models"
+        x:Class="SignalScheduler.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel" x:CompileBindings="True"
+        Title="Signal Scheduler" Width="640" Height="760"
+        Opened="OnOpened" Closing="OnClosing">
+  <Window.Styles>
+    <StyleInclude Source="avares://SignalScheduler/Views/PresentationStyles.axaml" />
+  </Window.Styles>
+  <ScrollViewer>
+    <StackPanel Margin="24" Spacing="20">
+      <TextBlock Text="Signal Scheduler" FontSize="26" FontWeight="SemiBold" />
+      <TextBlock Classes="muted" Text="Keep the app open and your Mac awake until messages are sent." />
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Classes="heading" Text="New message" />
+          <TextBlock Classes="field" Text="From" />
+          <ComboBox x:Name="FromAccountSelector" ItemsSource="{Binding Signal.LinkedAccounts}"
+                    SelectedItem="{Binding Signal.Account, Mode=TwoWay}"
+                    PlaceholderText="Choose a detected account" HorizontalAlignment="Stretch" />
+          <Button Content="Refresh accounts" Command="{Binding Signal.RefreshAccountsCommand}" />
+          <TextBlock Text="{Binding Signal.AccountDiscoveryStatus}" />
+          <TextBlock Classes="field" Text="To" />
+          <TextBox Text="{Binding Recipient, Mode=TwoWay}" Watermark="Phone number with country code" />
+          <TextBlock Classes="field" Text="Message" />
+          <TextBox Text="{Binding Body, Mode=TwoWay}" Watermark="Write a message…"
+                   AcceptsReturn="True" Height="100" TextWrapping="Wrap" />
+          <WrapPanel Classes="actions">
+            <Button Content="Attach photos…" Click="OnAttachPhotos" />
+            <Button Content="Paste screenshot" Command="{Binding PasteImageCommand}" />
+          </WrapPanel>
+          <ItemsControl x:Name="ComposerAttachments" ItemsSource="{Binding Attachments}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="vm:AttachmentViewModel">
+                <Grid ColumnDefinitions="90,*,Auto" ColumnSpacing="8" Margin="0,0,0,6">
+                  <Image Source="{Binding Preview}" Width="90" Height="70" Stretch="Uniform" />
+                  <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" />
+                  <Button Grid.Column="2" Content="Remove" Command="{Binding RemoveCommand}" VerticalAlignment="Center" />
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+          <StackPanel Spacing="10" Margin="0,6,0,0">
+            <Border Height="1" Background="#41808080" Margin="0,0,0,6" />
+            <TextBlock Classes="field" Text="Send at" />
+            <TextBox Text="{Binding When, Mode=TwoWay}" Watermark="yyyy-MM-dd HH:mm" />
+            <TextBlock Classes="muted" Text="Local time · yyyy-MM-dd HH:mm" FontSize="12" />
+            <Button Content="Schedule message" Command="{Binding ScheduleCommand}" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+      <Border Classes="card">
+        <StackPanel Spacing="10">
+          <TextBlock Classes="heading" Text="App status" />
+          <Button Content="Open Settings" Click="OnOpenSettings" />
+          <TextBlock Text="{Binding Signal.ExecutableStatus}" />
+          <TextBlock Text="{Binding Status}" />
+        </StackPanel>
+      </Border>
+      <StackPanel Spacing="12">
+        <TextBlock Classes="heading" Text="Messages" />
+        <TextBlock Classes="muted" Text="{Binding QueueSummary}" />
+        <ItemsControl x:Name="MessagesList" ItemsSource="{Binding Messages}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="vm:MessageViewModel">
+              <Border Classes="card" Margin="0,0,0,14">
+                <StackPanel Spacing="10">
+                  <TextBlock Classes="field" Text="{Binding Recipient}" />
+                  <TextBlock Classes="muted" Text="{Binding SendAt}" FontSize="13" />
+                  <Border Padding="10,6" CornerRadius="6" Background="#18808080">
+                    <TextBlock Text="{Binding Status}" FontSize="13" />
+                  </Border>
+                  <TextBlock Text="{Binding StatusHint}" IsVisible="{Binding HasStatusHint}" FontSize="13" Opacity="0.8" />
+                  <TextBlock Text="{Binding Text}" IsVisible="{Binding HasText}" Margin="0,4,0,4" />
+                  <ItemsControl ItemsSource="{Binding Attachments}">
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate x:DataType="models:ImageAttachment">
+                        <TextBlock Text="{Binding Name, StringFormat='📎 {0}'}" FontSize="13" Opacity="0.8" Margin="0,0,0,6" />
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                  <WrapPanel Classes="actions" Margin="0,4,0,0">
+                    <Button Content="Cancel" IsVisible="{Binding CanCancel}" Command="{Binding CancelCommand}" />
+                    <Button Content="Use as new message" IsVisible="{Binding CanReuse}" Command="{Binding ReuseCommand}" />
+                    <Button Content="Delete" IsVisible="{Binding CanDelete}" Command="{Binding DeleteCommand}" />
+                  </WrapPanel>
+                </StackPanel>
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </StackPanel>
+  </ScrollViewer>
+</Window>

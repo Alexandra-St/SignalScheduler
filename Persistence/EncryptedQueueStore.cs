@@ -9,7 +9,8 @@ public sealed class EncryptedQueueStore : IDisposable
     private readonly string path;
     private readonly QueueCipher cipher;
     private readonly FileStream instanceLock;
-    public List<ScheduledMessage> Items { get; private set; } = new();
+    private List<ScheduledMessage> items = new();
+    public IReadOnlyList<ScheduledMessage> Items => items.AsReadOnly();
 
     public EncryptedQueueStore(string directory, byte[] key)
     {
@@ -23,23 +24,35 @@ public sealed class EncryptedQueueStore : IDisposable
         if (File.Exists(path))
         {
             var plaintext = cipher.Decrypt(File.ReadAllBytes(path));
-            Items = JsonSerializer.Deserialize<List<ScheduledMessage>>(plaintext)
+            items = JsonSerializer.Deserialize<List<ScheduledMessage>>(plaintext)
                 ?? throw new InvalidDataException("Invalid queue");
-            Items = Items.Select(message => message.State == MessageStatus.Sending
+            items = items.Select(message => message.State == MessageStatus.Sending
                 ? message with { State = MessageStatus.Unknown } : message).ToList();
             Save();
         }
     }
 
-    public void Change(Guid id, MessageStatus state)
+    public void Add(ScheduledMessage message)
     {
-        Items = Items.Select(message => message.Id == id ? message with { State = state } : message).ToList();
+        items.Add(message);
         Save();
     }
 
-    public void Save()
+    public void Remove(Guid id)
     {
-        var bytes = cipher.Encrypt(JsonSerializer.SerializeToUtf8Bytes(Items));
+        items.RemoveAll(message => message.Id == id);
+        Save();
+    }
+
+    public void ChangeStatus(Guid id, MessageStatus state)
+    {
+        items = items.Select(message => message.Id == id ? message with { State = state } : message).ToList();
+        Save();
+    }
+
+    private void Save()
+    {
+        var bytes = cipher.Encrypt(JsonSerializer.SerializeToUtf8Bytes(items));
         var temporary = path + ".tmp";
         using (var file = new FileStream(temporary, FileMode.Create, FileAccess.Write, FileShare.None))
         {
