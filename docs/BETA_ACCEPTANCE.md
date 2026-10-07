@@ -57,10 +57,17 @@ completion; actual receipt was independently observed in the delivery tests abov
 - Intel hardware validation and recovery checks not described in the report.
 - Removal of the temporary phone-linked test device.
 
+## Follow-up manual verification — 2026-10-08
+
+The operator confirmed the rebuilt app's Send at fix works correctly and feedback
+displays properly. Result: **PASS** for the reported validation/feedback issue.
+The updated source passed 109 .NET tests. This follow-up applies to the rebuilt
+.app, not the earlier DMG, and does not extend clean-Mac verification.
+
 ## Remaining release work
 
-- Fix and regress the known Send at validation/feedback bug; these passes do not
-  establish that it is fixed. See `docs/KNOWN_ISSUES.md`.
+- Incorporate the verified Send at fix into the final DMG; the earlier tested beta
+  DMG does not contain it.
 - Replace the default placeholder with a proper custom application icon before
   public release.
 - Finish independent review of third-party corresponding-source and license

@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Text.RegularExpressions;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
@@ -23,13 +22,29 @@ public sealed class MainWindowViewModel : ObservableObject
     private string recipient = "", body = "";
     private string when = DateTime.Now.AddMinutes(30).ToString("yyyy-MM-dd HH:mm");
     private string status = "Opening encrypted queue…";
+    private string sendTimeError = "";
     private bool canSchedule;
     public SignalCliConfiguration Signal { get; } = new();
     public string Recipient { get => recipient; set => Set(ref recipient, value); }
     public string Body { get => body; set => Set(ref body, value); }
-    public string When { get => when; set => Set(ref when, value); }
+    public string When
+    {
+        get => when;
+        set { if (Set(ref when, value ?? "")) ValidateSendTime(out _); }
+    }
+    public string SendTimeError
+    {
+        get => sendTimeError;
+        private set
+        {
+            if (!Set(ref sendTimeError, value)) return;
+            Notify(nameof(HasSendTimeError));
+            NotifyScheduling();
+        }
+    }
+    public bool HasSendTimeError => SendTimeError.Length > 0;
     public string Status { get => status; private set => Set(ref status, value); }
-    public bool CanSchedule => canSchedule && !IsBusy && Signal.HasSelectedAccount;
+    public bool CanSchedule => canSchedule && !IsBusy && Signal.HasSelectedAccount && !HasSendTimeError;
     public bool IsBusy => dispatcher?.IsBusy ?? false;
     public IReadOnlyList<MessageViewModel> Messages { get; private set; } = Array.Empty<MessageViewModel>();
     public string QueueSummary => Messages.Count == 0 ? "No messages yet. Schedule your first message above."
@@ -44,8 +59,10 @@ public sealed class MainWindowViewModel : ObservableObject
         ScheduleCommand = new(Schedule, () => CanSchedule);
         PasteImageCommand = new(PasteImageAsync);
         Signal.PropertyChanged += (_, _) => NotifyScheduling();
+        ValidateSendTime(out _);
         timer.Tick += async (_, _) =>
         {
+            ValidateSendTime(out _);
             if (dispatcher != null && Signal.ExecutableReady && !Signal.IsWorking) await dispatcher.DispatchDueAsync();
         };
     }
@@ -107,8 +124,17 @@ public sealed class MainWindowViewModel : ObservableObject
         return true;
     }
 
+    private bool ValidateSendTime(out DateTimeOffset due)
+    {
+        var valid = SendTimeValidation.TryGetDue(When, DateTimeOffset.Now, TimeZoneInfo.Local, out due, out var error);
+        SendTimeError = error;
+        return valid;
+    }
+
     public void Schedule()
     {
+        // Recheck at activation: a time can become past after the last timer tick.
+        if (!ValidateSendTime(out var due)) return;
         if (store == null || IsBusy || !canSchedule) return;
         if (Signal.IsWorking)
         { Status = "Wait for account detection to finish."; return; }
@@ -118,13 +144,6 @@ public sealed class MainWindowViewModel : ObservableObject
         { Status = "Set executable path and linked account before scheduling."; return; }
         if (string.IsNullOrWhiteSpace(Body) && attachments.Count == 0)
         { Status = "Add text or a photo."; return; }
-        if (!DateTime.TryParseExact(When, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture,
-                DateTimeStyles.None, out var date))
-        { Status = "Use yyyy-MM-dd HH:mm."; return; }
-        if (TimeZoneInfo.Local.IsInvalidTime(date) || TimeZoneInfo.Local.IsAmbiguousTime(date))
-        { Status = "This time is ambiguous or skipped by daylight saving. Choose another time."; return; }
-        var due = new DateTimeOffset(date, TimeZoneInfo.Local.GetUtcOffset(date));
-        if (due <= DateTimeOffset.Now) { Status = "Choose a future time."; return; }
         try
         {
             store.Add(new ScheduledMessage(Guid.NewGuid(), Recipient!, Body!, due,

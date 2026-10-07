@@ -23,4 +23,8 @@
   <Style Selector="WrapPanel.actions > Button">
     <Setter Property="Margin" Value="0,0,8,8" />
   </Style>
+  <Style Selector="TextBox.invalid">
+    <Setter Property="BorderBrush" Value="#D05050" />
+    <Setter Property="BorderThickness" Value="2" />
+  </Style>
 </Styles>

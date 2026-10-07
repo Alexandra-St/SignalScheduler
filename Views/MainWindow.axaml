@@ -55,9 +55,12 @@
           <StackPanel Spacing="10" Margin="0,6,0,0">
             <Border Height="1" Background="#41808080" Margin="0,0,0,6" />
             <TextBlock Classes="field" Text="Send at" />
-            <TextBox Text="{Binding When, Mode=TwoWay}" Watermark="yyyy-MM-dd HH:mm" />
+            <TextBox x:Name="SendAtInput" Text="{Binding When, Mode=TwoWay}" Watermark="yyyy-MM-dd HH:mm"
+                     Classes.invalid="{Binding HasSendTimeError}" />
+            <TextBlock x:Name="SendAtError" Text="{Binding SendTimeError}" IsVisible="{Binding HasSendTimeError}"
+                       FontWeight="SemiBold" />
             <TextBlock Classes="muted" Text="Local time · yyyy-MM-dd HH:mm" FontSize="12" />
-            <Button Content="Schedule message" Command="{Binding ScheduleCommand}" />
+            <Button x:Name="ScheduleMessageButton" Content="Schedule message" Command="{Binding ScheduleCommand}" />
           </StackPanel>
         </StackPanel>
       </Border>

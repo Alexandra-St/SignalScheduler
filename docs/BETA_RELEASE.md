@@ -40,8 +40,7 @@ than an unidentified developer, stop and report the exact warning before proceed
 - The beta is not notarized. Installation, delivery and real phone linking passed
   on an Apple Silicon development Mac; clean-Mac and browser-download first-launch
   verification remain pending. Developer ID/notarization are optional at this stage.
-- A known Send at validation/feedback bug remains open. A custom application icon
-  is also required before publication.
+- A custom application icon is required before publication.
 - Intel hardware is not validated. No automatic updates are included.
 - Corresponding-source materials are being assembled. This draft is not publication-ready
   until the source checklist and live acceptance checks are complete.
@@ -56,7 +55,8 @@ linking URIs, Signal account directories, queue files, Keychain data or real con
 
 - [x] Record operator-reported installation, QR and Note to Self checks on the development Mac.
 - [ ] Record clean-Mac verification separately.
-- [ ] Fix and regress Send at validation/feedback.
+- [x] Manually verify the Send at validation/feedback fix in the rebuilt app (2026-10-08).
+- [ ] Include the verified fix in the final DMG.
 - [ ] Replace the placeholder with a custom application icon.
 - [ ] Complete and review source/license materials; resolve manifest gaps.
 - [ ] Obtain approval to commit, push, tag and publish.

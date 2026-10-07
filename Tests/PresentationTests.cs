@@ -135,6 +135,36 @@ public sealed class PresentationTests
         configuration.Close();
     }
 
+    [AvaloniaFact]
+    public void SendTimeErrorIsVisibleNextToInputAndClearsAfterCorrection()
+    {
+        var view = new MainWindow();
+        var model = (MainWindowViewModel)view.DataContext!;
+        using var host = new WindowScope(Host(view));
+        var input = view.FindControl<TextBox>("SendAtInput")!;
+        var error = view.FindControl<TextBlock>("SendAtError")!;
+        var button = view.FindControl<Button>("ScheduleMessageButton")!;
+        var notifications = 0;
+        model.ScheduleCommand.CanExecuteChanged += (_, _) => notifications++;
+        input.Text = "2026-10-07 23:011";
+        Dispatcher.UIThread.RunJobs();
+        Assert.Equal(input.Text, model.When);
+        Assert.True(error.IsVisible);
+        Assert.Contains("yyyy-MM-dd HH:mm", error.Text);
+        Assert.True(input.Classes.Contains("invalid"));
+        Assert.False(button.IsEffectivelyEnabled);
+        Assert.False(model.ScheduleCommand.CanExecute(null));
+        Assert.True(notifications > 0);
+        model.Schedule(); // Direct activation still validates even without a real queue.
+        Assert.True(model.HasSendTimeError);
+        input.Text = DateTime.Now.AddHours(2).ToString("yyyy-MM-dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+        Dispatcher.UIThread.RunJobs();
+        Assert.False(error.IsVisible);
+        Assert.False(input.Classes.Contains("invalid"));
+        Assert.Equal("", model.SendTimeError);
+        model.TryClose();
+    }
+
     private sealed class WindowScope(Window window) : IDisposable
     {
         public Window Window => window;
