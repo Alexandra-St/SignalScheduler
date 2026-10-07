@@ -10,7 +10,7 @@ public sealed class SignalCliConfiguration : ObservableObject
     private string cli = "", version = "", account = "";
     private string executableStatus = "Looking for signal-cli…", accountDiscoveryStatus = "";
     private IReadOnlyList<string> linkedAccounts = Array.Empty<string>();
-    private bool resolving, discovering, locked, closed;
+    private bool resolving, discovering, linking, locked, closed, accountsKnown;
 
     public string Cli { get => cli; private set => Set(ref cli, value); }
     public string ExecutableVersion { get => version; private set => Set(ref version, value); }
@@ -24,9 +24,11 @@ public sealed class SignalCliConfiguration : ObservableObject
     }
     public bool AutomaticDetection => customExecutable == null;
     public bool ExecutableReady => Cli.Length > 0 && !resolving;
-    public bool IsWorking => resolving || discovering;
+    public bool IsWorking => resolving || discovering || linking;
     public bool CanConfigure => !closed && !locked && !IsWorking;
-    public bool HasSelectedAccount => ExecutableReady && !discovering && LinkedAccounts.Contains(Account, StringComparer.Ordinal);
+    public bool HasSelectedAccount => ExecutableReady && !IsWorking && LinkedAccounts.Contains(Account, StringComparer.Ordinal);
+    public bool CanConnect => CanConfigure && ExecutableReady;
+    public bool NeedsConnection => accountsKnown && ExecutableReady && LinkedAccounts.Count == 0;
     public AsyncCommand RefreshAccountsCommand { get; }
     public AsyncCommand UseAutomaticDetectionCommand { get; }
 
@@ -48,7 +50,7 @@ public sealed class SignalCliConfiguration : ObservableObject
     }
 
     public Task<SignalExecutable?> ResolveExecutableAsync() => customExecutable == null
-        ? SignalExecutable.DetectAsync(Environment.GetEnvironmentVariable("PATH"))
+        ? SignalExecutable.DetectForApplicationAsync()
         : SignalExecutable.ValidateAsync(customExecutable);
 
     public async Task ConfigureExecutableAsync(string? chosenPath, bool persist = true)
@@ -57,6 +59,7 @@ public sealed class SignalCliConfiguration : ObservableObject
         resolving = true;
         Cli = "";
         LinkedAccounts = Array.Empty<string>();
+        accountsKnown = false;
         Account = "";
         AccountDiscoveryStatus = "";
         ExecutableVersion = "";
@@ -65,7 +68,7 @@ public sealed class SignalCliConfiguration : ObservableObject
         try
         {
             var executable = chosenPath == null
-                ? await SignalExecutable.DetectAsync(Environment.GetEnvironmentVariable("PATH"))
+                ? await SignalExecutable.DetectForApplicationAsync()
                 : await SignalExecutable.ValidateAsync(chosenPath);
             if (closed) return;
             if (chosenPath != null && executable == null)
@@ -98,11 +101,12 @@ public sealed class SignalCliConfiguration : ObservableObject
             var accounts = await SignalAccountDiscovery.ListAsync(Cli);
             if (closed) return;
             LinkedAccounts = accounts;
+            accountsKnown = true;
             Account = accounts.Count == 1 ? accounts[0]
                 : accounts.Contains(Account, StringComparer.Ordinal) ? Account : "";
             AccountDiscoveryStatus = accounts.Count switch
             {
-                0 => "No local accounts found. Link signal-cli using the README instructions, then refresh.",
+                0 => "Signal is not connected. Choose Connect Signal to get started.",
                 1 => "Account ready",
                 _ => "Multiple accounts found. Choose the account to send from."
             };
@@ -112,12 +116,23 @@ public sealed class SignalCliConfiguration : ObservableObject
             if (!closed)
             {
                 LinkedAccounts = Array.Empty<string>();
+                accountsKnown = false;
                 Account = "";
                 AccountDiscoveryStatus = "Could not detect accounts. Check Settings and refresh.";
             }
         }
         finally { discovering = false; NotifyState(); }
     }
+
+    internal bool TryBeginLink()
+    {
+        if (!CanConnect) return false;
+        linking = true;
+        NotifyState();
+        return true;
+    }
+
+    internal void EndLink() { linking = false; NotifyState(); }
 
     public void ReportSelectionError() => ExecutableStatus = "Could not choose executable. Try again.";
     public void SetSending(bool isSending) { locked = isSending; NotifyState(); }
@@ -128,6 +143,8 @@ public sealed class SignalCliConfiguration : ObservableObject
         Notify(nameof(ExecutableReady));
         Notify(nameof(IsWorking));
         Notify(nameof(CanConfigure));
+        Notify(nameof(CanConnect));
+        Notify(nameof(NeedsConnection));
         Notify(nameof(HasSelectedAccount));
         RefreshAccountsCommand.NotifyCanExecuteChanged();
         UseAutomaticDetectionCommand.NotifyCanExecuteChanged();

@@ -16,6 +16,7 @@
       <TextBox Text="{Binding Cli, Mode=OneWay}" IsReadOnly="True" Watermark="No executable detected" />
       <TextBlock Text="{Binding ExecutableVersion, StringFormat='Version: {0}'}" />
       <TextBlock Text="{Binding ExecutableStatus}" />
+      <Button Content="Connect Signal" IsEnabled="{Binding CanConnect}" Click="OnConnectSignal" />
       <Button Content="Choose executable…" IsEnabled="{Binding CanConfigure}" Click="OnChooseExecutable" />
       <Button Content="Use automatic detection" Command="{Binding UseAutomaticDetectionCommand}" />
     </StackPanel>

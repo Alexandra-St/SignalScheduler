@@ -78,3 +78,7 @@ logs/
 *.swp
 *.swo
 *.zip
+
+# Python packaging helpers
+__pycache__/
+*.pyc

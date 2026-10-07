@@ -13,7 +13,17 @@
     <StackPanel Margin="24" Spacing="20">
       <TextBlock Text="Signal Scheduler" FontSize="26" FontWeight="SemiBold" />
       <TextBlock Classes="muted" Text="Keep the app open and your Mac awake until messages are sent." />
-      <Border Classes="card">
+      <Border x:Name="SignalWelcome" Classes="card" IsVisible="{Binding Signal.NeedsConnection}">
+        <StackPanel Spacing="12">
+          <TextBlock Classes="heading" Text="Welcome to Signal Scheduler" />
+          <TextBlock Text="Connect your Signal account to start scheduling messages. Scan a QR code with your phone — no Terminal needed." />
+          <WrapPanel Classes="actions">
+            <Button Content="Connect Signal" Click="OnConnectSignal" IsEnabled="{Binding Signal.CanConnect}" />
+            <Button Content="Refresh accounts" Command="{Binding Signal.RefreshAccountsCommand}" />
+          </WrapPanel>
+        </StackPanel>
+      </Border>
+      <Border x:Name="MessageComposer" Classes="card" IsVisible="{Binding !Signal.NeedsConnection}">
         <StackPanel Spacing="12">
           <TextBlock Classes="heading" Text="New message" />
           <TextBlock Classes="field" Text="From" />

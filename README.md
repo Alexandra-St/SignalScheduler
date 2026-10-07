@@ -50,7 +50,7 @@ The UI handles composition and queue actions. `EncryptedQueueStore` encrypts sna
 | Desktop UI | Avalonia 11.3, Fluent theme |
 | Persistence | JSON snapshots encrypted with AES-256-GCM |
 | Key storage | macOS Keychain via `/usr/bin/security` |
-| Signal integration | External `signal-cli` executable |
+| Signal integration | Bundled JVM `signal-cli` with a private Temurin Java runtime; optional custom executable |
 | Screenshot import | Native macOS clipboard via AppleScript |
 | Packaging | Bash, `dotnet publish`, ad hoc code signing |
 
@@ -72,39 +72,20 @@ Messages up to five minutes overdue are attempted when the app resumes. Older me
 
 - macOS; Apple Silicon or Intel.
 - .NET 8 SDK to build the application.
-- A working, current `signal-cli` installation.
+- Python 3 and Internet access for the first local build.
 - Signal on a primary mobile device for linking.
 
-`signal-cli` is not bundled. Use its [installation documentation](https://github.com/AsamK/signal-cli) for platform requirements.
+The `.app` includes pinned `signal-cli` and Java runtimes. Running it does not require Homebrew, system Java or .NET. Building from source still requires the SDK and Python; QR onboarding and a local DMG are included; official Developer ID signing and notarization require publisher credentials.
 
-### Install dependencies
+### Install build tools
 
 With Homebrew:
 
 ```bash
 brew install --cask dotnet-sdk@8
-brew install signal-cli
 
 dotnet --list-sdks
-signal-cli --version
 ```
-
-### Link your account
-
-```bash
-signal-cli link -n "SignalScheduler"
-```
-
-Scan the terminal QR code from Signal on your phone: **Settings → Linked Devices → Link New Device**. Keep the command running until linking completes. Use device linking, not registration of your existing number.
-
-If needed, inspect the linked account and synchronize it:
-
-```bash
-signal-cli listAccounts
-signal-cli -a YOUR_ACCOUNT receive
-```
-
-Replace `YOUR_ACCOUNT` locally with your account identifier. Do not share QR codes, linking URIs or account output in issues. Do not run a separate `signal-cli` daemon against the same account while using this application.
 
 ### Build and launch
 
@@ -115,12 +96,43 @@ bash build-mac.sh
 open "build/Signal Scheduler.app"
 ```
 
-The script detects the architecture, publishes a self-contained application and signs it ad hoc for local use. It does not produce a notarized distribution release.
+The script detects the architecture, publishes self-contained .NET, downloads the
+pinned upstream JVM `signal-cli` and matching Temurin JRE, checks SHA-256, includes
+licenses and signs the bundle ad hoc for local use. Verified downloads are cached
+under `build/dependency-cache/`. Versions and artifact hashes are tracked in
+`packaging/dependencies.lock.json`; the build never selects a moving latest release.
+
+The final smoke check relocates the app and exercises the private Java runtime and
+account discovery with a minimal PATH and an isolated empty configuration. This
+checks independence from Homebrew/system Java on the build Mac; testing on an actual
+clean Mac and Intel hardware is still required before a public release.
+
+To create a local installation image after building, run `python3 packaging/distribute.py`.
+The image is placed in `build/distribution/`; drag the app to Applications.
+Local images are not notarized public releases.
+See [packaging verification](docs/PACKAGING.md) and [third-party notices](THIRD_PARTY_NOTICES.md).
+
+### Link your account
+
+Existing linked accounts are reused in their original signal-cli data directory.
+No credentials or account data are copied into the `.app`. If you have already
+linked an account, skip this step.
+
+For a new account, click **Connect Signal** on the welcome screen. On your phone,
+open **Signal → Settings → Linked Devices → Link New Device**, scan the code,
+and approve the new device. The account is detected and selected automatically
+when linking succeeds. You can also connect another device from **Settings → signal-cli**.
+
+The code is generated locally and shown only while the connection is active.
+Cancel or close the window to stop linking. An expired code can be replaced with
+**Try again**. Use device linking, not registration of your existing number.
+Do not share QR codes, linking URIs or account output in issues.
+Do not run a separate `signal-cli` daemon against the same account while using this application.
 
 ### Schedule a message
 
-1. The app finds and validates `signal-cli` automatically using PATH, then standard Homebrew locations. For a custom installation, open **Settings → signal-cli**, choose an executable, or return to **Use automatic detection**. The path is read-only; the version is shown after validation.
-2. The linked account is detected on startup. If several accounts exist, choose one; after linking, click **Refresh accounts**. The **From** dropdown is the only account selector; scheduling stays disabled until a detected account is selected. Enter the recipient's international phone number.
+1. The packaged app validates and uses its private `signal-cli` runtime. Development runs outside the `.app` search PATH, then standard Homebrew locations. For a custom installation, open **Settings → signal-cli**, choose an executable, or return to **Use automatic detection**. The path is read-only; the version is shown after validation.
+2. The linked account is detected on startup. If several accounts exist, choose one; account discovery runs automatically after linking; **Refresh accounts** is available for recovery. The **From** dropdown is the only account selector; scheduling stays disabled until a detected account is selected. Enter the recipient's international phone number.
 3. Add text or images. To capture a screenshot to the clipboard, press **Control + Shift + Command + 4**, then click **Paste screenshot**.
 4. Enter the local date and time as `yyyy-MM-dd HH:mm` and click **Schedule message**.
 5. Keep the application open and the Mac awake with network access.
@@ -150,7 +162,7 @@ Queue mutations go through `Add`, `Remove` and `ChangeStatus`, which persist aut
 | `ViewModels/` | Composer coordination, Signal configuration, message cards and attachment previews |
 | `Tests/` | Queue compatibility, encryption, dispatcher, subprocess integration and headless UI regression tests |
 | `SignalScheduler.csproj` | Application runtime and Avalonia dependencies |
-| `build-mac.sh` | Architecture detection, publishing and macOS bundle signing |
+| `build-mac.sh`, `packaging/` | Pinned dependency packaging, checksum/archive validation, bundle signing and relocation smoke checks |
 | `.gitignore`, `.editorconfig` | Runtime-data exclusions and shared source formatting settings |
 | `docs/VERIFICATION.md` | Automated verification scope and manual macOS acceptance checks |
 | `SECURITY.md`, `LICENSE` | Security boundaries and MIT license |
@@ -199,6 +211,14 @@ Encryption protects the queue at rest, not against code running as the unlocked 
 
 ## License
 
-[MIT](LICENSE). External dependencies retain their own licenses; `signal-cli` is installed separately and is licensed under GPL-3.0-or-later.
+[MIT](LICENSE). External dependencies retain their own licenses; Bundled `signal-cli` is licensed under GPL-3.0-or-later; Temurin has its own included licenses. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
 Executable preferences are stored locally outside the repository. Automatic mode searches again on startup and before delivery; queued messages use the current validated executable rather than their historical saved path. Version validation checks identity output, not cryptographic authenticity.
+
+## Beta preparation
+
+The next beta's [draft release notes](docs/BETA_RELEASE.md) include installation and
+first-launch instructions. [Acceptance results](docs/BETA_ACCEPTANCE.md) distinguish
+automated checks from pending phone/clean-Mac verification. Source materials are
+collected separately with `python3 packaging/prepare_beta_sources.py`; their manifest
+requires review before public binary distribution.

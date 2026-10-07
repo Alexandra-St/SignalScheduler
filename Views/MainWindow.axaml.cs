@@ -17,6 +17,9 @@ public sealed partial class MainWindow : Window
 
     private async void OnOpened(object? sender, EventArgs args) => await viewModel.OpenAsync();
     private void OnClosing(object? sender, WindowClosingEventArgs args) => args.Cancel = !viewModel.TryClose();
+    private async void OnConnectSignal(object? sender, RoutedEventArgs args)
+        => await new SignalLinkWindow(viewModel.Signal).ShowDialog(this);
+
     private async void OnOpenSettings(object? sender, RoutedEventArgs args)
         => await new SignalCliSettingsWindow(viewModel.Signal).ShowDialog(this);
 

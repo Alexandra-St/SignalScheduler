@@ -5,6 +5,18 @@ namespace SignalScheduler.Integrations.Signal;
 
 public sealed record SignalExecutable(string Path, string Version)
 {
+    public static string? BundledPath(string baseDirectory)
+    {
+        var directory = new DirectoryInfo(baseDirectory);
+        if (directory.Name != "MacOS" || directory.Parent?.Name != "Contents"
+            || directory.Parent.Parent?.Name.EndsWith(".app", StringComparison.Ordinal) != true)
+            return null;
+        return System.IO.Path.Combine(directory.Parent.FullName, "Resources", "signal-cli-launcher");
+    }
+
+    public static Task<SignalExecutable?> DetectForApplicationAsync() => DetectAsync(
+        Environment.GetEnvironmentVariable("PATH"), bundledPath: BundledPath(AppContext.BaseDirectory));
+
     public static async Task<SignalExecutable?> ValidateAsync(string path)
     {
         try
@@ -28,8 +40,11 @@ public sealed record SignalExecutable(string Path, string Version)
             .Distinct(StringComparer.Ordinal);
     }
 
-    public static async Task<SignalExecutable?> DetectAsync(string? path, IEnumerable<string>? fallback = null)
+    public static async Task<SignalExecutable?> DetectAsync(string? path, IEnumerable<string>? fallback = null, string? bundledPath = null)
     {
+        // A packaged app uses its tested private runtime. A broken bundle must not
+        // silently pick an unrelated system executable; custom Settings remain available.
+        if (bundledPath != null) return await ValidateAsync(bundledPath);
         foreach (var candidate in Candidates(path, fallback))
             if (await ValidateAsync(candidate) is { } executable) return executable;
         return null;

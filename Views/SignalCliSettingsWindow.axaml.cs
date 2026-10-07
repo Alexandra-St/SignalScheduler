@@ -18,6 +18,9 @@ public sealed partial class SignalCliSettingsWindow : Window
         DataContext = configuration;
     }
 
+    private async void OnConnectSignal(object? sender, RoutedEventArgs args)
+        => await new SignalLinkWindow(configuration).ShowDialog(this);
+
     private async void OnChooseExecutable(object? sender, RoutedEventArgs args)
     {
         try

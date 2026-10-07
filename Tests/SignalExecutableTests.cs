@@ -43,6 +43,24 @@ public sealed class SignalExecutableTests
     }
 
     [Fact]
+    public async Task PackagedAppPrefersItsBundleAndNeverSilentlyFallsBackWhenItIsBroken()
+    {
+        using var queue = new TestQueue();
+        var baseDirectory = Path.Combine(queue.DirectoryPath, "Signal Scheduler.app", "Contents", "MacOS");
+        var resources = Path.Combine(queue.DirectoryPath, "Signal Scheduler.app", "Contents", "Resources");
+        Directory.CreateDirectory(baseDirectory);
+        Directory.CreateDirectory(resources);
+        var bundled = Path.Combine(resources, "signal-cli-launcher");
+        Script(bundled, "printf 'signal-cli 0.14.9'");
+        Script(queue.Executable, "printf 'signal-cli 0.14.1'");
+        Assert.Equal(bundled, SignalExecutable.BundledPath(baseDirectory));
+        Assert.Null(SignalExecutable.BundledPath(queue.DirectoryPath));
+        Assert.Equal(bundled, (await SignalExecutable.DetectAsync(null, new[] { queue.Executable }, bundled))!.Path);
+        File.Delete(bundled);
+        Assert.Null(await SignalExecutable.DetectAsync(null, new[] { queue.Executable }, bundled));
+    }
+
+    [Fact]
     public async Task SettingsValidatesBeforeDiscoveringAccountsAndDisablesInvalidSelection()
     {
         using var queue = new TestQueue();

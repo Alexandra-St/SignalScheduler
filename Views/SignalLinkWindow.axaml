@@ -1,0 +1,26 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SignalScheduler.ViewModels"
+        x:Class="SignalScheduler.Views.SignalLinkWindow"
+        x:DataType="vm:SignalLinkViewModel" x:CompileBindings="True"
+        Title="Connect Signal" Width="480" Height="600"
+        Opened="OnOpened" Closing="OnClosing" Closed="OnClosed">
+  <Window.Styles>
+    <StyleInclude Source="avares://SignalScheduler/Views/PresentationStyles.axaml" />
+  </Window.Styles>
+  <ScrollViewer>
+    <StackPanel Margin="24" Spacing="18">
+      <TextBlock Classes="heading" Text="Connect Signal" />
+      <TextBlock Text="On your phone, open Signal → Settings → Linked Devices → Link New Device." />
+      <Border Background="White" Padding="12" CornerRadius="8" IsVisible="{Binding HasQrCode}" HorizontalAlignment="Center">
+        <Image Source="{Binding QrCode}" Width="280" Height="280" Stretch="Uniform" />
+      </Border>
+      <TextBlock Text="{Binding Status}" />
+      <WrapPanel Classes="actions">
+        <Button Content="Try again" Command="{Binding ConnectCommand}" IsVisible="{Binding !Connected}" />
+        <Button Content="Cancel" Command="{Binding CancelCommand}" IsVisible="{Binding IsConnecting}" />
+        <Button Content="Close" Click="OnClose" IsVisible="{Binding !IsConnecting}" />
+      </WrapPanel>
+    </StackPanel>
+  </ScrollViewer>
+</Window>

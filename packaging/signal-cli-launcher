@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+resources=$(CDPATH= cd -- "$(/usr/bin/dirname -- "$0")" && pwd)
+# Ignore inherited JVM injection/settings; use only this app's bundled runtime.
+unset JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH
+exec "$resources/jre/Contents/Home/bin/java" --enable-native-access=ALL-UNNAMED \
+    -cp "$resources/signal-cli/lib/*" org.asamk.signal.Main "$@"
