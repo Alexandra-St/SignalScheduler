@@ -28,7 +28,7 @@ flowchart LR
     Dispatcher --> Store
     Dispatcher --> Sender["ISignalSender"]
 
-    Sender --> Config["ConfiguredSignalSender"]
+    Config["ConfiguredSignalSender"] -. implements .-> Sender
     Config --> Adapter["SignalCliAdapter"]
     Adapter --> Runner["ProcessRunner"]
     Runner --> CLI["signal-cli"]
