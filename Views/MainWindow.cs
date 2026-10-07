@@ -25,8 +25,8 @@ public sealed class MainWindow : Window
         var panel = new StackPanel { Margin = new Thickness(24), Spacing = 10 };
         Content = new ScrollViewer { Content = panel };
         panel.Children.Add(new TextBlock { Text = "Signal Scheduler", FontSize = 26 });
-        panel.Children.Add(new TextBlock { Text = "Local queue • keep this app open and your Mac awake" });
-        AddField("signal-cli executable", Editor(nameof(viewModel.Cli)));
+        panel.Children.Add(new TextBlock { Text = "Keep the app open and your Mac awake until messages are sent." });
+        AddField("signal-cli path", Editor(nameof(viewModel.Cli)));
         AddField("Linked account", Editor(nameof(viewModel.Account), "Your account: +countrycode… or ACI"));
         var accounts = new ComboBox { PlaceholderText = "Choose a detected account", HorizontalAlignment = HorizontalAlignment.Stretch };
         accounts.Bind(ItemsControl.ItemsSourceProperty, new Binding(nameof(viewModel.LinkedAccounts)));
@@ -35,22 +35,22 @@ public sealed class MainWindow : Window
         {
             if (accounts.SelectedItem is string selected) viewModel.Account = selected;
         };
-        panel.Children.Add(accounts);
-        var refreshAccounts = new Button { Content = "Refresh linked accounts" };
+        AddField("From", accounts);
+        var refreshAccounts = new Button { Content = "Refresh accounts" };
         refreshAccounts.Click += async (_, _) => await viewModel.RefreshAccountsAsync();
         panel.Children.Add(refreshAccounts);
         var accountStatus = new TextBlock { TextWrapping = TextWrapping.Wrap };
         accountStatus.Bind(TextBlock.TextProperty, new Binding(nameof(viewModel.AccountDiscoveryStatus)));
         panel.Children.Add(accountStatus);
-        AddField("Recipient", Editor(nameof(viewModel.Recipient), "Recipient phone number: +countrycode…"));
-        var body = Editor(nameof(viewModel.Body), "Message");
+        AddField("To", Editor(nameof(viewModel.Recipient), "Phone number with country code"));
+        var body = Editor(nameof(viewModel.Body), "Write a message…");
         body.AcceptsReturn = true;
         body.Height = 100;
         body.TextWrapping = TextWrapping.Wrap;
         AddField("Message", body);
 
         var actions = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
-        var addImages = new Button { Content = "Add photos…" };
+        var addImages = new Button { Content = "Attach photos…" };
         var pasteImage = new Button { Content = "Paste screenshot" };
         addImages.Click += async (_, _) => await SelectImagesAsync();
         pasteImage.Click += async (_, _) => await viewModel.PasteImageAsync();
@@ -58,9 +58,9 @@ public sealed class MainWindow : Window
         actions.Children.Add(pasteImage);
         panel.Children.Add(actions);
         panel.Children.Add(attachmentRows);
-        AddField("Send at — local time (yyyy-MM-dd HH:mm)", Editor(nameof(viewModel.When)));
+        AddField("Send at", Editor(nameof(viewModel.When), "yyyy-MM-dd HH:mm"));
 
-        var schedule = new Button { Content = "Schedule" };
+        var schedule = new Button { Content = "Schedule message" };
         schedule.Bind(Button.IsEnabledProperty, new Binding(nameof(viewModel.CanSchedule)));
         schedule.Click += (_, _) => viewModel.Schedule();
         panel.Children.Add(schedule);

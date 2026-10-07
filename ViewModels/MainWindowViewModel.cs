@@ -108,7 +108,7 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
             AccountDiscoveryStatus = accounts.Count switch
             {
                 0 => "No local accounts found. Link signal-cli using the README instructions, then refresh.",
-                1 => "Linked account detected.",
+                1 => "Account ready",
                 _ => "Multiple accounts found. Choose the account to send from."
             };
         }

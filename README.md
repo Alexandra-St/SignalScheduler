@@ -120,9 +120,9 @@ The script detects the architecture, publishes a self-contained application and 
 ### Schedule a message
 
 1. Set the `signal-cli` executable path; Homebrew locations are detected by default.
-2. The linked account is detected on startup. If several accounts exist, choose one; after linking or changing the executable path, click **Refresh linked accounts**. Manual account entry remains available. Enter the recipient's international phone number.
+2. The linked account is detected on startup. If several accounts exist, choose one; after linking or changing the executable path, click **Refresh accounts**. Manual account entry remains available. Enter the recipient's international phone number.
 3. Add text or images. To capture a screenshot to the clipboard, press **Control + Shift + Command + 4**, then click **Paste screenshot**.
-4. Enter the local date and time as `yyyy-MM-dd HH:mm` and click **Schedule**.
+4. Enter the local date and time as `yyyy-MM-dd HH:mm` and click **Schedule message**.
 5. Keep the application open and the Mac awake with network access.
 
 Start with a message to your own number and verify it in **Note to Self**. See [manual verification](docs/VERIFICATION.md) for recovery and attachment checks.
