@@ -47,7 +47,7 @@ Before a send starts, the message is persisted as `Sending`. If the application 
 
 - macOS
 - .NET 8 SDK
-- A current `signal-cli` installation
+- A recent version of `signal-cli`
 - Signal on a primary device for linking
 
 Install the dependencies with Homebrew:
