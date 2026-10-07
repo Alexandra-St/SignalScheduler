@@ -20,8 +20,16 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
     private readonly List<ImageAttachment> attachments = new();
     private EncryptedQueueStore? store;
     private MessageDispatcher? dispatcher;
-    private string cli = File.Exists("/opt/homebrew/bin/signal-cli")
-        ? "/opt/homebrew/bin/signal-cli" : "/usr/local/bin/signal-cli";
+    private string cli = "";
+    private string? customExecutable;
+    private string executableStatus = "Looking for signal-cli…", executableVersion = "";
+    private bool isResolvingExecutable;
+    public string ExecutableStatus { get => executableStatus; private set => Set(ref executableStatus, value); }
+    public string ExecutableVersion { get => executableVersion; private set => Set(ref executableVersion, value); }
+    public bool AutomaticDetection => customExecutable == null;
+    public bool CanConfigureExecutable => !IsBusy && !IsDiscoveringAccounts && !isResolvingExecutable;
+    public bool ExecutableReady => !string.IsNullOrEmpty(Cli) && !isResolvingExecutable;
+
     private string account = "", recipient = "", body = "";
     private string when = DateTime.Now.AddMinutes(30).ToString("yyyy-MM-dd HH:mm");
     private string status = "Opening encrypted queue…";
@@ -30,13 +38,24 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
     private IReadOnlyList<string> linkedAccounts = Array.Empty<string>();
     private string accountDiscoveryStatus = "";
 
-    public string Cli { get => cli; set => Set(ref cli, value); }
+    public string Cli
+    {
+        get => cli;
+        set
+        {
+            if (cli == value) return;
+            Set(ref cli, value);
+            LinkedAccounts = Array.Empty<string>();
+            Account = "";
+            AccountDiscoveryStatus = "Executable path changed. Refresh accounts for the new path.";
+        }
+    }
     public string Account { get => account; set => Set(ref account, value); }
     public string Recipient { get => recipient; set => Set(ref recipient, value); }
     public string Body { get => body; set => Set(ref body, value); }
     public string When { get => when; set => Set(ref when, value); }
     public string Status { get => status; private set => Set(ref status, value); }
-    public bool CanSchedule { get => canSchedule; private set => Set(ref canSchedule, value); }
+    public bool CanSchedule { get => canSchedule && ExecutableReady && !IsDiscoveringAccounts && LinkedAccounts.Contains(Account, StringComparer.Ordinal); private set => Set(ref canSchedule, value); }
     public bool IsBusy => dispatcher?.IsBusy ?? false;
     public bool IsDiscoveringAccounts { get => isDiscoveringAccounts; private set => Set(ref isDiscoveringAccounts, value); }
     public IReadOnlyList<string> LinkedAccounts { get => linkedAccounts; private set => Set(ref linkedAccounts, value); }
@@ -53,7 +72,7 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
     {
         timer.Tick += async (_, _) =>
         {
-            if (dispatcher != null && !IsDiscoveringAccounts) await dispatcher.DispatchDueAsync();
+            if (dispatcher != null && ExecutableReady && !IsDiscoveringAccounts) await dispatcher.DispatchDueAsync();
         };
     }
 
@@ -66,8 +85,12 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
             store = new EncryptedQueueStore(MacApplicationPaths.DataDirectory,
                 await MacKeychain.GetOrCreateKeyAsync());
             MacApplicationPaths.DeleteTemporaryLeftovers();
-            dispatcher = new MessageDispatcher(store, new SignalCliAdapter());
-            dispatcher.SendingStarted += () => CanSchedule = false;
+            dispatcher = new MessageDispatcher(store, new ConfiguredSignalSender(ResolveCurrentExecutableAsync), () => Cli);
+            dispatcher.SendingStarted += () =>
+            {
+                CanSchedule = false;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CanConfigureExecutable)));
+            };
             dispatcher.QueueChanged += () => QueueChanged?.Invoke();
             dispatcher.QueueWriteFailed += () => QueueFailure("Queue write failed. Reopen the app.");
             dispatcher.SendingCompleted += outcome =>
@@ -80,21 +103,71 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
                 };
                 if (dispatcher.IsFaulted) timer.Stop();
                 CanSchedule = !dispatcher.IsFaulted;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CanConfigureExecutable)));
             };
             CanSchedule = true;
             Status = "Ready. Account linking instructions are in README.";
             QueueChanged?.Invoke();
             timer.Start();
-            await RefreshAccountsAsync();
+            try { customExecutable = SignalCliPreferences.Load(); }
+            catch { ExecutableStatus = "Could not read Settings. Choose an executable or use automatic detection."; return; }
+            await ConfigureExecutableAsync(customExecutable, persist: false);
         }
         catch (Exception exception) { Status = "Cannot open queue: " + exception.Message; }
     }
 
+    public void ReportExecutableSelectionError() => ExecutableStatus = "Could not choose executable. Try again.";
+
+    private Task<SignalExecutable?> ResolveCurrentExecutableAsync() => customExecutable == null
+        ? SignalExecutable.DetectAsync(Environment.GetEnvironmentVariable("PATH"))
+        : SignalExecutable.ValidateAsync(customExecutable);
+
+    public async Task ConfigureExecutableAsync(string? chosenPath, bool persist = true)
+    {
+        if (!CanConfigureExecutable || closed) return;
+        isResolvingExecutable = true;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CanConfigureExecutable)));
+        Cli = "";
+        LinkedAccounts = Array.Empty<string>();
+        Account = "";
+        ExecutableVersion = "";
+        ExecutableStatus = "Looking for signal-cli…";
+        try
+        {
+            var executable = chosenPath == null
+                ? await SignalExecutable.DetectAsync(Environment.GetEnvironmentVariable("PATH"))
+                : await SignalExecutable.ValidateAsync(chosenPath);
+            if (closed) return;
+            if (chosenPath != null && executable == null)
+            {
+                AccountDiscoveryStatus = "";
+                ExecutableStatus = "Invalid executable. Choose a working signal-cli or use automatic detection.";
+                return;
+            }
+            if (persist) SignalCliPreferences.Save(chosenPath);
+            customExecutable = chosenPath;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AutomaticDetection)));
+            Cli = executable?.Path ?? "";
+            ExecutableVersion = executable?.Version ?? "";
+            ExecutableStatus = executable == null
+                ? "signal-cli not found. Install signal-cli or choose its location in Settings."
+                : "signal-cli ready";
+        }
+        catch { ExecutableStatus = "Could not save Settings. Try again."; Cli = ""; }
+        finally
+        {
+            isResolvingExecutable = false;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CanConfigureExecutable)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CanSchedule)));
+        }
+        if (ExecutableReady) await RefreshAccountsAsync();
+        else AccountDiscoveryStatus = "";
+    }
+
     public async Task RefreshAccountsAsync()
     {
-        if (closed || IsBusy || IsDiscoveringAccounts) return;
+        if (closed || IsBusy || IsDiscoveringAccounts || !ExecutableReady) return;
         var executable = Cli;
-        var originalAccount = Account;
         IsDiscoveringAccounts = true;
         AccountDiscoveryStatus = "Looking for linked accounts…";
         try
@@ -102,9 +175,8 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
             var accounts = await SignalAccountDiscovery.ListAsync(executable);
             if (closed || Cli != executable) return;
             LinkedAccounts = accounts;
-            if (Account == originalAccount)
-                Account = accounts.Count == 1 ? accounts[0]
-                    : accounts.Contains(Account, StringComparer.Ordinal) ? Account : "";
+            Account = accounts.Count == 1 ? accounts[0]
+                : accounts.Contains(Account, StringComparer.Ordinal) ? Account : "";
             AccountDiscoveryStatus = accounts.Count switch
             {
                 0 => "No local accounts found. Link signal-cli using the README instructions, then refresh.",
@@ -117,7 +189,8 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
             if (!closed && Cli == executable)
             {
                 LinkedAccounts = Array.Empty<string>();
-                AccountDiscoveryStatus = "Could not detect accounts. Check the executable path, refresh, or enter your account manually.";
+                Account = "";
+                AccountDiscoveryStatus = "Could not detect accounts. Check the executable path and refresh.";
             }
         }
         finally
@@ -144,12 +217,12 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
 
     public void Schedule()
     {
-        if (store == null || IsBusy) return;
+        if (store == null || IsBusy || !canSchedule) return;
         if (IsDiscoveringAccounts)
         { Status = "Wait for account detection to finish."; return; }
         if (!Regex.IsMatch(Recipient ?? "", @"^\+[1-9]\d{6,14}$"))
         { Status = "Enter recipient in international format."; return; }
-        if (!File.Exists(Cli) || string.IsNullOrWhiteSpace(Account))
+        if (!File.Exists(Cli) || !LinkedAccounts.Contains(Account, StringComparer.Ordinal))
         { Status = "Set executable path and linked account before scheduling."; return; }
         if (string.IsNullOrWhiteSpace(Body) && attachments.Count == 0)
         { Status = "Add text or a photo."; return; }
@@ -189,8 +262,7 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
         attachments.Clear();
         attachments.AddRange(message.Attachments ?? new());
         AttachmentsChanged?.Invoke();
-        Account = message.Account;
-        Cli = message.Cli;
+        Account = LinkedAccounts.Contains(message.Account, StringComparer.Ordinal) ? message.Account : "";
         When = DateTime.Now.AddMinutes(30).ToString("yyyy-MM-dd HH:mm");
     }
 
@@ -260,5 +332,9 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
         if (EqualityComparer<T>.Default.Equals(field, value)) return;
         field = value;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        if (name is nameof(IsDiscoveringAccounts))
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CanConfigureExecutable)));
+        if (name is nameof(Account) or nameof(LinkedAccounts) or nameof(IsDiscoveringAccounts) or nameof(Cli))
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CanSchedule)));
     }
 }

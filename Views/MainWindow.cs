@@ -26,8 +26,12 @@ public sealed class MainWindow : Window
         Content = new ScrollViewer { Content = panel };
         panel.Children.Add(new TextBlock { Text = "Signal Scheduler", FontSize = 26 });
         panel.Children.Add(new TextBlock { Text = "Keep the app open and your Mac awake until messages are sent." });
-        AddField("signal-cli path", Editor(nameof(viewModel.Cli)));
-        AddField("Linked account", Editor(nameof(viewModel.Account), "Your account: +countrycode… or ACI"));
+        var settings = new Button { Content = "Open Settings" };
+        settings.Click += async (_, _) => await OpenSettingsAsync();
+        panel.Children.Add(settings);
+        var executableStatus = new TextBlock { TextWrapping = TextWrapping.Wrap };
+        executableStatus.Bind(TextBlock.TextProperty, new Binding(nameof(viewModel.ExecutableStatus)));
+        panel.Children.Add(executableStatus);
         var accounts = new ComboBox { PlaceholderText = "Choose a detected account", HorizontalAlignment = HorizontalAlignment.Stretch };
         accounts.Bind(ItemsControl.ItemsSourceProperty, new Binding(nameof(viewModel.LinkedAccounts)));
         accounts.Bind(ComboBox.SelectedItemProperty, new Binding(nameof(viewModel.Account)) { Mode = BindingMode.OneWay });
@@ -79,6 +83,46 @@ public sealed class MainWindow : Window
             panel.Children.Add(new TextBlock { Text = label });
             panel.Children.Add(field);
         }
+    }
+
+    private async Task OpenSettingsAsync()
+    {
+        var panel = new StackPanel { Margin = new Thickness(24), Spacing = 12 };
+        var window = new Window { Title = "Settings → signal-cli", Width = 560, Height = 360,
+            Content = new ScrollViewer { Content = panel } };
+        panel.Children.Add(new TextBlock { Text = "signal-cli", FontSize = 22 });
+        var automatic = new CheckBox { Content = "Automatic detection", IsHitTestVisible = false, Focusable = false };
+        automatic.Bind(CheckBox.IsCheckedProperty, new Binding(nameof(viewModel.AutomaticDetection)) { Source = viewModel });
+        panel.Children.Add(automatic);
+        var path = new TextBox { IsReadOnly = true, Watermark = "No executable detected" };
+        path.Bind(TextBox.TextProperty, new Binding(nameof(viewModel.Cli)) { Source = viewModel, Mode = BindingMode.OneWay });
+        panel.Children.Add(new TextBlock { Text = "Detected / selected executable" });
+        panel.Children.Add(path);
+        var version = new TextBlock();
+        version.Bind(TextBlock.TextProperty, new Binding(nameof(viewModel.ExecutableVersion)) { Source = viewModel, StringFormat = "Version: {0}" });
+        panel.Children.Add(version);
+        var status = new TextBlock { TextWrapping = TextWrapping.Wrap };
+        status.Bind(TextBlock.TextProperty, new Binding(nameof(viewModel.ExecutableStatus)) { Source = viewModel });
+        panel.Children.Add(status);
+        var choose = new Button { Content = "Choose executable…" };
+        choose.Bind(Button.IsEnabledProperty, new Binding(nameof(viewModel.CanConfigureExecutable)) { Source = viewModel });
+        choose.Click += async (_, _) =>
+        {
+            try
+            {
+                var files = await window.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                { Title = "Choose signal-cli executable", AllowMultiple = false });
+                if (files.Count == 1 && files[0].TryGetLocalPath() is { } selected)
+                    await viewModel.ConfigureExecutableAsync(selected);
+            }
+            catch { viewModel.ReportExecutableSelectionError(); }
+        };
+        panel.Children.Add(choose);
+        var reset = new Button { Content = "Use automatic detection" };
+        reset.Bind(Button.IsEnabledProperty, new Binding(nameof(viewModel.CanConfigureExecutable)) { Source = viewModel });
+        reset.Click += async (_, _) => await viewModel.ConfigureExecutableAsync(null);
+        panel.Children.Add(reset);
+        await window.ShowDialog(this);
     }
 
     private static TextBox Editor(string property, string? watermark = null)

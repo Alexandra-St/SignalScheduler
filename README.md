@@ -119,8 +119,8 @@ The script detects the architecture, publishes a self-contained application and 
 
 ### Schedule a message
 
-1. Set the `signal-cli` executable path; Homebrew locations are detected by default.
-2. The linked account is detected on startup. If several accounts exist, choose one; after linking or changing the executable path, click **Refresh accounts**. Manual account entry remains available. Enter the recipient's international phone number.
+1. The app finds and validates `signal-cli` automatically using PATH, then standard Homebrew locations. For a custom installation, open **Settings → signal-cli**, choose an executable, or return to **Use automatic detection**. The path is read-only; the version is shown after validation.
+2. The linked account is detected on startup. If several accounts exist, choose one; after linking, click **Refresh accounts**. The **From** dropdown is the only account selector; scheduling stays disabled until a detected account is selected. Enter the recipient's international phone number.
 3. Add text or images. To capture a screenshot to the clipboard, press **Control + Shift + Command + 4**, then click **Paste screenshot**.
 4. Enter the local date and time as `yyyy-MM-dd HH:mm` and click **Schedule message**.
 5. Keep the application open and the Mac awake with network access.
@@ -196,3 +196,5 @@ Encryption protects the queue at rest, not against code running as the unlocked 
 ## License
 
 [MIT](LICENSE). External dependencies retain their own licenses; `signal-cli` is installed separately and is licensed under GPL-3.0-or-later.
+
+Executable preferences are stored locally outside the repository. Automatic mode searches again on startup and before delivery; queued messages use the current validated executable rather than their historical saved path. Version validation checks identity output, not cryptographic authenticity.

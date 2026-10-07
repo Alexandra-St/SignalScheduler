@@ -5,7 +5,7 @@ namespace SignalScheduler.Infrastructure;
 public static class ProcessRunner
 {
     public static async Task<(int Code, string Output)> RunAsync(
-        string executable, IEnumerable<string> arguments, string? input = null)
+        string executable, IEnumerable<string> arguments, string? input = null, int timeoutSeconds = 90)
     {
         var info = new ProcessStartInfo(executable)
         {
@@ -22,7 +22,7 @@ public static class ProcessRunner
         if (input != null) await process.StandardInput.WriteAsync(input);
         process.StandardInput.Close();
 
-        using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(90));
+        using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(timeoutSeconds));
         try { await process.WaitForExitAsync(timeout.Token); }
         catch
         {

@@ -4,7 +4,7 @@ using SignalScheduler.Persistence;
 
 namespace SignalScheduler.Services;
 
-public sealed class MessageDispatcher(EncryptedQueueStore store, ISignalSender sender)
+public sealed class MessageDispatcher(EncryptedQueueStore store, ISignalSender sender, Func<string?>? currentExecutable = null)
 {
     public bool IsBusy { get; private set; }
     public bool IsClosing { get; private set; }
@@ -28,7 +28,7 @@ public sealed class MessageDispatcher(EncryptedQueueStore store, ISignalSender s
             ChangeWithoutSending(message.Id, MessageStatus.Missed);
             return;
         }
-        if (!File.Exists(message.Cli))
+        if (!File.Exists(currentExecutable == null ? message.Cli : currentExecutable()))
         {
             ChangeWithoutSending(message.Id, MessageStatus.Blocked);
             return;
