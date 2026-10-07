@@ -1,0 +1,79 @@
+# .NET build output
+[Bb]in/
+[Oo]bj/
+/build/
+/publish/
+/artifacts/
+*.app/
+*.dmg
+*.pkg
+*.nupkg
+*.snupkg
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Rider / Visual Studio / VS Code local settings
+.idea/
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.DotSettings.user
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100/
+.Trashes/
+
+# Credentials, signing material and machine-local configuration
+.env
+.env.*
+!.env.example
+secrets.json
+appsettings.*.local.json
+NuGet.Config.local
+*.pfx
+*.p12
+*.pem
+*.key
+*.mobileprovision
+*.provisionprofile
+credentials/
+secrets/
+
+# Signal account state and application runtime data — never commit
+.signal/
+.signal-cli/
+signal-cli/
+Signal/
+SignalScheduler/
+Application Support/
+data/
+accounts/
+attachments/
+temporary/
+queue.enc
+queue.enc.tmp
+instance.lock
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.log
+logs/
+
+# Temporary files, downloads and source archives
+*.tmp
+*.bak
+*.swp
+*.swo
+*.zip
