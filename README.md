@@ -39,7 +39,7 @@ flowchart TD
     CLI --> Signal["Signal service"]
 ```
 
-The UI handles composition and queue actions. `QueueStore` encrypts snapshots, flushes writes before replacement and holds an exclusive instance lock. A five-second dispatcher timer selects due messages and sends them serially through a subprocess adapter.
+The UI handles composition and queue actions. `EncryptedQueueStore` encrypts snapshots, flushes writes before replacement and holds an exclusive instance lock. The ViewModel drives a five-second dispatcher timer; `MessageDispatcher` selects due messages and sends them serially through `ISignalSender`. `SignalCliAdapter` implements the external Signal integration.
 
 ## Tech stack
 
@@ -132,16 +132,31 @@ Quit the application, replace the source files and rebuild. Moving the source fo
 
 ## Project structure
 
-| File | Responsibility |
+| Path | Responsibility |
 | --- | --- |
-| `Program.cs` | Application startup, message models, encrypted store, subprocess adapter and desktop UI |
-| `SignalScheduler.csproj` | Runtime target and Avalonia dependencies |
+| `Program.cs`, `App.cs` | Entry point and Avalonia application initialization |
+| `Models/` | Scheduled messages, image attachments and backward-compatible state values |
+| `Services/MessageDispatcher.cs` | Due-message selection, serial sending and outcome transitions |
+| `Persistence/EncryptedQueueStore.cs` | Queue snapshots, file replacement, instance locking and restart recovery |
+| `Integrations/Signal/` | Signal sender boundary and `signal-cli` adapter |
+| `Security/` | AES-GCM queue envelope and macOS Keychain access |
+| `Infrastructure/` | Subprocess execution, macOS application paths and clipboard image import |
+| `Views/MainWindow.cs` | Controls, file picker, thumbnails and queue rendering |
+| `ViewModels/MainWindowViewModel.cs` | Composer state, validation, queue actions and UI lifecycle coordination |
+| `Tests/` | Queue compatibility, encryption, dispatcher and subprocess integration regression tests |
+| `SignalScheduler.csproj` | Application runtime and Avalonia dependencies |
 | `build-mac.sh` | Architecture detection, publishing and macOS bundle signing |
-| `.gitignore` | Build output, IDE files, secrets and runtime-data exclusions |
-| `.editorconfig` | Shared text and indentation settings |
-| `docs/VERIFICATION.md` | Manual acceptance checks and current verification scope |
-| `SECURITY.md` | Threat model and safe vulnerability reporting |
-| `LICENSE` | MIT license for this project's code |
+| `.gitignore`, `.editorconfig` | Runtime-data exclusions and shared source formatting settings |
+| `docs/VERIFICATION.md` | Automated verification scope and manual macOS acceptance checks |
+| `SECURITY.md`, `LICENSE` | Security boundaries and MIT license |
+
+### Run regression tests
+
+```bash
+dotnet test Tests/SignalScheduler.Tests.csproj -c Release
+```
+
+Tests use synthetic data and a fake Signal sender or local subprocess. They do not link an account or send real messages. Filesystem and subprocess checks are intended for macOS and Linux; they do not exercise Keychain, native clipboard permissions or live Signal delivery.
 
 ## Security & privacy
 
@@ -159,8 +174,7 @@ Encryption protects the queue at rest, not against code running as the unlocked 
 - Date/time picker and quick scheduling presets.
 - Contact selection and group recipients.
 - Direct editing and rescheduling of pending messages.
-- Separate UI, scheduling, persistence and integration modules.
-- Automated tests for queue recovery and send-state transitions.
+- Extend automated coverage to composer validation and UI lifecycle behavior.
 - Background execution, login startup and clearer sleep/offline handling.
 - Explore scheduling inside a separately maintained Signal Desktop build.
 
@@ -175,7 +189,7 @@ Encryption protects the queue at rest, not against code running as the unlocked 
 - Recipients are phone numbers; no contact picker, groups, video or voice-message workflow.
 - Thumbnails cannot yet be opened full-size; HEIC/HEIF previews depend on decoder support.
 - The complete encrypted queue is rewritten on every change; retention is manual, and large histories consume memory and disk space.
-- No automated test suite, independent security audit or notarized release yet. Manual macOS verification is documented separately.
+- No independent security audit or notarized release yet. Automated tests cover queue and dispatch behavior; native macOS workflows require manual verification.
 - `signal-cli` must stay compatible with Signal service changes.
 
 ## License

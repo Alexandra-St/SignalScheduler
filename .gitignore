@@ -1,4 +1,5 @@
-# .NET build output
+# .NET and Avalonia build output
+.avalonia-build-tasks/
 [Bb]in/
 [Oo]bj/
 /build/
@@ -51,14 +52,14 @@ secrets/
 # Signal account state and application runtime data — never commit
 .signal/
 .signal-cli/
-signal-cli/
-Signal/
-SignalScheduler/
-Application Support/
-data/
-accounts/
-attachments/
-temporary/
+/signal-cli/
+/Signal/
+/SignalScheduler/
+/Application Support/
+/data/
+/accounts/
+/attachments/
+/temporary/
 queue.enc
 queue.enc.tmp
 instance.lock
