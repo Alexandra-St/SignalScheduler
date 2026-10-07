@@ -13,7 +13,8 @@ namespace SignalScheduler.Views;
 public sealed class MainWindow : Window
 {
     private readonly MainWindowViewModel viewModel = new();
-    private readonly StackPanel rows = new() { Spacing = 8 };
+    private readonly StackPanel rows = new() { Spacing = 14 };
+    private readonly TextBlock queueSummary = new() { Opacity = 0.7 };
     private readonly StackPanel attachmentRows = new() { Spacing = 6 };
 
     public MainWindow()
@@ -22,16 +23,20 @@ public sealed class MainWindow : Window
         Width = 640;
         Height = 760;
         DataContext = viewModel;
-        var panel = new StackPanel { Margin = new Thickness(24), Spacing = 10 };
-        Content = new ScrollViewer { Content = panel };
-        panel.Children.Add(new TextBlock { Text = "Signal Scheduler", FontSize = 26 });
-        panel.Children.Add(new TextBlock { Text = "Keep the app open and your Mac awake until messages are sent." });
+        var page = new StackPanel { Margin = new Thickness(24), Spacing = 20 };
+        var panel = new StackPanel { Spacing = 12 };
+        Content = new ScrollViewer { Content = page };
+        page.Children.Add(new TextBlock { Text = "Signal Scheduler", FontSize = 26, FontWeight = FontWeight.SemiBold });
+        panel.Children.Add(Heading("New message"));
+        page.Children.Add(new TextBlock { Text = "Keep the app open and your Mac awake until messages are sent.", TextWrapping = TextWrapping.Wrap, Opacity = 0.7 });
         var settings = new Button { Content = "Open Settings" };
         settings.Click += async (_, _) => await OpenSettingsAsync();
-        panel.Children.Add(settings);
+        var appStatus = new StackPanel { Spacing = 10 };
+        appStatus.Children.Add(Heading("App status"));
+        appStatus.Children.Add(settings);
         var executableStatus = new TextBlock { TextWrapping = TextWrapping.Wrap };
         executableStatus.Bind(TextBlock.TextProperty, new Binding(nameof(viewModel.ExecutableStatus)));
-        panel.Children.Add(executableStatus);
+        appStatus.Children.Add(executableStatus);
         var accounts = new ComboBox { PlaceholderText = "Choose a detected account", HorizontalAlignment = HorizontalAlignment.Stretch };
         accounts.Bind(ItemsControl.ItemsSourceProperty, new Binding(nameof(viewModel.LinkedAccounts)));
         accounts.Bind(ComboBox.SelectedItemProperty, new Binding(nameof(viewModel.Account)) { Mode = BindingMode.OneWay });
@@ -53,25 +58,37 @@ public sealed class MainWindow : Window
         body.TextWrapping = TextWrapping.Wrap;
         AddField("Message", body);
 
-        var actions = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
-        var addImages = new Button { Content = "Attach photos…" };
-        var pasteImage = new Button { Content = "Paste screenshot" };
+        var actions = new WrapPanel { Orientation = Orientation.Horizontal };
+        var addImages = new Button { Content = "Attach photos…", Margin = new Thickness(0, 0, 8, 8) };
+        var pasteImage = new Button { Content = "Paste screenshot", Margin = new Thickness(0, 0, 8, 8) };
         addImages.Click += async (_, _) => await SelectImagesAsync();
         pasteImage.Click += async (_, _) => await viewModel.PasteImageAsync();
         actions.Children.Add(addImages);
         actions.Children.Add(pasteImage);
         panel.Children.Add(actions);
         panel.Children.Add(attachmentRows);
-        AddField("Send at", Editor(nameof(viewModel.When), "yyyy-MM-dd HH:mm"));
+        var scheduling = new StackPanel { Spacing = 10, Margin = new Thickness(0, 6, 0, 0) };
+        scheduling.Children.Add(new Border { Height = 1, Background = new SolidColorBrush(Color.FromArgb(65, 128, 128, 128)), Margin = new Thickness(0, 0, 0, 6) });
+        scheduling.Children.Add(new TextBlock { Text = "Send at", FontWeight = FontWeight.SemiBold });
+        scheduling.Children.Add(Editor(nameof(viewModel.When), "yyyy-MM-dd HH:mm"));
+        scheduling.Children.Add(new TextBlock { Text = "Local time · yyyy-MM-dd HH:mm", FontSize = 12, Opacity = 0.7 });
 
         var schedule = new Button { Content = "Schedule message" };
         schedule.Bind(Button.IsEnabledProperty, new Binding(nameof(viewModel.CanSchedule)));
         schedule.Click += (_, _) => viewModel.Schedule();
-        panel.Children.Add(schedule);
+        scheduling.Children.Add(schedule);
+        panel.Children.Add(scheduling);
+        page.Children.Add(Card(panel));
         var status = new TextBlock { TextWrapping = TextWrapping.Wrap };
         status.Bind(TextBlock.TextProperty, new Binding(nameof(viewModel.Status)));
-        panel.Children.Add(status);
-        panel.Children.Add(rows);
+        appStatus.Children.Add(status);
+        page.Children.Add(Card(appStatus));
+        var messages = new StackPanel { Spacing = 12 };
+        messages.Children.Add(Heading("Messages"));
+        messages.Children.Add(queueSummary);
+        messages.Children.Add(rows);
+        page.Children.Add(messages);
+        RefreshQueue();
 
         viewModel.QueueChanged += RefreshQueue;
         viewModel.AttachmentsChanged += RefreshAttachments;
@@ -80,10 +97,23 @@ public sealed class MainWindow : Window
 
         void AddField(string label, Control field)
         {
-            panel.Children.Add(new TextBlock { Text = label });
+            panel.Children.Add(new TextBlock { Text = label, FontWeight = FontWeight.SemiBold });
             panel.Children.Add(field);
         }
     }
+
+    private static TextBlock Heading(string text) => new()
+    { Text = text, FontSize = 18, FontWeight = FontWeight.SemiBold };
+
+    private static Border Card(Control content) => new()
+    {
+        Child = content,
+        Padding = new Thickness(18),
+        CornerRadius = new CornerRadius(10),
+        BorderThickness = new Thickness(1),
+        BorderBrush = new SolidColorBrush(Color.FromArgb(80, 128, 128, 128)),
+        Background = new SolidColorBrush(Color.FromArgb(14, 128, 128, 128))
+    };
 
     private async Task OpenSettingsAsync()
     {
@@ -178,32 +208,41 @@ public sealed class MainWindow : Window
     private void RefreshQueue()
     {
         rows.Children.Clear();
-        foreach (var message in viewModel.Messages)
+        var messages = viewModel.Messages.ToList();
+        queueSummary.Text = messages.Count == 0 ? "No messages yet. Schedule your first message above."
+            : $"{messages.Count} messages · newest scheduled time first";
+        foreach (var message in messages)
         {
-            var row = new StackPanel { Spacing = 4 };
-            row.Children.Add(new TextBlock
+            var row = new StackPanel { Spacing = 10 };
+            row.Children.Add(new TextBlock { Text = "To " + message.Recipient, FontWeight = FontWeight.SemiBold, TextWrapping = TextWrapping.Wrap });
+            row.Children.Add(new TextBlock { Text = $"Send at {message.Due.LocalDateTime:yyyy-MM-dd HH:mm} · local time", FontSize = 13, Opacity = 0.7, TextWrapping = TextWrapping.Wrap });
+            row.Children.Add(new Border
             {
-                Text = $"{message.Recipient} · {message.Due.LocalDateTime:yyyy-MM-dd HH:mm} · {MessageStatusLabels.Format(message.State)}",
-                TextWrapping = TextWrapping.Wrap
+                Child = new TextBlock { Text = "Status: " + MessageStatusLabels.Format(message.State), TextWrapping = TextWrapping.Wrap, FontSize = 13 },
+                Padding = new Thickness(10, 6), CornerRadius = new CornerRadius(6),
+                Background = new SolidColorBrush(Color.FromArgb(24, 128, 128, 128))
             });
-            row.Children.Add(new TextBlock { Text = message.Text, TextWrapping = TextWrapping.Wrap });
+            if (MessageStatusLabels.Hint(message.State) is { } hint)
+                row.Children.Add(new TextBlock { Text = hint, TextWrapping = TextWrapping.Wrap, FontSize = 13, Opacity = 0.8 });
+            if (!string.IsNullOrWhiteSpace(message.Text))
+                row.Children.Add(new TextBlock { Text = message.Text, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 4, 0, 4) });
             foreach (var attachment in message.Attachments ?? new())
-                row.Children.Add(new TextBlock { Text = "📎 " + attachment.Name });
-            var actions = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
+                row.Children.Add(new TextBlock { Text = "📎 " + attachment.Name, TextWrapping = TextWrapping.Wrap, FontSize = 13, Opacity = 0.8 });
+            var actions = new WrapPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 4, 0, 0) };
             if (message.State == MessageStatus.Pending)
                 AddAction("Cancel", () => viewModel.Cancel(message));
             if (message.State != MessageStatus.Sending)
             {
-                AddAction("Copy to composer", () => viewModel.CopyToComposer(message));
+                AddAction("Use as new message", () => viewModel.CopyToComposer(message));
                 if (message.State != MessageStatus.Pending)
                     AddAction("Delete", () => viewModel.Delete(message));
             }
             row.Children.Add(actions);
-            rows.Children.Add(row);
+            rows.Children.Add(Card(row));
 
             void AddAction(string label, Action action)
             {
-                var button = new Button { Content = label, IsEnabled = !viewModel.IsBusy };
+                var button = new Button { Content = label, IsEnabled = !viewModel.IsBusy, Margin = new Thickness(0, 0, 8, 6) };
                 button.Click += (_, _) => action();
                 actions.Children.Add(button);
             }

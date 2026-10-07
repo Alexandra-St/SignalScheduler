@@ -106,7 +106,7 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CanConfigureExecutable)));
             };
             CanSchedule = true;
-            Status = "Ready. Account linking instructions are in README.";
+            Status = "Ready to schedule messages.";
             QueueChanged?.Invoke();
             timer.Start();
             try { customExecutable = SignalCliPreferences.Load(); }
