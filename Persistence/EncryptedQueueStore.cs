@@ -25,13 +25,13 @@ public sealed class EncryptedQueueStore : IDisposable
             var plaintext = cipher.Decrypt(File.ReadAllBytes(path));
             Items = JsonSerializer.Deserialize<List<ScheduledMessage>>(plaintext)
                 ?? throw new InvalidDataException("Invalid queue");
-            Items = Items.Select(message => message.State == MessageStates.Sending
-                ? message with { State = MessageStates.Unknown } : message).ToList();
+            Items = Items.Select(message => message.State == MessageStatus.Sending
+                ? message with { State = MessageStatus.Unknown } : message).ToList();
             Save();
         }
     }
 
-    public void Change(Guid id, string state)
+    public void Change(Guid id, MessageStatus state)
     {
         Items = Items.Select(message => message.Id == id ? message with { State = state } : message).ToList();
         Save();

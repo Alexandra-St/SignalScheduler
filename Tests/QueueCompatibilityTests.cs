@@ -10,6 +10,55 @@ namespace SignalScheduler.Tests;
 
 public sealed class QueueCompatibilityTests
 {
+    [Theory]
+    [InlineData(MessageStatus.Pending, "Pending")]
+    [InlineData(MessageStatus.Sending, "Sending")]
+    [InlineData(MessageStatus.Cancelled, "Cancelled")]
+    [InlineData(MessageStatus.Sent, "Sent — accepted by signal-cli")]
+    [InlineData(MessageStatus.Unknown, "Unknown — check Signal before rescheduling")]
+    [InlineData(MessageStatus.UnknownOrFailed, "Unknown/failed — check Signal before rescheduling")]
+    [InlineData(MessageStatus.Missed, "Missed — reschedule manually")]
+    [InlineData(MessageStatus.Blocked, "Blocked — signal-cli missing; reschedule manually")]
+    public void StatusWritesOriginalWireStringAndReadsItBack(MessageStatus status, string wireValue)
+    {
+        var json = JsonSerializer.Serialize(status);
+        Assert.Equal(wireValue, JsonSerializer.Deserialize<string>(json));
+        Assert.Equal(status, JsonSerializer.Deserialize<MessageStatus>(json));
+    }
+
+    [Theory]
+    [InlineData("\"FutureStatus\"")]
+    [InlineData("\"pending\"")]
+    [InlineData("\"1\"")]
+    [InlineData("1")]
+    [InlineData("null")]
+    [InlineData("true")]
+    [InlineData("{}")]
+    [InlineData("[]")]
+    public async Task UnrecognizedOrMissingStateLoadsAndNeverDispatches(string? stateJson)
+    {
+        using var queue = new TestQueue();
+        var message = queue.Add(TimeSpan.FromMinutes(-1));
+        var node = System.Text.Json.Nodes.JsonNode.Parse(JsonSerializer.Serialize(message))!.AsObject();
+        if (stateJson is null) node.Remove("State");
+        else node["State"] = System.Text.Json.Nodes.JsonNode.Parse(stateJson);
+        using var cipher = new QueueCipher(queue.Key.ToArray());
+        File.WriteAllBytes(Path.Combine(queue.DirectoryPath, "queue.enc"),
+            cipher.Encrypt(Encoding.UTF8.GetBytes("[" + node.ToJsonString() + "]")));
+        queue.Store.Dispose();
+        using var reopened = new EncryptedQueueStore(queue.DirectoryPath, queue.Key.ToArray());
+        Assert.Equal(MessageStatus.Unknown, Assert.Single(reopened.Items).State);
+        var sender = new FakeSignalSender();
+        await new SignalScheduler.Services.MessageDispatcher(reopened, sender).DispatchDueAsync();
+        Assert.Empty(sender.Attempts);
+        using var persisted = JsonDocument.Parse(cipher.Decrypt(File.ReadAllBytes(Path.Combine(queue.DirectoryPath, "queue.enc"))));
+        Assert.Equal("Unknown — check Signal before rescheduling", persisted.RootElement[0].GetProperty("State").GetString());
+    }
+
+    [Fact]
+    public Task MissingStateLoadsAndNeverDispatches()
+        => UnrecognizedOrMissingStateLoadsAndNeverDispatches(null);
+
     [Fact]
     public void NewCipherReadsLegacyEnvelopeAndLegacyCipherReadsNewEnvelope()
     {
@@ -37,12 +86,21 @@ public sealed class QueueCompatibilityTests
     }
 
     [Theory]
-    [InlineData(MessageStates.Pending, MessageStates.Pending)]
-    [InlineData(MessageStates.Sending, MessageStates.Unknown)]
-    [InlineData(MessageStates.Cancelled, MessageStates.Cancelled)]
-    [InlineData(MessageStates.Sent, MessageStates.Sent)]
-    [InlineData(MessageStates.UnknownOrFailed, MessageStates.UnknownOrFailed)]
-    public void LegacyTextOnlyQueueLoadsWithoutMigration(string state, string expected)
+    [InlineData("Pending", MessageStatus.Pending)]
+    [InlineData("Sending", MessageStatus.Unknown)]
+    [InlineData("Cancelled", MessageStatus.Cancelled)]
+    [InlineData("Sent — accepted by signal-cli", MessageStatus.Sent)]
+    [InlineData("Unknown — check Signal before rescheduling", MessageStatus.Unknown)]
+    [InlineData("Unknown/failed — check Signal before rescheduling", MessageStatus.UnknownOrFailed)]
+    [InlineData("Missed — reschedule manually", MessageStatus.Missed)]
+    [InlineData("Blocked — signal-cli missing; reschedule manually", MessageStatus.Blocked)]
+    [InlineData("Sent", MessageStatus.Sent)]
+    [InlineData("Unknown", MessageStatus.Unknown)]
+    [InlineData("UnknownOrFailed", MessageStatus.UnknownOrFailed)]
+    [InlineData("Missed", MessageStatus.Missed)]
+    [InlineData("Blocked", MessageStatus.Blocked)]
+    [InlineData("LegacyUnexpectedStatus", MessageStatus.Unknown)]
+    public void LegacyTextOnlyQueueLoadsWithoutMigration(string state, MessageStatus expected)
     {
         var directory = Path.Combine(Path.GetTempPath(), "signal-scheduler-tests", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(directory);
@@ -79,17 +137,17 @@ public sealed class QueueCompatibilityTests
             using (var store = new EncryptedQueueStore(directory, key.ToArray()))
             {
                 var message = new ScheduledMessage(Guid.NewGuid(), "recipient-placeholder", "",
-                    DateTimeOffset.UtcNow.AddMinutes(10), MessageStates.Pending, "account-placeholder", "cli-placeholder",
+                    DateTimeOffset.UtcNow.AddMinutes(10), MessageStatus.Pending, "account-placeholder", "cli-placeholder",
                     new() { new ImageAttachment("synthetic.png", new byte[] { 1, 2, 3 }) });
                 id = message.Id;
                 store.Items.Add(message);
                 store.Save();
-                store.Change(id, MessageStates.Cancelled);
+                store.Change(id, MessageStatus.Cancelled);
             }
             using var reopened = new EncryptedQueueStore(directory, key.ToArray());
             var loaded = Assert.Single(reopened.Items);
             Assert.Equal(id, loaded.Id);
-            Assert.Equal(MessageStates.Cancelled, loaded.State);
+            Assert.Equal(MessageStatus.Cancelled, loaded.State);
             Assert.Equal(new byte[] { 1, 2, 3 }, Assert.Single(loaded.Attachments!).Data);
             Assert.DoesNotContain("recipient-placeholder", Encoding.UTF8.GetString(File.ReadAllBytes(Path.Combine(directory, "queue.enc"))));
         }

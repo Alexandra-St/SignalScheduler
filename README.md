@@ -23,7 +23,7 @@ Public screenshots will use synthetic content and redact account and recipient i
 - Cancel pending messages or copy an existing message into the composer.
 - Persist message content, attachments and metadata in an AES-256-GCM encrypted queue.
 - Store the encryption key in macOS Keychain.
-- Recover interrupted sends as unknown rather than retrying automatically.
+- Recover interrupted sends as unknown rather than retrying automatically. Unknown or unsupported stored statuses also require manual review.
 - Reject invalid or ambiguous daylight-saving times.
 - Package a self-contained macOS application for Apple Silicon or Intel.
 
@@ -135,9 +135,9 @@ Quit the application, replace the source files and rebuild. Moving the source fo
 | Path | Responsibility |
 | --- | --- |
 | `Program.cs`, `App.cs` | Entry point and Avalonia application initialization |
-| `Models/` | Scheduled messages, image attachments and backward-compatible state values |
+| `Models/` | Scheduled messages, image attachments and strongly typed `MessageStatus` values |
 | `Services/MessageDispatcher.cs` | Due-message selection, serial sending and outcome transitions |
-| `Persistence/EncryptedQueueStore.cs` | Queue snapshots, file replacement, instance locking and restart recovery |
+| `Persistence/EncryptedQueueStore.cs` | Queue snapshots, compatible status-string conversion, file replacement, instance locking and restart recovery |
 | `Integrations/Signal/` | Signal sender boundary and `signal-cli` adapter |
 | `Security/` | AES-GCM queue envelope and macOS Keychain access |
 | `Infrastructure/` | Subprocess execution, macOS application paths and clipboard image import |

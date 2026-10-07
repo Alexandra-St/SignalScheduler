@@ -20,17 +20,17 @@ public sealed class MessageDispatcher(EncryptedQueueStore store, ISignalSender s
     {
         if (IsBusy || IsClosing) return;
         var message = store.Items
-            .Where(item => item.State == MessageStates.Pending && item.Due <= DateTimeOffset.UtcNow)
+            .Where(item => item.State == MessageStatus.Pending && item.Due <= DateTimeOffset.UtcNow)
             .OrderBy(item => item.Due).FirstOrDefault();
         if (message == null) return;
         if (DateTimeOffset.UtcNow - message.Due > TimeSpan.FromMinutes(5))
         {
-            ChangeWithoutSending(message.Id, MessageStates.Missed);
+            ChangeWithoutSending(message.Id, MessageStatus.Missed);
             return;
         }
         if (!File.Exists(message.Cli))
         {
-            ChangeWithoutSending(message.Id, MessageStates.Blocked);
+            ChangeWithoutSending(message.Id, MessageStatus.Blocked);
             return;
         }
 
@@ -40,16 +40,16 @@ public sealed class MessageDispatcher(EncryptedQueueStore store, ISignalSender s
         var outcome = DispatchOutcome.Interrupted;
         try
         {
-            store.Change(message.Id, MessageStates.Sending);
+            store.Change(message.Id, MessageStatus.Sending);
             QueueChanged?.Invoke();
             started = true;
             var result = await sender.SendAsync(message);
-            store.Change(message.Id, result.Code == 0 ? MessageStates.Sent : MessageStates.UnknownOrFailed);
+            store.Change(message.Id, result.Code == 0 ? MessageStatus.Sent : MessageStatus.UnknownOrFailed);
             outcome = result.Code == 0 ? DispatchOutcome.Accepted : DispatchOutcome.Uncertain;
         }
         catch
         {
-            try { if (started) store.Change(message.Id, MessageStates.Unknown); }
+            try { if (started) store.Change(message.Id, MessageStatus.Unknown); }
             catch { IsFaulted = true; }
         }
         finally
@@ -60,7 +60,7 @@ public sealed class MessageDispatcher(EncryptedQueueStore store, ISignalSender s
         }
     }
 
-    private void ChangeWithoutSending(Guid id, string state)
+    private void ChangeWithoutSending(Guid id, MessageStatus state)
     {
         try { store.Change(id, state); QueueChanged?.Invoke(); }
         catch { QueueWriteFailed?.Invoke(); }

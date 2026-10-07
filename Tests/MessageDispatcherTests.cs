@@ -11,7 +11,7 @@ public sealed class MessageDispatcherTests
     {
         using var queue = new TestQueue();
         queue.Add(TimeSpan.FromMinutes(10));
-        queue.Add(TimeSpan.FromMinutes(-1), MessageStates.Cancelled);
+        queue.Add(TimeSpan.FromMinutes(-1), MessageStatus.Cancelled);
         var sender = new FakeSignalSender();
         await new MessageDispatcher(queue.Store, sender).DispatchDueAsync();
         Assert.Empty(sender.Attempts);
@@ -26,7 +26,7 @@ public sealed class MessageDispatcherTests
         {
             Send = _ =>
             {
-                Assert.Equal(MessageStates.Sending, Assert.Single(queue.Store.Items).State);
+                Assert.Equal(MessageStatus.Sending, Assert.Single(queue.Store.Items).State);
                 return Task.FromResult((0, ""));
             }
         };
@@ -36,7 +36,7 @@ public sealed class MessageDispatcherTests
         await dispatcher.DispatchDueAsync();
         await dispatcher.DispatchDueAsync();
         Assert.Single(sender.Attempts);
-        Assert.Equal(MessageStates.Sent, Assert.Single(queue.Store.Items).State);
+        Assert.Equal(MessageStatus.Sent, Assert.Single(queue.Store.Items).State);
         Assert.Equal(DispatchOutcome.Accepted, outcome);
     }
 
@@ -48,7 +48,7 @@ public sealed class MessageDispatcherTests
         var sender = new FakeSignalSender();
         await new MessageDispatcher(queue.Store, sender).DispatchDueAsync();
         Assert.Empty(sender.Attempts);
-        Assert.Equal(MessageStates.Missed, Assert.Single(queue.Store.Items).State);
+        Assert.Equal(MessageStatus.Missed, Assert.Single(queue.Store.Items).State);
     }
 
     [Fact]
@@ -60,13 +60,13 @@ public sealed class MessageDispatcherTests
         var sender = new FakeSignalSender();
         await new MessageDispatcher(queue.Store, sender).DispatchDueAsync();
         Assert.Empty(sender.Attempts);
-        Assert.Equal(MessageStates.Blocked, Assert.Single(queue.Store.Items).State);
+        Assert.Equal(MessageStatus.Blocked, Assert.Single(queue.Store.Items).State);
     }
 
     [Theory]
-    [InlineData(false, MessageStates.UnknownOrFailed, DispatchOutcome.Uncertain)]
-    [InlineData(true, MessageStates.Unknown, DispatchOutcome.Interrupted)]
-    public async Task UncertainAndInterruptedAttemptsAreNeverRetried(bool throws, string state, DispatchOutcome expected)
+    [InlineData(false, MessageStatus.UnknownOrFailed, DispatchOutcome.Uncertain)]
+    [InlineData(true, MessageStatus.Unknown, DispatchOutcome.Interrupted)]
+    public async Task UncertainAndInterruptedAttemptsAreNeverRetried(bool throws, MessageStatus state, DispatchOutcome expected)
     {
         using var queue = new TestQueue();
         queue.Add(TimeSpan.FromMinutes(-1));
@@ -102,7 +102,7 @@ public sealed class MessageDispatcherTests
         release.SetResult((0, ""));
         await first;
         Assert.False(dispatcher.IsBusy);
-        Assert.Single(queue.Store.Items, message => message.State == MessageStates.Pending);
+        Assert.Single(queue.Store.Items, message => message.State == MessageStatus.Pending);
     }
 
     [Fact]
@@ -118,6 +118,6 @@ public sealed class MessageDispatcherTests
         dispatcher.Close();
         await dispatcher.DispatchDueAsync();
         Assert.Single(sender.Attempts);
-        Assert.Equal(MessageStates.Pending, queue.Store.Items.Single(message => message.Id == newer.Id).State);
+        Assert.Equal(MessageStatus.Pending, queue.Store.Items.Single(message => message.Id == newer.Id).State);
     }
 }

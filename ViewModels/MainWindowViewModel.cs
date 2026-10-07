@@ -115,7 +115,7 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
         try
         {
             store.Items.Add(new ScheduledMessage(Guid.NewGuid(), Recipient!, Body!, due,
-                MessageStates.Pending, Account.Trim(), Cli, attachments.ToList()));
+                MessageStatus.Pending, Account.Trim(), Cli, attachments.ToList()));
             store.Save();
             Body = "";
             attachments.Clear();
@@ -126,7 +126,7 @@ public sealed class MainWindowViewModel : INotifyPropertyChanged
         catch { QueueFailure("Queue write failed. Reopen the app before continuing."); }
     }
 
-    public void Cancel(ScheduledMessage message) => Mutate(() => store!.Change(message.Id, MessageStates.Cancelled));
+    public void Cancel(ScheduledMessage message) => Mutate(() => store!.Change(message.Id, MessageStatus.Cancelled));
 
     public void Delete(ScheduledMessage message) => Mutate(() =>
     {

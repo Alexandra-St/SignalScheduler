@@ -31,7 +31,7 @@ public sealed class SignalCliAdapterTests
             File.SetUnixFileMode(executable, UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute);
             var bytes = new byte[] { 1, 2, 3, 4 };
             var message = new ScheduledMessage(Guid.NewGuid(), "recipient-placeholder", "Synthetic caption",
-                DateTimeOffset.UtcNow, MessageStates.Pending, "account-placeholder", executable,
+                DateTimeOffset.UtcNow, MessageStatus.Pending, "account-placeholder", executable,
                 new() { new ImageAttachment("synthetic image.png", bytes) });
             var result = await new SignalCliAdapter().SendAsync(message);
             Assert.Equal(0, result.Code);

@@ -125,19 +125,19 @@ public sealed class MainWindow : Window
             var row = new StackPanel { Spacing = 4 };
             row.Children.Add(new TextBlock
             {
-                Text = $"{message.Recipient} · {message.Due.LocalDateTime:yyyy-MM-dd HH:mm} · {message.State}",
+                Text = $"{message.Recipient} · {message.Due.LocalDateTime:yyyy-MM-dd HH:mm} · {MessageStatusLabels.Format(message.State)}",
                 TextWrapping = TextWrapping.Wrap
             });
             row.Children.Add(new TextBlock { Text = message.Text, TextWrapping = TextWrapping.Wrap });
             foreach (var attachment in message.Attachments ?? new())
                 row.Children.Add(new TextBlock { Text = "📎 " + attachment.Name });
             var actions = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
-            if (message.State == MessageStates.Pending)
+            if (message.State == MessageStatus.Pending)
                 AddAction("Cancel", () => viewModel.Cancel(message));
-            if (message.State != MessageStates.Sending)
+            if (message.State != MessageStatus.Sending)
             {
                 AddAction("Copy to composer", () => viewModel.CopyToComposer(message));
-                if (message.State != MessageStates.Pending)
+                if (message.State != MessageStatus.Pending)
                     AddAction("Delete", () => viewModel.Delete(message));
             }
             row.Children.Add(actions);

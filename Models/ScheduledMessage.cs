@@ -1,12 +1,12 @@
 namespace SignalScheduler.Models;
 
-// Property names and string states form the existing queue format; do not rename them.
+// Property names form the existing queue format; State uses a compatible string converter.
 public sealed record ScheduledMessage(
     Guid Id,
     string Recipient,
     string Text,
     DateTimeOffset Due,
-    string State,
+    MessageStatus State,
     string Account,
     string Cli,
     List<ImageAttachment>? Attachments = null);

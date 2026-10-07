@@ -19,7 +19,7 @@ internal sealed class TestQueue : IDisposable
         File.WriteAllText(Executable, "test fixture; not a Signal executable");
     }
 
-    public ScheduledMessage Add(TimeSpan delay, string state = MessageStates.Pending)
+    public ScheduledMessage Add(TimeSpan delay, MessageStatus state = MessageStatus.Pending)
     {
         var message = new ScheduledMessage(Guid.NewGuid(), "recipient-placeholder", "Synthetic test message",
             DateTimeOffset.UtcNow + delay, state, "account-placeholder", Executable);
