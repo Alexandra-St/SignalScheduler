@@ -222,3 +222,13 @@ performed no real Signal sends. The operator reported that the fixes now appear
 to work normally and approved commit/push. This is development-Mac acceptance,
 not clean-Mac acceptance or proof of all QR scenarios. A matching final source
 archive, native synthetic screenshots and release publication remain separate work.
+
+## Manual QR acceptance — build 29
+
+On 2026-10-08 the operator confirmed the remaining QR procedure worked normally
+on the installed build 29: closing the linking window, starting a fresh attempt,
+phone-approved linking through a separate temporary configuration, and restoring
+automatic detection followed by removal of the test device. Combined with the
+earlier timeout/Try again report, the planned development-Mac QR scenarios are
+complete. No account identifiers, QR codes or linking secrets are recorded.
+This does not establish clean-Mac or browser-download acceptance.

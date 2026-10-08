@@ -30,8 +30,7 @@ remain automated checks, not separately reported manual checks. The initial 0.2.
 
 ## Remaining verification boundaries
 
-Clean-Mac/browser-download first launch, new phone-approved QR linking after
-redesign, window-close cancellation, recovery after uncertain sends and
+Clean-Mac/browser-download first launch, recovery after uncertain sends and
 native synthetic screenshots remain pending. Intel is unvalidated and is not a
 release target. Sent indicates successful CLI completion, not a delivery receipt.
 Blocked still appears under that name; renaming it to Cannot send is not implemented.
@@ -46,3 +45,7 @@ Blocked still appears under that name; renaming it to Cannot send is not impleme
   explains this.
 - Operator reported the fixes working normally on the development Mac. Real QR
   timeout and Try again also passed manual testing on 2026-10-08.
+
+The operator subsequently confirmed build 29 QR window-close cancellation, a
+fresh attempt, phone-approved linking and restoration of automatic detection.
+The development-Mac QR checklist is complete; clean-Mac acceptance remains open.
