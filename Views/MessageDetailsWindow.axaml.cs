@@ -32,12 +32,19 @@ public partial class MessageDetailsWindow : Window
         ClearAttachments();
         attachments.AddRange(message.Attachments.Select(item => new AttachmentViewModel(item, _ => { })));
         this.FindControl<ItemsControl>("DetailsAttachments")!.ItemsSource = attachments.ToArray();
-        this.FindControl<Border>("DeleteConfirmation")!.IsVisible = false;
+        SetDeleteConfirmation(false);
     }
     private void ClearAttachments()
     {
         foreach (var attachment in attachments) attachment.Dispose();
         attachments.Clear();
+    }
+    private async void OnReschedule(object? sender, RoutedEventArgs args)
+    {
+        var message = (MessageViewModel)DataContext!;
+        if (!message.RescheduleCommand.CanExecute(null)) return;
+        var dialog = new RescheduleWindow(owner, message.Message);
+        if (await dialog.ShowDialog<bool>(this)) Close();
     }
     private async void OnEdit(object? sender, RoutedEventArgs args)
     {
@@ -53,14 +60,19 @@ public partial class MessageDetailsWindow : Window
         message.ReuseCommand.Execute(null);
         Close();
     }
-    public void ShowDeleteConfirmation() => this.FindControl<Border>("DeleteConfirmation")!.IsVisible = true;
+    private void SetDeleteConfirmation(bool visible)
+    {
+        this.FindControl<Border>("DeleteConfirmation")!.IsVisible = visible;
+        this.FindControl<WrapPanel>("DetailsActions")!.IsVisible = !visible;
+    }
+    public void ShowDeleteConfirmation() => SetDeleteConfirmation(true);
     private void OnDelete(object? sender, RoutedEventArgs args)
     {
         if (((MessageViewModel)DataContext!).DeleteCommand.CanExecute(null))
-            this.FindControl<Border>("DeleteConfirmation")!.IsVisible = true;
+            SetDeleteConfirmation(true);
     }
     private void OnKeepMessage(object? sender, RoutedEventArgs args)
-        => this.FindControl<Border>("DeleteConfirmation")!.IsVisible = false;
+        => SetDeleteConfirmation(false);
     private void OnConfirmDelete(object? sender, RoutedEventArgs args)
     {
         var message = (MessageViewModel)DataContext!;

@@ -33,6 +33,8 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = viewModel;
+        viewModel.RescheduleRequested += async message =>
+            await new RescheduleWindow(viewModel, message).ShowDialog(this);
         viewModel.DeleteConfirmationRequested += async message =>
         {
             var current = viewModel.Messages.SingleOrDefault(item => item.Message.Id == message.Id);

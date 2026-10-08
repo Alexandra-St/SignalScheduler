@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SignalScheduler.ViewModels" x:Class="SignalScheduler.Views.RescheduleWindow"
+        x:DataType="vm:MessageViewModel" x:CompileBindings="True" Title="Reschedule message"
+        Width="540" Height="480" MinWidth="440" MinHeight="360" Background="#111D27" RequestedThemeVariant="Dark" WindowStartupLocation="CenterOwner">
+  <Window.Styles><StyleInclude Source="avares://SignalScheduler/Views/PresentationStyles.axaml" /><StyleInclude Source="avares://SignalScheduler/Views/SendTimePickerStyles.axaml" /></Window.Styles>
+  <Grid Margin="20" RowDefinitions="Auto,*,Auto,Auto,Auto" RowSpacing="12">
+    <TextBlock Classes="heading" Text="Reschedule message" />
+    <ScrollViewer Grid.Row="1"><StackPanel Spacing="10">
+      <TextBlock Text="{Binding Message.Account, StringFormat='From: {0}'}" />
+      <SelectableTextBlock Text="{Binding Recipient}" TextWrapping="Wrap" />
+      <SelectableTextBlock Text="{Binding Text}" TextWrapping="Wrap" />
+      <ItemsControl ItemsSource="{Binding Attachments}"><ItemsControl.ItemTemplate><DataTemplate x:CompileBindings="False"><TextBlock Text="{Binding Name}" /></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+    </StackPanel></ScrollViewer>
+    <StackPanel Grid.Row="2" Spacing="8">
+      <TextBlock Text="New send time" Classes="field" />
+      <Grid ColumnDefinitions="3*,2*" ColumnSpacing="8">
+        <TextBox x:Name="NewDate" Classes="sendAt" Watermark="dd.MM.yyyy" />
+        <TextBox x:Name="NewTime" Grid.Column="1" Classes="sendAt" Watermark="HH:mm" />
+      </Grid>
+      <TextBlock Classes="muted" Text="Mac local time" FontSize="12" />
+      <TextBlock Text="The original missed message will remain in History." Classes="muted" FontSize="12" />
+    </StackPanel>
+    <TextBlock x:Name="RescheduleError" Grid.Row="3" Classes="validationError" IsVisible="False" />
+    <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+      <Button Content="Cancel" Click="OnCancel" />
+      <Button Content="Reschedule" Click="OnConfirm" Background="#3B6FA8" />
+    </StackPanel>
+  </Grid>
+</Window>

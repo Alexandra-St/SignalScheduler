@@ -48,6 +48,9 @@ public sealed class MessageViewModel : IDisposable
     public bool CanCancel => Message.State == MessageStatus.Pending;
     public bool CanEdit => Message.State == MessageStatus.Pending;
     public RelayCommand EditCommand { get; }
+    public bool CanReschedule => Message.State == MessageStatus.Missed;
+    public bool ShowReuse => CanReuse && !CanReschedule;
+    public RelayCommand RescheduleCommand { get; }
     public bool CanReuse => Message.State != MessageStatus.Sending;
     public bool CanDelete => CanReuse && Message.State != MessageStatus.Pending;
     public RelayCommand CancelCommand { get; }
@@ -57,6 +60,7 @@ public sealed class MessageViewModel : IDisposable
     public MessageViewModel(ScheduledMessage message, MainWindowViewModel owner)
     {
         Message = message;
+        RescheduleCommand = new(() => owner.RequestReschedule(message), () => CanReschedule && !owner.IsBusy);
         EditCommand = new(() => owner.RequestTextEdit(message), () => CanEdit && !owner.IsBusy);
         CancelCommand = new(() => owner.Cancel(message), () => CanCancel && !owner.IsBusy);
         ReuseCommand = new(() => owner.CopyToComposer(message), () => CanReuse && !owner.IsBusy);
@@ -65,6 +69,7 @@ public sealed class MessageViewModel : IDisposable
 
     public void NotifyCommandsChanged()
     {
+        RescheduleCommand.NotifyCanExecuteChanged();
         EditCommand.NotifyCanExecuteChanged();
         CancelCommand.NotifyCanExecuteChanged();
         ReuseCommand.NotifyCanExecuteChanged();

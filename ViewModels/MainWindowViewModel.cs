@@ -166,11 +166,21 @@ public sealed class MainWindowViewModel : ObservableObject
     public IReadOnlyList<MessageViewModel> Messages { get; private set; } = Array.Empty<MessageViewModel>();
     private string historyFilter = "All statuses";
     private DateTime presentationDate = DateTime.Today;
-    public IReadOnlyList<string> HistoryFilters { get; } = new[] { "All statuses", "Sent", "Cancelled", "Missed", "Unknown / Failed", "Blocked" };
+    private bool reviewingNewMissed;
+    public string NewMissedFilter => $"Missed ({startupMissedCount})";
+    public bool IsReviewingNewMissed => reviewingNewMissed;
+    public string ShowAllMissedLabel => $"Show all missed ({Messages.Count(item => item.Message.State == MessageStatus.Missed)})";
+    public IReadOnlyList<string> HistoryFilters { get; private set; } = new[] { "All statuses", "Sent", "Cancelled", "Missed", "Unknown / Failed", "Blocked" };
     public string HistoryFilter
     {
         get => historyFilter;
-        set { if (Set(ref historyFilter, value ?? "All statuses")) RefreshMessageGroups(); }
+        set
+        {
+            if (value == null || !Set(ref historyFilter, value)) return;
+            reviewingNewMissed = historyFilter.StartsWith("Missed (", StringComparison.Ordinal);
+            Notify(nameof(IsReviewingNewMissed));
+            RefreshMessageGroups();
+        }
     }
     public IReadOnlyList<MessageGroup> UpcomingGroups { get; private set; } = Array.Empty<MessageGroup>();
     public IReadOnlyList<MessageViewModel> HistoryMessages { get; private set; } = Array.Empty<MessageViewModel>();
@@ -182,7 +192,21 @@ public sealed class MainWindowViewModel : ObservableObject
     {
         presentationDate = DateTime.Today;
         UpcomingGroups = MessageQueuePresentation.Upcoming(Messages, presentationDate);
-        HistoryMessages = MessageQueuePresentation.History(Messages, HistoryFilter);
+        if (reviewingNewMissed) { historyFilter = NewMissedFilter; Notify(nameof(HistoryFilter)); }
+        HistoryMessages = reviewingNewMissed
+            ? MessageQueuePresentation.History(Messages, "Missed").Where(item => startupMissedIds.Contains(item.Message.Id)).ToArray()
+            : MessageQueuePresentation.History(Messages, HistoryFilter);
+        var filters = startupMissedCount > 0 || reviewingNewMissed
+            ? new[] { "All statuses", "Sent", "Cancelled", NewMissedFilter, "Missed", "Unknown / Failed", "Blocked" }
+            : new[] { "All statuses", "Sent", "Cancelled", "Missed", "Unknown / Failed", "Blocked" };
+        if (!HistoryFilters.SequenceEqual(filters))
+        {
+            HistoryFilters = filters;
+            Notify(nameof(HistoryFilters));
+            Notify(nameof(HistoryFilter));
+        }
+        Notify(nameof(ShowAllMissedLabel));
+        Notify(nameof(IsReviewingNewMissed));
         Notify(nameof(UpcomingGroups));
         Notify(nameof(HistoryMessages));
         Notify(nameof(NoUpcoming));
@@ -222,6 +246,7 @@ public sealed class MainWindowViewModel : ObservableObject
                 throw new PlatformNotSupportedException("This version requires macOS Keychain.");
             store = new EncryptedQueueStore(MacApplicationPaths.DataDirectory,
                 await MacKeychain.GetOrCreateKeyAsync());
+            CaptureStartupOverdue();
             MacApplicationPaths.DeleteTemporaryLeftovers();
             dispatcher = new MessageDispatcher(store, new ConfiguredSignalSender(Signal.ResolveExecutableAsync), () => Signal.Cli);
             dispatcher.SendingStarted += () =>
@@ -246,6 +271,13 @@ public sealed class MainWindowViewModel : ObservableObject
                 Signal.SetSending(false);
                 NotifyScheduling();
             };
+            foreach (var id in startupOverdue.ToArray())
+            {
+                var remaining = startupOverdue.Count;
+                await dispatcher.DispatchDueAsync();
+                if (startupOverdue.Count == remaining)
+                    throw new IOException("Could not save missed message status. Reopen the app.");
+            }
             canSchedule = true;
             NotifyScheduling();
             Status = "Ready to schedule messages.";
@@ -320,6 +352,56 @@ public sealed class MainWindowViewModel : ObservableObject
     {
         if (IsBusy || store?.Items.SingleOrDefault(item => item.Id == message.Id)?.State != MessageStatus.Pending) return;
         Mutate(() => store!.ChangeStatus(message.Id, MessageStatus.Cancelled));
+    }
+
+    public event Action<ScheduledMessage>? RescheduleRequested;
+    public void RequestReschedule(ScheduledMessage message)
+    {
+        var current = store?.Items.SingleOrDefault(item => item.Id == message.Id);
+        if (!IsBusy && current?.State == MessageStatus.Missed) RescheduleRequested?.Invoke(current);
+    }
+    public bool TryReschedule(Guid id, string date, string time, out string error)
+    {
+        error = "This missed message is no longer available.";
+        var original = store?.Items.SingleOrDefault(item => item.Id == id);
+        if (original?.State != MessageStatus.Missed) return false;
+        if (!DateTime.TryParseExact(date, new[] { "d.M.yyyy", "dd.MM.yyyy" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out var day))
+        { error = "Enter a valid date, for example 08.10.2026."; return false; }
+        var canonical = day.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) + " " + time;
+        if (!SendTimeValidation.TryGetDue(canonical, DateTimeOffset.Now, TimeZoneInfo.Local, out var due, out error)) return false;
+        if (IsBusy || !canSchedule || Signal.IsWorking)
+        { error = "Wait until Signal Scheduler is ready."; return false; }
+        if (!File.Exists(Signal.Cli) || !Signal.LinkedAccounts.Contains(original.Account, StringComparer.Ordinal))
+        { error = "Connect the original sending account in Settings before rescheduling."; return false; }
+        try
+        {
+            store!.Add(original with { Id = Guid.NewGuid(), Due = due, State = MessageStatus.Pending, Cli = Signal.Cli });
+            startupMissedIds.Remove(original.Id);
+            UpdateMessages();
+            SelectedMessagesTab = 0;
+            Status = "Message rescheduled. The original remains in History.";
+            error = "";
+            return true;
+        }
+        catch { error = "Queue write failed. Reopen the app."; QueueFailure(error); return false; }
+    }
+    private HashSet<Guid> startupOverdue = new();
+    private readonly HashSet<Guid> startupMissedIds = new();
+    private bool startupNoticeDismissed;
+    private int startupMissedCount;
+    public bool HasStartupMissed => startupMissedCount > 0 && !startupNoticeDismissed;
+    public RelayCommand DismissMissedCommand => new(() => { startupNoticeDismissed = true; Notify(nameof(HasStartupMissed)); });
+    public string StartupMissedNotice => startupMissedCount == 1
+        ? "1 scheduled message was missed while Signal Scheduler was inactive."
+        : $"{startupMissedCount} scheduled messages were missed while Signal Scheduler was inactive.";
+    private int selectedMessagesTab;
+    public int SelectedMessagesTab { get => selectedMessagesTab; set => Set(ref selectedMessagesTab, value); }
+    public RelayCommand ReviewMissedCommand => new(() => { HistoryFilter = NewMissedFilter; SelectedMessagesTab = 1; });
+    public RelayCommand ShowAllMissedCommand => new(() => { HistoryFilter = "Missed"; SelectedMessagesTab = 1; });
+    private void CaptureStartupOverdue()
+    {
+        startupOverdue = store!.Items.Where(item => item.State == MessageStatus.Pending &&
+            DateTimeOffset.UtcNow - item.Due > TimeSpan.FromMinutes(5)).Select(item => item.Id).ToHashSet();
     }
 
     public event Action<ScheduledMessage>? TextEditRequested;
@@ -448,6 +530,13 @@ public sealed class MainWindowViewModel : ObservableObject
 
     private void UpdateMessages()
     {
+        foreach (var id in startupOverdue.ToArray())
+            if (store?.Items.Any(item => item.Id == id && item.State == MessageStatus.Missed) == true)
+            { startupMissedIds.Add(id); startupOverdue.Remove(id); }
+        startupMissedIds.RemoveWhere(id => store?.Items.Any(item => item.Id == id && item.State == MessageStatus.Missed) != true);
+        startupMissedCount = startupMissedIds.Count;
+        Notify(nameof(HasStartupMissed));
+        Notify(nameof(StartupMissedNotice));
         foreach (var message in Messages) message.Dispose();
         Messages = store?.Items.OrderByDescending(message => message.Due)
             .Select(message => new MessageViewModel(message, this)).ToList()

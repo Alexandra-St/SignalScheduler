@@ -39,15 +39,16 @@
         <StackPanel Spacing="8">
           <TextBlock Text="Delete this message from history? This cannot be undone." TextWrapping="Wrap" />
           <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
-            <Button Content="Keep message" Click="OnKeepMessage" />
-            <Button Content="Delete from history" Click="OnConfirmDelete" Background="#753E45" />
+            <Button Content="Cancel" Click="OnKeepMessage" />
+            <Button Content="Delete" Click="OnConfirmDelete" Background="#753E45" />
           </StackPanel>
         </StackPanel>
       </Border>
-      <WrapPanel HorizontalAlignment="Right">
+      <WrapPanel x:Name="DetailsActions" HorizontalAlignment="Right">
         <Button Content="Edit text…" IsVisible="{Binding CanEdit}" Click="OnEdit" Margin="0,0,8,6" />
         <Button Content="Cancel message" IsVisible="{Binding CanCancel}" Command="{Binding CancelCommand}" Margin="0,0,8,6" />
-        <Button Content="Use as new message" IsVisible="{Binding CanReuse}" Click="OnReuse" Margin="0,0,8,6" />
+        <Button Content="Reschedule…" IsVisible="{Binding CanReschedule}" Click="OnReschedule" Margin="0,0,8,6" />
+        <Button Content="Use as new message" IsVisible="{Binding ShowReuse}" Click="OnReuse" Margin="0,0,8,6" />
         <Button Content="Delete from history" IsVisible="{Binding CanDelete}" Click="OnDelete" Margin="0,0,8,6" />
         <Button Content="Close" Click="OnClose" Margin="0,0,0,6" />
       </WrapPanel>

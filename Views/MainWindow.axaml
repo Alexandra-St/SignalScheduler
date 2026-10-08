@@ -42,8 +42,9 @@
             <Button.Flyout>
               <MenuFlyout>
                 <MenuItem Header="Edit message text…" IsVisible="{Binding CanEdit}" Command="{Binding EditCommand}" />
+                <MenuItem Header="Reschedule…" IsVisible="{Binding CanReschedule}" Command="{Binding RescheduleCommand}" />
                 <MenuItem Header="Cancel message" IsVisible="{Binding CanCancel}" Command="{Binding CancelCommand}" />
-                <MenuItem Header="Use as new message" IsVisible="{Binding CanReuse}" Command="{Binding ReuseCommand}" />
+                <MenuItem Header="Use as new message" IsVisible="{Binding ShowReuse}" Command="{Binding ReuseCommand}" />
                 <MenuItem Header="Delete from history" IsVisible="{Binding CanDelete}" Command="{Binding DeleteCommand}" />
               </MenuFlyout>
             </Button.Flyout>
@@ -57,6 +58,7 @@
     <StyleInclude Source="avares://SignalScheduler/Views/SendTimePickerStyles.axaml" />
     <Style Selector="TabItem">
       <Setter Property="FontSize" Value="14" />
+      <Setter Property="MinWidth" Value="160" />
       <Setter Property="Padding" Value="12,8" />
     </Style>
     <Style Selector="TabItem:selected">
@@ -175,9 +177,18 @@
         </Grid>
       </Border>
       <Border x:Name="MessagesPanel" Grid.Column="1" Classes="workspacePanel">
-        <Grid RowDefinitions="Auto,*" RowSpacing="10">
+        <Grid RowDefinitions="Auto,Auto,*" RowSpacing="10">
           <TextBlock Classes="heading" Text="Messages" />
-          <TabControl x:Name="MessageTabs" Grid.Row="1">
+          <Border Grid.Row="1" Background="#332A1C" BorderBrush="#70502D" BorderThickness="1" CornerRadius="6" Padding="12" IsVisible="{Binding HasStartupMissed}">
+            <StackPanel Spacing="8">
+              <TextBlock Text="{Binding StartupMissedNotice}" TextWrapping="Wrap" />
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button Content="Review messages" Command="{Binding ReviewMissedCommand}" />
+                <Button Content="Dismiss" Command="{Binding DismissMissedCommand}" />
+              </StackPanel>
+            </StackPanel>
+          </Border>
+          <TabControl x:Name="MessageTabs" Grid.Row="2" SelectedIndex="{Binding SelectedMessagesTab, Mode=TwoWay}">
             <TabItem Header="{Binding UpcomingHeader}">
               <ScrollViewer x:Name="MessagesScroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="0,10,0,0">
@@ -198,6 +209,10 @@
             <TabItem Header="{Binding HistoryHeader}">
               <Grid RowDefinitions="Auto,*" RowSpacing="10" Margin="0,10,0,0">
                 <StackPanel Spacing="5">
+                  <Button Content="{Binding ShowAllMissedLabel}" Command="{Binding ShowAllMissedCommand}"
+                          IsVisible="{Binding IsReviewingNewMissed}" HorizontalAlignment="Right" />
+                  <TextBlock Text="Showing only messages from the current startup notification." Classes="muted" FontSize="12"
+                             IsVisible="{Binding IsReviewingNewMissed}" />
                   <ComboBox x:Name="HistoryFilter" ItemsSource="{Binding HistoryFilters}" SelectedItem="{Binding HistoryFilter, Mode=TwoWay}" MinWidth="160" HorizontalAlignment="Left" />
                   <TextBlock Text="Scheduled times · Mac local time" Classes="muted" FontSize="12" />
                 </StackPanel>

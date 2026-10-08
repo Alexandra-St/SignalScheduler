@@ -96,6 +96,7 @@ public sealed class PresentationTests
     [InlineData(MessageStatus.Pending, "Pending", true, true, false)]
     [InlineData(MessageStatus.Sending, "Sending", false, false, false)]
     [InlineData(MessageStatus.Sent, "Sent", false, true, true)]
+    [InlineData(MessageStatus.Missed, "Missed", false, false, true)]
     [InlineData(MessageStatus.Cancelled, "Cancelled", false, true, true)]
     [InlineData(MessageStatus.Unknown, "Unknown", false, true, true)]
     public void MessageTemplateShowsStatusAndOnlyApplicableActions(MessageStatus state, string status,
@@ -127,6 +128,8 @@ public sealed class PresentationTests
             Assert.Equal(state == MessageStatus.Pending, items.Single(item => Equals(item.Header, "Edit message text…")).IsVisible);
             Assert.Same(model.EditCommand, items.Single(item => Equals(item.Header, "Edit message text…")).Command);
             Assert.Equal(cancel, items.Single(item => Equals(item.Header, "Cancel message")).IsVisible);
+            Assert.Equal(state == MessageStatus.Missed, items.Single(item => Equals(item.Header, "Reschedule…")).IsVisible);
+            Assert.Same(model.RescheduleCommand, items.Single(item => Equals(item.Header, "Reschedule…")).Command);
             Assert.Equal(reuse, items.Single(item => Equals(item.Header, "Use as new message")).IsVisible);
             Assert.Equal(delete, items.Single(item => Equals(item.Header, "Delete from history")).IsVisible);
             Assert.Same(model.ReuseCommand, items.Single(item => Equals(item.Header, "Use as new message")).Command);

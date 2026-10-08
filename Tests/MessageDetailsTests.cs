@@ -41,7 +41,7 @@ public sealed class MessageDetailsTests
             var buttons = window.GetVisualDescendants().OfType<Button>().ToArray();
             Assert.Equal(status == MessageStatus.Pending, buttons.Single(b => Equals(b.Content, "Cancel message")).IsVisible);
             Assert.Equal(status == MessageStatus.Pending, buttons.Single(b => Equals(b.Content, "Edit text…")).IsVisible);
-            Assert.Equal(status != MessageStatus.Sending, buttons.Single(b => Equals(b.Content, "Use as new message")).IsVisible);
+            Assert.Equal(status is not (MessageStatus.Sending or MessageStatus.Missed), buttons.Single(b => Equals(b.Content, "Use as new message")).IsVisible);
             Assert.Equal(model.CanDelete, buttons.Single(b => Equals(b.Content, "Delete from history") && b.Parent is WrapPanel).IsVisible);
             Assert.False(window.FindControl<Border>("DeleteConfirmation")!.IsVisible);
             if (model.CanDelete)
@@ -49,7 +49,9 @@ public sealed class MessageDetailsTests
                 buttons.Single(b => Equals(b.Content, "Delete from history") && b.Parent is WrapPanel)
                     .RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 Assert.True(window.FindControl<Border>("DeleteConfirmation")!.IsVisible);
-                buttons.Single(b => Equals(b.Content, "Keep message")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                Assert.False(window.FindControl<WrapPanel>("DetailsActions")!.IsVisible);
+                Assert.Equal(new[] { "Cancel", "Delete" }, buttons.Where(b => b.IsEffectivelyVisible && b.Content is string).Select(b => (string)b.Content!).OrderBy(t => t).ToArray());
+                buttons.Single(b => Equals(b.Content, "Cancel")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 Assert.False(window.FindControl<Border>("DeleteConfirmation")!.IsVisible);
             }
             if (status == MessageStatus.Pending && Environment.GetEnvironmentVariable("SIGNALSCHEDULER_LAYOUT_PREVIEW") is { } directory)
