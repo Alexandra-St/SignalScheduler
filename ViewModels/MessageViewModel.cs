@@ -60,7 +60,7 @@ public sealed class MessageViewModel : IDisposable
         EditCommand = new(() => owner.RequestTextEdit(message), () => CanEdit && !owner.IsBusy);
         CancelCommand = new(() => owner.Cancel(message), () => CanCancel && !owner.IsBusy);
         ReuseCommand = new(() => owner.CopyToComposer(message), () => CanReuse && !owner.IsBusy);
-        DeleteCommand = new(() => owner.Delete(message), () => CanDelete && !owner.IsBusy);
+        DeleteCommand = new(() => owner.RequestDeletion(message), () => CanDelete && !owner.IsBusy);
     }
 
     public void NotifyCommandsChanged()

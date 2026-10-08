@@ -10,7 +10,7 @@
         Background="#0D1720" Opened="OnOpened" Closing="OnClosing">
   <Window.Resources>
     <DataTemplate x:Key="MessageCard" x:DataType="vm:MessageViewModel">
-      <Border Background="#14232E" BorderBrush="#293D4D" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,8">
+      <Border Tapped="OnMessageTapped" KeyDown="OnMessageKeyDown" Focusable="True" Background="#14232E" BorderBrush="#293D4D" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,8">
         <Grid ColumnDefinitions="58,*,Auto,Auto" ColumnSpacing="10">
           <StackPanel Spacing="4">
             <TextBlock Text="{Binding ScheduledTime}" FontWeight="SemiBold" />

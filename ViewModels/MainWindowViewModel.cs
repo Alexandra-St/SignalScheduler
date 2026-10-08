@@ -309,7 +309,11 @@ public sealed class MainWindowViewModel : ObservableObject
         catch { QueueFailure("Queue write failed. Reopen the app before continuing."); }
     }
 
-    public void Cancel(ScheduledMessage message) => Mutate(() => store!.ChangeStatus(message.Id, MessageStatus.Cancelled));
+    public void Cancel(ScheduledMessage message)
+    {
+        if (IsBusy || store?.Items.SingleOrDefault(item => item.Id == message.Id)?.State != MessageStatus.Pending) return;
+        Mutate(() => store!.ChangeStatus(message.Id, MessageStatus.Cancelled));
+    }
 
     public event Action<ScheduledMessage>? TextEditRequested;
     public void RequestTextEdit(ScheduledMessage message)
@@ -342,7 +346,20 @@ public sealed class MainWindowViewModel : ObservableObject
         }
     }
 
-    public void Delete(ScheduledMessage message) => Mutate(() => store!.Remove(message.Id));
+    public event Action<ScheduledMessage>? DeleteConfirmationRequested;
+    public void RequestDeletion(ScheduledMessage message)
+    {
+        var current = store?.Items.SingleOrDefault(item => item.Id == message.Id);
+        if (!IsBusy && current != null && current.State is not (MessageStatus.Pending or MessageStatus.Sending))
+            DeleteConfirmationRequested?.Invoke(current);
+    }
+
+    public void Delete(ScheduledMessage message)
+    {
+        var current = store?.Items.SingleOrDefault(item => item.Id == message.Id);
+        if (IsBusy || current == null || current.State is MessageStatus.Pending or MessageStatus.Sending) return;
+        Mutate(() => store!.Remove(message.Id));
+    }
 
     public void CopyToComposer(ScheduledMessage message)
     {

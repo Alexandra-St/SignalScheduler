@@ -1,0 +1,56 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SignalScheduler.ViewModels" x:Class="SignalScheduler.Views.MessageDetailsWindow"
+        x:DataType="vm:MessageViewModel" x:CompileBindings="True" Title="Message details"
+        Width="640" Height="480" MinWidth="480" MinHeight="360" Background="#111D27"
+        RequestedThemeVariant="Dark" WindowStartupLocation="CenterOwner">
+  <Grid Margin="20" RowDefinitions="Auto,*,Auto" RowSpacing="14">
+    <TextBlock Text="Message details" FontSize="18" FontWeight="SemiBold" />
+    <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled">
+      <StackPanel Spacing="12">
+        <TextBlock Text="To" Foreground="#AABCCA" FontSize="12" />
+        <SelectableTextBlock Text="{Binding RecipientIdentifier}" TextWrapping="Wrap" />
+        <TextBlock Text="Scheduled for" Foreground="#AABCCA" FontSize="12" />
+        <TextBlock Text="{Binding Message.Due.LocalDateTime, StringFormat='{}{0:dd.MM.yyyy HH:mm} (Mac local time)'}" />
+        <Border Background="{Binding BadgeBackground}" CornerRadius="5" Padding="8,4" HorizontalAlignment="Left">
+          <TextBlock Text="{Binding BadgeLabel}" Foreground="#F1F4F7" />
+        </Border>
+        <Border Background="#2C2026" BorderBrush="#753E45" BorderThickness="1" CornerRadius="6" Padding="12"
+                IsVisible="{Binding HasStatusHint}">
+          <TextBlock x:Name="DetailsWarning" Text="{Binding StatusHint}" TextWrapping="Wrap" Foreground="#E0BFA6" />
+        </Border>
+        <TextBlock Text="Message" Foreground="#AABCCA" FontSize="12" />
+        <SelectableTextBlock x:Name="FullMessageText" Text="{Binding Text}" TextWrapping="Wrap" />
+        <ItemsControl x:Name="DetailsAttachments">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="vm:AttachmentViewModel">
+              <Grid ColumnDefinitions="64,*" ColumnSpacing="10" Margin="0,4">
+                <Border Background="#243746" Width="64" Height="56" CornerRadius="4" ClipToBounds="True">
+                  <Image Source="{Binding Preview}" Stretch="UniformToFill" />
+                </Border>
+                <TextBlock Grid.Column="1" Text="{Binding Name}" TextWrapping="Wrap" VerticalAlignment="Center" />
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </ScrollViewer>
+    <StackPanel Grid.Row="2" Spacing="10">
+      <Border x:Name="DeleteConfirmation" IsVisible="False" Background="#2C2026" CornerRadius="6" Padding="10">
+        <StackPanel Spacing="8">
+          <TextBlock Text="Delete this message from history? This cannot be undone." TextWrapping="Wrap" />
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+            <Button Content="Keep message" Click="OnKeepMessage" />
+            <Button Content="Delete from history" Click="OnConfirmDelete" Background="#753E45" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+      <WrapPanel HorizontalAlignment="Right">
+        <Button Content="Edit text…" IsVisible="{Binding CanEdit}" Click="OnEdit" Margin="0,0,8,6" />
+        <Button Content="Cancel message" IsVisible="{Binding CanCancel}" Command="{Binding CancelCommand}" Margin="0,0,8,6" />
+        <Button Content="Use as new message" IsVisible="{Binding CanReuse}" Click="OnReuse" Margin="0,0,8,6" />
+        <Button Content="Delete from history" IsVisible="{Binding CanDelete}" Click="OnDelete" Margin="0,0,8,6" />
+        <Button Content="Close" Click="OnClose" Margin="0,0,0,6" />
+      </WrapPanel>
+    </StackPanel>
+  </Grid>
+</Window>

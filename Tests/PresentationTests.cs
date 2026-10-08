@@ -244,6 +244,7 @@ public sealed class PresentationTests
         void Capture(string state)
         {
             if (Environment.GetEnvironmentVariable("SIGNALSCHEDULER_LAYOUT_PREVIEW") is not { } directory) return;
+            Directory.CreateDirectory(directory);
             using var frame = host.Window.CaptureRenderedFrame();
             Assert.NotNull(frame);
             frame.Save(System.IO.Path.Combine(directory, "send-at-" + state + ".png"));
