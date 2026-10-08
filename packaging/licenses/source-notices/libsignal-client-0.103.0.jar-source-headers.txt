@@ -1,0 +1,163 @@
+Source files: org/signal/libsignal/cds2/Cds2Client.java, org/signal/libsignal/sgxsession/SgxCommunicationFailureException.java, org/signal/libsignal/zkgroup/auth/AuthCredentialWithPni.java, org/signal/libsignal/zkgroup/auth/AuthCredentialWithPniResponse.java, org/signal/libsignal/zkgroup/profiles/ExpiringProfileKeyCredential.java, org/signal/libsignal/zkgroup/profiles/ExpiringProfileKeyCredentialResponse.java
+
+//
+// Copyright 2022 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/crypto/Aes256Ctr32.java, org/signal/libsignal/crypto/Aes256GcmDecryption.java, org/signal/libsignal/crypto/Aes256GcmEncryption.java, org/signal/libsignal/crypto/CryptographicHash.java, org/signal/libsignal/crypto/CryptographicMac.java, org/signal/libsignal/crypto/jce/Mac.java, org/signal/libsignal/crypto/jce/MessageDigest.java, org/signal/libsignal/devicetransfer/DeviceTransferKey.java, org/signal/libsignal/hsmenclave/HsmEnclaveClient.java, org/signal/libsignal/internal/NativeHandleGuard.java, org/signal/libsignal/protocol/InvalidRegistrationIdException.java, org/signal/libsignal/protocol/groups/InvalidSenderKeySessionException.java, org/signal/libsignal/zkgroup/internal/Constants.java
+
+//
+// Copyright 2021 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/crypto/Aes256GcmSiv.java
+
+//
+// Copyright 2020 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/hsmenclave/EnclaveCommunicationFailureException.java, org/signal/libsignal/hsmenclave/TrustedCodeMismatchException.java, org/signal/libsignal/media/Mp4Sanitizer.java, org/signal/libsignal/media/ParseException.java, org/signal/libsignal/media/SanitizedMetadata.java, org/signal/libsignal/media/WebpSanitizer.java, org/signal/libsignal/metadata/InvalidMetadataMessageException.java, org/signal/libsignal/metadata/InvalidMetadataVersionException.java, org/signal/libsignal/metadata/ProtocolDuplicateMessageException.java, org/signal/libsignal/metadata/ProtocolException.java, org/signal/libsignal/metadata/ProtocolInvalidKeyException.java, org/signal/libsignal/metadata/ProtocolInvalidKeyIdException.java, org/signal/libsignal/metadata/ProtocolInvalidMessageException.java, org/signal/libsignal/metadata/ProtocolInvalidVersionException.java, org/signal/libsignal/metadata/ProtocolLegacyMessageException.java, org/signal/libsignal/metadata/ProtocolNoSessionException.java, org/signal/libsignal/metadata/ProtocolUntrustedIdentityException.java, org/signal/libsignal/metadata/SealedSessionCipher.java, org/signal/libsignal/metadata/SelfSendException.java, org/signal/libsignal/metadata/protocol/UnidentifiedSenderMessageContent.java, org/signal/libsignal/net/CdsiLookup.java, org/signal/libsignal/net/CdsiLookupRequest.java, org/signal/libsignal/net/CdsiLookupResponse.java, org/signal/libsignal/net/Network.java, org/signal/libsignal/sgxsession/SgxClient.java, org/signal/libsignal/svr2/Pin.java, org/signal/libsignal/svr2/PinHash.java, org/signal/libsignal/svr2/Svr2Client.java, org/signal/libsignal/attest/AttestationDataException.java, org/signal/libsignal/attest/AttestationFailedException.java, org/signal/libsignal/internal/CompletableFuture.java, org/signal/libsignal/metadata/certificate/CertificateValidator.kt, org/signal/libsignal/metadata/certificate/InvalidCertificateException.kt, org/signal/libsignal/metadata/certificate/SenderCertificate.kt, org/signal/libsignal/metadata/certificate/ServerCertificate.kt, org/signal/libsignal/protocol/ServiceId.java, org/signal/libsignal/protocol/groups/state/InMemorySenderKeyStore.java, org/signal/libsignal/protocol/incrementalmac/ChunkSizeChoice.kt, org/signal/libsignal/protocol/incrementalmac/IncrementalMacInputStream.java, org/signal/libsignal/protocol/incrementalmac/IncrementalMacOutputStream.java, org/signal/libsignal/protocol/incrementalmac/InvalidMacException.java, org/signal/libsignal/protocol/kem/KEMKeyPair.kt, org/signal/libsignal/protocol/kem/KEMKeyType.kt, org/signal/libsignal/protocol/kem/KEMPublicKey.kt, org/signal/libsignal/protocol/kem/KEMSecretKey.kt, org/signal/libsignal/protocol/state/KyberPreKeyRecord.java, org/signal/libsignal/protocol/state/KyberPreKeyStore.java, org/signal/libsignal/protocol/state/impl/InMemoryKyberPreKeyStore.java, org/signal/libsignal/usernames/BadDiscriminatorException.java, org/signal/libsignal/usernames/BadNicknameCharacterException.java, org/signal/libsignal/usernames/BaseUsernameException.java, org/signal/libsignal/usernames/CannotBeEmptyException.java, org/signal/libsignal/usernames/CannotStartWithDigitException.java, org/signal/libsignal/usernames/MissingSeparatorException.java, org/signal/libsignal/usernames/NicknameTooLongException.java, org/signal/libsignal/usernames/NicknameTooShortException.java, org/signal/libsignal/usernames/ProofVerificationFailureException.java, org/signal/libsignal/usernames/Username.java, org/signal/libsignal/usernames/UsernameLinkInputDataTooLong.java, org/signal/libsignal/usernames/UsernameLinkInvalidEntropyDataLength.java, org/signal/libsignal/usernames/UsernameLinkInvalidLinkData.java, org/signal/libsignal/zkgroup/GenericServerPublicParams.java, org/signal/libsignal/zkgroup/GenericServerSecretParams.java, org/signal/libsignal/zkgroup/backups/BackupAuthCredential.java, org/signal/libsignal/zkgroup/backups/BackupAuthCredentialPresentation.java, org/signal/libsignal/zkgroup/backups/BackupAuthCredentialRequest.java, org/signal/libsignal/zkgroup/backups/BackupAuthCredentialRequestContext.java, org/signal/libsignal/zkgroup/backups/BackupAuthCredentialResponse.java, org/signal/libsignal/zkgroup/calllinks/CallLinkAuthCredential.java, org/signal/libsignal/zkgroup/calllinks/CallLinkAuthCredentialPresentation.java, org/signal/libsignal/zkgroup/calllinks/CallLinkAuthCredentialResponse.java, org/signal/libsignal/zkgroup/calllinks/CallLinkPublicParams.java, org/signal/libsignal/zkgroup/calllinks/CallLinkSecretParams.java, org/signal/libsignal/zkgroup/calllinks/CreateCallLinkCredential.java, org/signal/libsignal/zkgroup/calllinks/CreateCallLinkCredentialPresentation.java, org/signal/libsignal/zkgroup/calllinks/CreateCallLinkCredentialRequest.java, org/signal/libsignal/zkgroup/calllinks/CreateCallLinkCredentialRequestContext.java, org/signal/libsignal/zkgroup/calllinks/CreateCallLinkCredentialResponse.java
+
+//
+// Copyright 2023 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/internal/Async.kt
+
+/*
+ * Copyright 2025 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/signal/libsignal/internal/NativeNice.kt
+
+//
+// Copyright (C) 2026 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+// WARNING: this file was automatically generated
+
+@file:Suppress(
+  "ktlint:standard:function-naming",
+  "ktlint:standard:property-naming",
+  "ktlint:standard:class-naming",
+  "ktlint:standard:filename",
+  "ktlint:standard:max-line-length",
+  "ktlint:standard:no-consecutive-comments",
+  "PLATFORM_CLASS_MAPPED_TO_KOTLIN",
+)
+
+Source files: org/signal/libsignal/internal/NativeNiceHelpers.kt, org/signal/libsignal/messagebackup/BackupJsonExporter.kt, org/signal/libsignal/messagebackup/MessageBackupSizing.kt, org/signal/libsignal/net/AuthAccountsService.kt, org/signal/libsignal/net/AuthBackupsService.kt, org/signal/libsignal/net/AuthDevicesService.kt, org/signal/libsignal/net/AuthKeysService.kt, org/signal/libsignal/net/AuthMessagesService.kt, org/signal/libsignal/net/AuthPaymentsService.kt, org/signal/libsignal/net/AuthStickersService.kt, org/signal/libsignal/net/AuthUsernamesService.kt, org/signal/libsignal/net/KeyTransparencyClient.kt, org/signal/libsignal/net/RegisterAccountRequestRejectedException.java, org/signal/libsignal/net/RegistrationInvalidReceiptException.java, org/signal/libsignal/net/RegistrationInvalidSessionException.java, org/signal/libsignal/net/RegistrationOneTimePasswordRequiredException.java, org/signal/libsignal/net/RegistrationRecoveryPasswordRequiredException.java, org/signal/libsignal/net/SvrKey.kt, org/signal/libsignal/net/UnauthBackupsService.kt, org/signal/libsignal/net/UnauthCallQualityService.kt, org/signal/libsignal/net/UnauthCredentialsService.kt, org/signal/libsignal/net/UnauthKeysService.kt, org/signal/libsignal/net/UnauthLoginPurchaseService.kt, org/signal/libsignal/net/UnauthProfilesService.kt, org/signal/libsignal/net/UserBasedAuthorization.kt, org/signal/libsignal/net/internal/ServiceStreams.kt, org/signal/libsignal/protocol/DeviceId.kt, org/signal/libsignal/zkgroup/ZkCredentialKeyPair.java, org/signal/libsignal/zkgroup/ZkCredentialPublicKey.java, org/signal/libsignal/zkgroup/avatars/AvatarUploadCredential.java, org/signal/libsignal/zkgroup/avatars/AvatarUploadCredentialPresentation.java, org/signal/libsignal/zkgroup/avatars/AvatarUploadCredentialRequest.java, org/signal/libsignal/zkgroup/avatars/AvatarUploadCredentialRequestContext.java, org/signal/libsignal/zkgroup/avatars/AvatarUploadCredentialResponse.java
+
+//
+// Copyright 2026 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/keytrans/KeyTransparencyException.java, org/signal/libsignal/keytrans/Store.java, org/signal/libsignal/media/GuaranteedSkipInputStream.java, org/signal/libsignal/media/TrustedSkipInputStream.java, org/signal/libsignal/messagebackup/AccountEntropyPool.java, org/signal/libsignal/messagebackup/BackupKey.java, org/signal/libsignal/messagebackup/ComparableBackup.java, org/signal/libsignal/messagebackup/MessageBackup.java, org/signal/libsignal/messagebackup/MessageBackupKey.java, org/signal/libsignal/messagebackup/OnlineBackupValidator.java, org/signal/libsignal/messagebackup/ValidationError.java, org/signal/libsignal/net/AppExpiredException.java, org/signal/libsignal/net/CdsiInvalidTokenException.java, org/signal/libsignal/net/CdsiProtocolException.java, org/signal/libsignal/net/ChatServiceException.java, org/signal/libsignal/net/ChatServiceInactiveException.java, org/signal/libsignal/net/DeviceDeregisteredException.java, org/signal/libsignal/net/DurationExt.java, org/signal/libsignal/net/EnclaveAuth.java, org/signal/libsignal/net/IpType.java, org/signal/libsignal/net/NetworkException.java, org/signal/libsignal/net/NetworkProtocolException.java, org/signal/libsignal/net/RateLimitChallengeException.kt, org/signal/libsignal/net/RetryLaterException.java, org/signal/libsignal/svr/DataMissingException.java, org/signal/libsignal/svr/RestoreFailedException.java, org/signal/libsignal/svr/SvrException.java, org/signal/libsignal/internal/CalledFromNative.kt, org/signal/libsignal/internal/FilterExceptions.java, org/signal/libsignal/internal/TokioAsyncContext.java, org/signal/libsignal/net/internal/BridgeChatListener.java, org/signal/libsignal/usernames/BadDiscriminatorCharacterException.java, org/signal/libsignal/usernames/DiscriminatorCannotBeEmptyException.java, org/signal/libsignal/usernames/DiscriminatorCannotBeSingleDigitException.java, org/signal/libsignal/usernames/DiscriminatorCannotBeZeroException.java, org/signal/libsignal/usernames/DiscriminatorCannotHaveLeadingZerosException.java, org/signal/libsignal/usernames/DiscriminatorTooLargeException.java, org/signal/libsignal/zkgroup/backups/BackupCredentialType.java, org/signal/libsignal/zkgroup/backups/BackupLevel.kt, org/signal/libsignal/zkgroup/groupsend/GroupSendDerivedKeyPair.java, org/signal/libsignal/zkgroup/groupsend/GroupSendEndorsement.java, org/signal/libsignal/zkgroup/groupsend/GroupSendEndorsementsResponse.java, org/signal/libsignal/zkgroup/groupsend/GroupSendFullToken.java
+
+//
+// Copyright 2024 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/keytrans/VerificationFailedException.java, org/signal/libsignal/messagebackup/BackupForwardSecrecyToken.java, org/signal/libsignal/net/AuthenticatedChatConnection.java, org/signal/libsignal/net/ChallengeOption.kt, org/signal/libsignal/net/ChatConnection.java, org/signal/libsignal/net/ChatConnectionListener.java, org/signal/libsignal/net/ConnectedElsewhereException.java, org/signal/libsignal/net/ConnectionInvalidatedException.java, org/signal/libsignal/net/DeviceTransferPossibleException.java, org/signal/libsignal/net/FakeChatRemote.java, org/signal/libsignal/net/FakeChatServer.java, org/signal/libsignal/net/KeyTransparency.kt, org/signal/libsignal/net/MismatchedDeviceException.kt, org/signal/libsignal/net/PossibleCaptiveNetworkException.java, org/signal/libsignal/net/ProvisioningConnection.java, org/signal/libsignal/net/ProvisioningConnectionListener.java, org/signal/libsignal/net/RegisterAccountResponse.java, org/signal/libsignal/net/RegistrationCodeNotDeliverableException.java, org/signal/libsignal/net/RegistrationException.java, org/signal/libsignal/net/RegistrationLockException.java, org/signal/libsignal/net/RegistrationRecoveryFailedException.java, org/signal/libsignal/net/RegistrationService.java, org/signal/libsignal/net/RegistrationSessionIdInvalidException.java, org/signal/libsignal/net/RegistrationSessionNotFoundException.java, org/signal/libsignal/net/RegistrationSessionNotReadyException.java, org/signal/libsignal/net/RegistrationSessionSendCodeException.java, org/signal/libsignal/net/RegistrationSessionState.java, org/signal/libsignal/net/RequestResult.kt, org/signal/libsignal/net/RequestUnauthorizedException.kt, org/signal/libsignal/net/ServerSideErrorException.java, org/signal/libsignal/net/SvrB.kt, org/signal/libsignal/net/TimeoutException.java, org/signal/libsignal/net/TransportFailureException.java, org/signal/libsignal/net/UnauthMessagesService.kt, org/signal/libsignal/net/UnauthUsernamesService.kt, org/signal/libsignal/net/UnauthenticatedChatConnection.java, org/signal/libsignal/net/UnexpectedResponseException.java, org/signal/libsignal/svr/InvalidSvrBDataException.java, org/signal/libsignal/internal/BridgedStringMap.java, org/signal/libsignal/net/internal/BridgeProvisioningListener.java, org/signal/libsignal/net/internal/ConnectChatBridge.java, org/signal/libsignal/protocol/ReusedBaseKeyException.java, org/signal/libsignal/protocol/SerializablePublicKey.java, org/signal/libsignal/protocol/SignedPublicPreKey.java, org/signal/libsignal/protocol/state/Internal.kt
+
+//
+// Copyright 2025 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/net/DeviceIdNotFoundException.kt, org/signal/libsignal/net/InvalidReceiptException.kt, org/signal/libsignal/net/MfaKeyNotFoundException.kt, org/signal/libsignal/net/MfaNotVerifiedException.kt, org/signal/libsignal/net/MissingBackupIdException.kt, org/signal/libsignal/net/ServiceIdNotFoundException.kt, org/signal/libsignal/net/SingleOutboundMessage.kt, org/signal/libsignal/net/TooManyMfaKeysException.kt, org/signal/libsignal/net/TooManyTotpKeysException.kt, org/signal/libsignal/net/UsernameNotAvailableException.kt, org/signal/libsignal/net/UsernameNotSetException.kt, org/signal/libsignal/net/UsernameReservationNotFoundException.kt, org/signal/libsignal/net/WebAuthnRegistrationUnsuccessfulException.kt
+
+//
+// Copyright 2026 Signal Messenger, LLC
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/net/UploadForm.kt
+
+//
+//  Copyright 2026 Signal Messenger, LLC
+//  SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/net/UploadTooLargeException.kt
+
+/*
+ * Copyright 2026 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/signal/libsignal/internal/Native.kt, org/signal/libsignal/internal/NativeTesting.kt
+
+//
+// Copyright (C) 2026 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+// WARNING: this file was automatically generated
+
+@file:Suppress(
+  "ktlint:standard:function-naming",
+  "ktlint:standard:property-naming",
+  "ktlint:standard:filename",
+  "ktlint:standard:max-line-length",
+)
+
+Source files: org/signal/libsignal/net/BadRequestError.kt
+
+//
+// Copyright 2025 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+// This file exists so that BadRequestError and its sub-interfaces can be applied to exception types
+// shared between the client and server, even though typed request APIs are a client-only thing.
+
+Source files: org/signal/libsignal/protocol/DuplicateMessageException.java, org/signal/libsignal/protocol/IdentityKey.java, org/signal/libsignal/protocol/IdentityKeyPair.java, org/signal/libsignal/protocol/InvalidKeyException.java, org/signal/libsignal/protocol/InvalidKeyIdException.java, org/signal/libsignal/protocol/InvalidMacException.java, org/signal/libsignal/protocol/InvalidMessageException.java, org/signal/libsignal/protocol/InvalidSessionException.java, org/signal/libsignal/protocol/InvalidVersionException.java, org/signal/libsignal/protocol/LegacyMessageException.java, org/signal/libsignal/protocol/NoSessionException.java, org/signal/libsignal/protocol/SessionBuilder.java, org/signal/libsignal/protocol/SessionCipher.java, org/signal/libsignal/protocol/SignalProtocolAddress.java, org/signal/libsignal/protocol/UntrustedIdentityException.java, org/signal/libsignal/protocol/groups/GroupCipher.java, org/signal/libsignal/protocol/groups/GroupSessionBuilder.java, org/signal/libsignal/protocol/groups/state/SenderKeyRecord.java, org/signal/libsignal/protocol/groups/state/SenderKeyStore.java, org/signal/libsignal/protocol/logging/Log.java, org/signal/libsignal/protocol/logging/SignalProtocolLogger.java, org/signal/libsignal/protocol/logging/SignalProtocolLoggerProvider.java, org/signal/libsignal/protocol/message/CiphertextMessage.java, org/signal/libsignal/protocol/message/DecryptionErrorMessage.java, org/signal/libsignal/protocol/message/PlaintextContent.java, org/signal/libsignal/protocol/message/PreKeySignalMessage.java, org/signal/libsignal/protocol/message/SenderKeyDistributionMessage.java, org/signal/libsignal/protocol/message/SenderKeyMessage.java, org/signal/libsignal/protocol/message/SignalMessage.java, org/signal/libsignal/protocol/state/IdentityKeyStore.java, org/signal/libsignal/protocol/state/PreKeyBundle.kt, org/signal/libsignal/protocol/state/PreKeyRecord.java, org/signal/libsignal/protocol/state/PreKeyStore.java, org/signal/libsignal/protocol/state/SessionRecord.java, org/signal/libsignal/protocol/state/SessionStore.java, org/signal/libsignal/protocol/state/SignalProtocolStore.java, org/signal/libsignal/protocol/state/SignedPreKeyRecord.java, org/signal/libsignal/protocol/state/SignedPreKeyStore.java, org/signal/libsignal/protocol/state/impl/InMemoryIdentityKeyStore.java, org/signal/libsignal/protocol/state/impl/InMemoryPreKeyStore.java, org/signal/libsignal/protocol/state/impl/InMemorySessionStore.java, org/signal/libsignal/protocol/state/impl/InMemorySignalProtocolStore.java, org/signal/libsignal/protocol/state/impl/InMemorySignedPreKeyStore.java, org/signal/libsignal/protocol/util/ByteUtil.java, org/signal/libsignal/protocol/util/Hex.java, org/signal/libsignal/protocol/util/KeyHelper.java, org/signal/libsignal/protocol/util/Medium.java
+
+//
+// Copyright 2014-2016 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/protocol/ecc/ECKeyPair.kt, org/signal/libsignal/protocol/ecc/ECPrivateKey.kt, org/signal/libsignal/protocol/ecc/ECPublicKey.kt, org/signal/libsignal/protocol/kdf/HKDF.kt
+
+//
+// Copyright 2013-2016 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/protocol/fingerprint/DisplayableFingerprint.java, org/signal/libsignal/protocol/fingerprint/Fingerprint.java, org/signal/libsignal/protocol/fingerprint/FingerprintGenerator.java, org/signal/libsignal/protocol/fingerprint/FingerprintParsingException.java, org/signal/libsignal/protocol/fingerprint/FingerprintVersionMismatchException.java, org/signal/libsignal/protocol/fingerprint/NumericFingerprintGenerator.java, org/signal/libsignal/protocol/fingerprint/ScannableFingerprint.java
+
+//
+// Copyright 2016 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/zkgroup/InvalidInputException.java, org/signal/libsignal/zkgroup/NotarySignature.java, org/signal/libsignal/zkgroup/ServerPublicParams.java, org/signal/libsignal/zkgroup/ServerSecretParams.java, org/signal/libsignal/zkgroup/VerificationFailedException.java, org/signal/libsignal/zkgroup/groups/ClientZkGroupCipher.java, org/signal/libsignal/zkgroup/groups/GroupIdentifier.java, org/signal/libsignal/zkgroup/groups/GroupMasterKey.java, org/signal/libsignal/zkgroup/groups/GroupPublicParams.java, org/signal/libsignal/zkgroup/groups/GroupSecretParams.java, org/signal/libsignal/zkgroup/groups/ProfileKeyCiphertext.java, org/signal/libsignal/zkgroup/groups/UuidCiphertext.java, org/signal/libsignal/zkgroup/internal/ByteArray.java, org/signal/libsignal/zkgroup/profiles/ProfileKey.java, org/signal/libsignal/zkgroup/profiles/ProfileKeyCommitment.java, org/signal/libsignal/zkgroup/profiles/ProfileKeyCredentialRequest.java, org/signal/libsignal/zkgroup/profiles/ProfileKeyCredentialRequestContext.java, org/signal/libsignal/zkgroup/profiles/ProfileKeyVersion.java, org/signal/libsignal/zkgroup/receipts/ClientZkReceiptOperations.java, org/signal/libsignal/zkgroup/receipts/ReceiptCredential.java, org/signal/libsignal/zkgroup/receipts/ReceiptCredentialPresentation.java, org/signal/libsignal/zkgroup/receipts/ReceiptCredentialRequest.java, org/signal/libsignal/zkgroup/receipts/ReceiptCredentialRequestContext.java, org/signal/libsignal/zkgroup/receipts/ReceiptCredentialResponse.java, org/signal/libsignal/zkgroup/receipts/ReceiptSerial.java, org/signal/libsignal/zkgroup/receipts/ServerZkReceiptOperations.java
+
+//
+// Copyright 2020-2021 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/zkgroup/auth/AuthCredentialPresentation.java, org/signal/libsignal/zkgroup/auth/ClientZkAuthOperations.java, org/signal/libsignal/zkgroup/auth/ServerZkAuthOperations.java, org/signal/libsignal/zkgroup/profiles/ClientZkProfileOperations.java, org/signal/libsignal/zkgroup/profiles/ProfileKeyCredentialPresentation.java, org/signal/libsignal/zkgroup/profiles/ServerZkProfileOperations.java
+
+//
+// Copyright 2020-2022 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+Source files: org/signal/libsignal/zkgroup/donation/DonationPermit.kt
+
+//
+// Copyright (C) 2026 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//

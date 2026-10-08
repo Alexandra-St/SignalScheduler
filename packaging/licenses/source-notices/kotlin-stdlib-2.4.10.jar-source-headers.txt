@@ -1,0 +1,1688 @@
+Source files: commonMain/generated/_Arrays.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("ArraysKt")
+@file:Suppress("REDUNDANT_CALL_OF_CONVERSION_METHOD")
+
+Source files: commonMain/generated/_Collections.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("CollectionsKt")
+@file:Suppress("REDUNDANT_CALL_OF_CONVERSION_METHOD")
+
+Source files: commonMain/generated/_Comparisons.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("ComparisonsKt")
+@file:Suppress("REDUNDANT_CALL_OF_CONVERSION_METHOD")
+
+Source files: commonMain/generated/_Maps.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("MapsKt")
+@file:Suppress("REDUNDANT_CALL_OF_CONVERSION_METHOD")
+
+Source files: commonMain/generated/_OneToManyTitlecaseMappings.kt, commonMain/kotlin/io/encoding/ExperimentalEncodingApi.kt, commonMain/kotlin/text/HexExtensions.kt, commonMain/kotlin/text/HexFormat.kt, commonMain/kotlin/text/UHexExtensions.kt, commonMain/kotlin/uuid/ExperimentalUuidApi.kt, commonMain/kotlin/UnsignedCommon.kt, jvmMain/kotlin/enums/EnumEntriesJVM.kt, jvmMain/kotlin/internal/PlatformImplementations.kt, jvmMain/kotlin/io/encoding/Base64JVM.kt, jvmMain/kotlin/text/CharCategoryJVM.kt, jvmMain/kotlin/text/CharDirectionality.kt
+
+/*
+ * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+Source files: commonMain/generated/_Ranges.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("RangesKt")
+@file:Suppress("REDUNDANT_CALL_OF_CONVERSION_METHOD")
+
+Source files: commonMain/generated/_Sequences.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("SequencesKt")
+@file:Suppress("REDUNDANT_CALL_OF_CONVERSION_METHOD")
+
+Source files: commonMain/generated/_Sets.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("SetsKt")
+@file:Suppress("REDUNDANT_CALL_OF_CONVERSION_METHOD")
+
+Source files: commonMain/generated/_Strings.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("StringsKt")
+@file:Suppress("REDUNDANT_CALL_OF_CONVERSION_METHOD")
+
+Source files: commonMain/generated/_UArrays.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("UArraysKt")
+@file:Suppress("REDUNDANT_CALL_OF_CONVERSION_METHOD")
+@file:kotlin.jvm.JvmPackageName("kotlin.collections.unsigned")
+
+Source files: commonMain/generated/_UCollections.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("UCollectionsKt")
+@file:Suppress("REDUNDANT_CALL_OF_CONVERSION_METHOD")
+
+Source files: commonMain/generated/_UComparisons.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("UComparisonsKt")
+@file:Suppress("REDUNDANT_CALL_OF_CONVERSION_METHOD")
+
+Source files: commonMain/generated/_URanges.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("URangesKt")
+@file:Suppress("REDUNDANT_CALL_OF_CONVERSION_METHOD")
+
+Source files: commonMain/generated/_USequences.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("USequencesKt")
+@file:Suppress("REDUNDANT_CALL_OF_CONVERSION_METHOD")
+
+Source files: commonMain/kotlin/Comparator.kt, commonMain/kotlin/ExceptionsH.kt, commonMain/kotlin/KotlinH.kt, commonMain/kotlin/collections/AbstractMutableCollection.kt, commonMain/kotlin/collections/AbstractMutableList.kt, commonMain/kotlin/collections/AbstractMutableMap.kt, commonMain/kotlin/collections/AbstractMutableSet.kt, commonMain/kotlin/annotations/Inference.kt, commonMain/kotlin/annotations/Throws.kt, commonMain/kotlin/collections/AbstractCollection.kt, commonMain/kotlin/collections/AbstractSet.kt, commonMain/kotlin/coroutines/Continuation.kt, commonMain/kotlin/coroutines/CoroutineContextImpl.kt, commonMain/kotlin/coroutines/cancellation/CancellationExceptionH.kt, commonMain/kotlin/properties/Interfaces.kt, commonMain/kotlin/text/CharCategory.kt, commonMain/kotlin/util/DeepRecursive.kt, commonMain/kotlin/util/KotlinVersion.kt, jvmMain/kotlin/collections/AbstractMutableCollection.kt, jvmMain/kotlin/collections/AbstractMutableList.kt, jvmMain/kotlin/collections/AbstractMutableMap.kt, jvmMain/kotlin/collections/AbstractMutableSet.kt, jvmMain/kotlin/coroutines/cancellation/CancellationException.kt, jvmMain/kotlin/Throws.kt, jvmMain/kotlin/jvm/internal/AdaptedFunctionReference.java, jvmMain/kotlin/jvm/internal/FunInterfaceConstructorReference.java, jvmMain/kotlin/jvm/internal/FunctionAdapter.java, jvmMain/kotlin/jvm/internal/TypeParameterReference.kt, jvmMain/jdk7/kotlin/io/path/ExperimentalPathApi.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+Source files: commonMain/kotlin/JsAnnotationsH.kt, commonMain/kotlin/SequencesH.kt, commonMain/kotlin/ioH.kt, commonMain/kotlin/annotations/Multiplatform.kt, commonMain/kotlin/collections/AbstractIterator.kt, commonMain/kotlin/collections/IndexedValue.kt, commonMain/kotlin/collections/Sequence.kt, commonMain/kotlin/collections/SlidingWindow.kt, commonMain/kotlin/contracts/ContractBuilder.kt, commonMain/kotlin/contracts/Effect.kt, commonMain/kotlin/coroutines/ContinuationInterceptor.kt, commonMain/kotlin/coroutines/CoroutineContext.kt, commonMain/kotlin/coroutines/CoroutinesH.kt, commonMain/kotlin/coroutines/CoroutinesIntrinsicsH.kt, commonMain/kotlin/experimental/bitwiseOperations.kt, commonMain/kotlin/experimental/inferenceMarker.kt, commonMain/kotlin/internal/Annotations.kt, commonMain/kotlin/internal/progressionUtil.kt, commonMain/kotlin/properties/Delegates.kt, commonMain/kotlin/properties/ObservableProperty.kt, commonMain/kotlin/random/XorWowRandom.kt, commonMain/kotlin/text/Typography.kt, commonMain/kotlin/text/regex/MatchResult.kt, commonMain/kotlin/util/HashCode.kt, jvmMain/kotlin/collections/ArraysUtilJVM.java, jvmMain/kotlin/coroutines/SafeContinuationJvm.kt, jvmMain/kotlin/coroutines/jvm/internal/ContinuationImpl.kt, jvmMain/kotlin/coroutines/jvm/internal/CoroutineStackFrame.kt, jvmMain/kotlin/coroutines/jvm/internal/DebugMetadata.kt, jvmMain/kotlin/coroutines/jvm/internal/DebugProbes.kt, jvmMain/kotlin/coroutines/jvm/internal/RunSuspend.kt, jvmMain/kotlin/io/Exceptions.kt, jvmMain/kotlin/io/Serializable.kt, jvmMain/kotlin/jvm/JvmDefault.kt, jvmMain/kotlin/jvm/internal/unsafe/monitor.kt, jvmMain/kotlin/random/PlatformRandom.kt, jvmMain/kotlin/reflect/KCallable.kt, jvmMain/kotlin/reflect/KFunction.kt, jvmMain/kotlin/KotlinNullPointerException.kt, jvmMain/kotlin/Metadata.kt, jvmMain/kotlin/NoWhenBranchMatchedException.kt, jvmMain/kotlin/TypeCastException.kt, jvmMain/kotlin/UninitializedPropertyAccessException.kt, jvmMain/kotlin/jvm/KotlinReflectionNotSupportedError.kt, jvmMain/kotlin/jvm/PurelyImplements.kt, jvmMain/kotlin/jvm/annotations/JvmFlagAnnotations.kt, jvmMain/kotlin/jvm/annotations/JvmPlatformAnnotations.kt, jvmMain/kotlin/jvm/functions/FunctionN.kt, jvmMain/kotlin/jvm/internal/ArrayIterator.kt, jvmMain/kotlin/jvm/internal/CallableReference.java, jvmMain/kotlin/jvm/internal/ClassBasedDeclarationContainer.kt, jvmMain/kotlin/jvm/internal/ClassReference.kt, jvmMain/kotlin/jvm/internal/DefaultConstructorMarker.java, jvmMain/kotlin/jvm/internal/FunctionBase.kt, jvmMain/kotlin/jvm/internal/FunctionImpl.java, jvmMain/kotlin/jvm/internal/FunctionReference.java, jvmMain/kotlin/jvm/internal/FunctionReferenceImpl.java, jvmMain/kotlin/jvm/internal/InlineMarker.java, jvmMain/kotlin/jvm/internal/Intrinsics.java, jvmMain/kotlin/jvm/internal/Lambda.kt, jvmMain/kotlin/jvm/internal/MagicApiIntrinsics.java, jvmMain/kotlin/jvm/internal/MutablePropertyReference.java, jvmMain/kotlin/jvm/internal/MutablePropertyReference0.java, jvmMain/kotlin/jvm/internal/MutablePropertyReference0Impl.java, jvmMain/kotlin/jvm/internal/MutablePropertyReference1.java, jvmMain/kotlin/jvm/internal/MutablePropertyReference1Impl.java, jvmMain/kotlin/jvm/internal/MutablePropertyReference2.java, jvmMain/kotlin/jvm/internal/MutablePropertyReference2Impl.java, jvmMain/kotlin/jvm/internal/PackageReference.kt, jvmMain/kotlin/jvm/internal/PrimitiveSpreadBuilders.kt, jvmMain/kotlin/jvm/internal/PropertyReference.java, jvmMain/kotlin/jvm/internal/PropertyReference0.java, jvmMain/kotlin/jvm/internal/PropertyReference0Impl.java, jvmMain/kotlin/jvm/internal/PropertyReference1.java, jvmMain/kotlin/jvm/internal/PropertyReference1Impl.java, jvmMain/kotlin/jvm/internal/PropertyReference2.java, jvmMain/kotlin/jvm/internal/PropertyReference2Impl.java, jvmMain/kotlin/jvm/internal/Ref.java, jvmMain/kotlin/jvm/internal/Reflection.java, jvmMain/kotlin/jvm/internal/ReflectionFactory.java, jvmMain/kotlin/jvm/internal/SpreadBuilder.java, jvmMain/kotlin/jvm/internal/TypeIntrinsics.java, jvmMain/kotlin/jvm/internal/markers/KMarkers.kt, jvmMain/jdk8/kotlin/random/jdk8/PlatformThreadLocalRandom.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+Source files: commonMain/kotlin/JvmAnnotationsH.kt, commonMain/kotlin/CharCode.kt, commonMain/kotlin/comparisons/compareTo.kt, commonMain/kotlin/random/Random.kt, commonMain/kotlin/random/URandom.kt, commonMain/kotlin/UMath.kt, commonMain/kotlin/UProgressionUtil.kt, jvmMain/kotlin/CharCodeJVM.kt, jvmMain/kotlin/collections/builders/ListBuilder.kt, jvmMain/kotlin/collections/builders/SetBuilder.kt, jvmMain/kotlin/text/regex/Regex.kt, jvmMain/kotlin/time/DurationJvm.kt, jvmMain/kotlin/jvm/internal/RepeatableContainer.java, jvmMain/kotlin/jvm/internal/SerializedIr.kt, jvmMain/jdk7/kotlin/io/path/PathTreeWalk.kt
+
+/*
+ * Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+Source files: commonMain/kotlin/MathH.kt
+
+/*
+ * Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("MathKt")
+
+Source files: commonMain/kotlin/TextH.kt, commonMain/kotlin/Annotation.kt, commonMain/kotlin/Any.kt, commonMain/kotlin/ArrayIntrinsics.kt, commonMain/kotlin/CharSequence.kt, commonMain/kotlin/Comparable.kt, commonMain/kotlin/Enum.kt, commonMain/kotlin/Iterator.kt, commonMain/kotlin/Library.kt, commonMain/kotlin/Nothing.kt, commonMain/kotlin/Number.kt, commonMain/kotlin/String.kt, commonMain/kotlin/Throwable.kt, commonMain/kotlin/Unit.kt, commonMain/kotlin/annotations/ConsistentCopyVisibility.kt, commonMain/kotlin/time/Clock.kt, commonMain/kotlin/time/TimeSources.kt, commonMain/kotlin/time/measureTime.kt, commonMain/kotlin/util/Suspend.kt, jvmMain/kotlin/coroutines/jvm/internal/Spilling.kt, jvmMain/kotlin/time/InstantJvm.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+Source files: commonMain/kotlin/collections/ArrayList.kt, commonMain/kotlin/collections/CollectionsH.kt, commonMain/kotlin/collections/HashMap.kt, commonMain/kotlin/collections/HashSet.kt, commonMain/kotlin/collections/LinkedHashMap.kt, commonMain/kotlin/collections/LinkedHashSet.kt, commonMain/kotlin/Collections.kt, commonMain/kotlin/annotations/NativeAnnotations.kt, commonMain/kotlin/annotations/VersionOverloads.kt, commonMain/kotlin/collections/ArrayDeque.kt, commonMain/kotlin/contextParameters/ExperimentalContextParameters.kt, commonMain/kotlin/experimental/ExpectRefinement.kt, commonMain/kotlin/experimental/ExperimentalObjCEnum.kt, commonMain/kotlin/internal/serializationUtil.kt, commonMain/kotlin/time/Clocks.kt, commonMain/kotlin/time/Duration.kt, jvmMain/kotlin/coroutines/jvm/internal/TailCallAsyncStackTraceEntry.kt, jvmMain/kotlin/internal/serializationUtil.kt, jvmMain/kotlin/jvm/internal/BoxingConstructorMarker.kt, jvmMain/kotlin/jvm/internal/KTypeParameterBase.kt, jvmMain/kotlin/jvm/internal/KotlinGenericDeclaration.kt
+
+/*
+ * Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+Source files: commonMain/kotlin/Annotations.kt, commonMain/kotlin/Function.kt, commonMain/kotlin/annotation/Annotations.kt, commonMain/kotlin/concurrent/atomics/ExperimentalAtomicApi.kt, commonMain/kotlin/internal/AnnotationsBuiltin.kt, jvmMain/kotlin/ArrayIntrinsics.kt, jvmMain/kotlin/Unit.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.internal.JvmBuiltin
+
+Source files: commonMain/kotlin/Array.kt, commonMain/kotlin/Arrays.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by org.jetbrains.kotlin.generators.builtins.arrays.GenerateCommonArrays
+
+Source files: commonMain/kotlin/AutoCloseable.kt, commonMain/kotlin/annotations/NativeConcurrentAnnotations.kt, commonMain/kotlin/concurrent/Volatile.kt, commonMain/kotlin/experimental/ExperimentalObjCName.kt, commonMain/kotlin/experimental/ExperimentalObjCRefinement.kt, commonMain/kotlin/io/encoding/Base64.kt, commonMain/kotlin/time/TimeSource.kt, commonMain/kotlin/time/longSaturatedMath.kt, jvmMain/kotlin/concurrent/Volatile.kt, jvmMain/kotlin/time/MonoTimeSource.kt, jvmMain/kotlin/jvm/internal/SourceDebugExtension.kt, jvmMain/jdk7/kotlin/io/path/CopyActionContext.kt, jvmMain/jdk7/kotlin/io/path/CopyActionResult.kt, jvmMain/jdk7/kotlin/io/path/FileVisitorBuilder.kt, jvmMain/jdk7/kotlin/io/path/OnErrorResult.kt, jvmMain/jdk7/kotlin/io/path/PathWalkOption.kt
+
+/*
+ * Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+Source files: commonMain/kotlin/Boolean.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by org.jetbrains.kotlin.generators.builtins.numbers.primitives.CommonBooleanGenerator
+
+Source files: commonMain/kotlin/Char.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by org.jetbrains.kotlin.generators.builtins.numbers.primitives.CommonCharGenerator
+
+Source files: commonMain/kotlin/Primitives.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by org.jetbrains.kotlin.generators.builtins.numbers.primitives.CommonPrimitivesGenerator
+
+Source files: commonMain/kotlin/annotations/OptIn.kt
+
+/*
+ * Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.internal.JvmBuiltin
+
+Source files: commonMain/kotlin/annotations/ReturnValue.kt
+
+/*
+ * Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+@file:kotlin.internal.JvmBuiltin
+
+Source files: commonMain/kotlin/annotations/WasExperimental.kt, commonMain/kotlin/reflect/KCallable.kt, commonMain/kotlin/reflect/KFunction.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.internal.JvmBuiltin
+
+Source files: commonMain/kotlin/collections/AbstractList.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+/*
+ * Based on GWT AbstractList
+ * Copyright 2007 Google Inc.
+*/
+
+Source files: commonMain/kotlin/collections/AbstractMap.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+/*
+ * Based on GWT AbstractMap
+ * Copyright 2007 Google Inc.
+ */
+
+Source files: commonMain/kotlin/collections/Arrays.kt, jvmMain/kotlin/collections/ArraysJVM.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("ArraysKt")
+
+Source files: commonMain/kotlin/collections/Collections.kt
+
+/*
+ * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.js.JsFileName("CollectionsKt")
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("CollectionsKt")
+@file:OptIn(kotlin.experimental.ExperimentalTypeInference::class, kotlin.js.ExperimentalJsFileName::class)
+
+Source files: commonMain/kotlin/collections/Grouping.kt, jvmMain/kotlin/collections/GroupingJVM.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmName("GroupingKt")
+@file:kotlin.jvm.JvmMultifileClass
+
+Source files: commonMain/kotlin/collections/Iterables.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("CollectionsKt")
+
+Source files: commonMain/kotlin/collections/Iterators.kt, jvmMain/kotlin/collections/IteratorsJVM.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("CollectionsKt")
+
+Source files: commonMain/kotlin/collections/MapAccessors.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmName("MapAccessorsKt")
+
+Source files: commonMain/kotlin/collections/MapWithDefault.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("MapsKt")
+
+Source files: commonMain/kotlin/collections/Maps.kt
+
+/*
+ * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("MapsKt")
+@file:OptIn(kotlin.experimental.ExperimentalTypeInference::class)
+
+Source files: commonMain/kotlin/collections/MutableCollections.kt, jvmMain/kotlin/collections/MutableCollectionsJVM.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("CollectionsKt")
+
+Source files: commonMain/kotlin/collections/PrimitiveIterators.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by: org.jetbrains.kotlin.generators.builtins.iterators.GenerateIterators
+
+@file:kotlin.internal.JvmBuiltin
+
+Source files: commonMain/kotlin/collections/ReversedViews.kt, jvmMain/kotlin/collections/CollectionsJVM.kt
+
+/*
+ * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("CollectionsKt")
+
+Source files: commonMain/kotlin/collections/SequenceBuilder.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("SequencesKt")
+@file:OptIn(ExperimentalTypeInference::class)
+
+Source files: commonMain/kotlin/collections/Sequences.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("SequencesKt")
+
+Source files: commonMain/kotlin/collections/Sets.kt
+
+/*
+ * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("SetsKt")
+@file:OptIn(kotlin.experimental.ExperimentalTypeInference::class)
+
+Source files: commonMain/kotlin/collections/UArraySorting.kt, commonMain/kotlin/reflect/typeOf.kt, commonMain/kotlin/text/CharacterCodingException.kt, commonMain/kotlin/time/ExperimentalTime.kt, jvmMain/kotlin/reflect/KAnnotatedElement.kt, jvmMain/kotlin/reflect/KClass.kt, jvmMain/kotlin/reflect/KClassesImpl.kt, jvmMain/kotlin/reflect/KType.kt, jvmMain/kotlin/reflect/TypesJVM.kt, jvmMain/kotlin/jvm/internal/KTypeBase.kt, jvmMain/kotlin/jvm/internal/TypeReference.kt
+
+/*
+ * Copyright 2010-2019 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+Source files: commonMain/kotlin/comparisons/Comparisons.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+@file:kotlin.jvm.JvmName("ComparisonsKt")
+@file:kotlin.jvm.JvmMultifileClass
+
+Source files: commonMain/kotlin/concurrent/atomics/AtomicArrays.common.kt
+
+/*
+ * Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("AtomicArraysKt")
+
+Source files: commonMain/kotlin/concurrent/atomics/Atomics.common.kt
+
+/*
+ * Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("AtomicsKt")
+
+Source files: commonMain/kotlin/contextParameters/Context.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by: org.jetbrains.kotlin.generators.builtins.contextParameters.GenerateContextFunctions
+
+@file:kotlin.jvm.JvmName("ContextParametersKt")
+@file:kotlin.jvm.JvmMultifileClass
+
+Source files: commonMain/kotlin/contextParameters/ContextOf.kt
+
+/*
+ * Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmName("ContextParametersKt")
+@file:kotlin.jvm.JvmMultifileClass
+
+Source files: commonMain/kotlin/coroutines/intrinsics/Intrinsics.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmName("IntrinsicsKt")
+@file:kotlin.jvm.JvmMultifileClass
+
+Source files: commonMain/kotlin/enums/EnumEntries.kt
+
+/*
+ * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("EXPECT_AND_ACTUAL_IN_THE_SAME_MODULE") // for building kotlin-stdlib-jvm-minimal-for-test
+
+Source files: commonMain/kotlin/experimental/ExperimentalNativeApi.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license
+ * that can be found in the LICENSE file.
+ */
+
+Source files: commonMain/kotlin/properties/PropertyReferenceDelegates.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("PackageDirectoryMismatch")
+
+Source files: commonMain/kotlin/ranges/PrimitiveRanges.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by: org.jetbrains.kotlin.generators.builtins.ranges.GenerateRanges
+
+@file:kotlin.internal.JvmBuiltin
+
+Source files: commonMain/kotlin/ranges/ProgressionIterators.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by: org.jetbrains.kotlin.generators.builtins.progressionIterators.GenerateProgressionIterators
+
+@file:kotlin.internal.JvmBuiltin
+
+Source files: commonMain/kotlin/ranges/Progressions.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by: org.jetbrains.kotlin.generators.builtins.progressions.GenerateProgressions
+
+@file:kotlin.internal.JvmBuiltin
+
+Source files: commonMain/kotlin/ranges/Range.kt, commonMain/kotlin/reflect/KClassifier.kt, commonMain/kotlin/reflect/KTypeParameter.kt, commonMain/kotlin/reflect/KVariance.kt
+
+/*
+ * Copyright 2010-2019 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.internal.JvmBuiltin
+
+Source files: commonMain/kotlin/ranges/Ranges.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("RangesKt")
+
+Source files: commonMain/kotlin/reflect/KClass.kt, commonMain/kotlin/reflect/KType.kt, commonMain/kotlin/reflect/KTypeProjection.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.internal.JvmBuiltin
+
+Source files: commonMain/kotlin/reflect/KClasses.kt
+
+/*
+ * Copyright 2010-2019 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmName("KClasses")
+@file:Suppress("UNCHECKED_CAST")
+
+Source files: commonMain/kotlin/reflect/KProperty.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("IMPLEMENTING_FUNCTION_INTERFACE")
+@file:kotlin.internal.JvmBuiltin
+
+Source files: commonMain/kotlin/text/Appendable.kt
+
+/*
+ * Copyright 2010-2019 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("StringsKt")
+
+Source files: commonMain/kotlin/text/Char.kt, jvmMain/kotlin/text/CharJVM.kt
+
+/*
+ * Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("CharsKt")
+
+Source files: commonMain/kotlin/text/Indent.kt
+
+/*
+ * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("StringsKt")
+
+Source files: commonMain/kotlin/text/StringBuilder.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("StringsKt")
+@file:Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+
+Source files: commonMain/kotlin/text/StringNumberConversions.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("StringsKt")
+@file:Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
+
+Source files: commonMain/kotlin/text/Strings.kt
+
+/*
+ * Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("StringsKt")
+
+Source files: commonMain/kotlin/text/regex/RegexExtensions.kt, jvmMain/kotlin/text/StringBuilderJVM.kt, jvmMain/kotlin/text/regex/RegexExtensionsJVM.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("StringsKt")
+
+Source files: commonMain/kotlin/time/DurationUnit.kt
+
+/*
+ * Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass()
+@file:kotlin.jvm.JvmName("DurationUnitKt")
+
+Source files: commonMain/kotlin/time/Instant.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+/*
+ * Based on the ThreeTenBp project.
+ * Copyright (c) 2007-present, Stephen Colebourne & Michael Nascimento Santos
+ */
+
+Source files: commonMain/kotlin/util/FloorDivMod.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by: org.jetbrains.kotlin.generators.builtins.numbers.GenerateFloorDivMod
+
+@file:kotlin.jvm.JvmName("NumbersKt")
+@file:kotlin.jvm.JvmMultifileClass
+
+Source files: commonMain/kotlin/util/Lateinit.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmName("LateinitKt")
+@file:Suppress("unused")
+
+Source files: commonMain/kotlin/util/Lazy.kt, jvmMain/kotlin/util/LazyJVM.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmName("LazyKt")
+@file:kotlin.jvm.JvmMultifileClass
+
+Source files: commonMain/kotlin/util/Numbers.kt
+
+/*
+ * Copyright 2010-2019 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("NumbersKt")
+
+Source files: commonMain/kotlin/util/Preconditions.kt, jvmMain/kotlin/util/AssertionsJVM.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("PreconditionsKt")
+
+Source files: commonMain/kotlin/util/Result.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("UNCHECKED_CAST", "RedundantVisibilityModifier")
+
+Source files: commonMain/kotlin/util/Standard.kt, jvmMain/kotlin/util/Synchronized.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("StandardKt")
+
+Source files: commonMain/kotlin/util/Tuples.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmName("TuplesKt")
+
+Source files: commonMain/kotlin/uuid/Uuid.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("UuidKt")
+
+Source files: commonMain/kotlin/UByte.kt, commonMain/kotlin/UInt.kt, commonMain/kotlin/ULong.kt, commonMain/kotlin/UShort.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by: org.jetbrains.kotlin.generators.builtins.unsigned.UnsignedTypeGenerator
+
+Source files: commonMain/kotlin/UByteArray.kt, commonMain/kotlin/UIntArray.kt, commonMain/kotlin/ULongArray.kt, commonMain/kotlin/UShortArray.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by: org.jetbrains.kotlin.generators.builtins.unsigned.UnsignedArrayGenerator
+
+Source files: commonMain/kotlin/UIntRange.kt, commonMain/kotlin/ULongRange.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by: org.jetbrains.kotlin.generators.builtins.unsigned.UnsignedRangeGenerator
+
+Source files: commonMain/kotlin/UNumbers.kt
+
+/*
+ * Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmName("UNumbersKt")
+
+Source files: commonMain/kotlin/UStrings.kt
+
+/*
+ * Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmName("UStringsKt")  // string representation of unsigned numbers
+
+Source files: commonMain/kotlin/annotations/Unsigned.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
+
+Source files: jvmMain/generated/_ArraysJvm.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("ArraysKt")
+
+Source files: jvmMain/generated/_CollectionsJvm.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("CollectionsKt")
+
+Source files: jvmMain/generated/_ComparisonsJvm.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("ComparisonsKt")
+
+Source files: jvmMain/generated/_MapsJvm.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("MapsKt")
+
+Source files: jvmMain/generated/_SequencesJvm.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("SequencesKt")
+
+Source files: jvmMain/generated/_StringsJvm.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("StringsKt")
+
+Source files: jvmMain/generated/_UArraysJvm.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("UArraysKt")
+@file:kotlin.jvm.JvmPackageName("kotlin.collections.unsigned")
+
+Source files: jvmMain/kotlin/AutoCloseableJVM.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("AutoCloseableKt")
+@file:JvmPackageName("kotlin.jdk7")
+
+Source files: jvmMain/kotlin/collections/MapsJVM.kt
+
+/*
+ * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("MapsKt")
+
+Source files: jvmMain/kotlin/collections/SequencesJVM.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("SequencesKt")
+
+Source files: jvmMain/kotlin/collections/SetsJVM.kt
+
+/*
+ * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("SetsKt")
+
+Source files: jvmMain/kotlin/collections/TypeAliases.kt
+
+/*
+ * Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("ACTUAL_WITHOUT_EXPECT") // for building kotlin-stdlib-jvm-minimal-for-test
+
+Source files: jvmMain/kotlin/collections/builders/MapBuilder.kt, jvmMain/kotlin/internal/Constants.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+Source files: jvmMain/kotlin/concurrent/Locks.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("LocksKt")
+
+Source files: jvmMain/kotlin/concurrent/Thread.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("ThreadsKt")
+
+Source files: jvmMain/kotlin/concurrent/Timer.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("TimersKt")
+
+Source files: jvmMain/kotlin/concurrent/atomics/AtomicArrays.jvm.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmMultifileClass
+@file:JvmName("AtomicArraysKt")
+@file:OptIn(ExperimentalAtomicApi::class)
+
+Source files: jvmMain/kotlin/concurrent/atomics/Atomics.jvm.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmMultifileClass
+@file:JvmName("AtomicsKt")
+@file:OptIn(ExperimentalAtomicApi::class)
+
+Source files: jvmMain/kotlin/concurrent/internal/AtomicIntrinsics.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("EXTENSION_SHADOWED_BY_MEMBER")
+
+Source files: jvmMain/kotlin/coroutines/intrinsics/IntrinsicsJvm.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmName("IntrinsicsKt")
+@file:kotlin.jvm.JvmMultifileClass
+@file:Suppress("UNCHECKED_CAST")
+
+Source files: jvmMain/kotlin/coroutines/jvm/internal/GeneratedCodeMarkers.kt
+
+/*
+ * Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("GeneratedCodeMarkers")
+
+Source files: jvmMain/kotlin/coroutines/jvm/internal/boxing.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("Boxing")
+
+@file:Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
+
+Source files: jvmMain/kotlin/enums/EnumEntriesSerializationProxy.kt
+
+/*
+ * Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("EXPECT_AND_ACTUAL_IN_THE_SAME_MODULE") // for building kotlin-stdlib-jvm-minimal-for-test
+
+Source files: jvmMain/kotlin/io/Closeable.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("CloseableKt")
+
+Source files: jvmMain/kotlin/io/Console.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("ConsoleKt")
+
+Source files: jvmMain/kotlin/io/Constants.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("ConstantsKt")
+
+Source files: jvmMain/kotlin/io/FileReadWrite.kt, jvmMain/kotlin/io/files/FilePathComponents.kt, jvmMain/kotlin/io/files/FileTreeWalk.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmMultifileClass
+@file:JvmName("FilesKt")
+
+Source files: jvmMain/kotlin/io/IOStreams.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("ByteStreamsKt")
+
+Source files: jvmMain/kotlin/io/ReadWrite.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("TextStreamsKt")
+
+Source files: jvmMain/kotlin/io/encoding/Base64IOStream.kt
+
+/*
+ * Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmMultifileClass
+@file:JvmName("StreamEncodingKt")
+
+Source files: jvmMain/kotlin/io/files/Utils.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmMultifileClass
+@file:JvmName("FilesKt")
+
+Source files: jvmMain/kotlin/reflect/KDeclarationContainer.kt, jvmMain/kotlin/reflect/KParameter.kt
+
+/*
+ * Copyright 2010-2015 JetBrains s.r.o.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: jvmMain/kotlin/reflect/KProperty.kt
+
+/*
+ * Copyright 2010-2019 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("IMPLEMENTING_FUNCTION_INTERFACE")
+
+Source files: jvmMain/kotlin/reflect/KVisibility.kt
+
+/*
+ * Copyright 2010-2016 JetBrains s.r.o.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: jvmMain/kotlin/system/Process.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmName("ProcessKt")
+
+Source files: jvmMain/kotlin/system/Timing.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmName("TimingKt")
+
+Source files: jvmMain/kotlin/text/Charsets.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("CharsetsKt")
+
+Source files: jvmMain/kotlin/text/StringNumberConversionsJVM.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("StringsKt")
+@file:Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
+
+Source files: jvmMain/kotlin/text/StringsJVM.kt
+
+/*
+ * Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("StringsKt")
+@file:Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
+
+Source files: jvmMain/kotlin/text/regex/RegexExtensions.kt
+
+/*
+ * Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("RegexExtensionsJDK8Kt")
+@file:kotlin.jvm.JvmPackageName("kotlin.text.jdk8")
+
+Source files: jvmMain/kotlin/time/DurationUnitJvm.kt
+
+/*
+ * Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass()
+@file:kotlin.jvm.JvmName("DurationUnitKt")
+
+Source files: jvmMain/kotlin/util/BigDecimals.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("NumbersKt")
+
+Source files: jvmMain/kotlin/util/BigIntegers.kt
+
+/*
+ * Copyright 2010-2026 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("NumbersKt")
+
+Source files: jvmMain/kotlin/util/Exceptions.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("ExceptionsKt")
+@file:Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
+
+Source files: jvmMain/kotlin/util/MathJVM.kt
+
+/*
+ * Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmMultifileClass
+@file:JvmName("MathKt")
+
+Source files: jvmMain/kotlin/util/NumbersJVM.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.jvm.JvmMultifileClass
+@file:kotlin.jvm.JvmName("NumbersKt")
+
+Source files: jvmMain/kotlin/util/UnsignedJVM.kt
+
+/*
+ * Copyright 2010-2023 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+@file:kotlin.jvm.JvmName("UnsignedKt")
+
+Source files: jvmMain/kotlin/uuid/UuidJVM.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmMultifileClass
+@file:JvmName("UuidKt")
+
+Source files: jvmMain/kotlin/TypeAliases.kt, jvmMain/kotlin/text/TypeAliases.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("ACTUAL_WITHOUT_EXPECT") // for building kotlin-stdlib-jvm-minimal-for-test
+
+Source files: jvmMain/kotlin/jvm/JvmClassMapping.kt
+
+/*
+ * Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+@file:JvmName("JvmClassMappingKt")
+@file:Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN", "UNCHECKED_CAST")
+
+Source files: jvmMain/kotlin/jvm/functions/Functions.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by: org.jetbrains.kotlin.generators.builtins.functions.GenerateFunctions
+
+Source files: jvmMain/kotlin/jvm/internal/ArrayIterators.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by: org.jetbrains.kotlin.generators.builtins.arrayIterators.GenerateArrayIterators
+
+Source files: jvmMain/kotlin/jvm/internal/CollectionToArray.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("CollectionToArray")
+
+Source files: jvmMain/kotlin/jvm/internal/PrimitiveCompanionObjects.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
+
+Source files: jvmMain/kotlin/jvm/internal/localVariableReferences.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("unused")
+
+Source files: jvmMain/kotlin/Annotation.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+@file:kotlin.internal.JvmBuiltin
+@file:kotlin.internal.SuppressBytecodeGeneration
+
+Source files: jvmMain/kotlin/Any.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.internal.JvmBuiltin
+@file:kotlin.internal.SuppressBytecodeGeneration
+@file:Suppress("NON_ABSTRACT_FUNCTION_WITH_NO_BODY")
+
+Source files: jvmMain/kotlin/Array.kt, jvmMain/kotlin/Arrays.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by org.jetbrains.kotlin.generators.builtins.arrays.GenerateJvmArrays
+
+@file:Suppress("NON_ABSTRACT_FUNCTION_WITH_NO_BODY", "PRIMARY_CONSTRUCTOR_DELEGATION_CALL_EXPECTED", "MUST_BE_INITIALIZED_OR_BE_ABSTRACT")
+
+@file:kotlin.internal.JvmBuiltin
+@file:kotlin.internal.SuppressBytecodeGeneration
+
+Source files: jvmMain/kotlin/AtomicArrays.kt, jvmMain/kotlin/Atomics.kt
+
+/*
+ * Copyright 2010-2025 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.internal.JvmBuiltin
+@file:kotlin.internal.SuppressBytecodeGeneration
+@file:Suppress("NON_ABSTRACT_FUNCTION_WITH_NO_BODY", "MUST_BE_INITIALIZED_OR_BE_ABSTRACT")
+
+Source files: jvmMain/kotlin/Boolean.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by org.jetbrains.kotlin.generators.builtins.numbers.primitives.JvmBooleanGenerator
+
+@file:kotlin.internal.JvmBuiltin
+@file:kotlin.internal.SuppressBytecodeGeneration
+@file:Suppress("NON_ABSTRACT_FUNCTION_WITH_NO_BODY")
+
+Source files: jvmMain/kotlin/Char.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by org.jetbrains.kotlin.generators.builtins.numbers.primitives.JvmCharGenerator
+
+@file:kotlin.internal.JvmBuiltin
+@file:kotlin.internal.SuppressBytecodeGeneration
+@file:Suppress("NON_ABSTRACT_FUNCTION_WITH_NO_BODY")
+
+Source files: jvmMain/kotlin/CharSequence.kt, jvmMain/kotlin/Collections.kt, jvmMain/kotlin/Comparable.kt, jvmMain/kotlin/Iterator.kt, jvmMain/kotlin/Nothing.kt, jvmMain/kotlin/Number.kt, jvmMain/kotlin/Throwable.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.internal.JvmBuiltin
+@file:kotlin.internal.SuppressBytecodeGeneration
+
+Source files: jvmMain/kotlin/Coroutines.kt
+
+/*
+ * Copyright 2010-2018 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.internal.JvmBuiltin
+@file:kotlin.internal.SuppressBytecodeGeneration
+
+Source files: jvmMain/kotlin/Enum.kt, jvmMain/kotlin/String.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.internal.JvmBuiltin
+@file:kotlin.internal.SuppressBytecodeGeneration
+@file:Suppress("NON_ABSTRACT_FUNCTION_WITH_NO_BODY", "MUST_BE_INITIALIZED_OR_BE_ABSTRACT")
+
+Source files: jvmMain/kotlin/Library.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:kotlin.internal.JvmBuiltin
+@file:kotlin.internal.SuppressBytecodeGeneration
+@file:Suppress("NON_MEMBER_FUNCTION_NO_BODY", "REIFIED_TYPE_PARAMETER_NO_INLINE")
+
+Source files: jvmMain/kotlin/Primitives.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+// Auto-generated file. DO NOT EDIT!
+// Generated by org.jetbrains.kotlin.generators.builtins.numbers.primitives.JvmPrimitivesGenerator
+
+@file:kotlin.internal.JvmBuiltin
+@file:kotlin.internal.SuppressBytecodeGeneration
+@file:Suppress("NON_ABSTRACT_FUNCTION_WITH_NO_BODY", "OVERRIDE_DEPRECATION", "DIVISION_BY_ZERO")
+
+Source files: jvmMain/jdk7/kotlin/internal/jdk7/JDK7PlatformImplementations.kt
+
+/*
+ * Copyright 2010-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER", "CANNOT_OVERRIDE_INVISIBLE_MEMBER")
+
+Source files: jvmMain/jdk7/kotlin/io/path/PathReadWrite.kt
+
+/*
+ * Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER", "RedundantVisibilityModifier", "RedundantUnitReturnType", "SameParameterValue")
+@file:JvmMultifileClass
+@file:JvmName("PathsKt")
+
+Source files: jvmMain/jdk7/kotlin/io/path/PathRecursiveFunctions.kt
+
+/*
+ * Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmMultifileClass
+@file:JvmName("PathsKt")
+
+Source files: jvmMain/jdk7/kotlin/io/path/PathUtils.kt
+
+/*
+ * Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER", "RedundantVisibilityModifier")
+@file:JvmMultifileClass
+@file:JvmName("PathsKt")
+
+Source files: jvmMain/jdk8/kotlin/annotations/JvmRepeatable.kt
+
+/*
+ * Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
+@file:kotlin.jvm.JvmPackageName("kotlin.jvm.jdk8")
+
+Source files: jvmMain/jdk8/kotlin/collections/Collections.kt
+
+/*
+ * Copyright 2010-2017 JetBrains s.r.o.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@file:Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
+@file:JvmName("CollectionsJDK8Kt")
+@file:kotlin.jvm.JvmPackageName("kotlin.collections.jdk8")
+
+Source files: jvmMain/jdk8/kotlin/internal/jdk8/JDK8PlatformImplementations.kt
+
+/*
+ * Copyright 2010-2017 JetBrains s.r.o.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@file:Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER", "CANNOT_OVERRIDE_INVISIBLE_MEMBER")
+
+Source files: jvmMain/jdk8/kotlin/jvm/optionals/Optionals.kt
+
+/*
+ * Copyright 2010-2022 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+@file:Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
+
+Source files: jvmMain/jdk8/kotlin/streams/Streams.kt
+
+/*
+ * Copyright 2010-2017 JetBrains s.r.o.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@file:Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
+@file:JvmName("StreamsKt")
+@file:kotlin.jvm.JvmPackageName("kotlin.streams.jdk8")
+
+Source files: jvmMain/jdk8/kotlin/time/DurationConversions.kt
+
+/*
+ * Copyright 2010-2021 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
+@file:JvmName("DurationConversionsJDK8Kt")
+@file:kotlin.jvm.JvmPackageName("kotlin.time.jdk8")
+
+Source files: jvmMain/jdk8/kotlin/time/InstantConversions.kt
+
+/*
+ * Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
+ */
+
+@file:JvmName("InstantConversionsJDK8Kt")
+@file:JvmPackageName("kotlin.time.jdk8")

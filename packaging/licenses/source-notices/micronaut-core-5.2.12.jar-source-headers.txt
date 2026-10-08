@@ -1,0 +1,1027 @@
+Source files: io/micronaut/core/annotation/AccessorsStyle.java, io/micronaut/core/annotation/AnnotationValueProvider.java, io/micronaut/core/annotation/NonNull.java, io/micronaut/core/annotation/Nullable.java, io/micronaut/core/beans/AbstractBeanConstructor.java, io/micronaut/core/beans/BeanConstructor.java, io/micronaut/core/convert/converters/MultiValuesConverterFactory.java, io/micronaut/core/io/scan/BeanIntrospectionScanner.java, io/micronaut/core/optim/StaticOptimizations.java, io/micronaut/core/type/ArgumentCoercible.java, io/micronaut/core/type/DefaultGenericPlaceholder.java, io/micronaut/core/type/GenericPlaceholder.java, io/micronaut/core/type/RuntimeTypeInformation.java, io/micronaut/core/type/TypeInformation.java, io/micronaut/core/type/TypeInformationProvider.java, io/micronaut/core/util/EnvironmentProperties.java, io/micronaut/core/util/RegexPathMatcher.java
+
+/*
+ * Copyright 2017-2021 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/core/annotation/AllowsReflection.java, io/micronaut/core/annotation/Retainable.java, io/micronaut/core/beans/BeanIntrospectionFallback.java, io/micronaut/core/beans/BeanIntrospectionProviders.java, io/micronaut/core/beans/BeanIntrospectionsProvider.java, io/micronaut/core/beans/DefaultBeanIntrospectionsProvider.java, io/micronaut/core/beans/TargetConstructorCache.java, io/micronaut/core/execution/ConditionalExecutionExecutor.java, io/micronaut/core/execution/ImmediateExecutor.java, io/micronaut/core/io/ResourceConflictException.java, io/micronaut/core/io/ResourceDuplicateException.java, io/micronaut/core/io/ResourceLoadStrategy.java, io/micronaut/core/io/ResourceLoadStrategyType.java, io/micronaut/core/propagation/PropagatedContextConfiguration.java, io/micronaut/core/propagation/ScopedValuePropagatedContextElement.java, io/micronaut/core/propagation/ScopedValues.java, io/micronaut/core/type/Buildable.java, io/micronaut/core/type/DefaultRawArgument.java, io/micronaut/core/type/DefaultWildcardArgument.java, io/micronaut/core/type/WildcardArgument.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/core/annotation/AnnotatedElement.java, io/micronaut/core/annotation/AnnotatedTypeInfo.java, io/micronaut/core/annotation/AnnotationClassValue.java, io/micronaut/core/annotation/AnnotationMetadata.java, io/micronaut/core/annotation/AnnotationMetadataDelegate.java, io/micronaut/core/annotation/AnnotationMetadataProvider.java, io/micronaut/core/annotation/AnnotationMetadataResolver.java, io/micronaut/core/annotation/AnnotationSource.java, io/micronaut/core/annotation/AnnotationUtil.java, io/micronaut/core/annotation/AnnotationValue.java, io/micronaut/core/annotation/AnnotationValueBuilder.java, io/micronaut/core/annotation/AnnotationValueResolver.java, io/micronaut/core/annotation/Blocking.java, io/micronaut/core/annotation/Creator.java, io/micronaut/core/annotation/EmptyAnnotationMetadata.java, io/micronaut/core/annotation/EntryPoint.java, io/micronaut/core/annotation/Experimental.java, io/micronaut/core/annotation/Generated.java, io/micronaut/core/annotation/ImmutableSortedStringsArrayMap.java, io/micronaut/core/annotation/Indexed.java, io/micronaut/core/annotation/Indexes.java, io/micronaut/core/annotation/InstantiatedMember.java, io/micronaut/core/annotation/Internal.java, io/micronaut/core/annotation/Introspected.java, io/micronaut/core/annotation/NextMajorVersion.java, io/micronaut/core/annotation/NonBlocking.java, io/micronaut/core/annotation/Order.java, io/micronaut/core/annotation/ReflectiveAccess.java, io/micronaut/core/annotation/TypeHint.java, io/micronaut/core/annotation/UsedByGeneratedCode.java, io/micronaut/core/attr/AttributeHolder.java, io/micronaut/core/attr/MutableAttributeHolder.java, io/micronaut/core/beans/AbstractBeanIntrospectionReference.java, io/micronaut/core/beans/AbstractBeanMethod.java, io/micronaut/core/beans/AbstractBeanProperty.java, io/micronaut/core/beans/BeanIntrospection.java, io/micronaut/core/beans/BeanIntrospectionMap.java, io/micronaut/core/beans/BeanIntrospectionReference.java, io/micronaut/core/beans/BeanIntrospector.java, io/micronaut/core/beans/BeanMap.java, io/micronaut/core/beans/BeanMethod.java, io/micronaut/core/beans/BeanProperty.java, io/micronaut/core/beans/BeanPropertyMember.java, io/micronaut/core/beans/BeanReadProperty.java, io/micronaut/core/beans/BeanWrapper.java, io/micronaut/core/beans/BeanWriteProperty.java, io/micronaut/core/beans/DefaultBeanIntrospector.java, io/micronaut/core/beans/DefaultBeanWrapper.java, io/micronaut/core/beans/exceptions/IntrospectionException.java, io/micronaut/core/bind/ArgumentBinder.java, io/micronaut/core/bind/ArgumentBinderRegistry.java, io/micronaut/core/bind/BeanPropertyBinder.java, io/micronaut/core/bind/BoundExecutable.java, io/micronaut/core/bind/DefaultExecutableBinder.java, io/micronaut/core/bind/ExecutableBinder.java, io/micronaut/core/bind/TypeArgumentBinder.java, io/micronaut/core/bind/annotation/AbstractAnnotatedArgumentBinder.java, io/micronaut/core/bind/annotation/AbstractArgumentBinder.java, io/micronaut/core/bind/annotation/AnnotatedArgumentBinder.java, io/micronaut/core/bind/annotation/Bindable.java, io/micronaut/core/bind/exceptions/UnsatisfiedArgumentException.java, io/micronaut/core/cli/CommandLine.java, io/micronaut/core/cli/CommandLineParser.java, io/micronaut/core/cli/DefaultCommandLine.java, io/micronaut/core/cli/Option.java, io/micronaut/core/cli/exceptions/ParseException.java, io/micronaut/core/convert/ArgumentConversionContext.java, io/micronaut/core/convert/ConversionContext.java, io/micronaut/core/convert/ConversionError.java, io/micronaut/core/convert/ConversionService.java, io/micronaut/core/convert/DefaultArgumentConversionContext.java, io/micronaut/core/convert/DefaultMutableConversionService.java, io/micronaut/core/convert/ErrorsContext.java, io/micronaut/core/convert/MutableConversionService.java, io/micronaut/core/convert/TypeConverter.java, io/micronaut/core/convert/TypeConverterRegistrar.java, io/micronaut/core/convert/exceptions/ConversionErrorException.java, io/micronaut/core/convert/format/Format.java, io/micronaut/core/convert/format/FormattingTypeConverter.java, io/micronaut/core/convert/format/MapFormat.java, io/micronaut/core/convert/format/ReadableBytes.java, io/micronaut/core/convert/format/ReadableBytesTypeConverter.java, io/micronaut/core/convert/value/ConvertibleMultiValues.java, io/micronaut/core/convert/value/ConvertibleMultiValuesMap.java, io/micronaut/core/convert/value/ConvertibleValues.java, io/micronaut/core/convert/value/ConvertibleValuesMap.java, io/micronaut/core/convert/value/MutableConvertibleMultiValues.java, io/micronaut/core/convert/value/MutableConvertibleMultiValuesMap.java, io/micronaut/core/convert/value/MutableConvertibleValues.java, io/micronaut/core/convert/value/MutableConvertibleValuesMap.java, io/micronaut/core/exceptions/BeanExceptionHandler.java, io/micronaut/core/exceptions/ExceptionHandler.java, io/micronaut/core/expressions/EvaluatedExpression.java, io/micronaut/core/expressions/ExpressionEvaluationContext.java, io/micronaut/core/io/FileReadable.java, io/micronaut/core/io/IOUtils.java, io/micronaut/core/io/Readable.java, io/micronaut/core/io/ResourceLoader.java, io/micronaut/core/io/ResourceResolver.java, io/micronaut/core/io/Streamable.java, io/micronaut/core/io/UrlReadable.java, io/micronaut/core/io/Writable.java, io/micronaut/core/io/buffer/ByteBuffer.java, io/micronaut/core/io/buffer/ByteBufferFactory.java, io/micronaut/core/io/buffer/ReferenceCounted.java, io/micronaut/core/io/file/DefaultFileSystemResourceLoader.java, io/micronaut/core/io/file/FileSystemResourceLoader.java, io/micronaut/core/io/scan/AnnotationScanner.java, io/micronaut/core/io/scan/ClassPathResourceLoader.java, io/micronaut/core/io/scan/DefaultClassPathResourceLoader.java, io/micronaut/core/io/service/DefaultServiceDefinition.java, io/micronaut/core/io/service/ServiceDefinition.java, io/micronaut/core/io/service/SoftServiceLoader.java, io/micronaut/core/io/socket/SocketUtils.java, io/micronaut/core/naming/Described.java, io/micronaut/core/naming/NameResolver.java, io/micronaut/core/naming/NameUtils.java, io/micronaut/core/naming/Named.java, io/micronaut/core/naming/conventions/MethodConvention.java, io/micronaut/core/naming/conventions/PropertyConvention.java, io/micronaut/core/naming/conventions/StringConvention.java, io/micronaut/core/naming/conventions/TypeConvention.java, io/micronaut/core/order/OrderUtil.java, io/micronaut/core/order/Ordered.java, io/micronaut/core/reflect/ClassUtils.java, io/micronaut/core/reflect/GenericTypeUtils.java, io/micronaut/core/reflect/InstantiationUtils.java, io/micronaut/core/reflect/ReflectionUtils.java, io/micronaut/core/reflect/exception/InstantiationException.java, io/micronaut/core/reflect/exception/InvocationException.java, io/micronaut/core/serialize/JdkSerializer.java, io/micronaut/core/serialize/ObjectSerializer.java, io/micronaut/core/serialize/exceptions/SerializationException.java, io/micronaut/core/type/Argument.java, io/micronaut/core/type/ArgumentValue.java, io/micronaut/core/type/DefaultArgument.java, io/micronaut/core/type/DefaultArgumentValue.java, io/micronaut/core/type/DefaultMutableArgumentValue.java, io/micronaut/core/type/Executable.java, io/micronaut/core/type/GenericArgument.java, io/micronaut/core/type/Headers.java, io/micronaut/core/type/MutableArgumentValue.java, io/micronaut/core/type/MutableHeaders.java, io/micronaut/core/type/ReturnType.java, io/micronaut/core/type/TypeVariableResolver.java, io/micronaut/core/type/UnsafeExecutable.java, io/micronaut/core/util/ArgumentUtils.java, io/micronaut/core/util/ArrayUtils.java, io/micronaut/core/util/CollectionUtils.java, io/micronaut/core/util/ConnectionString.java, io/micronaut/core/util/ExceptionUtils.java, io/micronaut/core/util/KotlinUtils.java, io/micronaut/core/util/LocaleResolver.java, io/micronaut/core/util/ObjectUtils.java, io/micronaut/core/util/PathMatcher.java, io/micronaut/core/util/StreamUtils.java, io/micronaut/core/util/StringUtils.java, io/micronaut/core/util/SupplierUtil.java, io/micronaut/core/util/Toggleable.java, io/micronaut/core/util/functional/ThrowingFunction.java, io/micronaut/core/util/functional/ThrowingSupplier.java, io/micronaut/core/util/locale/AbstractLocaleResolver.java, io/micronaut/core/util/locale/FixedLocaleResolver.java, io/micronaut/core/util/locale/LocaleResolutionConfiguration.java, io/micronaut/core/value/MapPropertyResolver.java, io/micronaut/core/value/MapValueResolver.java, io/micronaut/core/value/OptionalMultiValues.java, io/micronaut/core/value/OptionalMultiValuesMap.java, io/micronaut/core/value/OptionalValues.java, io/micronaut/core/value/OptionalValuesMap.java, io/micronaut/core/value/PropertyNotFoundException.java, io/micronaut/core/value/PropertyResolver.java, io/micronaut/core/value/ValueException.java, io/micronaut/core/value/ValueResolver.java, io/micronaut/core/version/SemanticVersion.java, io/micronaut/core/version/VersionUtils.java, io/micronaut/core/version/annotation/Version.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/core/annotation/AnnotationDefaultValuesProvider.java, io/micronaut/core/beans/UnsafeBeanInstantiationIntrospection.java, io/micronaut/core/bind/MappedBindingResult.java, io/micronaut/core/convert/CharSequenceToEnumConverter.java, io/micronaut/core/execution/DelayedExecutionFlow.java, io/micronaut/core/execution/DelayedExecutionFlowImpl.java, io/micronaut/core/io/buffer/ByteArrayByteBuffer.java, io/micronaut/core/io/buffer/DelegateByteBuffer.java, io/micronaut/core/propagation/MutablePropagatedContextImpl.java, io/micronaut/core/propagation/ThreadContext.java, io/micronaut/core/util/CopyOnWriteMap.java, io/micronaut/core/util/StringIntMap.java
+
+/*
+ * Copyright 2017-2023 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/core/annotation/BuildTimeInit.java, io/micronaut/core/beans/EnumBeanIntrospection.java, io/micronaut/core/io/buffer/ByteArrayBufferFactory.java, io/micronaut/core/io/service/MicronautMetaServiceLoaderUtils.java, io/micronaut/core/util/AnsiColour.java, io/micronaut/core/util/NativeImageUtils.java, io/micronaut/core/util/functional/ThrowingConsumer.java, io/micronaut/core/value/PropertyCatalog.java
+
+/*
+ * Copyright 2017-2024 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/core/annotation/NullMarked.java, io/micronaut/core/graal/Boxed.java, io/micronaut/core/io/buffer/LeakTracker.java, io/micronaut/core/io/buffer/NioReadBuffer.java, io/micronaut/core/io/buffer/ReadBuffer.java, io/micronaut/core/io/buffer/ReadBufferFactory.java, io/micronaut/core/io/file/TemporaryFileResource.java, io/micronaut/core/io/scan/ClassClassPathResourceLoader.java, io/micronaut/core/io/scan/ClassLoaderClassPathResourceLoader.java, io/micronaut/core/io/scan/CombinedClassPathResourceLoader.java, io/micronaut/core/io/value/Base64ResourceLoader.java, io/micronaut/core/io/value/StringResourceLoader.java, io/micronaut/core/io/value/ValueResourceLoader.java, io/micronaut/core/util/functional/ThrowingRunnable.java
+
+/*
+ * Copyright 2017-2025 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/core/annotation/ReflectionConfig.java, io/micronaut/core/annotation/Vetoed.java, io/micronaut/core/beans/BeanInfo.java, io/micronaut/core/beans/UnsafeBeanProperty.java, io/micronaut/core/beans/UnsafeBeanReadProperty.java, io/micronaut/core/beans/UnsafeBeanWriteProperty.java, io/micronaut/core/convert/ConversionServiceAware.java, io/micronaut/core/convert/ConversionServiceProvider.java, io/micronaut/core/convert/ImmutableArgumentConversionContext.java, io/micronaut/core/execution/CompletableFutureExecutionFlow.java, io/micronaut/core/execution/CompletableFutureExecutionFlowImpl.java, io/micronaut/core/execution/ExecutionFlow.java, io/micronaut/core/execution/ImperativeExecutionFlow.java, io/micronaut/core/execution/ImperativeExecutionFlowImpl.java, io/micronaut/core/expressions/EvaluatedExpressionReference.java, io/micronaut/core/graal/GraalReflectionConfigurer.java, io/micronaut/core/io/service/ServiceLoaderFeature.java, io/micronaut/core/io/service/ServiceScanner.java, io/micronaut/core/propagation/MutablePropagatedContext.java, io/micronaut/core/propagation/PropagatedContext.java, io/micronaut/core/propagation/PropagatedContextElement.java, io/micronaut/core/propagation/PropagatedContextImpl.java, io/micronaut/core/propagation/ThreadPropagatedContextElement.java, io/micronaut/core/util/IOExceptionBiFunction.java
+
+/*
+ * Copyright 2017-2022 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/core/annotation/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core annotation classes.
+ *
+ * @author Sergio del Amo
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/attr/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core attribute holder.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/beans/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * This package provides interfaces and abstractions to introspect beans with bean metadata
+ * computed at compilation time. See {@link io.micronaut.core.beans.BeanIntrospector} for the main entry point.
+ *
+ * @author graemerocher
+ * @since 1.0
+ * @see io.micronaut.core.annotation.Introspected
+ * @see io.micronaut.core.beans.BeanIntrospector
+ * @see io.micronaut.core.beans.BeanIntrospection
+ */
+@NullMarked
+
+Source files: io/micronaut/core/beans/exceptions/package-info.java, io/micronaut/core/convert/converters/package-info.java, io/micronaut/core/execution/package-info.java, io/micronaut/core/expressions/package-info.java, io/micronaut/core/graal/package-info.java, io/micronaut/core/io/value/package-info.java, io/micronaut/core/optim/package-info.java, io/micronaut/core/propagation/package-info.java, io/micronaut/core/util/functional/package-info.java, io/micronaut/core/version/annotation/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The package info.
+ */
+@NullMarked
+
+Source files: io/micronaut/core/bind/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core argument and property bind classes.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/bind/annotation/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core bind annotation classes.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/bind/exceptions/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Exceptions that occur during data binding.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/cli/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core CLI dispatch level.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/cli/exceptions/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core CLI exceptions.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/convert/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core type conversion classes.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/convert/exceptions/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core type conversion exceptions.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/convert/format/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core type conversion formatting.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/convert/value/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core type conversion of multiple values.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/exceptions/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Common exception handling classes.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/io/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core input/output.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/io/buffer/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core buffer factory.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/io/file/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core file i/o.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/io/scan/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core scan with annotation.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/io/service/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core i/o service classes.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/io/socket/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core i/o socketutils.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/naming/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core name resolution.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/naming/conventions/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core name conventions for properties and methods, etc.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/order/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core ordered objects.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/reflect/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core reflections utils.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/reflect/exception/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core reflection exception.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/serialize/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core object serializations.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/serialize/exceptions/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core object serialization exceptions.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/type/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core type, argument, and builder abstractions.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/util/AntPathMatcher.java
+
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+Source files: io/micronaut/core/util/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core utilities.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/util/clhm/ConcurrentLinkedHashMap.java, io/micronaut/core/util/clhm/EvictionListener.java, io/micronaut/core/util/clhm/Weigher.java, io/micronaut/core/util/clhm/Weighers.java
+
+/*
+ * Copyright 2010 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/core/util/clhm/EntryWeigher.java
+
+/*
+ * Copyright 2012 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/core/util/clhm/LinkedDeque.java
+
+/*
+ * Copyright 2011 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/core/util/clhm/package-info.java
+
+/*
+ * Copyright 2012 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Contains a forked implementation of ConcurrentLinkedHashMap.
+ *
+ * @author graemerocher
+ * @since 1.1
+ */
+@NullMarked
+
+Source files: io/micronaut/core/util/locale/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut utilities to resolve a {@link java.util.Locale}.
+ *
+ * @author Sergio del Amo
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/value/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core property and value resolution.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/core/version/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Micronaut core comparing versions.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked

@@ -1,0 +1,447 @@
+[
+  {
+    "project": "HikariCP",
+    "repository": "brettwooldridge/HikariCP",
+    "tag": "HikariCP-7.1.0",
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/brettwooldridge/HikariCP/HikariCP-7.1.0/LICENSE",
+        "sha256": "73ba74dfaa520b49a401b5d21459a8523a146f3b7518a833eea5efa85130bf68"
+      }
+    ],
+    "absent": [
+      "LICENSE.txt",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "annotations",
+    "repository": "JetBrains/java-annotations",
+    "tag": "23.0.0",
+    "files": [
+      {
+        "path": "LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/JetBrains/java-annotations/23.0.0/LICENSE.txt",
+        "sha256": "8c1e966c7855fb54027bcaf6ebe7a43abe4785791e8cf9148c363761d493d097"
+      }
+    ],
+    "absent": [
+      "LICENSE",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "arrow",
+    "repository": "arrow-kt/arrow",
+    "tag": "2.2.2.1",
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/arrow-kt/arrow/2.2.2.1/LICENSE",
+        "sha256": "bf6f6164984fa886363d2a2a4bb617b39b65166c0f05f8353623f1c72278a7dd"
+      }
+    ],
+    "absent": [
+      "LICENSE.txt",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "zxing",
+    "repository": "zxing/zxing",
+    "tag": "zxing-3.5.4",
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/zxing/zxing/zxing-3.5.4/LICENSE",
+        "sha256": "3f62881f0566227a24b12e5a754cc79f39aaa94883038e95c94812e1f50af42f"
+      },
+      {
+        "path": "NOTICE",
+        "url": "https://raw.githubusercontent.com/zxing/zxing/zxing-3.5.4/NOTICE",
+        "sha256": "4db4b60aace29ec6c5c4f13ca9cac1930d3c0c54bcc67dceead0c10771120e66"
+      }
+    ],
+    "absent": [
+      "LICENSE.txt",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "javaparser",
+    "repository": "javaparser/javaparser",
+    "tag": "javaparser-parent-3.28.2",
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/javaparser/javaparser/javaparser-parent-3.28.2/LICENSE",
+        "sha256": "b8655bf6423a32f12013ac91b5cbfdf17304c527016a1cdec2ff0b21ebdc4723"
+      }
+    ],
+    "absent": [
+      "LICENSE.txt",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "javapoet",
+    "repository": "square/javapoet",
+    "tag": "javapoet-1.13.0",
+    "files": [
+      {
+        "path": "LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/square/javapoet/javapoet-1.13.0/LICENSE.txt",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      }
+    ],
+    "absent": [
+      "LICENSE",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "jspecify",
+    "repository": "jspecify/jspecify",
+    "tag": "v1.0.0",
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/jspecify/jspecify/v1.0.0/LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      }
+    ],
+    "absent": [
+      "NOTICE",
+      "NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "kotlin",
+    "repository": "JetBrains/kotlin",
+    "tag": "v2.4.10",
+    "files": [
+      {
+        "path": "license/NOTICE.txt",
+        "url": "https://raw.githubusercontent.com/JetBrains/kotlin/v2.4.10/license/NOTICE.txt",
+        "sha256": "0b09a83d3ef7795c7dec65e815866597c066c53898f2852a76599b8f5552941a"
+      }
+    ],
+    "absent": [
+      "LICENSE",
+      "LICENSE.txt",
+      "NOTICE",
+      "NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "kotlinpoet-2.2.0",
+    "repository": "square/kotlinpoet",
+    "tag": "2.2.0",
+    "files": [
+      {
+        "path": "LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/square/kotlinpoet/2.2.0/LICENSE.txt",
+        "sha256": "aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe"
+      }
+    ],
+    "absent": [
+      "LICENSE",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "kotlinpoet-2.3.0",
+    "repository": "square/kotlinpoet",
+    "tag": "2.3.0",
+    "files": [
+      {
+        "path": "LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/square/kotlinpoet/2.3.0/LICENSE.txt",
+        "sha256": "aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe"
+      }
+    ],
+    "absent": [
+      "LICENSE",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "coroutines",
+    "repository": "Kotlin/kotlinx.coroutines",
+    "tag": "1.10.2",
+    "files": [
+      {
+        "path": "LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/Kotlin/kotlinx.coroutines/1.10.2/LICENSE.txt",
+        "sha256": "b1febe6399dffb10d19d35e7663ab16300c93cb0476a94115df1cc0097a8ffd8"
+      },
+      {
+        "path": "license/NOTICE.txt",
+        "url": "https://raw.githubusercontent.com/Kotlin/kotlinx.coroutines/1.10.2/license/NOTICE.txt",
+        "sha256": "1ab6de67ef738bffae63f9aa6a8798a35e87341c83ea28d09c8dc8ca6993232a"
+      }
+    ],
+    "absent": [
+      "LICENSE",
+      "NOTICE",
+      "NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "serialization",
+    "repository": "Kotlin/kotlinx.serialization",
+    "tag": "v1.9.0",
+    "files": [
+      {
+        "path": "LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/Kotlin/kotlinx.serialization/v1.9.0/LICENSE.txt",
+        "sha256": "c5accbbd8546e94c34aed24afe689a617627d18eed5a6c48277e48db57c23851"
+      },
+      {
+        "path": "license/NOTICE.txt",
+        "url": "https://raw.githubusercontent.com/Kotlin/kotlinx.serialization/v1.9.0/license/NOTICE.txt",
+        "sha256": "ec77bba5c852830abfdefcdefbf4a22577ff4df79ec323a898d5100ca1d6f8d6"
+      }
+    ],
+    "absent": [
+      "LICENSE",
+      "NOTICE",
+      "NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "libphonenumber",
+    "repository": "google/libphonenumber",
+    "tag": "v9.0.29",
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/google/libphonenumber/v9.0.29/LICENSE",
+        "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9"
+      }
+    ],
+    "absent": [
+      "LICENSE.txt",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "micronaut-core",
+    "repository": "micronaut-projects/micronaut-core",
+    "tag": "v5.2.12",
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/micronaut-projects/micronaut-core/v5.2.12/LICENSE",
+        "sha256": "c98ecc8ef79e7a1a14a0767e3321b681dd25f9307625724f2b299f5e75e99520"
+      }
+    ],
+    "absent": [
+      "LICENSE.txt",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "micronaut-json-schema",
+    "repository": "micronaut-projects/micronaut-json-schema",
+    "tag": "v2.3.1",
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/micronaut-projects/micronaut-json-schema/v2.3.1/LICENSE",
+        "sha256": "c98ecc8ef79e7a1a14a0767e3321b681dd25f9307625724f2b299f5e75e99520"
+      }
+    ],
+    "absent": [
+      "LICENSE.txt",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "micronaut-serde",
+    "repository": "micronaut-projects/micronaut-serialization",
+    "tag": "v3.1.1",
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/micronaut-projects/micronaut-serialization/v3.1.1/LICENSE",
+        "sha256": "c98ecc8ef79e7a1a14a0767e3321b681dd25f9307625724f2b299f5e75e99520"
+      }
+    ],
+    "absent": [
+      "LICENSE.txt",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "micronaut-sourcegen",
+    "repository": "micronaut-projects/micronaut-sourcegen",
+    "tag": "v2.2.0",
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/micronaut-projects/micronaut-sourcegen/v2.2.0/LICENSE",
+        "sha256": "c98ecc8ef79e7a1a14a0767e3321b681dd25f9307625724f2b299f5e75e99520"
+      }
+    ],
+    "absent": [
+      "LICENSE.txt",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "okhttp",
+    "repository": "square/okhttp",
+    "tag": "parent-5.3.2",
+    "files": [
+      {
+        "path": "LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/square/okhttp/parent-5.3.2/LICENSE.txt",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      }
+    ],
+    "absent": [
+      "LICENSE",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "okio",
+    "repository": "square/okio",
+    "tag": "parent-3.17.0",
+    "files": [
+      {
+        "path": "LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/square/okio/parent-3.17.0/LICENSE.txt",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      }
+    ],
+    "absent": [
+      "NOTICE",
+      "NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "reactor",
+    "repository": "reactor/reactor-core",
+    "tag": "v3.8.7",
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/reactor/reactor-core/v3.8.7/LICENSE",
+        "sha256": "6b9522191b8cb7126b2d214edd7f782d2ccd83c467e9c03b8af9e0bf903b49b4"
+      }
+    ],
+    "absent": [
+      "LICENSE.txt",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "rxjava",
+    "repository": "ReactiveX/RxJava",
+    "tag": "v3.1.12",
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/ReactiveX/RxJava/v3.1.12/LICENSE",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      }
+    ],
+    "absent": [
+      "LICENSE.txt",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "rxkotlin",
+    "repository": "ReactiveX/RxKotlin",
+    "tag": "3.0.1",
+    "files": [
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/ReactiveX/RxKotlin/3.0.1/LICENSE",
+        "sha256": "39e838b90f657019a5cd5954ab588139806a4b08537d870b2fbdb9102ae91a20"
+      }
+    ],
+    "absent": [
+      "LICENSE.txt",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  },
+  {
+    "project": "wire",
+    "repository": "square/wire",
+    "tag": "6.0.0-alpha02",
+    "files": [
+      {
+        "path": "LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/square/wire/6.0.0-alpha02/LICENSE.txt",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      }
+    ],
+    "absent": [
+      "LICENSE",
+      "NOTICE",
+      "NOTICE.txt",
+      "license/NOTICE.txt"
+    ],
+    "errors": []
+  }
+]

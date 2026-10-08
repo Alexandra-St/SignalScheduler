@@ -1,0 +1,287 @@
+Source files: io/micronaut/serde/Decoder.java, io/micronaut/serde/Deserializer.java, io/micronaut/serde/DeserializerLocator.java, io/micronaut/serde/Encoder.java, io/micronaut/serde/NamingStrategyLocator.java, io/micronaut/serde/ObjectMapper.java, io/micronaut/serde/ObjectSerializer.java, io/micronaut/serde/Serde.java, io/micronaut/serde/SerdeIntrospections.java, io/micronaut/serde/SerdeRegistry.java, io/micronaut/serde/Serializer.java, io/micronaut/serde/SerializerLocator.java, io/micronaut/serde/UpdatingDeserializer.java, io/micronaut/serde/annotation/SerdeImport.java, io/micronaut/serde/annotation/Serdeable.java, io/micronaut/serde/config/DeserializationConfiguration.java, io/micronaut/serde/config/SerdeConfiguration.java, io/micronaut/serde/config/SerializationConfiguration.java, io/micronaut/serde/config/annotation/SerdeConfig.java, io/micronaut/serde/config/naming/IdentityStrategy.java, io/micronaut/serde/config/naming/KebabCaseStrategy.java, io/micronaut/serde/config/naming/LowerCamelCaseStrategy.java, io/micronaut/serde/config/naming/LowerCaseStrategy.java, io/micronaut/serde/config/naming/LowerDotCaseStrategy.java, io/micronaut/serde/config/naming/PropertyNamingStrategy.java, io/micronaut/serde/config/naming/SnakeCaseStrategy.java, io/micronaut/serde/config/naming/UpperCamelCaseStrategy.java, io/micronaut/serde/config/naming/UpperCamelCaseStrategyWithSpaces.java, io/micronaut/serde/exceptions/InvalidFormatException.java, io/micronaut/serde/exceptions/InvalidPropertyFormatException.java, io/micronaut/serde/exceptions/SerdeException.java, io/micronaut/serde/reference/AbstractPropertyReferenceManager.java, io/micronaut/serde/reference/PropertyReference.java, io/micronaut/serde/reference/PropertyReferenceManager.java, io/micronaut/serde/reference/SerializationReference.java, io/micronaut/serde/util/NullableDeserializer.java, io/micronaut/serde/util/NullableSerde.java
+
+/*
+ * Copyright 2017-2021 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/serde/DelegatingDecoder.java, io/micronaut/serde/LimitingStream.java, io/micronaut/serde/PropertyFilter.java, io/micronaut/serde/config/DefaultDeserializationConfiguration.java, io/micronaut/serde/config/DefaultSerdeConfiguration.java, io/micronaut/serde/config/DefaultSerializationConfiguration.java, io/micronaut/serde/util/BinaryCodecUtil.java
+
+/*
+ * Copyright 2017-2023 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/serde/FeatureDecoderContext.java, io/micronaut/serde/FeatureEncoderContext.java, io/micronaut/serde/FormatConfiguration.java, io/micronaut/serde/FormattedDeserializer.java, io/micronaut/serde/FormattedSerde.java, io/micronaut/serde/FormattedSerializer.java, io/micronaut/serde/Keys.java, io/micronaut/serde/KeysAwareDecoder.java, io/micronaut/serde/KeysAwareEncoder.java, io/micronaut/serde/KeysAwareSupport.java, io/micronaut/serde/KeysProvider.java, io/micronaut/serde/KeysSupport.java, io/micronaut/serde/RuntimeResolverSerdeIntrospections.java, io/micronaut/serde/WrappedDecoder.java, io/micronaut/serde/WrappedEncoder.java, io/micronaut/serde/annotation/SerdeableGenerated.java, io/micronaut/serde/exceptions/NullValueSerdeException.java, io/micronaut/serde/util/GeneratedSerdeEnumUtil.java, io/micronaut/serde/util/GeneratedSerdeExceptionUtil.java, io/micronaut/serde/util/GeneratedSerdeFallbackUtil.java, io/micronaut/serde/util/SerdeArgumentConstants.java, io/micronaut/serde/util/SerdePropertyAccess.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/serde/ObjectMappers.java, io/micronaut/serde/SerdeJsonMapperSupplier.java, io/micronaut/serde/exceptions/RuntimeSerdeException.java, io/micronaut/serde/util/CustomizableDeserializer.java, io/micronaut/serde/util/CustomizableSerializer.java
+
+/*
+ * Copyright 2017-2022 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/serde/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Core Micronaut Serialization SPI for encoders, decoders, serializers, deserializers, and object mappers.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/annotation/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Annotations for declaring serializable types and importing external serialization metadata.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/config/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Configuration contracts and defaults for Micronaut Serialization behavior.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/config/annotation/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Annotation model used by the serialization processor to describe serde configuration.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/config/naming/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Property naming strategies used to translate bean property names during serialization.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/exceptions/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Exception types raised by Micronaut Serialization.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/exceptions/path/CollectionItemReferencePath.java, io/micronaut/serde/exceptions/path/DefaultCollectionItemReferencePath.java, io/micronaut/serde/exceptions/path/DefaultMapItemReferencePath.java, io/micronaut/serde/exceptions/path/DefaultPropertyReferencePath.java, io/micronaut/serde/exceptions/path/MapItemReferencePath.java, io/micronaut/serde/exceptions/path/PropertyReferencePath.java, io/micronaut/serde/exceptions/path/ReferencePath.java
+
+/*
+ * Copyright 2017-2025 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/serde/exceptions/path/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Reference path model for reporting where serialization or deserialization failures occurred.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/reference/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Reusable property reference metadata for serialization and error reporting.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/util/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Shared utility types used by generated and runtime serialization code.
+ */
+@NullMarked

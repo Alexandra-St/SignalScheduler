@@ -1,0 +1,13 @@
+Source files: org/signal/core/models/AccountEntropyPool.kt, org/signal/core/models/MasterKey.kt, org/signal/core/models/ServiceId.kt, org/signal/core/models/backup/BackupId.kt, org/signal/core/models/backup/BackupKey.kt, org/signal/core/models/backup/MediaRootBackupKey.kt, org/signal/core/models/backup/MessageBackupKey.kt, org/signal/core/models/storageservice/StorageCipherKey.kt, org/signal/core/models/storageservice/StorageItemKey.kt, org/signal/core/models/storageservice/StorageKey.kt, org/signal/core/models/storageservice/StorageManifestKey.kt
+
+/*
+ * Copyright 2025 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/signal/core/models/backup/MediaId.kt, org/signal/core/models/backup/MediaName.kt
+
+/*
+ * Copyright 2024 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */

@@ -1,0 +1,13 @@
+Source files: org/signal/core/util/serialization/ACISerializer.kt, org/signal/core/util/serialization/AccountEntropyPoolSerializer.kt, org/signal/core/util/serialization/ByteArrayToBase64NoPaddingSerializer.kt, org/signal/core/util/serialization/ByteArrayToBase64Serializer.kt, org/signal/core/util/serialization/ByteArrayToUrlSafeBase64Serializer.kt, org/signal/core/util/serialization/ECPublicKeyToBase64NoPaddingSerializer.kt, org/signal/core/util/serialization/ECPublicKeyToBase64Serializer.kt, org/signal/core/util/serialization/IdentityKeyToBase64NoPaddingSerializer.kt, org/signal/core/util/serialization/KEMPublicKeyToBase64NoPaddingSerializer.kt, org/signal/core/util/serialization/KEMPublicKeyToBase64Serializer.kt, org/signal/core/util/serialization/MasterKeyToBase64Serializer.kt, org/signal/core/util/serialization/PniSerializer.kt, org/signal/core/util/serialization/ServiceIdSerializer.kt, org/signal/core/util/serialization/SignalJson.kt, org/signal/core/util/serialization/UuidSerializer.kt
+
+/*
+ * Copyright 2026 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/signal/core/util/serialization/JsonExtensions.kt
+
+/*
+ * Copyright 2025 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */

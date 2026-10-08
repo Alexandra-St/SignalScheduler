@@ -1,0 +1,669 @@
+Source files: io/micronaut/context/propagation/PropagatedContextConfigurationProperties.java, io/micronaut/scheduling/executor/ThreadSelectionConfiguration.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/context/time/InstantSourceFactory.java, io/micronaut/runtime/graceful/GracefulShutdownConfiguration.java, io/micronaut/runtime/graceful/GracefulShutdownListener.java, io/micronaut/scheduling/executor/FastThreadPerTaskExecutor.java, io/micronaut/scheduling/executor/GracefulShutdownCapableScheduledThreadPoolExecutor.java
+
+/*
+ * Copyright 2017-2025 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/context/time/package-info.java, io/micronaut/logging/package-info.java, io/micronaut/logging/impl/package-info.java, io/micronaut/runtime/beans/package-info.java, io/micronaut/runtime/context/package-info.java, io/micronaut/runtime/graceful/package-info.java, io/micronaut/runtime/server/watch/event/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The package info.
+ */
+@NullMarked
+
+Source files: io/micronaut/logging/LogLevel.java, io/micronaut/logging/LoggingConverterRegistrar.java, io/micronaut/logging/LoggingSystem.java, io/micronaut/logging/PropertiesLoggingLevelsConfigurer.java, io/micronaut/logging/impl/Log4jLoggingSystem.java, io/micronaut/runtime/ApplicationConfiguration.java, io/micronaut/runtime/EmbeddedApplication.java, io/micronaut/runtime/Micronaut.java, io/micronaut/runtime/context/CompositeMessageSource.java, io/micronaut/runtime/context/env/ConfigurationAdvice.java, io/micronaut/runtime/context/env/ConfigurationIntroductionAdvice.java, io/micronaut/runtime/context/scope/Refreshable.java, io/micronaut/runtime/context/scope/ScopedProxy.java, io/micronaut/runtime/context/scope/ThreadLocal.java, io/micronaut/runtime/context/scope/ThreadLocalCustomScope.java, io/micronaut/runtime/context/scope/refresh/RefreshEvent.java, io/micronaut/runtime/context/scope/refresh/RefreshInterceptor.java, io/micronaut/runtime/context/scope/refresh/RefreshScope.java, io/micronaut/runtime/converters/time/TimeConverterRegistrar.java, io/micronaut/runtime/event/AbstractEmbeddedApplicationEvent.java, io/micronaut/runtime/event/ApplicationShutdownEvent.java, io/micronaut/runtime/event/ApplicationStartupEvent.java, io/micronaut/runtime/event/annotation/EventListener.java, io/micronaut/runtime/exceptions/ApplicationStartupException.java, io/micronaut/runtime/server/EmbeddedServer.java, io/micronaut/runtime/server/event/ServerShutdownEvent.java, io/micronaut/runtime/server/event/ServerStartupEvent.java, io/micronaut/scheduling/DefaultTaskExceptionHandler.java, io/micronaut/scheduling/NextFireTime.java, io/micronaut/scheduling/ReschedulingTask.java, io/micronaut/scheduling/ScheduledExecutorTaskScheduler.java, io/micronaut/scheduling/TaskExceptionHandler.java, io/micronaut/scheduling/TaskExecutors.java, io/micronaut/scheduling/TaskScheduler.java, io/micronaut/scheduling/annotation/Async.java, io/micronaut/scheduling/annotation/ExecuteOn.java, io/micronaut/scheduling/annotation/Scheduled.java, io/micronaut/scheduling/annotation/Schedules.java, io/micronaut/scheduling/async/AsyncInterceptor.java, io/micronaut/scheduling/exceptions/SchedulerConfigurationException.java, io/micronaut/scheduling/exceptions/TaskExecutionException.java, io/micronaut/scheduling/executor/DefaultExecutorSelector.java, io/micronaut/scheduling/executor/DefaultThreadFactory.java, io/micronaut/scheduling/executor/ExecutorConfiguration.java, io/micronaut/scheduling/executor/ExecutorFactory.java, io/micronaut/scheduling/executor/ExecutorSelector.java, io/micronaut/scheduling/executor/ExecutorType.java, io/micronaut/scheduling/executor/IOExecutorServiceConfig.java, io/micronaut/scheduling/executor/NamedThreadFactory.java, io/micronaut/scheduling/executor/ScheduledExecutorServiceConfig.java, io/micronaut/scheduling/executor/ThreadSelection.java, io/micronaut/scheduling/executor/UserExecutorConfiguration.java, io/micronaut/scheduling/instrument/InstrumentedExecutor.java, io/micronaut/scheduling/instrument/InstrumentedExecutorService.java, io/micronaut/scheduling/instrument/InstrumentedScheduledExecutorService.java, io/micronaut/scheduling/instrument/RunnableInstrumenter.java, io/micronaut/scheduling/io/watch/DefaultWatchThread.java, io/micronaut/scheduling/io/watch/FileWatchCondition.java, io/micronaut/scheduling/io/watch/FileWatchConfiguration.java, io/micronaut/scheduling/io/watch/WatchServiceFactory.java, io/micronaut/scheduling/io/watch/event/FileChangedEvent.java, io/micronaut/scheduling/io/watch/event/WatchEventType.java, io/micronaut/scheduling/processor/ScheduledMethodProcessor.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/logging/LoggingSystemException.java, io/micronaut/runtime/server/watch/event/FileWatchRestartListener.java
+
+/*
+ * Copyright 2017-2022 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/logging/impl/LogbackLoggingSystem.java, io/micronaut/logging/impl/LogbackUtils.java, io/micronaut/runtime/beans/MapperIntroduction.java, io/micronaut/runtime/beans/MapperMethodProcessor.java, io/micronaut/runtime/context/scope/refresh/RefreshScopeCondition.java
+
+/*
+ * Copyright 2017-2023 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/runtime/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Main entrypoint for Micronaut.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/runtime/context/env/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Command line property source.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/runtime/context/scope/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Annotations for context scope.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/runtime/context/scope/refresh/RefreshEventListener.java, io/micronaut/scheduling/LoomSupport.java
+
+/*
+ * Copyright 2017-2021 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/runtime/context/scope/refresh/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Refresh handling.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/runtime/converters/time/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Runtime time conversion.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/runtime/event/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Common applications events.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/runtime/event/annotation/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Event related annotations.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/runtime/exceptions/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Runtime exceptions.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/runtime/graceful/GracefulShutdownCapable.java, io/micronaut/runtime/graceful/GracefulShutdownManager.java
+
+/*
+ * Copyright 2017-2024 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/runtime/server/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Embedded server.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/runtime/server/event/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Server shutdown and startup events.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/scheduling/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Scheduling execution services.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/scheduling/annotation/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Scheduling annotations.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/scheduling/async/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Classes related to handling the {@link io.micronaut.scheduling.annotation.Async} annotation.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/scheduling/cron/CronExpression.java
+
+/*
+ * Copyright (C) 2012- Frode Carlsen.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *MapClaims.java
+ * Note: rewritten to standard Java 8 DateTime by zemiak (c) 2016
+ * Forked from: https://github.com/frode-carlsen/cron
+ */
+
+Source files: io/micronaut/scheduling/cron/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Scheduling for Cron expressions.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/scheduling/exceptions/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Scheduling Exceptions.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/scheduling/executor/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Scheduling Execution configuration and factory.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/scheduling/instrument/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Interfaces for simplifying instrumentation of {@link java.util.concurrent.ExecutorService} instances.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@Experimental
+@NullMarked
+
+Source files: io/micronaut/scheduling/io/watch/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Classes related to file watch.
+ *
+ * @author graemerocher
+ * @since 1.1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/scheduling/io/watch/event/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Events related to file watch changes.
+ *
+ * @author graemerocher
+ * @since 1.1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/scheduling/processor/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Scheduled method processing.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked

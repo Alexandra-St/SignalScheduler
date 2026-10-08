@@ -1,0 +1,562 @@
+Source files: io/reactivex/rxjava3/disposables/RunnableDisposable.java, io/reactivex/rxjava3/disposables/FutureDisposable.java, io/reactivex/rxjava3/disposables/ReferenceDisposable.java, io/reactivex/rxjava3/disposables/SerialDisposable.java, io/reactivex/rxjava3/disposables/DisposableContainer.java, io/reactivex/rxjava3/disposables/AutoCloseableDisposable.java, io/reactivex/rxjava3/disposables/ActionDisposable.java, io/reactivex/rxjava3/disposables/SubscriptionDisposable.java, io/reactivex/rxjava3/disposables/Disposable.java, io/reactivex/rxjava3/disposables/CompositeDisposable.java, io/reactivex/rxjava3/processors/SerializedProcessor.java, io/reactivex/rxjava3/processors/BehaviorProcessor.java, io/reactivex/rxjava3/processors/UnicastProcessor.java, io/reactivex/rxjava3/processors/PublishProcessor.java, io/reactivex/rxjava3/processors/ReplayProcessor.java, io/reactivex/rxjava3/processors/MulticastProcessor.java, io/reactivex/rxjava3/processors/FlowableProcessor.java, io/reactivex/rxjava3/processors/AsyncProcessor.java, io/reactivex/rxjava3/functions/BiPredicate.java, io/reactivex/rxjava3/functions/BiFunction.java, io/reactivex/rxjava3/functions/Predicate.java, io/reactivex/rxjava3/functions/Consumer.java, io/reactivex/rxjava3/functions/Function.java, io/reactivex/rxjava3/functions/Cancellable.java, io/reactivex/rxjava3/functions/IntFunction.java, io/reactivex/rxjava3/functions/Action.java, io/reactivex/rxjava3/functions/Function6.java, io/reactivex/rxjava3/functions/BiConsumer.java, io/reactivex/rxjava3/functions/Function5.java, io/reactivex/rxjava3/functions/Function7.java, io/reactivex/rxjava3/functions/Function4.java, io/reactivex/rxjava3/functions/Function8.java, io/reactivex/rxjava3/functions/Supplier.java, io/reactivex/rxjava3/functions/LongConsumer.java, io/reactivex/rxjava3/functions/BooleanSupplier.java, io/reactivex/rxjava3/functions/Function3.java, io/reactivex/rxjava3/functions/Function9.java, io/reactivex/rxjava3/exceptions/ProtocolViolationException.java, io/reactivex/rxjava3/exceptions/QueueOverflowException.java, io/reactivex/rxjava3/exceptions/UndeliverableException.java, io/reactivex/rxjava3/exceptions/MissingBackpressureException.java, io/reactivex/rxjava3/exceptions/CompositeException.java, io/reactivex/rxjava3/exceptions/Exceptions.java, io/reactivex/rxjava3/exceptions/OnErrorNotImplementedException.java, io/reactivex/rxjava3/subjects/ReplaySubject.java, io/reactivex/rxjava3/subjects/BehaviorSubject.java, io/reactivex/rxjava3/subjects/UnicastSubject.java, io/reactivex/rxjava3/subjects/SingleSubject.java, io/reactivex/rxjava3/subjects/MaybeSubject.java, io/reactivex/rxjava3/subjects/PublishSubject.java, io/reactivex/rxjava3/subjects/CompletableSubject.java, io/reactivex/rxjava3/subjects/Subject.java, io/reactivex/rxjava3/subjects/AsyncSubject.java, io/reactivex/rxjava3/subjects/SerializedSubject.java, io/reactivex/rxjava3/annotations/Experimental.java, io/reactivex/rxjava3/annotations/BackpressureSupport.java, io/reactivex/rxjava3/annotations/SchedulerSupport.java, io/reactivex/rxjava3/annotations/Beta.java, io/reactivex/rxjava3/annotations/CheckReturnValue.java, io/reactivex/rxjava3/annotations/NonNull.java, io/reactivex/rxjava3/annotations/BackpressureKind.java, io/reactivex/rxjava3/annotations/Nullable.java, io/reactivex/rxjava3/plugins/RxJavaPlugins.java, io/reactivex/rxjava3/internal/disposables/ListCompositeDisposable.java, io/reactivex/rxjava3/internal/disposables/SequentialDisposable.java, io/reactivex/rxjava3/internal/disposables/DisposableHelper.java, io/reactivex/rxjava3/internal/disposables/ArrayCompositeDisposable.java, io/reactivex/rxjava3/internal/disposables/EmptyDisposable.java, io/reactivex/rxjava3/internal/disposables/CancellableDisposable.java, io/reactivex/rxjava3/internal/functions/Functions.java, io/reactivex/rxjava3/internal/functions/ObjectHelper.java, io/reactivex/rxjava3/internal/subscriptions/ScalarSubscription.java, io/reactivex/rxjava3/internal/subscriptions/SubscriptionHelper.java, io/reactivex/rxjava3/internal/subscriptions/SubscriptionArbiter.java, io/reactivex/rxjava3/internal/subscriptions/BooleanSubscription.java, io/reactivex/rxjava3/internal/subscriptions/BasicQueueSubscription.java, io/reactivex/rxjava3/internal/subscriptions/DeferredScalarSubscription.java, io/reactivex/rxjava3/internal/subscriptions/BasicIntQueueSubscription.java, io/reactivex/rxjava3/internal/subscriptions/ArrayCompositeSubscription.java, io/reactivex/rxjava3/internal/subscriptions/EmptySubscription.java, io/reactivex/rxjava3/internal/subscriptions/AsyncSubscription.java, io/reactivex/rxjava3/internal/util/AtomicThrowable.java, io/reactivex/rxjava3/internal/util/NotificationLite.java, io/reactivex/rxjava3/internal/util/ObservableQueueDrain.java, io/reactivex/rxjava3/internal/util/ConnectConsumer.java, io/reactivex/rxjava3/internal/util/HalfSerializer.java, io/reactivex/rxjava3/internal/util/ArrayListSupplier.java, io/reactivex/rxjava3/internal/util/BlockingHelper.java, io/reactivex/rxjava3/internal/util/QueueDrainHelper.java, io/reactivex/rxjava3/internal/util/ErrorMode.java, io/reactivex/rxjava3/internal/util/VolatileSizeArrayList.java, io/reactivex/rxjava3/internal/util/HashMapSupplier.java, io/reactivex/rxjava3/internal/util/ExceptionHelper.java, io/reactivex/rxjava3/internal/util/LinkedArrayList.java, io/reactivex/rxjava3/internal/util/BackpressureHelper.java, io/reactivex/rxjava3/internal/util/EmptyComponent.java, io/reactivex/rxjava3/internal/util/SuppressAnimalSniffer.java, io/reactivex/rxjava3/internal/util/QueueDrain.java, io/reactivex/rxjava3/internal/util/EndConsumerHelper.java, io/reactivex/rxjava3/internal/util/AppendOnlyLinkedArrayList.java, io/reactivex/rxjava3/internal/util/ListAddBiConsumer.java, io/reactivex/rxjava3/internal/util/BlockingIgnoringReceiver.java, io/reactivex/rxjava3/internal/util/MergerBiFunction.java, io/reactivex/rxjava3/internal/util/SorterFunction.java, io/reactivex/rxjava3/internal/subscribers/InnerQueuedSubscriber.java, io/reactivex/rxjava3/internal/subscribers/FutureSubscriber.java, io/reactivex/rxjava3/internal/subscribers/StrictSubscriber.java, io/reactivex/rxjava3/internal/subscribers/SinglePostCompleteSubscriber.java, io/reactivex/rxjava3/internal/subscribers/BasicFuseableConditionalSubscriber.java, io/reactivex/rxjava3/internal/subscribers/BasicFuseableSubscriber.java, io/reactivex/rxjava3/internal/subscribers/BlockingBaseSubscriber.java, io/reactivex/rxjava3/internal/subscribers/SubscriberResourceWrapper.java, io/reactivex/rxjava3/internal/subscribers/BlockingSubscriber.java, io/reactivex/rxjava3/internal/subscribers/DeferredScalarSubscriber.java, io/reactivex/rxjava3/internal/subscribers/BlockingLastSubscriber.java, io/reactivex/rxjava3/internal/subscribers/BoundedSubscriber.java, io/reactivex/rxjava3/internal/subscribers/LambdaSubscriber.java, io/reactivex/rxjava3/internal/subscribers/InnerQueuedSubscriberSupport.java, io/reactivex/rxjava3/internal/subscribers/QueueDrainSubscriber.java, io/reactivex/rxjava3/internal/subscribers/BlockingFirstSubscriber.java, io/reactivex/rxjava3/internal/subscribers/ForEachWhileSubscriber.java, io/reactivex/rxjava3/internal/operators/completable/CompletableFromObservable.java, io/reactivex/rxjava3/internal/operators/completable/CompletableFromSupplier.java, io/reactivex/rxjava3/internal/operators/completable/CompletableOnErrorComplete.java, io/reactivex/rxjava3/internal/operators/completable/CompletableDoOnEvent.java, io/reactivex/rxjava3/internal/operators/completable/CompletableEmpty.java, io/reactivex/rxjava3/internal/operators/completable/CompletableMergeArrayDelayError.java, io/reactivex/rxjava3/internal/operators/completable/CompletableMergeArray.java, io/reactivex/rxjava3/internal/operators/completable/CompletableUsing.java, io/reactivex/rxjava3/internal/operators/completable/CompletableDetach.java, io/reactivex/rxjava3/internal/operators/completable/CompletableDoFinally.java, io/reactivex/rxjava3/internal/operators/completable/CompletableHide.java, io/reactivex/rxjava3/internal/operators/completable/CompletableMergeDelayErrorIterable.java, io/reactivex/rxjava3/internal/operators/completable/CompletableConcatArray.java, io/reactivex/rxjava3/internal/operators/completable/CompletableCreate.java, io/reactivex/rxjava3/internal/operators/completable/CompletableErrorSupplier.java, io/reactivex/rxjava3/internal/operators/completable/CompletableOnErrorReturn.java, io/reactivex/rxjava3/internal/operators/completable/CompletableLift.java, io/reactivex/rxjava3/internal/operators/completable/CompletableToObservable.java, io/reactivex/rxjava3/internal/operators/completable/CompletableDisposeOn.java, io/reactivex/rxjava3/internal/operators/completable/CompletableNever.java, io/reactivex/rxjava3/internal/operators/completable/CompletableSubscribeOn.java, io/reactivex/rxjava3/internal/operators/completable/CompletableDefer.java, io/reactivex/rxjava3/internal/operators/completable/CompletablePeek.java, io/reactivex/rxjava3/internal/operators/completable/CompletableTakeUntilCompletable.java, io/reactivex/rxjava3/internal/operators/completable/CompletableFromSingle.java, io/reactivex/rxjava3/internal/operators/completable/CompletableTimeout.java, io/reactivex/rxjava3/internal/operators/completable/CompletableToSingle.java, io/reactivex/rxjava3/internal/operators/completable/CompletableFromRunnable.java, io/reactivex/rxjava3/internal/operators/completable/CompletableDelay.java, io/reactivex/rxjava3/internal/operators/completable/CompletableCache.java, io/reactivex/rxjava3/internal/operators/completable/CompletableError.java, io/reactivex/rxjava3/internal/operators/completable/CompletableFromAction.java, io/reactivex/rxjava3/internal/operators/completable/CompletableFromCallable.java, io/reactivex/rxjava3/internal/operators/completable/CompletableToFlowable.java, io/reactivex/rxjava3/internal/operators/completable/CompletableMaterialize.java, io/reactivex/rxjava3/internal/operators/completable/CompletableFromPublisher.java, io/reactivex/rxjava3/internal/operators/completable/CompletableObserveOn.java, io/reactivex/rxjava3/internal/operators/completable/CompletableResumeNext.java, io/reactivex/rxjava3/internal/operators/completable/CompletableAmb.java, io/reactivex/rxjava3/internal/operators/completable/CompletableConcatIterable.java, io/reactivex/rxjava3/internal/operators/completable/CompletableTimer.java, io/reactivex/rxjava3/internal/operators/completable/CompletableMergeIterable.java, io/reactivex/rxjava3/internal/operators/completable/CompletableConcat.java, io/reactivex/rxjava3/internal/operators/completable/CompletableAndThenCompletable.java, io/reactivex/rxjava3/internal/operators/completable/CompletableMerge.java, io/reactivex/rxjava3/internal/operators/completable/CompletableFromUnsafeSource.java, io/reactivex/rxjava3/internal/operators/mixed/FlowableSwitchMapMaybe.java, io/reactivex/rxjava3/internal/operators/mixed/ConcatMapXMainObserver.java, io/reactivex/rxjava3/internal/operators/mixed/ScalarXMapZHelper.java, io/reactivex/rxjava3/internal/operators/mixed/ObservableSwitchMapMaybe.java, io/reactivex/rxjava3/internal/operators/mixed/FlowableSwitchMapSinglePublisher.java, io/reactivex/rxjava3/internal/operators/mixed/ObservableConcatMapSingle.java, io/reactivex/rxjava3/internal/operators/mixed/ObservableSwitchMapCompletable.java, io/reactivex/rxjava3/internal/operators/mixed/FlowableSwitchMapCompletablePublisher.java, io/reactivex/rxjava3/internal/operators/mixed/FlowableConcatMapMaybe.java, io/reactivex/rxjava3/internal/operators/mixed/FlowableConcatMapSinglePublisher.java, io/reactivex/rxjava3/internal/operators/mixed/FlowableSwitchMapMaybePublisher.java, io/reactivex/rxjava3/internal/operators/mixed/FlowableSwitchMapCompletable.java, io/reactivex/rxjava3/internal/operators/mixed/SingleFlatMapObservable.java, io/reactivex/rxjava3/internal/operators/mixed/CompletableAndThenPublisher.java, io/reactivex/rxjava3/internal/operators/mixed/ObservableConcatMapCompletable.java, io/reactivex/rxjava3/internal/operators/mixed/MaybeFlatMapObservable.java, io/reactivex/rxjava3/internal/operators/mixed/FlowableSwitchMapSingle.java, io/reactivex/rxjava3/internal/operators/mixed/FlowableConcatMapSingle.java, io/reactivex/rxjava3/internal/operators/mixed/ObservableConcatMapMaybe.java, io/reactivex/rxjava3/internal/operators/mixed/ConcatMapXMainSubscriber.java, io/reactivex/rxjava3/internal/operators/mixed/FlowableConcatMapCompletable.java, io/reactivex/rxjava3/internal/operators/mixed/MaybeFlatMapPublisher.java, io/reactivex/rxjava3/internal/operators/mixed/CompletableAndThenObservable.java, io/reactivex/rxjava3/internal/operators/mixed/MaterializeSingleObserver.java, io/reactivex/rxjava3/internal/operators/mixed/FlowableConcatMapMaybePublisher.java, io/reactivex/rxjava3/internal/operators/mixed/ObservableSwitchMapSingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableDistinctUntilChanged.java, io/reactivex/rxjava3/internal/operators/observable/BlockingObservableNext.java, io/reactivex/rxjava3/internal/operators/observable/ObservableAllSingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableRange.java, io/reactivex/rxjava3/internal/operators/observable/ObservableBufferTimed.java, io/reactivex/rxjava3/internal/operators/observable/ObservableObserveOn.java, io/reactivex/rxjava3/internal/operators/observable/ObservableReduceWithSingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSkip.java, io/reactivex/rxjava3/internal/operators/observable/ObservableScan.java, io/reactivex/rxjava3/internal/operators/observable/ObservableJoin.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFromIterable.java, io/reactivex/rxjava3/internal/operators/observable/ObservableUnsubscribeOn.java, io/reactivex/rxjava3/internal/operators/observable/ObservableInterval.java, io/reactivex/rxjava3/internal/operators/observable/ObservableConcatMapScheduler.java, io/reactivex/rxjava3/internal/operators/observable/ObservableTimeoutTimed.java, io/reactivex/rxjava3/internal/operators/observable/ObservableGroupBy.java, io/reactivex/rxjava3/internal/operators/observable/ObservableConcatMap.java, io/reactivex/rxjava3/internal/operators/observable/ObservableAll.java, io/reactivex/rxjava3/internal/operators/observable/BlockingObservableMostRecent.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSingleMaybe.java, io/reactivex/rxjava3/internal/operators/observable/ObservableMapNotification.java, io/reactivex/rxjava3/internal/operators/observable/ObservableLastMaybe.java, io/reactivex/rxjava3/internal/operators/observable/ObservableBlockingSubscribe.java, io/reactivex/rxjava3/internal/operators/observable/ObservableDistinct.java, io/reactivex/rxjava3/internal/operators/observable/BlockingObservableIterable.java, io/reactivex/rxjava3/internal/operators/observable/ObservableBufferExactBoundary.java, io/reactivex/rxjava3/internal/operators/observable/ObservableTakeUntil.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFlatMapMaybe.java, io/reactivex/rxjava3/internal/operators/observable/ObservableReduceSeedSingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableTakeLastTimed.java, io/reactivex/rxjava3/internal/operators/observable/ObservableMaterialize.java, io/reactivex/rxjava3/internal/operators/observable/ObservableDebounce.java, io/reactivex/rxjava3/internal/operators/observable/ObservableMergeWithSingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableReplay.java, io/reactivex/rxjava3/internal/operators/observable/ObservableRepeatWhen.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFromAction.java, io/reactivex/rxjava3/internal/operators/observable/ObservableToListSingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFromRunnable.java, io/reactivex/rxjava3/internal/operators/observable/ObservableUsing.java, io/reactivex/rxjava3/internal/operators/observable/ObservableElementAt.java, io/reactivex/rxjava3/internal/operators/observable/ObservableDebounceTimed.java, io/reactivex/rxjava3/internal/operators/observable/ObservableDoFinally.java, io/reactivex/rxjava3/internal/operators/observable/ObservableWindowBoundary.java, io/reactivex/rxjava3/internal/operators/observable/ObservableTakeLast.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFromFuture.java, io/reactivex/rxjava3/internal/operators/observable/ObservableHide.java, io/reactivex/rxjava3/internal/operators/observable/ObservableMap.java, io/reactivex/rxjava3/internal/operators/observable/ObservableDefer.java, io/reactivex/rxjava3/internal/operators/observable/ObservableIgnoreElementsCompletable.java, io/reactivex/rxjava3/internal/operators/observable/ObservableBuffer.java, io/reactivex/rxjava3/internal/operators/observable/ObservableWindow.java, io/reactivex/rxjava3/internal/operators/observable/ObservableAny.java, io/reactivex/rxjava3/internal/operators/observable/ObservableElementAtMaybe.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFromUnsafeSource.java, io/reactivex/rxjava3/internal/operators/observable/ObservableCollect.java, io/reactivex/rxjava3/internal/operators/observable/ObservableGenerate.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFromCompletable.java, io/reactivex/rxjava3/internal/operators/observable/ObservableTakeWhile.java, io/reactivex/rxjava3/internal/operators/observable/ObservableMergeWithMaybe.java, io/reactivex/rxjava3/internal/operators/observable/ObservableEmpty.java, io/reactivex/rxjava3/internal/operators/observable/ObservableDelaySubscriptionOther.java, io/reactivex/rxjava3/internal/operators/observable/ObservablePublishSelector.java, io/reactivex/rxjava3/internal/operators/observable/ObservableThrottleLatest.java, io/reactivex/rxjava3/internal/operators/observable/ObservableLastSingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableLift.java, io/reactivex/rxjava3/internal/operators/observable/ObservableThrottleFirstTimed.java, io/reactivex/rxjava3/internal/operators/observable/ObservableScanSeed.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSkipLastTimed.java, io/reactivex/rxjava3/internal/operators/observable/ObservableDelay.java, io/reactivex/rxjava3/internal/operators/observable/ObservableWindowBoundarySelector.java, io/reactivex/rxjava3/internal/operators/observable/ObservableDoOnEach.java, io/reactivex/rxjava3/internal/operators/observable/ObservableZipIterable.java, io/reactivex/rxjava3/internal/operators/observable/ObservableTimeInterval.java, io/reactivex/rxjava3/internal/operators/observable/BlockingObservableLatest.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSkipWhile.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSequenceEqual.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSkipUntil.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFlattenIterable.java, io/reactivex/rxjava3/internal/operators/observable/ObservableDoOnLifecycle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableDematerialize.java, io/reactivex/rxjava3/internal/operators/observable/ObserverResourceWrapper.java, io/reactivex/rxjava3/internal/operators/observable/ObservableRetryBiPredicate.java, io/reactivex/rxjava3/internal/operators/observable/ObservableAutoConnect.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSerialized.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFromSupplier.java, io/reactivex/rxjava3/internal/operators/observable/ObservableTake.java, io/reactivex/rxjava3/internal/operators/observable/ObservableToList.java, io/reactivex/rxjava3/internal/operators/observable/ObservableAmb.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFlatMapSingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableInternalHelper.java, io/reactivex/rxjava3/internal/operators/observable/ObservableTimer.java, io/reactivex/rxjava3/internal/operators/observable/ObservableCombineLatest.java, io/reactivex/rxjava3/internal/operators/observable/ObservableRepeat.java, io/reactivex/rxjava3/internal/operators/observable/ObservableWithLatestFrom.java, io/reactivex/rxjava3/internal/operators/observable/ObservableConcatMapEager.java, io/reactivex/rxjava3/internal/operators/observable/ObservableOnErrorComplete.java, io/reactivex/rxjava3/internal/operators/observable/ObservableScalarXMap.java, io/reactivex/rxjava3/internal/operators/observable/ObservableOnErrorReturn.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFlatMap.java, io/reactivex/rxjava3/internal/operators/observable/ObservableReduceMaybe.java, io/reactivex/rxjava3/internal/operators/observable/ObservableCountSingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableRetryWhen.java, io/reactivex/rxjava3/internal/operators/observable/ObservableRepeatUntil.java, io/reactivex/rxjava3/internal/operators/observable/ObservableRetryPredicate.java, io/reactivex/rxjava3/internal/operators/observable/ObservableGroupJoin.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSampleWithObservable.java, io/reactivex/rxjava3/internal/operators/observable/ObservableCache.java, io/reactivex/rxjava3/internal/operators/observable/ObservableCollectSingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFlatMapCompletableCompletable.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSubscribeOn.java, io/reactivex/rxjava3/internal/operators/observable/ObservableCount.java, io/reactivex/rxjava3/internal/operators/observable/ObservableTakeLastOne.java, io/reactivex/rxjava3/internal/operators/observable/ObservableIntervalRange.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSwitchMap.java, io/reactivex/rxjava3/internal/operators/observable/ObservableDoAfterNext.java, io/reactivex/rxjava3/internal/operators/observable/ObservableCreate.java, io/reactivex/rxjava3/internal/operators/observable/ObservableBufferBoundary.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFromCallable.java, io/reactivex/rxjava3/internal/operators/observable/ObservableElementAtSingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFlatMapCompletable.java, io/reactivex/rxjava3/internal/operators/observable/ObservableMergeWithCompletable.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFromArray.java, io/reactivex/rxjava3/internal/operators/observable/ObservableAnySingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableWithLatestFromMany.java, io/reactivex/rxjava3/internal/operators/observable/ObservableZip.java, io/reactivex/rxjava3/internal/operators/observable/ObservableJust.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSampleTimed.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSequenceEqualSingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSkipLast.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFilter.java, io/reactivex/rxjava3/internal/operators/observable/ObservableOnErrorNext.java, io/reactivex/rxjava3/internal/operators/observable/ObservableRefCount.java, io/reactivex/rxjava3/internal/operators/observable/ObservableNever.java, io/reactivex/rxjava3/internal/operators/observable/ObservableWindowSubscribeIntercept.java, io/reactivex/rxjava3/internal/operators/observable/ObservablePublish.java, io/reactivex/rxjava3/internal/operators/observable/ObservableConcatWithMaybe.java, io/reactivex/rxjava3/internal/operators/observable/AbstractObservableWithUpstream.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSwitchIfEmpty.java, io/reactivex/rxjava3/internal/operators/observable/ObservableConcatWithCompletable.java, io/reactivex/rxjava3/internal/operators/observable/ObservableTakeUntilPredicate.java, io/reactivex/rxjava3/internal/operators/observable/ObservableTimeout.java, io/reactivex/rxjava3/internal/operators/observable/ObservableWindowTimed.java, io/reactivex/rxjava3/internal/operators/observable/ObservableError.java, io/reactivex/rxjava3/internal/operators/observable/ObservableFromPublisher.java, io/reactivex/rxjava3/internal/operators/observable/ObservableDetach.java, io/reactivex/rxjava3/internal/operators/observable/ObservableRangeLong.java, io/reactivex/rxjava3/internal/operators/observable/ObservableIgnoreElements.java, io/reactivex/rxjava3/internal/operators/observable/ObservableSingleSingle.java, io/reactivex/rxjava3/internal/operators/observable/ObservableConcatWithSingle.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFromSupplier.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeConcatArray.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFromAction.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeDelaySubscriptionOtherPublisher.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeOnErrorComplete.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeOnErrorNext.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeLift.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeUsing.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeSwitchIfEmptySingle.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFlatMapIterableObservable.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeErrorCallable.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeToFlowable.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFlatMapCompletable.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeDoFinally.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeCount.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeConcatArrayDelayError.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeZipIterable.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeDoAfterSuccess.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFromCallable.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeDelayOtherPublisher.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeCallbackObserver.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeDoOnTerminate.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeDematerialize.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeMaterialize.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeDoOnLifecycle.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFlatMapSingle.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeHide.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFromSingle.java, io/reactivex/rxjava3/internal/operators/maybe/MaybePeek.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFlatMapBiSelector.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeMergeArray.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeIgnoreElement.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeIsEmpty.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeTimeoutPublisher.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFromCompletable.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeEmpty.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeEqualSingle.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFlatMapNotification.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeDelay.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeZipArray.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeDetach.java, io/reactivex/rxjava3/internal/operators/maybe/AbstractMaybeWithUpstream.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeSwitchIfEmpty.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeTimer.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeAmb.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeIsEmptySingle.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeCache.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeSubscribeOn.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeToObservable.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeDelayWithCompletable.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeIgnoreElementCompletable.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFlatMapIterableFlowable.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeObserveOn.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeToSingle.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFlatten.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFilterSingle.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFromFuture.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeConcatIterable.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeJust.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeTimeoutMaybe.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeContains.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeOnErrorReturn.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeUnsafeCreate.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeDoOnEvent.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFilter.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeMap.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeError.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeToPublisher.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeTakeUntilPublisher.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeCreate.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeDefer.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeTakeUntilMaybe.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeTimeInterval.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeUnsubscribeOn.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeNever.java, io/reactivex/rxjava3/internal/operators/maybe/MaybeFromRunnable.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableOnBackpressureDrop.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableTimeoutTimed.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableCollectSingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableDematerialize.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableDebounceTimed.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableOnErrorNext.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSequenceEqual.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableReduceWithSingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableDetach.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableInternalHelper.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableScan.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableZip.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableMaterialize.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableCache.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableWithLatestFromMany.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableUsing.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableWithLatestFrom.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableConcatMapScheduler.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableUnsubscribeOn.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFromSupplier.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableJust.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableTake.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableThrottleFirstTimed.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableTakeLastOne.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableTakeUntil.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableConcatMapEager.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableCount.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableWindowTimed.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableError.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableRetryWhen.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableMap.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableIgnoreElements.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFromArray.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableTimeInterval.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableToList.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableDefer.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableRetryBiPredicate.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableOnBackpressureBufferStrategy.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableInterval.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableConcatMapEagerPublisher.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableWindowBoundary.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFlatMap.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFlatMapMaybe.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableDoOnEach.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableCreate.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFlatMapSinglePublisher.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableLastSingle.java, io/reactivex/rxjava3/internal/operators/flowable/BlockingFlowableIterable.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableCountSingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableReduceMaybe.java, io/reactivex/rxjava3/internal/operators/flowable/AbstractFlowableWithUpstream.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableDoAfterNext.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableZipIterable.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableConcatWithMaybe.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableTakeWhile.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableObserveOn.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableBlockingSubscribe.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableRetryPredicate.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSkip.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableScalarXMap.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableConcatWithCompletable.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableAllSingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSkipLastTimed.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableReduceSeedSingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableReplay.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableMapNotification.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFromObservable.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableThrottleLatest.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableLift.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableAmb.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableLastMaybe.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSingleSingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSampleTimed.java, io/reactivex/rxjava3/internal/operators/flowable/BlockingFlowableMostRecent.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFlatMapSingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableBufferTimed.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableOnBackpressureReduceWith.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableRangeLong.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableWindowBoundarySelector.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableToListSingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableIgnoreElementsCompletable.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableMergeWithSingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFromAction.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableConcatMap.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableDoFinally.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableMapPublisher.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFromCompletable.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableElementAt.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableDebounce.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSwitchIfEmpty.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSubscribeOn.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableBufferBoundary.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSerialized.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableCombineLatest.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableDistinct.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableOnBackpressureLatest.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFromRunnable.java, io/reactivex/rxjava3/internal/operators/flowable/BlockingFlowableLatest.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFlatMapCompletable.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableRefCount.java, io/reactivex/rxjava3/internal/operators/flowable/FlowablePublish.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableOnBackpressureReduce.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFilter.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableWindow.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFromIterable.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableHide.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFromFuture.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableMergeWithCompletable.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableTimeout.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableRepeat.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSequenceEqualSingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFlattenIterable.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableGenerate.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableEmpty.java, io/reactivex/rxjava3/internal/operators/flowable/BlockingFlowableNext.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableAutoConnect.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableJoin.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSkipWhile.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableIntervalRange.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableDelay.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableGroupJoin.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableOnBackpressureError.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableDelaySubscriptionOther.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableTimer.java, io/reactivex/rxjava3/internal/operators/flowable/AbstractBackpressureThrottlingSubscriber.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFlatMapCompletableCompletable.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableTakeUntilPredicate.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableBufferExactBoundary.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableConcatArray.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableTakeLastTimed.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableElementAtSingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFromPublisher.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableOnBackpressureBuffer.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableElementAtMaybePublisher.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableWindowSubscribeIntercept.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFlatMapMaybePublisher.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableMergeWithMaybe.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableCollect.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableReduce.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableDoOnLifecycle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableAll.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableConcatWithSingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableRepeatUntil.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableElementAtMaybe.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableDistinctUntilChanged.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableFromCallable.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableAny.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableNever.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableRange.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableOnErrorComplete.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableTakePublisher.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableRepeatWhen.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableGroupBy.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSwitchMap.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableTakeLast.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableOnErrorReturn.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableAnySingle.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSamplePublisher.java, io/reactivex/rxjava3/internal/operators/flowable/FlowablePublishMulticast.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSkipLast.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableBuffer.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSkipUntil.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableSingleMaybe.java, io/reactivex/rxjava3/internal/operators/flowable/FlowableScanSeed.java, io/reactivex/rxjava3/internal/operators/single/SingleError.java, io/reactivex/rxjava3/internal/operators/single/SingleDoAfterTerminate.java, io/reactivex/rxjava3/internal/operators/single/SingleCreate.java, io/reactivex/rxjava3/internal/operators/single/SingleZipIterable.java, io/reactivex/rxjava3/internal/operators/single/SingleEquals.java, io/reactivex/rxjava3/internal/operators/single/SingleResumeNext.java, io/reactivex/rxjava3/internal/operators/single/SingleTimer.java, io/reactivex/rxjava3/internal/operators/single/SingleCache.java, io/reactivex/rxjava3/internal/operators/single/SingleMaterialize.java, io/reactivex/rxjava3/internal/operators/single/SingleFlatMapPublisher.java, io/reactivex/rxjava3/internal/operators/single/SingleDelay.java, io/reactivex/rxjava3/internal/operators/single/SingleContains.java, io/reactivex/rxjava3/internal/operators/single/SingleFromSupplier.java, io/reactivex/rxjava3/internal/operators/single/SingleUnsubscribeOn.java, io/reactivex/rxjava3/internal/operators/single/SingleDetach.java, io/reactivex/rxjava3/internal/operators/single/SingleToFlowable.java, io/reactivex/rxjava3/internal/operators/single/SingleInternalHelper.java, io/reactivex/rxjava3/internal/operators/single/SingleDefer.java, io/reactivex/rxjava3/internal/operators/single/SingleFromUnsafeSource.java, io/reactivex/rxjava3/internal/operators/single/SingleTimeInterval.java, io/reactivex/rxjava3/internal/operators/single/SingleUsing.java, io/reactivex/rxjava3/internal/operators/single/SingleObserveOn.java, io/reactivex/rxjava3/internal/operators/single/SingleDelayWithSingle.java, io/reactivex/rxjava3/internal/operators/single/SingleSubscribeOn.java, io/reactivex/rxjava3/internal/operators/single/SingleFlatMapBiSelector.java, io/reactivex/rxjava3/internal/operators/single/SingleTakeUntil.java, io/reactivex/rxjava3/internal/operators/single/SingleDoOnSubscribe.java, io/reactivex/rxjava3/internal/operators/single/SingleAmb.java, io/reactivex/rxjava3/internal/operators/single/SingleDoFinally.java, io/reactivex/rxjava3/internal/operators/single/SingleJust.java, io/reactivex/rxjava3/internal/operators/single/SingleDoAfterSuccess.java, io/reactivex/rxjava3/internal/operators/single/SingleFlatMapNotification.java, io/reactivex/rxjava3/internal/operators/single/SingleZipArray.java, io/reactivex/rxjava3/internal/operators/single/SingleOnErrorReturn.java, io/reactivex/rxjava3/internal/operators/single/SingleDoOnError.java, io/reactivex/rxjava3/internal/operators/single/SingleDoOnDispose.java, io/reactivex/rxjava3/internal/operators/single/SingleDoOnLifecycle.java, io/reactivex/rxjava3/internal/operators/single/SingleFlatMapMaybe.java, io/reactivex/rxjava3/internal/operators/single/SingleDoOnTerminate.java, io/reactivex/rxjava3/internal/operators/single/SingleFromPublisher.java, io/reactivex/rxjava3/internal/operators/single/SingleFromCallable.java, io/reactivex/rxjava3/internal/operators/single/SingleDoOnSuccess.java, io/reactivex/rxjava3/internal/operators/single/SingleFlatMapIterableFlowable.java, io/reactivex/rxjava3/internal/operators/single/SingleDelayWithObservable.java, io/reactivex/rxjava3/internal/operators/single/SingleFlatMapCompletable.java, io/reactivex/rxjava3/internal/operators/single/SingleHide.java, io/reactivex/rxjava3/internal/operators/single/SingleDelayWithCompletable.java, io/reactivex/rxjava3/internal/operators/single/SingleDematerialize.java, io/reactivex/rxjava3/internal/operators/single/SingleDoOnEvent.java, io/reactivex/rxjava3/internal/operators/single/SingleFlatMapIterableObservable.java, io/reactivex/rxjava3/internal/operators/single/SingleDelayWithPublisher.java, io/reactivex/rxjava3/internal/operators/single/SingleMap.java, io/reactivex/rxjava3/internal/operators/single/SingleTimeout.java, io/reactivex/rxjava3/internal/operators/single/SingleToObservable.java, io/reactivex/rxjava3/internal/operators/single/SingleFlatMap.java, io/reactivex/rxjava3/internal/operators/single/SingleOnErrorComplete.java, io/reactivex/rxjava3/internal/operators/single/SingleLift.java, io/reactivex/rxjava3/internal/operators/single/SingleNever.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelConcatMap.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelCollect.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelFlatMap.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelFlatMapIterable.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelDoOnNextTry.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelPeek.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelRunOn.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelMapTry.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelFilterTry.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelFromPublisher.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelReduce.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelFromArray.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelMap.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelJoin.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelSortedJoin.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelFilter.java, io/reactivex/rxjava3/internal/operators/parallel/ParallelReduceFull.java, io/reactivex/rxjava3/internal/jdk8/ParallelFlatMapStream.java, io/reactivex/rxjava3/internal/jdk8/CompletableFromCompletionStage.java, io/reactivex/rxjava3/internal/jdk8/CompletionStageConsumer.java, io/reactivex/rxjava3/internal/jdk8/MaybeFlattenStreamAsFlowable.java, io/reactivex/rxjava3/internal/jdk8/ObservableSingleStageObserver.java, io/reactivex/rxjava3/internal/jdk8/FlowableSingleStageSubscriber.java, io/reactivex/rxjava3/internal/jdk8/ObservableLastStageObserver.java, io/reactivex/rxjava3/internal/jdk8/FlowableFlatMapStream.java, io/reactivex/rxjava3/internal/jdk8/FlowableFirstStageSubscriber.java, io/reactivex/rxjava3/internal/jdk8/MaybeFlattenStreamAsObservable.java, io/reactivex/rxjava3/internal/jdk8/ObservableStageObserver.java, io/reactivex/rxjava3/internal/jdk8/ParallelMapTryOptional.java, io/reactivex/rxjava3/internal/jdk8/FlowableMapOptional.java, io/reactivex/rxjava3/internal/jdk8/FlowableCollectWithCollectorSingle.java, io/reactivex/rxjava3/internal/jdk8/ObservableFromCompletionStage.java, io/reactivex/rxjava3/internal/jdk8/SingleMapOptional.java, io/reactivex/rxjava3/internal/jdk8/ObservableCollectWithCollector.java, io/reactivex/rxjava3/internal/jdk8/ObservableFromStream.java, io/reactivex/rxjava3/internal/jdk8/SingleFlattenStreamAsFlowable.java, io/reactivex/rxjava3/internal/jdk8/ParallelCollector.java, io/reactivex/rxjava3/internal/jdk8/ObservableFlatMapStream.java, io/reactivex/rxjava3/internal/jdk8/ObservableFirstStageObserver.java, io/reactivex/rxjava3/internal/jdk8/ObservableCollectWithCollectorSingle.java, io/reactivex/rxjava3/internal/jdk8/ObservableMapOptional.java, io/reactivex/rxjava3/internal/jdk8/FlowableFromStream.java, io/reactivex/rxjava3/internal/jdk8/SingleFromCompletionStage.java, io/reactivex/rxjava3/internal/jdk8/MaybeFromCompletionStage.java, io/reactivex/rxjava3/internal/jdk8/FlowableLastStageSubscriber.java, io/reactivex/rxjava3/internal/jdk8/ParallelMapOptional.java, io/reactivex/rxjava3/internal/jdk8/FlowableFromCompletionStage.java, io/reactivex/rxjava3/internal/jdk8/MaybeMapOptional.java, io/reactivex/rxjava3/internal/jdk8/FlowableCollectWithCollector.java, io/reactivex/rxjava3/internal/jdk8/SingleFlattenStreamAsObservable.java, io/reactivex/rxjava3/internal/jdk8/FlowableStageSubscriber.java, io/reactivex/rxjava3/internal/fuseable/HasUpstreamMaybeSource.java, io/reactivex/rxjava3/internal/fuseable/HasUpstreamSingleSource.java, io/reactivex/rxjava3/internal/fuseable/HasUpstreamObservableSource.java, io/reactivex/rxjava3/internal/fuseable/HasUpstreamCompletableSource.java, io/reactivex/rxjava3/internal/fuseable/AbstractEmptyQueueFuseable.java, io/reactivex/rxjava3/internal/fuseable/HasUpstreamPublisher.java, io/reactivex/rxjava3/internal/fuseable/FuseToObservable.java, io/reactivex/rxjava3/internal/fuseable/FuseToMaybe.java, io/reactivex/rxjava3/internal/fuseable/CancellableQueueFuseable.java, io/reactivex/rxjava3/internal/fuseable/FuseToFlowable.java, io/reactivex/rxjava3/internal/observers/ConsumerSingleObserver.java, io/reactivex/rxjava3/internal/observers/SafeSingleObserver.java, io/reactivex/rxjava3/internal/observers/DisposableLambdaObserver.java, io/reactivex/rxjava3/internal/observers/ResumeSingleObserver.java, io/reactivex/rxjava3/internal/observers/BlockingDisposableMultiObserver.java, io/reactivex/rxjava3/internal/observers/BasicIntQueueDisposable.java, io/reactivex/rxjava3/internal/observers/InnerQueuedObserverSupport.java, io/reactivex/rxjava3/internal/observers/DeferredScalarObserver.java, io/reactivex/rxjava3/internal/observers/BiConsumerSingleObserver.java, io/reactivex/rxjava3/internal/observers/ForEachWhileObserver.java, io/reactivex/rxjava3/internal/observers/InnerQueuedObserver.java, io/reactivex/rxjava3/internal/observers/FutureMultiObserver.java, io/reactivex/rxjava3/internal/observers/QueueDrainObserver.java, io/reactivex/rxjava3/internal/observers/LambdaObserver.java, io/reactivex/rxjava3/internal/observers/BlockingBaseObserver.java, io/reactivex/rxjava3/internal/observers/BlockingFirstObserver.java, io/reactivex/rxjava3/internal/observers/BlockingObserver.java, io/reactivex/rxjava3/internal/observers/BlockingMultiObserver.java, io/reactivex/rxjava3/internal/observers/BlockingLastObserver.java, io/reactivex/rxjava3/internal/observers/BasicFuseableObserver.java, io/reactivex/rxjava3/internal/observers/EmptyCompletableObserver.java, io/reactivex/rxjava3/internal/observers/SafeMaybeObserver.java, io/reactivex/rxjava3/internal/observers/SafeCompletableObserver.java, io/reactivex/rxjava3/internal/observers/CallbackCompletableObserver.java, io/reactivex/rxjava3/internal/observers/FutureObserver.java, io/reactivex/rxjava3/internal/observers/BasicQueueDisposable.java, io/reactivex/rxjava3/internal/observers/DeferredScalarDisposable.java, io/reactivex/rxjava3/internal/schedulers/NonBlockingThread.java, io/reactivex/rxjava3/internal/schedulers/InstantPeriodicTask.java, io/reactivex/rxjava3/internal/schedulers/ScheduledDirectTask.java, io/reactivex/rxjava3/internal/schedulers/ScheduledRunnable.java, io/reactivex/rxjava3/internal/schedulers/SchedulerWhen.java, io/reactivex/rxjava3/internal/schedulers/ImmediateThinScheduler.java, io/reactivex/rxjava3/internal/schedulers/RxThreadFactory.java, io/reactivex/rxjava3/internal/schedulers/NewThreadScheduler.java, io/reactivex/rxjava3/internal/schedulers/ExecutorScheduler.java, io/reactivex/rxjava3/internal/schedulers/NewThreadWorker.java, io/reactivex/rxjava3/internal/schedulers/AbstractDirectTask.java, io/reactivex/rxjava3/internal/schedulers/DisposeOnCancel.java, io/reactivex/rxjava3/internal/schedulers/ScheduledDirectPeriodicTask.java, io/reactivex/rxjava3/internal/schedulers/SchedulerMultiWorkerSupport.java, io/reactivex/rxjava3/internal/schedulers/ComputationScheduler.java, io/reactivex/rxjava3/internal/schedulers/SchedulerPoolFactory.java, io/reactivex/rxjava3/internal/schedulers/TrampolineScheduler.java, io/reactivex/rxjava3/internal/schedulers/IoScheduler.java, io/reactivex/rxjava3/internal/schedulers/SingleScheduler.java, io/reactivex/rxjava3/core/CompletableObserver.java, io/reactivex/rxjava3/core/FlowableConverter.java, io/reactivex/rxjava3/core/Completable.java, io/reactivex/rxjava3/core/FlowableEmitter.java, io/reactivex/rxjava3/core/Observer.java, io/reactivex/rxjava3/core/SingleTransformer.java, io/reactivex/rxjava3/core/Observable.java, io/reactivex/rxjava3/core/CompletableOperator.java, io/reactivex/rxjava3/core/SingleOnSubscribe.java, io/reactivex/rxjava3/core/SingleConverter.java, io/reactivex/rxjava3/core/BackpressureStrategy.java, io/reactivex/rxjava3/core/CompletableConverter.java, io/reactivex/rxjava3/core/FlowableOnSubscribe.java, io/reactivex/rxjava3/core/Notification.java, io/reactivex/rxjava3/core/SingleEmitter.java, io/reactivex/rxjava3/core/SingleSource.java, io/reactivex/rxjava3/core/CompletableSource.java, io/reactivex/rxjava3/core/ObservableConverter.java, io/reactivex/rxjava3/core/CompletableEmitter.java, io/reactivex/rxjava3/core/ObservableOnSubscribe.java, io/reactivex/rxjava3/core/MaybeTransformer.java, io/reactivex/rxjava3/core/ObservableOperator.java, io/reactivex/rxjava3/core/MaybeOnSubscribe.java, io/reactivex/rxjava3/core/Single.java, io/reactivex/rxjava3/core/ObservableTransformer.java, io/reactivex/rxjava3/core/FlowableSubscriber.java, io/reactivex/rxjava3/core/ObservableSource.java, io/reactivex/rxjava3/core/FlowableOperator.java, io/reactivex/rxjava3/core/MaybeEmitter.java, io/reactivex/rxjava3/core/BackpressureOverflowStrategy.java, io/reactivex/rxjava3/core/Scheduler.java, io/reactivex/rxjava3/core/SingleObserver.java, io/reactivex/rxjava3/core/MaybeOperator.java, io/reactivex/rxjava3/core/MaybeSource.java, io/reactivex/rxjava3/core/CompletableTransformer.java, io/reactivex/rxjava3/core/CompletableOnSubscribe.java, io/reactivex/rxjava3/core/MaybeConverter.java, io/reactivex/rxjava3/core/Maybe.java, io/reactivex/rxjava3/core/Flowable.java, io/reactivex/rxjava3/core/SingleOperator.java, io/reactivex/rxjava3/core/Emitter.java, io/reactivex/rxjava3/core/MaybeObserver.java, io/reactivex/rxjava3/core/ObservableEmitter.java, io/reactivex/rxjava3/core/FlowableTransformer.java, io/reactivex/rxjava3/subscribers/SafeSubscriber.java, io/reactivex/rxjava3/subscribers/DisposableSubscriber.java, io/reactivex/rxjava3/subscribers/TestSubscriber.java, io/reactivex/rxjava3/subscribers/ResourceSubscriber.java, io/reactivex/rxjava3/subscribers/SerializedSubscriber.java, io/reactivex/rxjava3/subscribers/DefaultSubscriber.java, io/reactivex/rxjava3/operators/ScalarSupplier.java, io/reactivex/rxjava3/operators/SimplePlainQueue.java, io/reactivex/rxjava3/operators/QueueFuseable.java, io/reactivex/rxjava3/operators/QueueSubscription.java, io/reactivex/rxjava3/operators/QueueDisposable.java, io/reactivex/rxjava3/operators/SimpleQueue.java, io/reactivex/rxjava3/operators/ConditionalSubscriber.java, io/reactivex/rxjava3/flowables/GroupedFlowable.java, io/reactivex/rxjava3/flowables/ConnectableFlowable.java, io/reactivex/rxjava3/observers/ResourceSingleObserver.java, io/reactivex/rxjava3/observers/ResourceCompletableObserver.java, io/reactivex/rxjava3/observers/DisposableObserver.java, io/reactivex/rxjava3/observers/SafeObserver.java, io/reactivex/rxjava3/observers/DisposableCompletableObserver.java, io/reactivex/rxjava3/observers/DisposableSingleObserver.java, io/reactivex/rxjava3/observers/ResourceObserver.java, io/reactivex/rxjava3/observers/LambdaConsumerIntrospection.java, io/reactivex/rxjava3/observers/DisposableMaybeObserver.java, io/reactivex/rxjava3/observers/SerializedObserver.java, io/reactivex/rxjava3/observers/BaseTestConsumer.java, io/reactivex/rxjava3/observers/DefaultObserver.java, io/reactivex/rxjava3/observers/TestObserver.java, io/reactivex/rxjava3/observers/ResourceMaybeObserver.java, io/reactivex/rxjava3/observables/ConnectableObservable.java, io/reactivex/rxjava3/observables/GroupedObservable.java, io/reactivex/rxjava3/parallel/ParallelFailureHandling.java, io/reactivex/rxjava3/parallel/ParallelFlowable.java, io/reactivex/rxjava3/parallel/ParallelFlowableConverter.java, io/reactivex/rxjava3/parallel/ParallelTransformer.java, io/reactivex/rxjava3/schedulers/TestScheduler.java, io/reactivex/rxjava3/schedulers/Timed.java, io/reactivex/rxjava3/schedulers/SchedulerRunnableIntrospection.java, io/reactivex/rxjava3/schedulers/Schedulers.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+Source files: io/reactivex/rxjava3/disposables/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Default implementations for {@link io.reactivex.rxjava3.disposables.Disposable Disposable}-based resource management
+ * ({@code Disposable} container types) and utility classes to construct
+ * {@link io.reactivex.rxjava3.disposables.Disposable Disposables} from callbacks and other types.
+ */
+
+Source files: io/reactivex/rxjava3/processors/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Classes representing so-called hot backpressure-aware sources, aka <strong>processors</strong>,
+ * that implement the {@link io.reactivex.rxjava3.processors.FlowableProcessor FlowableProcessor} class,
+ * the Reactive Streams {@link org.reactivestreams.Processor Processor} interface
+ * to allow forms of multicasting events to one or more subscribers as well as consuming another
+ * Reactive Streams {@link org.reactivestreams.Publisher Publisher}.
+ * <p>
+ * Available processor implementations:
+ * <br>
+ * <ul>
+ *     <li>{@link io.reactivex.rxjava3.processors.AsyncProcessor AsyncProcessor} - replays the very last item</li>
+ *     <li>{@link io.reactivex.rxjava3.processors.BehaviorProcessor BehaviorProcessor} - remembers the latest item</li>
+ *     <li>{@link io.reactivex.rxjava3.processors.MulticastProcessor MulticastProcessor} - coordinates its source with its consumers</li>
+ *     <li>{@link io.reactivex.rxjava3.processors.PublishProcessor PublishProcessor} - dispatches items to current consumers</li>
+ *     <li>{@link io.reactivex.rxjava3.processors.ReplayProcessor ReplayProcessor} - remembers some or all items and replays them to consumers</li>
+ *     <li>{@link io.reactivex.rxjava3.processors.UnicastProcessor UnicastProcessor} - remembers or relays items to a single consumer</li>
+ * </ul>
+ * <p>
+ * The non-backpressured variants of the {@code FlowableProcessor} class are called
+ * {@link io.reactivex.rxjava3.subjects.Subject}s and reside in the {@code io.reactivex.subjects} package.
+ * @see io.reactivex.rxjava3.subjects
+ */
+
+Source files: io/reactivex/rxjava3/functions/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Functional interfaces of functions and actions of arity 0 to 9 and related
+ * utility classes.
+ */
+
+Source files: io/reactivex/rxjava3/exceptions/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Exception handling utilities ({@link io.reactivex.rxjava3.exceptions.Exceptions Exceptions}),
+ * composite exception container ({@link io.reactivex.rxjava3.exceptions.CompositeException CompositeException}) and
+ * various lifecycle-related ({@link io.reactivex.rxjava3.exceptions.MissingBackpressureException UndeliverableException})
+ * and behavior-violation exception types ({@link io.reactivex.rxjava3.exceptions.OnErrorNotImplementedException OnErrorNotImplementedException},
+ * {@link io.reactivex.rxjava3.exceptions.MissingBackpressureException MissingBackpressureException}).
+ */
+
+Source files: io/reactivex/rxjava3/subjects/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Classes representing so-called hot sources, aka <strong>subjects</strong>, that implement a base reactive class and
+ * the respective consumer type at once to allow forms of multicasting events to multiple
+ * consumers as well as consuming another base reactive type of their kind.
+ * <p>
+ * Available subject classes with their respective base classes and consumer interfaces:
+ * <br>
+ * <table border="1" style="border-collapse: collapse;">
+ * <caption>The available subject classes with their respective base classes and consumer interfaces.</caption>
+ * <tr><td><b>Subject type</b></td><td><b>Base class</b></td><td><b>Consumer interface</b></td></tr>
+ * <tr>
+ *     <td>{@link io.reactivex.rxjava3.subjects.Subject Subject}
+ *     <br>&nbsp;&nbsp;&nbsp;{@link io.reactivex.rxjava3.subjects.AsyncSubject AsyncSubject}
+ *     <br>&nbsp;&nbsp;&nbsp;{@link io.reactivex.rxjava3.subjects.BehaviorSubject BehaviorSubject}
+ *     <br>&nbsp;&nbsp;&nbsp;{@link io.reactivex.rxjava3.subjects.PublishSubject PublishSubject}
+ *     <br>&nbsp;&nbsp;&nbsp;{@link io.reactivex.rxjava3.subjects.ReplaySubject ReplaySubject}
+ *     <br>&nbsp;&nbsp;&nbsp;{@link io.reactivex.rxjava3.subjects.UnicastSubject UnicastSubject}
+ *     </td>
+ *     <td>{@link io.reactivex.rxjava3.core.Observable Observable}</td>
+ *     <td>{@link io.reactivex.rxjava3.core.Observer Observer}</td>
+ * </tr>
+ * <tr>
+ *     <td>{@link io.reactivex.rxjava3.subjects.SingleSubject SingleSubject}</td>
+ *     <td>{@link io.reactivex.rxjava3.core.Single Single}</td>
+ *     <td>{@link io.reactivex.rxjava3.core.SingleObserver SingleObserver}</td>
+ * </tr>
+ * <tr>
+ *     <td>{@link io.reactivex.rxjava3.subjects.MaybeSubject MaybeSubject}</td>
+ *     <td>{@link io.reactivex.rxjava3.core.Maybe Maybe}</td>
+ *     <td>{@link io.reactivex.rxjava3.core.MaybeObserver MaybeObserver}</td>
+ * </tr>
+ * <tr>
+ *     <td>{@link io.reactivex.rxjava3.subjects.CompletableSubject CompletableSubject}</td>
+ *     <td>{@link io.reactivex.rxjava3.core.Completable Completable}</td>
+ *     <td>{@link io.reactivex.rxjava3.core.CompletableObserver CompletableObserver}</td>
+ * </tr>
+ * </table>
+ * <p>
+ * The backpressure-aware variants of the {@code Subject} class are called
+ * {@link org.reactivestreams.Processor}s and reside in the {@code io.reactivex.processors} package.
+ * @see io.reactivex.rxjava3.processors
+ */
+
+Source files: io/reactivex/rxjava3/annotations/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Annotations for indicating operator behavior, API stability
+ * ({@link io.reactivex.rxjava3.annotations.Experimental @Experimental} and {@link io.reactivex.rxjava3.annotations.Beta @Beta}) and
+ * nullability indicators ({@link io.reactivex.rxjava3.annotations.Nullable Nullable} and {@link io.reactivex.rxjava3.annotations.NonNull NonNull}).
+ */
+
+Source files: io/reactivex/rxjava3/plugins/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Contains the central plugin handler {@link io.reactivex.rxjava3.plugins.RxJavaPlugins}
+ * class to hook into the lifecycle of the base reactive types and schedulers.
+ */
+
+Source files: io/reactivex/rxjava3/internal/queue/MpscLinkedQueue.java, io/reactivex/rxjava3/operators/SpscArrayQueue.java, io/reactivex/rxjava3/operators/SpscLinkedArrayQueue.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/*
+ * The code was inspired by the similarly named JCTools class:
+ * https://github.com/JCTools/JCTools/blob/master/jctools-core/src/main/java/org/jctools/queues/atomic
+ */
+
+Source files: io/reactivex/rxjava3/internal/util/Pow2.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/*
+ * Original License: https://github.com/JCTools/JCTools/blob/master/LICENSE
+ * Original location: https://github.com/JCTools/JCTools/blob/master/jctools-core/src/main/java/org/jctools/util/Pow2.java
+ */
+
+Source files: io/reactivex/rxjava3/internal/util/OpenHashSet.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/*
+ * Inspired by fastutils' OpenHashSet implementation at
+ * https://github.com/vigna/fastutil/blob/master/drv/OpenHashSet.drv
+ */
+
+Source files: io/reactivex/rxjava3/internal/subscribers/DisposableAutoReleaseSubscriber.java, io/reactivex/rxjava3/internal/observers/DisposableAutoReleaseObserver.java, io/reactivex/rxjava3/internal/observers/AbstractDisposableAutoRelease.java, io/reactivex/rxjava3/internal/observers/DisposableAutoReleaseMultiObserver.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/*
+ * Copyright 2016-2019 David Karnok
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/reactivex/rxjava3/internal/fuseable/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Base interfaces and types for supporting operator-fusion.
+ */
+
+Source files: io/reactivex/rxjava3/core/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Base reactive classes: {@link io.reactivex.rxjava3.core.Flowable},  {@link io.reactivex.rxjava3.core.Observable},
+ * {@link io.reactivex.rxjava3.core.Single},  {@link io.reactivex.rxjava3.core.Maybe} and
+ *  {@link io.reactivex.rxjava3.core.Completable}; base reactive consumers;
+ * other common base interfaces.
+ *
+ * <p>A library that enables subscribing to and composing asynchronous events and
+ * callbacks.</p>
+ * <p>The Flowable/Subscriber, Observable/Observer, Single/SingleObserver and
+ * Completable/CompletableObserver interfaces and associated operators (in
+ * the {@code io.reactivex.internal.operators} package) are inspired by the
+ * Reactive Rx library in Microsoft .NET but designed and implemented on
+ * the more advanced Reactive-Streams ( http://www.reactivestreams.org ) principles.</p>
+ * <p>
+ * More information can be found at <a
+ * href="http://msdn.microsoft.com/en-us/data/gg577609">http://msdn.microsoft.com/en-us/data/gg577609</a>.
+ * </p>
+ *
+ *
+ * <p>Compared with the Microsoft implementation:
+ * <ul>
+ * <li>Observable == IObservable (base type)</li>
+ * <li>Observer == IObserver (event consumer)</li>
+ * <li>Disposable == IDisposable (resource/cancellation management)</li>
+ * <li>Observable == Observable (factory methods)</li>
+ * <li>Flowable == IAsyncEnumerable (backpressure)</li>
+ * <li>Subscriber == IAsyncEnumerator</li>
+ * </ul>
+ * The Single and Completable reactive base types have no equivalent in Rx.NET as of 3.x.
+ *
+ * <p>Services which intend on exposing data asynchronously and wish
+ * to allow reactive processing and composition can implement the
+ * {@link io.reactivex.rxjava3.core.Flowable}, {@link io.reactivex.rxjava3.core.Observable}, {@link io.reactivex.rxjava3.core.Single},
+ * {@link io.reactivex.rxjava3.core.Maybe} or {@link io.reactivex.rxjava3.core.Completable} class which then allow
+ * consumers to subscribe to them and receive events.</p>
+ * <p>Usage examples can be found on the {@link io.reactivex.rxjava3.core.Flowable}/{@link io.reactivex.rxjava3.core.Observable} and {@link org.reactivestreams.Subscriber} classes.</p>
+ */
+
+Source files: io/reactivex/rxjava3/subscribers/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Default wrappers and implementations for {@link org.reactivestreams.Subscriber Subscriber}-based consumer classes and interfaces,
+ * including disposable ({@link io.reactivex.rxjava3.subscribers.DisposableSubscriber DisposableSubscriber}) and resource-tracking
+ * ({@link io.reactivex.rxjava3.subscribers.ResourceSubscriber ResourceSubscriber})
+ * variants and the {@link io.reactivex.rxjava3.subscribers.TestSubscriber TestSubscriber} that allows unit testing
+ * {@link io.reactivex.rxjava3.core.Flowable Flowable}-based flows.
+ */
+
+Source files: io/reactivex/rxjava3/operators/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Classes and interfaces for writing advanced operators within and outside RxJava.
+ */
+
+Source files: io/reactivex/rxjava3/flowables/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Classes supporting the Flowable base reactive class:
+ * {@link io.reactivex.rxjava3.flowables.ConnectableFlowable} and
+ * {@link io.reactivex.rxjava3.flowables.GroupedFlowable}.
+ */
+
+Source files: io/reactivex/rxjava3/observers/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Default wrappers and implementations for observer-based consumer classes and interfaces,
+ * including disposable and resource-tracking variants and
+ * the {@link io.reactivex.rxjava3.observers.TestObserver TestObserver} that allows unit testing
+ * {@link io.reactivex.rxjava3.core.Observable Observable}-, {@link io.reactivex.rxjava3.core.Single Single}-,
+ * {@link io.reactivex.rxjava3.core.Maybe Maybe}- and {@link io.reactivex.rxjava3.core.Completable Completable}-based flows.
+ * <p>
+ * Available observer variants
+ * <br>
+ * <table border="1" style="border-collapse: collapse;">
+ * <caption>The available observer types.</caption>
+ * <tr><td><b>Reactive type</b></td><td><b>Base interface</b></td><td><b>Simple</b></td><td><b>Disposable</b></td><td><b>Resource</b></td></tr>
+ * <tr>
+ *     <td>{@link io.reactivex.rxjava3.core.Observable Observable}</td>
+ *     <td>{@link io.reactivex.rxjava3.core.Observer Observer}</td>
+ *     <td>{@link io.reactivex.rxjava3.observers.DefaultObserver DefaultObserver}</td>
+ *     <td>{@link io.reactivex.rxjava3.observers.DisposableObserver DisposableObserver}</td>
+ *     <td>{@link io.reactivex.rxjava3.observers.ResourceObserver DisposableObserver}</td>
+ * </tr>
+ * <tr>
+ *     <td>{@link io.reactivex.rxjava3.core.Maybe Maybe}</td>
+ *     <td>{@link io.reactivex.rxjava3.core.MaybeObserver MaybeObserver}</td>
+ *     <td>N/A</td>
+ *     <td>{@link io.reactivex.rxjava3.observers.DisposableMaybeObserver DisposableMaybeObserver}</td>
+ *     <td>{@link io.reactivex.rxjava3.observers.ResourceMaybeObserver DisposableMaybeObserver}</td>
+ * </tr>
+ * <tr>
+ *     <td>{@link io.reactivex.rxjava3.core.Single Single}</td>
+ *     <td>{@link io.reactivex.rxjava3.core.SingleObserver SingleObserver}</td>
+ *     <td>N/A</td>
+ *     <td>{@link io.reactivex.rxjava3.observers.DisposableSingleObserver DisposableSingleObserver}</td>
+ *     <td>{@link io.reactivex.rxjava3.observers.ResourceSingleObserver DisposableSingleObserver}</td>
+ * </tr>
+ * <tr>
+ *     <td>{@link io.reactivex.rxjava3.core.Completable Completable}</td>
+ *     <td>{@link io.reactivex.rxjava3.core.CompletableObserver CompletableObserver}</td>
+ *     <td>N/A</td>
+ *     <td>{@link io.reactivex.rxjava3.observers.DisposableCompletableObserver DisposableCompletableObserver}</td>
+ *     <td>{@link io.reactivex.rxjava3.observers.ResourceCompletableObserver DisposableCompletableObserver}</td>
+ * </tr>
+ * </table>
+ */
+
+Source files: io/reactivex/rxjava3/observables/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Classes supporting the Observable base reactive class:
+ * {@link io.reactivex.rxjava3.observables.ConnectableObservable} and
+ * {@link io.reactivex.rxjava3.observables.GroupedObservable}.
+ */
+
+Source files: io/reactivex/rxjava3/parallel/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Contains the base type {@link io.reactivex.rxjava3.parallel.ParallelFlowable},
+ * a sub-DSL for working with {@link io.reactivex.rxjava3.core.Flowable} sequences in parallel.
+ */
+
+Source files: io/reactivex/rxjava3/schedulers/package-info.java
+
+/*
+ * Copyright (c) 2016-present, RxJava Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See
+ * the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * Contains notably the factory class of {@link io.reactivex.rxjava3.schedulers.Schedulers Schedulers} providing methods for
+ * retrieving the standard scheduler instances, the {@link io.reactivex.rxjava3.schedulers.TestScheduler TestScheduler} for testing flows
+ * with scheduling in a controlled manner and the class {@link io.reactivex.rxjava3.schedulers.Timed Timed} that can hold
+ * a value and a timestamp associated with it.
+ */

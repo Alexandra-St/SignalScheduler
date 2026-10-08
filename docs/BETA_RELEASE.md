@@ -48,8 +48,9 @@ than an unidentified developer, stop and report the exact warning before proceed
   verification remain pending. Developer ID/notarization are optional at this stage.
 - Custom icon appearance was verified on the development Mac.
 - Intel hardware is not validated. No automatic updates are included.
-- Corresponding-source materials are being assembled. This draft is not publication-ready
-  until the source checklist and live acceptance checks are complete.
+- Matching source/license materials passed technical coverage checks and accompany
+  the candidate. Clean-Mac acceptance remains pending; Replace update, attachment preservation
+  and one-time post-update delivery passed on the development Mac.
 
 ## Reporting a problem
 
@@ -67,7 +68,7 @@ linking URIs, Signal account directories, queue files, Keychain data or real con
 - [x] Manually verify the Send at validation/feedback fix in the rebuilt app (2026-10-08).
 - [x] Include the verified fix in the candidate DMG (0.2.1 build 5).
 - [x] Verify custom icon appearance on the development Mac; final build packaging verified separately.
-- [ ] Complete and review source/license materials; resolve manifest gaps.
+- [x] Complete technical source/license coverage review; include exact JDK commit and native acknowledgments.
 - [ ] Obtain approval to commit, push, tag and publish.
 - [ ] Build from the approved commit and rerun package verification.
 - [ ] Attach the DMG, matching SHA-256 and complete matching source materials.

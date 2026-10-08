@@ -1,0 +1,106 @@
+Source files: jvmMain/kotlinx/serialization/json/JsonSchemaCache.kt, jvmMain/kotlinx/serialization/json/JvmStreams.kt, jvmMain/kotlinx/serialization/json/internal/createMapForCache.kt, commonMain/kotlinx/serialization/json/JsonAnnotations.kt, commonMain/kotlinx/serialization/json/internal/JsonElementMarker.kt, commonMain/kotlinx/serialization/json/internal/JsonSerializersModuleValidator.kt, commonMain/kotlinx/serialization/json/internal/JsonTreeReader.kt, commonMain/kotlinx/serialization/json/internal/SchemaCache.kt, commonMain/kotlinx/serialization/json/internal/StreamingJsonDecoder.kt, commonMain/kotlinx/serialization/json/internal/lexer/AbstractJsonLexer.kt, commonMain/kotlinx/serialization/json/internal/lexer/ReaderJsonLexer.kt, commonMain/kotlinx/serialization/json/internal/lexer/StringJsonLexer.kt
+
+/*
+ * Copyright 2017-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+Source files: jvmMain/kotlinx/serialization/json/internal/ArrayPools.kt, commonMain/kotlinx/serialization/json/internal/CharArrayPool.common.kt, commonMain/kotlinx/serialization/json/internal/StreamingJsonEncoder.kt, commonMain/kotlinx/serialization/json/internal/SuppressAnimalSniffer.kt
+
+/*
+ * Copyright 2017-2022 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+Source files: jvmMain/kotlinx/serialization/json/internal/FormatLanguage.kt
+
+/*
+ * Copyright 2017-2023 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+Source files: commonMain/kotlinx/serialization/json/Json.kt, commonMain/kotlinx/serialization/json/internal/lexer/CommentLexers.kt
+
+/*
+ * Copyright 2017-2024 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+Source files: commonMain/kotlinx/serialization/json/JsonContentPolymorphicSerializer.kt, commonMain/kotlinx/serialization/json/JsonDecoder.kt, commonMain/kotlinx/serialization/json/JsonEncoder.kt
+
+/*
+ * Copyright 2017-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+Source files: commonMain/kotlinx/serialization/json/JsonElement.kt
+
+/*
+ * Copyright 2017-2022 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+@file:Suppress("unused")
+
+Source files: commonMain/kotlinx/serialization/json/JsonElementBuilders.kt
+
+/*
+ * Copyright 2017-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+@file:OptIn(ExperimentalContracts::class)
+
+Source files: commonMain/kotlinx/serialization/json/JsonElementSerializers.kt, commonMain/kotlinx/serialization/json/internal/JsonNamesMap.kt, commonMain/kotlinx/serialization/json/internal/Polymorphic.kt, commonMain/kotlinx/serialization/json/internal/WriteMode.kt
+
+/*
+ * Copyright 2017-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+@file:OptIn(ExperimentalSerializationApi::class)
+
+Source files: commonMain/kotlinx/serialization/json/JsonTransformingSerializer.kt
+
+/*
+ * Copyright 2017-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+@file:Suppress("DeprecatedCallableAddReplaceWith")
+
+Source files: commonMain/kotlinx/serialization/json/internal/Composers.kt
+
+/*
+ * Copyright 2017-2022 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+@file:OptIn(ExperimentalSerializationApi::class)
+
+Source files: commonMain/kotlinx/serialization/json/internal/JsonExceptions.kt
+
+/*
+ * Copyright 2017-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+@file:Suppress("FunctionName")
+
+Source files: commonMain/kotlinx/serialization/json/internal/JsonIterator.kt
+
+/*
+ * Copyright 2017-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+@file:Suppress("FunctionName")
+@file:OptIn(ExperimentalSerializationApi::class)
+
+Source files: commonMain/kotlinx/serialization/json/internal/StringOps.kt
+
+/*
+ * Copyright 2017-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+Source files: commonMain/kotlinx/serialization/json/internal/TreeJsonDecoder.kt
+
+/*
+ * Copyright 2017-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+@file:Suppress("LeakingThis")
+@file:OptIn(ExperimentalSerializationApi::class)
+
+Source files: commonMain/kotlinx/serialization/json/internal/TreeJsonEncoder.kt
+
+/*
+ * Copyright 2017-2022 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+@file:OptIn(ExperimentalSerializationApi::class)

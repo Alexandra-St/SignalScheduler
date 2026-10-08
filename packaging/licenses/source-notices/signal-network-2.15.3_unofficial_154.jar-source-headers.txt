@@ -1,0 +1,13 @@
+Source files: org/signal/network/api/AccountApiV2.kt, org/signal/network/api/ArchiveApi.kt, org/signal/network/api/ArchiveApiV2.kt, org/signal/network/api/CallingApi.kt, org/signal/network/api/CdsApi.kt, org/signal/network/api/CertificateApi.kt, org/signal/network/api/KeysApiV2.kt, org/signal/network/api/LinkDeviceApi.kt, org/signal/network/api/MessageApiV2.kt, org/signal/network/api/PaymentsApi.kt, org/signal/network/api/ProvisioningApi.kt, org/signal/network/api/RateLimitChallengeApi.kt, org/signal/network/api/RegistrationApiV2.kt, org/signal/network/api/RemoteConfigApi.kt, org/signal/network/api/SignalWebSocketExtensions.kt, org/signal/network/api/SvrBApi.kt, org/signal/network/api/UsernameApi.kt, org/signal/network/api/WebsocketResponseExtensions.kt, org/signal/network/pin/PinValidityChecker.kt, org/signal/network/rest/DownloadResult.kt, org/signal/network/rest/ErrorMapper.kt, org/signal/network/rest/RequestSpec.kt, org/signal/network/rest/RestResponse.kt, org/signal/network/rest/SignalRestClient.kt, org/signal/network/rest/StreamingRequestBody.kt, org/signal/network/service/ArchiveCacheStore.kt, org/signal/network/service/ArchiveService.kt, org/signal/network/service/CdnService.kt, org/signal/network/service/MessageService.kt, org/signal/network/service/TwoFactorMethodService.kt, org/signal/network/service/UsernameService.kt
+
+/*
+ * Copyright 2026 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/signal/network/api/AttachmentApi.kt, org/signal/network/api/AttachmentUploadResult.kt, org/signal/network/service/StorageServiceService.kt
+
+/*
+ * Copyright 2024 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */

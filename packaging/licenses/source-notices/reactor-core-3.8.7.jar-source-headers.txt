@@ -1,0 +1,868 @@
+Source files: reactor/adapter/JdkFlowAdapter.java, reactor/core/Exceptions.java, reactor/core/Fuseable.java, reactor/core/publisher/BlockingOptionalMonoSubscriber.java, reactor/core/publisher/BlockingSingleSubscriber.java, reactor/core/publisher/ConnectableFluxHide.java, reactor/core/publisher/ConnectableFluxOnAssembly.java, reactor/core/publisher/ConnectableLift.java, reactor/core/publisher/ConnectableLiftFuseable.java, reactor/core/publisher/DelegateProcessor.java, reactor/core/publisher/DirectProcessor.java, reactor/core/publisher/DrainUtils.java, reactor/core/publisher/Flux.java, reactor/core/publisher/FluxArray.java, reactor/core/publisher/FluxAutoConnect.java, reactor/core/publisher/FluxAutoConnectFuseable.java, reactor/core/publisher/FluxBuffer.java, reactor/core/publisher/FluxCallable.java, reactor/core/publisher/FluxCallableOnAssembly.java, reactor/core/publisher/FluxCancelOn.java, reactor/core/publisher/FluxConcatIterable.java, reactor/core/publisher/FluxContextWrite.java, reactor/core/publisher/FluxContextWriteRestoringThreadLocals.java, reactor/core/publisher/FluxDefer.java, reactor/core/publisher/FluxDeferContextual.java, reactor/core/publisher/FluxDelaySubscription.java, reactor/core/publisher/FluxDematerialize.java, reactor/core/publisher/FluxDetach.java, reactor/core/publisher/FluxDistinct.java, reactor/core/publisher/FluxDistinctFuseable.java, reactor/core/publisher/FluxDistinctUntilChanged.java, reactor/core/publisher/FluxDoFinally.java, reactor/core/publisher/FluxDoFirst.java, reactor/core/publisher/FluxDoFirstFuseable.java, reactor/core/publisher/FluxDoOnEach.java, reactor/core/publisher/FluxDoOnEachFuseable.java, reactor/core/publisher/FluxElapsed.java, reactor/core/publisher/FluxEmpty.java, reactor/core/publisher/FluxError.java, reactor/core/publisher/FluxErrorOnRequest.java, reactor/core/publisher/FluxErrorSupplied.java, reactor/core/publisher/FluxFilter.java, reactor/core/publisher/FluxFilterFuseable.java, reactor/core/publisher/FluxFirstWithSignal.java, reactor/core/publisher/FluxFirstWithValue.java, reactor/core/publisher/FluxFromMonoOperator.java, reactor/core/publisher/FluxGenerate.java, reactor/core/publisher/FluxHandle.java, reactor/core/publisher/FluxHandleFuseable.java, reactor/core/publisher/FluxHide.java, reactor/core/publisher/FluxIndex.java, reactor/core/publisher/FluxIndexFuseable.java, reactor/core/publisher/FluxInterval.java, reactor/core/publisher/FluxIterable.java, reactor/core/publisher/FluxLift.java, reactor/core/publisher/FluxLiftFuseable.java, reactor/core/publisher/FluxLog.java, reactor/core/publisher/FluxLogFuseable.java, reactor/core/publisher/FluxMap.java, reactor/core/publisher/FluxMapFuseable.java, reactor/core/publisher/FluxMapSignal.java, reactor/core/publisher/FluxMaterialize.java, reactor/core/publisher/FluxMerge.java, reactor/core/publisher/FluxName.java, reactor/core/publisher/FluxNameFuseable.java, reactor/core/publisher/FluxNever.java, reactor/core/publisher/FluxOnAssembly.java, reactor/core/publisher/FluxOnBackpressureDrop.java, reactor/core/publisher/FluxOnErrorResume.java, reactor/core/publisher/FluxOperator.java, reactor/core/publisher/FluxPeek.java, reactor/core/publisher/FluxPeekFuseable.java, reactor/core/publisher/FluxProcessor.java, reactor/core/publisher/FluxPublishOn.java, reactor/core/publisher/FluxRange.java, reactor/core/publisher/FluxRepeat.java, reactor/core/publisher/FluxRepeatPredicate.java, reactor/core/publisher/FluxRepeatWhen.java, reactor/core/publisher/FluxRetry.java, reactor/core/publisher/FluxRetryWhen.java, reactor/core/publisher/FluxScan.java, reactor/core/publisher/FluxScanSeed.java, reactor/core/publisher/FluxSkip.java, reactor/core/publisher/FluxSkipLast.java, reactor/core/publisher/FluxSkipUntil.java, reactor/core/publisher/FluxSkipWhile.java, reactor/core/publisher/FluxSource.java, reactor/core/publisher/FluxSourceFuseable.java, reactor/core/publisher/FluxSourceMono.java, reactor/core/publisher/FluxSourceMonoFuseable.java, reactor/core/publisher/FluxStream.java, reactor/core/publisher/FluxSwitchIfEmpty.java, reactor/core/publisher/FluxTake.java, reactor/core/publisher/FluxTakeFuseable.java, reactor/core/publisher/FluxTakeLast.java, reactor/core/publisher/FluxTakeLastOne.java, reactor/core/publisher/FluxTakeUntil.java, reactor/core/publisher/FluxTakeWhile.java, reactor/core/publisher/FluxUsing.java, reactor/core/publisher/FluxWindow.java, reactor/core/publisher/FluxZipIterable.java, reactor/core/publisher/GroupedLift.java, reactor/core/publisher/GroupedLiftFuseable.java, reactor/core/publisher/Hooks.java, reactor/core/publisher/ImmutableSignal.java, reactor/core/publisher/InnerProducer.java, reactor/core/publisher/InternalConnectableFluxOperator.java, reactor/core/publisher/InternalFluxOperator.java, reactor/core/publisher/InternalMonoOperator.java, reactor/core/publisher/Mono.java, reactor/core/publisher/MonoAll.java, reactor/core/publisher/MonoAny.java, reactor/core/publisher/MonoCallable.java, reactor/core/publisher/MonoCallableOnAssembly.java, reactor/core/publisher/MonoCancelOn.java, reactor/core/publisher/MonoCollect.java, reactor/core/publisher/MonoCollectList.java, reactor/core/publisher/MonoCompletionStage.java, reactor/core/publisher/MonoContextWrite.java, reactor/core/publisher/MonoContextWriteRestoringThreadLocals.java, reactor/core/publisher/MonoCount.java, reactor/core/publisher/MonoCurrentContext.java, reactor/core/publisher/MonoDefaultIfEmpty.java, reactor/core/publisher/MonoDefer.java, reactor/core/publisher/MonoDeferContextual.java, reactor/core/publisher/MonoDelay.java, reactor/core/publisher/MonoDelaySubscription.java, reactor/core/publisher/MonoDematerialize.java, reactor/core/publisher/MonoDetach.java, reactor/core/publisher/MonoDoFinally.java, reactor/core/publisher/MonoDoFirst.java, reactor/core/publisher/MonoDoFirstFuseable.java, reactor/core/publisher/MonoDoOnEach.java, reactor/core/publisher/MonoDoOnEachFuseable.java, reactor/core/publisher/MonoElapsed.java, reactor/core/publisher/MonoElementAt.java, reactor/core/publisher/MonoEmpty.java, reactor/core/publisher/MonoError.java, reactor/core/publisher/MonoErrorSupplied.java, reactor/core/publisher/MonoFilter.java, reactor/core/publisher/MonoFilterFuseable.java, reactor/core/publisher/MonoFirstWithSignal.java, reactor/core/publisher/MonoFirstWithValue.java, reactor/core/publisher/MonoFlattenIterable.java, reactor/core/publisher/MonoFromFluxOperator.java, reactor/core/publisher/MonoFromPublisher.java, reactor/core/publisher/MonoHandle.java, reactor/core/publisher/MonoHandleFuseable.java, reactor/core/publisher/MonoHasElement.java, reactor/core/publisher/MonoHasElements.java, reactor/core/publisher/MonoHide.java, reactor/core/publisher/MonoIgnoreElement.java, reactor/core/publisher/MonoIgnoreElements.java, reactor/core/publisher/MonoIgnorePublisher.java, reactor/core/publisher/MonoIgnoreThen.java, reactor/core/publisher/MonoLift.java, reactor/core/publisher/MonoLiftFuseable.java, reactor/core/publisher/MonoLog.java, reactor/core/publisher/MonoLogFuseable.java, reactor/core/publisher/MonoMap.java, reactor/core/publisher/MonoMapFuseable.java, reactor/core/publisher/MonoMaterialize.java, reactor/core/publisher/MonoName.java, reactor/core/publisher/MonoNameFuseable.java, reactor/core/publisher/MonoNever.java, reactor/core/publisher/MonoNext.java, reactor/core/publisher/MonoOnAssembly.java, reactor/core/publisher/MonoOnErrorResume.java, reactor/core/publisher/MonoOperator.java, reactor/core/publisher/MonoPeek.java, reactor/core/publisher/MonoPeekFuseable.java, reactor/core/publisher/MonoPeekTerminal.java, reactor/core/publisher/MonoProcessor.java, reactor/core/publisher/MonoReduce.java, reactor/core/publisher/MonoReduceSeed.java, reactor/core/publisher/MonoRepeat.java, reactor/core/publisher/MonoRepeatPredicate.java, reactor/core/publisher/MonoRepeatWhen.java, reactor/core/publisher/MonoRetry.java, reactor/core/publisher/MonoRetryWhen.java, reactor/core/publisher/MonoSingle.java, reactor/core/publisher/MonoSingleCallable.java, reactor/core/publisher/MonoSingleMono.java, reactor/core/publisher/MonoSingleOptional.java, reactor/core/publisher/MonoSingleOptionalCallable.java, reactor/core/publisher/MonoSource.java, reactor/core/publisher/MonoSourceFlux.java, reactor/core/publisher/MonoSourceFluxFuseable.java, reactor/core/publisher/MonoSourceFuseable.java, reactor/core/publisher/MonoStreamCollector.java, reactor/core/publisher/MonoSubscribeOnCallable.java, reactor/core/publisher/MonoSubscribeOnValue.java, reactor/core/publisher/MonoSupplier.java, reactor/core/publisher/MonoSwitchIfEmpty.java, reactor/core/publisher/MonoTakeLastOne.java, reactor/core/publisher/MonoTakeUntilOther.java, reactor/core/publisher/MonoTimed.java, reactor/core/publisher/MonoTimeout.java, reactor/core/publisher/MonoToCompletableFuture.java, reactor/core/publisher/MonoUsing.java, reactor/core/publisher/OptimizableOperator.java, reactor/core/publisher/ParallelCollect.java, reactor/core/publisher/ParallelConcatMap.java, reactor/core/publisher/ParallelDoOnEach.java, reactor/core/publisher/ParallelFilter.java, reactor/core/publisher/ParallelFlatMap.java, reactor/core/publisher/ParallelFlux.java, reactor/core/publisher/ParallelFluxHide.java, reactor/core/publisher/ParallelFluxName.java, reactor/core/publisher/ParallelFluxOnAssembly.java, reactor/core/publisher/ParallelLift.java, reactor/core/publisher/ParallelLiftFuseable.java, reactor/core/publisher/ParallelLog.java, reactor/core/publisher/ParallelMap.java, reactor/core/publisher/ParallelMergeOrdered.java, reactor/core/publisher/ParallelPeek.java, reactor/core/publisher/ParallelReduceSeed.java, reactor/core/publisher/ParallelRunOn.java, reactor/core/publisher/ParallelSource.java, reactor/core/publisher/ReplayProcessor.java, reactor/core/publisher/SerializedSubscriber.java, reactor/core/publisher/Signal.java, reactor/core/publisher/SignalLogger.java, reactor/core/publisher/SignalPeek.java, reactor/core/publisher/SinkManyReplayProcessor.java, reactor/core/publisher/SinkOneMulticast.java, reactor/core/publisher/SourceProducer.java, reactor/core/scheduler/ExecutorScheduler.java, reactor/core/scheduler/ImmediateScheduler.java, reactor/core/scheduler/Schedulers.java, reactor/core/scheduler/SingleScheduler.java, reactor/core/scheduler/SingleWorkerScheduler.java, reactor/util/Logger.java, reactor/util/Loggers.java, reactor/util/concurrent/SpscArrayQueue.java, reactor/util/concurrent/SpscLinkedArrayQueue.java, reactor/util/function/Tuple2.java, reactor/util/function/Tuple3.java, reactor/util/function/Tuple4.java, reactor/util/function/Tuple5.java, reactor/util/function/Tuple6.java, reactor/util/function/Tuple7.java, reactor/util/function/Tuple8.java
+
+/*
+ * Copyright (c) 2016-2025 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/adapter/package-info.java
+
+/*
+ * Copyright (c) 2011-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Adapt
+ * {@link org.reactivestreams.Publisher} to Java 9+
+ * {@link reactor.adapter.JdkFlowAdapter Flow.Publisher}. More adapter can be found
+ * in reactor-adapter under https://github.com/reactor/reactor-addons/ including RxJava1 and
+ * RxJava2.
+ *
+ * @author Stephane Maldini
+ */
+@NullMarked
+
+Source files: reactor/core/CorePublisher.java, reactor/core/publisher/InnerConsumer.java, reactor/core/publisher/MonoBridges.java, reactor/core/publisher/SignalType.java, reactor/core/scheduler/NonBlocking.java, reactor/util/function/Tuples.java
+
+/*
+ * Copyright (c) 2016-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/CoreSubscriber.java, reactor/core/scheduler/EmptyCompositeDisposable.java
+
+/*
+ * Copyright (c) 2017-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/Disposable.java, reactor/core/publisher/FluxJust.java, reactor/core/publisher/FluxOnBackpressureBuffer.java, reactor/core/publisher/FluxOnBackpressureBufferStrategy.java, reactor/core/publisher/GroupedFlux.java, reactor/core/publisher/InnerOperator.java, reactor/core/publisher/MonoJust.java, reactor/core/publisher/MonoRunnable.java, reactor/core/publisher/MonoSink.java, reactor/core/publisher/ParallelArraySource.java, reactor/core/scheduler/ExecutorServiceWorker.java, reactor/util/context/ContextN.java
+
+/*
+ * Copyright (c) 2015-2025 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/Disposables.java, reactor/core/publisher/FluxExpand.java, reactor/core/publisher/FluxFilterWhen.java, reactor/core/publisher/FluxRefCountGrace.java, reactor/core/publisher/FluxWindowTimeout.java, reactor/core/publisher/MonoCacheTime.java, reactor/core/publisher/MonoDelayUntil.java, reactor/core/publisher/MonoFilterWhen.java, reactor/core/publisher/MonoPublishMulticast.java, reactor/core/publisher/MonoWhen.java, reactor/core/publisher/StrictSubscriber.java, reactor/core/scheduler/DelegateServiceScheduler.java, reactor/core/scheduler/InstantPeriodicWorkerTask.java, reactor/core/scheduler/PeriodicSchedulerTask.java, reactor/core/scheduler/PeriodicWorkerTask.java, reactor/core/scheduler/SchedulerTask.java, reactor/core/scheduler/WorkerTask.java
+
+/*
+ * Copyright (c) 2017-2026 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/Scannable.java, reactor/core/publisher/FluxDelaySequence.java, reactor/core/publisher/FluxLimitRequest.java, reactor/core/publisher/FluxOnBackpressureBufferTimeout.java, reactor/core/publisher/MonoExpand.java, reactor/core/publisher/OperatorDisposables.java, reactor/util/concurrent/Queues.java, reactor/util/context/Context.java
+
+/*
+ * Copyright (c) 2017-2025 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/package-info.java
+
+/*
+ * Copyright (c) 2011-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Core components of the framework supporting extensions to the Reactive Stream
+ * programming model.
+ *
+ */
+@NullMarked
+
+Source files: reactor/core/observability/DefaultSignalListener.java, reactor/core/observability/SignalListener.java, reactor/core/observability/SignalListenerFactory.java
+
+/*
+ * Copyright (c) 2022 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/BaseSubscriber.java, reactor/core/publisher/BlockingIterable.java, reactor/core/publisher/EmitterProcessor.java, reactor/core/publisher/FluxBufferBoundary.java, reactor/core/publisher/FluxBufferPredicate.java, reactor/core/publisher/FluxBufferTimeout.java, reactor/core/publisher/FluxBufferWhen.java, reactor/core/publisher/FluxCombineLatest.java, reactor/core/publisher/FluxConcatArray.java, reactor/core/publisher/FluxConcatMap.java, reactor/core/publisher/FluxCreate.java, reactor/core/publisher/FluxDefaultIfEmpty.java, reactor/core/publisher/FluxFlatMap.java, reactor/core/publisher/FluxFlattenIterable.java, reactor/core/publisher/FluxGroupBy.java, reactor/core/publisher/FluxGroupJoin.java, reactor/core/publisher/FluxJoin.java, reactor/core/publisher/FluxMergeSequential.java, reactor/core/publisher/FluxOnBackpressureLatest.java, reactor/core/publisher/FluxPublish.java, reactor/core/publisher/FluxPublishMulticast.java, reactor/core/publisher/FluxRefCount.java, reactor/core/publisher/FluxReplay.java, reactor/core/publisher/FluxSample.java, reactor/core/publisher/FluxSampleFirst.java, reactor/core/publisher/FluxSampleTimeout.java, reactor/core/publisher/FluxSkipUntilOther.java, reactor/core/publisher/FluxSubscribeOn.java, reactor/core/publisher/FluxSubscribeOnCallable.java, reactor/core/publisher/FluxSubscribeOnValue.java, reactor/core/publisher/FluxSwitchMap.java, reactor/core/publisher/FluxTakeUntilOther.java, reactor/core/publisher/FluxTimeout.java, reactor/core/publisher/FluxWindowBoundary.java, reactor/core/publisher/FluxWindowPredicate.java, reactor/core/publisher/FluxWindowWhen.java, reactor/core/publisher/FluxWithLatestFrom.java, reactor/core/publisher/FluxZip.java, reactor/core/publisher/LambdaMonoSubscriber.java, reactor/core/publisher/LambdaSubscriber.java, reactor/core/publisher/MonoCreate.java, reactor/core/publisher/MonoDelayElement.java, reactor/core/publisher/MonoFlatMap.java, reactor/core/publisher/MonoFlatMapMany.java, reactor/core/publisher/MonoPublishOn.java, reactor/core/publisher/MonoSequenceEqual.java, reactor/core/publisher/MonoSubscribeOn.java, reactor/core/publisher/MonoZip.java, reactor/core/publisher/NextProcessor.java, reactor/core/publisher/Operators.java, reactor/core/publisher/ParallelGroup.java, reactor/core/publisher/ParallelMergeReduce.java, reactor/core/publisher/ParallelMergeSequential.java, reactor/core/publisher/ParallelMergeSort.java, reactor/core/publisher/SinkManyEmitterProcessor.java, reactor/core/publisher/SinkManyUnicast.java, reactor/core/publisher/UnicastProcessor.java, reactor/core/scheduler/ParallelScheduler.java
+
+/*
+ * Copyright (c) 2016-2026 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/BlockingFirstSubscriber.java, reactor/core/publisher/BlockingMonoSubscriber.java, reactor/core/publisher/FluxSink.java
+
+/*
+ * Copyright (c) 2016-2023 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/BlockingLastSubscriber.java
+
+/*
+ * Copyright (c) 2015-2023 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/BufferOverflowStrategy.java, reactor/core/publisher/ContextHolder.java
+
+/*
+ * Copyright (c) 2015-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/CallSiteSupplierFactory.java, reactor/core/publisher/ContextPropagationSupport.java, reactor/core/publisher/InternalProducerAttr.java, reactor/core/scheduler/BoundedElasticSchedulerSupplier.java
+
+/*
+ * Copyright (c) 2023 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/ConnectableFlux.java, reactor/core/publisher/SynchronousSink.java, reactor/core/scheduler/Scheduler.java
+
+/*
+ * Copyright (c) 2016-2024 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/ConnectableFluxRestoringThreadLocals.java, reactor/util/annotation/Incubating.java
+
+/*
+ * Copyright (c) 2024 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/ContextPropagation.java
+
+/*
+ * Copyright (c) 2022-2026 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/ContextTrackingFunctionWrapper.java, reactor/util/context/CoreContext.java
+
+/*
+ * Copyright (c) 2019-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/DirectInnerContainer.java, reactor/util/Metrics.java
+
+/*
+ * Copyright (c) 2016-2022 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/FluxConcatMapNoPrefetch.java, reactor/core/publisher/Sinks.java, reactor/core/publisher/SinksSpecs.java
+
+/*
+ * Copyright (c) 2020-2026 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/FluxContextWriteRestoringThreadLocalsFuseable.java
+
+/*
+ * Copyright (c) 2024-2025 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/FluxMergeComparing.java, reactor/util/concurrent/MpscLinkedQueue.java
+
+/*
+ * Copyright (c) 2018-2026 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/FluxMetrics.java, reactor/core/publisher/FluxMetricsFuseable.java, reactor/core/publisher/FluxSwitchOnFirst.java, reactor/core/publisher/FluxUsingWhen.java, reactor/core/publisher/MonoMetrics.java, reactor/core/publisher/MonoMetricsFuseable.java, reactor/core/publisher/MonoUsingWhen.java, reactor/core/publisher/OnNextFailureStrategy.java, reactor/core/publisher/QueueDrainSubscriber.java, reactor/core/publisher/Traces.java, reactor/core/scheduler/ReactorThreadFactory.java, reactor/core/scheduler/VirtualThreadFactory.java
+
+/*
+ * Copyright (c) 2018-2025 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/FluxOnErrorReturn.java, reactor/core/publisher/FluxTap.java, reactor/core/publisher/FluxTapFuseable.java, reactor/core/publisher/FluxTapRestoringThreadLocals.java, reactor/core/publisher/MonoOnErrorReturn.java, reactor/core/publisher/MonoTap.java, reactor/core/publisher/MonoTapFuseable.java, reactor/core/publisher/MonoTapRestoringThreadLocals.java, reactor/core/scheduler/SchedulerState.java, reactor/util/context/ReactorContextAccessor.java
+
+/*
+ * Copyright (c) 2022-2025 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/FluxSwitchMapNoPrefetch.java, reactor/core/publisher/MonoCacheInvalidateIf.java
+
+/*
+ * Copyright (c) 2021-2026 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/FluxTimed.java, reactor/core/publisher/InternalOneSink.java, reactor/core/publisher/SinkEmptyMulticast.java, reactor/core/publisher/SinkEmptySerialized.java, reactor/core/publisher/SinkManyBestEffort.java, reactor/core/publisher/SinkManySerialized.java, reactor/core/publisher/SinkManyUnicastNoBackpressure.java, reactor/core/publisher/SinkOneSerialized.java, reactor/util/context/ContextView.java, reactor/util/retry/RetryBackoffSpec.java
+
+/*
+ * Copyright (c) 2020-2025 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/InternalEmptySink.java, reactor/core/publisher/InternalManySink.java, reactor/core/publisher/Timed.java, reactor/core/scheduler/DelegatingScheduledExecutorService.java, reactor/util/retry/ImmutableRetrySignal.java
+
+/*
+ * Copyright (c) 2020-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/MonoCacheInvalidateWhen.java
+
+/*
+ * Copyright (c) 2021-2025 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/ParallelFluxRestoringThreadLocals.java, reactor/core/scheduler/BoundedElasticThreadPerTaskScheduler.java
+
+/*
+ * Copyright (c) 2023-2025 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/ParallelThen.java
+
+/*
+ * Copyright (c) 2019-2026 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/StateLogger.java
+
+/*
+ * Copyright (c) 2022-2024 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/publisher/package-info.java
+
+/*
+ * Copyright (c) 2011-2022 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Provide main Reactive APIs in {@link reactor.core.publisher.Flux} and {@link reactor.core.publisher.Mono},
+ * as well as various helper classes, interfaces used in the composition API, variants of Flux and operator-building
+ * utilities.
+ *
+ * <h2>Flux</h2>
+ * A typed N-elements or zero sequence {@link org.reactivestreams.Publisher} with core reactive extensions.
+ *
+ * <h2>Mono</h2>
+ * A typed one-element at most sequence {@link org.reactivestreams.Publisher} with core reactive extensions.
+ **
+ * @author Stephane Maldini
+ */
+@NullMarked
+
+Source files: reactor/core/scheduler/BoundedElasticScheduler.java
+
+/*
+ * Copyright (c) 2019-2025 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/scheduler/ReactorBlockHoundIntegration.java
+
+/*
+ * Copyright (c) 2019-2023 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/scheduler/SchedulerMetricDecorator.java
+
+/*
+ * Copyright (c) 2018-2022 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/core/scheduler/package-info.java
+
+/*
+ * Copyright (c) 2011-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * {@link reactor.core.scheduler.Scheduler} contract and static
+ * registry and factory methods in {@link reactor.core.scheduler.Schedulers}.
+ *
+ * @author Stephane Maldini
+ */
+@NullMarked
+
+Source files: reactor/util/package-info.java, reactor/util/context/package-info.java
+
+/*
+ * Copyright (c) 2011-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Miscellaneous utility classes, such as loggers, tuples or queue suppliers and implementations.
+ */
+@NullMarked
+
+Source files: reactor/util/annotation/NonNull.java, reactor/util/annotation/NonNullApi.java, reactor/util/annotation/Nullable.java
+
+/*
+ * Copyright 2002-2017 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/util/concurrent/package-info.java
+
+/*
+ * Copyright (c) 2011-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Queue {@link reactor.util.concurrent.Queues suppliers and utilities}
+ * Used for operational serialization (serializing threads) or buffering (asynchronous boundary).
+ *
+ * @author Stephane Maldini
+ */
+@NullMarked
+
+Source files: reactor/util/context/Context0.java, reactor/util/context/Context1.java, reactor/util/context/Context2.java, reactor/util/context/Context3.java
+
+/*
+ * Copyright (c) 2015-2022 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/util/context/Context4.java, reactor/util/context/Context5.java
+
+/*
+ * Copyright (c) 2017-2022 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/util/function/package-info.java
+
+/*
+ * Copyright (c) 2011-2021 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * {@link reactor.util.function.Tuples Tuples} provide a type-safe way to specify multiple parameters.
+ */
+@NullMarked
+
+Source files: reactor/util/repeat/ImmutableRepeatSignal.java, reactor/util/repeat/RepeatSpec.java
+
+/*
+ * Copyright (c) 2025 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/util/retry/Retry.java
+
+/*
+ * Copyright (c) 2020-2024 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: reactor/util/retry/RetrySpec.java
+
+/*
+ * Copyright (c) 2020-2023 VMware Inc. or its affiliates, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */

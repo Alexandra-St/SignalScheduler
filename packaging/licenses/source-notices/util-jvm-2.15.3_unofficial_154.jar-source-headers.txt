@@ -1,0 +1,64 @@
+Source files: org/signal/core/util/Base64.kt, org/signal/core/util/Bitmask.java, org/signal/core/util/ByteExtensions.kt, org/signal/core/util/CryptoUtil.java, org/signal/core/util/DoubleExtensions.kt, org/signal/core/util/DurationExtensions.kt, org/signal/core/util/FloatExtensions.kt, org/signal/core/util/Hex.java, org/signal/core/util/InputStreamExtensions.kt, org/signal/core/util/OptionalExtensions.kt, org/signal/core/util/OutputStreamExtensions.kt, org/signal/core/util/SetUtil.java, org/signal/core/util/Stopwatch.kt, org/signal/core/util/StreamUtil.java, org/signal/core/util/logging/CompoundLogger.kt, org/signal/core/util/logging/Log.kt, org/signal/core/util/logging/NoopLogger.kt, org/signal/core/util/logging/Scrubber.kt, org/signal/core/util/stream/LimitedInputStream.kt, org/signal/core/util/stream/MacInputStream.kt, org/signal/core/util/stream/MacOutputStream.kt
+
+/*
+ * Copyright 2023 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/signal/core/util/BidiUtil.kt, org/signal/core/util/E164Util.kt, org/signal/core/util/IntExtensions.kt, org/signal/core/util/RandomUtil.kt, org/signal/core/util/UuidExtensions.kt, org/signal/core/util/UuidUtil.kt, org/signal/core/util/stream/TrimmingInputStream.kt
+
+/*
+ * Copyright 2025 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/signal/core/util/ByteArrayExtensions.kt, org/signal/core/util/FlowExtensions.kt, org/signal/core/util/LongExtensions.kt, org/signal/core/util/ResettableLazy.kt, org/signal/core/util/StringExtensions.kt, org/signal/core/util/WireProtoJson.kt, org/signal/core/util/concurrent/ListenableFuture.java, org/signal/core/util/concurrent/SettableFuture.java, org/signal/core/util/logging/LoggingExtensions.kt, org/signal/core/util/stream/Crc32OutputStream.kt, org/signal/core/util/stream/NonClosingOutputStream.kt, org/signal/core/util/stream/NullOutputStream.kt, org/signal/core/util/test/TestUtils.kt
+
+/*
+ * Copyright 2024 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/signal/core/util/CloseableExtensions.kt, org/signal/core/util/EnumUtils.kt, org/signal/core/util/IOFunction.java, org/signal/core/util/LRUCache.java, org/signal/core/util/Linkifier.kt, org/signal/core/util/database/DatabaseId.kt
+
+/*
+ * Copyright 2026 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/signal/core/util/NoExternalStorageException.java
+
+/** 
+ * Copyright (C) 2011 Whisper Systems
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+Source files: org/signal/core/util/ProtoExtensions.kt
+
+/*
+ * Copyright 2024 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@file:JvmName("ProtoUtil")
+
+Source files: org/signal/core/util/concurrent/JvmRxExtensions.kt
+
+/*
+ * Copyright 2025 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@file:JvmName("JvmRxExtensions")

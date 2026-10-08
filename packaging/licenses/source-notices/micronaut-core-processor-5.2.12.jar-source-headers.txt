@@ -1,0 +1,490 @@
+Source files: io/micronaut/aop/mapper/InterceptorBeanMapper.java, io/micronaut/context/visitor/BeanImportHandler.java, io/micronaut/context/visitor/BeanImportVisitor.java, io/micronaut/context/visitor/ContextConfigurerVisitor.java, io/micronaut/inject/annotation/internal/CoreNonNullTransformer.java, io/micronaut/inject/annotation/internal/CoreNullableTransformer.java, io/micronaut/inject/annotation/internal/JavaxPostConstructTransformer.java, io/micronaut/inject/annotation/internal/JavaxPreDestroyTransformer.java, io/micronaut/inject/annotation/internal/JavaxRemapper.java, io/micronaut/inject/ast/AnnotationElement.java, io/micronaut/inject/ast/DefaultElementQuery.java, io/micronaut/inject/ast/GenericElement.java, io/micronaut/inject/ast/GenericPlaceholderElement.java, io/micronaut/inject/ast/ImportedClass.java, io/micronaut/inject/ast/PackageElement.java, io/micronaut/inject/ast/ReflectGenericPlaceholderElement.java, io/micronaut/inject/ast/ReflectTypeElement.java, io/micronaut/inject/ast/ReflectWildcardElement.java, io/micronaut/inject/ast/SimpleClassElement.java, io/micronaut/inject/ast/SimplePackageElement.java, io/micronaut/inject/ast/WildcardElement.java, io/micronaut/inject/ast/beans/BeanConstructorElement.java, io/micronaut/inject/ast/beans/BeanElement.java, io/micronaut/inject/ast/beans/BeanElementBuilder.java, io/micronaut/inject/ast/beans/BeanFieldElement.java, io/micronaut/inject/ast/beans/BeanMethodElement.java, io/micronaut/inject/ast/beans/BeanParameterElement.java, io/micronaut/inject/ast/beans/ConfigurableElement.java, io/micronaut/inject/ast/beans/InjectableElement.java, io/micronaut/inject/beans/visitor/EntityReflectiveAccessAnnotationMapper.java, io/micronaut/inject/visitor/BeanElementVisitor.java, io/micronaut/inject/visitor/BeanElementVisitorContext.java, io/micronaut/inject/visitor/BeanElementVisitorLoader.java, io/micronaut/inject/writer/AbstractBeanDefinitionBuilder.java, io/micronaut/inject/writer/DispatchWriter.java
+
+/*
+ * Copyright 2017-2021 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/aop/mapper/package-info.java, io/micronaut/expressions/package-info.java, io/micronaut/expressions/context/package-info.java, io/micronaut/expressions/parser/package-info.java, io/micronaut/expressions/parser/ast/package-info.java, io/micronaut/expressions/parser/ast/collection/package-info.java, io/micronaut/expressions/parser/ast/conditional/package-info.java, io/micronaut/expressions/parser/ast/operator/binary/package-info.java, io/micronaut/expressions/parser/ast/operator/unary/package-info.java, io/micronaut/expressions/parser/ast/util/package-info.java, io/micronaut/expressions/parser/compilation/package-info.java, io/micronaut/expressions/parser/exception/package-info.java, io/micronaut/expressions/parser/token/package-info.java, io/micronaut/expressions/util/package-info.java, io/micronaut/inject/ast/beans/package-info.java, io/micronaut/inject/ast/utils/package-info.java, io/micronaut/inject/beans/visitor/persistence/package-info.java, io/micronaut/inject/configuration/builder/package-info.java, io/micronaut/inject/utils/package-info.java, io/micronaut/inject/visitor/util/package-info.java, io/micronaut/validation/visitor/async/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The package info.
+ */
+@NullMarked
+
+Source files: io/micronaut/aop/writer/AopProxyWriter.java, io/micronaut/aop/writer/ProxyingBeanDefinitionWriter.java, io/micronaut/context/visitor/ConfigurationMetadataWriterVisitor.java, io/micronaut/context/visitor/ConfigurationReaderVisitor.java, io/micronaut/context/visitor/ExecutableVisitor.java, io/micronaut/context/visitor/InternalApiTypeElementVisitor.java, io/micronaut/inject/annotation/AbstractAnnotationMetadataBuilder.java, io/micronaut/inject/annotation/AnnotationMapper.java, io/micronaut/inject/annotation/AnnotationMetadataGenUtils.java, io/micronaut/inject/annotation/AnnotationMetadataWriter.java, io/micronaut/inject/annotation/AnnotationRemapper.java, io/micronaut/inject/annotation/AnnotationTransformer.java, io/micronaut/inject/annotation/NamedAnnotationMapper.java, io/micronaut/inject/annotation/NamedAnnotationTransformer.java, io/micronaut/inject/annotation/PackageRenameRemapper.java, io/micronaut/inject/annotation/TypedAnnotationMapper.java, io/micronaut/inject/annotation/TypedAnnotationTransformer.java, io/micronaut/inject/annotation/internal/FindBugsRemapper.java, io/micronaut/inject/annotation/internal/JakartaPersistenceContextAnnotationMapper.java, io/micronaut/inject/annotation/internal/JakartaPriorityAnnotationMapper.java, io/micronaut/inject/annotation/internal/JavaxPersistenceContextAnnotationMapper.java, io/micronaut/inject/annotation/internal/KotlinNotNullMapper.java, io/micronaut/inject/annotation/internal/KotlinNullableMapper.java, io/micronaut/inject/ast/ArrayableClassElement.java, io/micronaut/inject/ast/ClassElement.java, io/micronaut/inject/ast/ConstructorElement.java, io/micronaut/inject/ast/Element.java, io/micronaut/inject/ast/ElementFactory.java, io/micronaut/inject/ast/ElementModifier.java, io/micronaut/inject/ast/ElementQuery.java, io/micronaut/inject/ast/EnumConstantElement.java, io/micronaut/inject/ast/EnumElement.java, io/micronaut/inject/ast/FieldElement.java, io/micronaut/inject/ast/MemberElement.java, io/micronaut/inject/ast/MethodElement.java, io/micronaut/inject/ast/ParameterElement.java, io/micronaut/inject/ast/PrimitiveElement.java, io/micronaut/inject/ast/PropertyElement.java, io/micronaut/inject/ast/ReflectClassElement.java, io/micronaut/inject/ast/ReflectParameterElement.java, io/micronaut/inject/ast/TypedElement.java, io/micronaut/inject/ast/annotation/AbstractAnnotationElement.java, io/micronaut/inject/ast/annotation/AbstractElementAnnotationMetadata.java, io/micronaut/inject/ast/annotation/AbstractMutableAnnotationMetadata.java, io/micronaut/inject/ast/annotation/ElementMutableAnnotationMetadataDelegate.java, io/micronaut/inject/ast/annotation/MutableAnnotationMetadataDelegate.java, io/micronaut/inject/beans/visitor/BeanIntrospectionWriter.java, io/micronaut/inject/beans/visitor/EntityIntrospectedAnnotationMapper.java, io/micronaut/inject/beans/visitor/IntrospectedTypeElementVisitor.java, io/micronaut/inject/beans/visitor/JsonCreatorAnnotationMapper.java, io/micronaut/inject/beans/visitor/MappedSuperClassIntrospectionMapper.java, io/micronaut/inject/beans/visitor/persistence/JakartaEntityIntrospectedAnnotationMapper.java, io/micronaut/inject/beans/visitor/persistence/JakartaMappedSuperClassIntrospectionMapper.java, io/micronaut/inject/configuration/ConfigurationMetadata.java, io/micronaut/inject/configuration/ConfigurationMetadataBuilder.java, io/micronaut/inject/configuration/ConfigurationMetadataWriter.java, io/micronaut/inject/configuration/ConfigurationUtils.java, io/micronaut/inject/configuration/JsonConfigurationMetadataWriter.java, io/micronaut/inject/configuration/JsonSchemaConfigurationMetadataWriter.java, io/micronaut/inject/configuration/PropertyMetadata.java, io/micronaut/inject/processing/JavaModelUtils.java, io/micronaut/inject/visitor/ElementPostponedToNextRoundException.java, io/micronaut/inject/visitor/PackageElementVisitor.java, io/micronaut/inject/visitor/TypeElementVisitor.java, io/micronaut/inject/visitor/VisitorConfiguration.java, io/micronaut/inject/visitor/VisitorContext.java, io/micronaut/inject/visitor/util/VisitorContextUtils.java, io/micronaut/inject/writer/AbstractClassWriterOutputVisitor.java, io/micronaut/inject/writer/BeanConfigurationWriter.java, io/micronaut/inject/writer/BeanDefinitionVisitor.java, io/micronaut/inject/writer/ClassGenerationException.java, io/micronaut/inject/writer/ClassWriterOutputVisitor.java, io/micronaut/inject/writer/ConfigBuilderState.java, io/micronaut/inject/writer/DefaultOriginatingElements.java, io/micronaut/inject/writer/DirectoryClassWriterOutputVisitor.java, io/micronaut/inject/writer/ExecutableMethodsDefinitionWriter.java, io/micronaut/inject/writer/FileBackedGeneratedFile.java, io/micronaut/inject/writer/GeneratedFile.java, io/micronaut/inject/writer/OriginatingElements.java, io/micronaut/inject/writer/StaticOriginatingElements.java, io/micronaut/validation/visitor/async/AsyncTypeElementVisitor.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/aop/writer/RuntimeProxyBeanDefinitionWriter.java, io/micronaut/context/visitor/PackageConfigurationImportVisitor.java, io/micronaut/context/visitor/VisitorUtils.java, io/micronaut/inject/annotation/internal/JspecifyNotNullTransformer.java, io/micronaut/inject/annotation/internal/JspecifyNullMarkedTransformer.java, io/micronaut/inject/ast/UnresolvedTypeKind.java, io/micronaut/inject/beans/visitor/IntrospectedPackageElementVisitor.java, io/micronaut/inject/configuration/builder/ConfigurationBuilderDefinition.java, io/micronaut/inject/configuration/builder/ConfigurationBuilderOfFieldDefinition.java, io/micronaut/inject/configuration/builder/ConfigurationBuilderOfPropertyDefinition.java, io/micronaut/inject/configuration/builder/ConfigurationBuilderPropertyDefinition.java, io/micronaut/inject/processing/ProxyableTypeValidator.java, io/micronaut/inject/visitor/DefaultTypeElementQuery.java, io/micronaut/inject/visitor/TypeElementQuery.java, io/micronaut/inject/writer/ByteCodeWriterUtils.java, io/micronaut/inject/writer/ParameterDefaultValueProvider.java, io/micronaut/inject/writer/ParameterDefaultValueProviderLoader.java
+
+/*
+ * Copyright 2017-2025 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/aop/writer/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Proxy writers.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/context/visitor/package-info.java
+
+/*
+ * Copyright 2017-2021 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Additional visitors.
+ */
+@NullMarked
+
+Source files: io/micronaut/expressions/EvaluatedExpressionConstants.java, io/micronaut/expressions/EvaluatedExpressionWriter.java, io/micronaut/expressions/context/DefaultExpressionCompilationContextFactory.java, io/micronaut/expressions/context/DefaultExpressionEvaluationContext.java, io/micronaut/expressions/context/ExpressionEvaluationContext.java, io/micronaut/expressions/context/ExpressionWithContext.java, io/micronaut/expressions/context/ExtensibleExpressionEvaluationContext.java, io/micronaut/expressions/parser/CompoundEvaluatedExpressionParser.java, io/micronaut/expressions/parser/EvaluatedExpressionParser.java, io/micronaut/expressions/parser/SingleEvaluatedExpressionParser.java, io/micronaut/expressions/parser/ast/ExpressionNode.java, io/micronaut/expressions/parser/ast/access/AbstractMethodCall.java, io/micronaut/expressions/parser/ast/access/CandidateMethod.java, io/micronaut/expressions/parser/ast/access/ContextElementAccess.java, io/micronaut/expressions/parser/ast/access/ContextMethodCall.java, io/micronaut/expressions/parser/ast/access/ContextMethodParameterAccess.java, io/micronaut/expressions/parser/ast/access/ElementMethodCall.java, io/micronaut/expressions/parser/ast/access/EnvironmentAccess.java, io/micronaut/expressions/parser/ast/access/PropertyAccess.java, io/micronaut/expressions/parser/ast/collection/OneDimensionalArray.java, io/micronaut/expressions/parser/ast/conditional/TernaryExpression.java, io/micronaut/expressions/parser/ast/literal/BoolLiteral.java, io/micronaut/expressions/parser/ast/literal/DoubleLiteral.java, io/micronaut/expressions/parser/ast/literal/FloatLiteral.java, io/micronaut/expressions/parser/ast/literal/IntLiteral.java, io/micronaut/expressions/parser/ast/literal/LongLiteral.java, io/micronaut/expressions/parser/ast/literal/NullLiteral.java, io/micronaut/expressions/parser/ast/literal/StringLiteral.java, io/micronaut/expressions/parser/ast/operator/binary/AddOperator.java, io/micronaut/expressions/parser/ast/operator/binary/AndOperator.java, io/micronaut/expressions/parser/ast/operator/binary/BinaryOperator.java, io/micronaut/expressions/parser/ast/operator/binary/EqOperator.java, io/micronaut/expressions/parser/ast/operator/binary/InstanceofOperator.java, io/micronaut/expressions/parser/ast/operator/binary/LogicalOperator.java, io/micronaut/expressions/parser/ast/operator/binary/MatchesOperator.java, io/micronaut/expressions/parser/ast/operator/binary/MathOperator.java, io/micronaut/expressions/parser/ast/operator/binary/NeqOperator.java, io/micronaut/expressions/parser/ast/operator/binary/OrOperator.java, io/micronaut/expressions/parser/ast/operator/binary/PowOperator.java, io/micronaut/expressions/parser/ast/operator/binary/RelationalOperator.java, io/micronaut/expressions/parser/ast/operator/unary/NegOperator.java, io/micronaut/expressions/parser/ast/operator/unary/NotOperator.java, io/micronaut/expressions/parser/ast/operator/unary/PosOperator.java, io/micronaut/expressions/parser/ast/operator/unary/UnaryOperator.java, io/micronaut/expressions/parser/ast/types/TypeIdentifier.java, io/micronaut/expressions/parser/ast/util/EvaluatedExpressionCompilationUtils.java, io/micronaut/expressions/parser/ast/util/TypeDescriptors.java, io/micronaut/expressions/parser/compilation/ExpressionCompilationContext.java, io/micronaut/expressions/parser/compilation/ExpressionVisitorContext.java, io/micronaut/expressions/parser/exception/ExpressionCompilationException.java, io/micronaut/expressions/parser/exception/ExpressionParsingException.java, io/micronaut/expressions/parser/token/Token.java, io/micronaut/expressions/parser/token/TokenType.java, io/micronaut/expressions/parser/token/Tokenizer.java, io/micronaut/expressions/util/EvaluatedExpressionsUtils.java, io/micronaut/inject/annotation/EvaluatedExpressionReferenceCounter.java, io/micronaut/inject/annotation/internal/JavaxNonnullTransformer.java, io/micronaut/inject/annotation/internal/JavaxNullableTransformer.java, io/micronaut/inject/annotation/internal/KotlinDeprecatedTransformer.java, io/micronaut/inject/ast/PropertyElementQuery.java, io/micronaut/inject/ast/annotation/AbstractElementAnnotationMetadataFactory.java, io/micronaut/inject/ast/annotation/ElementAnnotationMetadata.java, io/micronaut/inject/ast/annotation/ElementAnnotationMetadataFactory.java, io/micronaut/inject/ast/utils/AstBeanPropertiesUtils.java, io/micronaut/inject/ast/utils/EnclosedElementsQuery.java, io/micronaut/inject/beans/visitor/IntrospectedToBeanPropertiesTransformer.java, io/micronaut/inject/processing/AbstractBeanElementCreator.java, io/micronaut/inject/processing/AopIntroductionProxySupportedBeanElementCreator.java, io/micronaut/inject/processing/BeanDefinitionCreator.java, io/micronaut/inject/processing/BeanDefinitionCreatorFactory.java, io/micronaut/inject/processing/ConfigurationReaderBeanElementCreator.java, io/micronaut/inject/processing/DeclaredBeanElementCreator.java, io/micronaut/inject/processing/FactoryBeanElementCreator.java, io/micronaut/inject/processing/IntroductionInterfaceBeanElementCreator.java, io/micronaut/inject/processing/ProcessingException.java, io/micronaut/inject/writer/ClassOutputWriter.java
+
+/*
+ * Copyright 2017-2022 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/expressions/context/ExpressionCompilationContextFactory.java, io/micronaut/expressions/context/ExpressionEvaluationContextRegistrar.java, io/micronaut/expressions/parser/ast/access/BeanContextAccess.java, io/micronaut/expressions/parser/ast/access/SubscriptOperator.java, io/micronaut/expressions/parser/ast/access/ThisAccess.java, io/micronaut/expressions/parser/ast/conditional/ElvisOperator.java, io/micronaut/expressions/parser/ast/operator/binary/ComparablesComparisonOperation.java, io/micronaut/expressions/parser/ast/operator/binary/NumericComparisonOperation.java, io/micronaut/expressions/parser/ast/operator/unary/EmptyOperator.java, io/micronaut/inject/annotation/internal/AndroidxNullableTransformer.java, io/micronaut/inject/annotation/internal/InterceptorBindingMembers.java, io/micronaut/inject/annotation/internal/JdtNullableTransformer.java, io/micronaut/inject/annotation/internal/JspecifyNullableTransformer.java, io/micronaut/inject/annotation/internal/QualifierBindingMembers.java, io/micronaut/inject/annotation/internal/ReactivexNullableTransformer.java, io/micronaut/inject/annotation/internal/ReactorNullableTransformer.java, io/micronaut/inject/annotation/internal/Rxjava3NullableTransformer.java, io/micronaut/inject/annotation/internal/SpotbugsNullableTransformer.java, io/micronaut/inject/ast/KotlinParameterElement.java, io/micronaut/inject/ast/annotation/GenericPlaceholderElementAnnotationMetadata.java, io/micronaut/inject/ast/annotation/MethodElementAnnotationMetadata.java, io/micronaut/inject/ast/annotation/MethodElementAnnotationsHelper.java, io/micronaut/inject/ast/annotation/MutatedMethodElementAnnotationMetadata.java, io/micronaut/inject/ast/annotation/PropertyElementAnnotationMetadata.java, io/micronaut/inject/ast/annotation/WildcardElementAnnotationMetadata.java, io/micronaut/inject/beans/visitor/MapperAnnotationMapper.java, io/micronaut/inject/beans/visitor/MapperVisitor.java, io/micronaut/inject/writer/EvaluatedExpressionProcessor.java
+
+/*
+ * Copyright 2017-2023 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/expressions/parser/ast/access/package-info.java, io/micronaut/expressions/parser/ast/literal/package-info.java, io/micronaut/expressions/parser/ast/types/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The package info.
+ */
+@NullUnmarked
+
+Source files: io/micronaut/inject/annotation/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The package info.
+ */
+
+Source files: io/micronaut/inject/annotation/internal/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Internal annotation mappers, not for public consumption.
+ *
+ * @since 1.1.0
+ * @author graemerocher
+ */
+@Internal
+@NullMarked
+
+Source files: io/micronaut/inject/ast/DefaultMethodAnnotationMetadata.java, io/micronaut/inject/ast/JsonAutoDetectConfiguration.java, io/micronaut/inject/ast/KotlinMethodElement.java, io/micronaut/inject/ast/TypeVariableBinder.java, io/micronaut/inject/beans/visitor/AbstractJsonPOJOBuilderAnnotationMapper.java, io/micronaut/inject/beans/visitor/IntrospectedPropertyTransformer.java, io/micronaut/inject/beans/visitor/JsonAutoDetectAnnotationMapper.java, io/micronaut/inject/beans/visitor/JsonGetterAnnotationMapper.java, io/micronaut/inject/beans/visitor/JsonPOJOBuilderAnnotationMapper.java, io/micronaut/inject/beans/visitor/JsonPropertyAnnotationMapper.java, io/micronaut/inject/beans/visitor/JsonSetterAnnotationMapper.java, io/micronaut/inject/beans/visitor/ToolsJsonPOJOBuilderAnnotationMapper.java, io/micronaut/inject/processing/definition/DefaultElementBeanDefinitionBuilderFactory.java, io/micronaut/inject/processing/definition/ElementBeanDefinitionBuilder.java, io/micronaut/inject/processing/definition/ElementBeanDefinitionBuilderFactory.java, io/micronaut/inject/processing/definition/ElementProxyBuilder.java, io/micronaut/inject/processing/definition/OutputObjectDef.java, io/micronaut/inject/utils/BeanInjectionUtils.java, io/micronaut/inject/visitor/BeanDefinitionInjectionPointResolver.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/inject/ast/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The AST package contains a generic AST over different languages (currently Groovy, Java and Kotlin).
+ *
+ * @see io.micronaut.inject.visitor.TypeElementVisitor
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/inject/ast/annotation/package-info.java
+
+/*
+ * Copyright 2017-2022 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The AST package contains internal classes to support annotation metadata on {@link io.micronaut.inject.ast.Element} instances.
+ *
+ * @see io.micronaut.inject.visitor.TypeElementVisitor
+ * @author graemerocher
+ * @since 1.0
+ */
+@Internal
+@NullMarked
+
+Source files: io/micronaut/inject/beans/visitor/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Type visitor implementations for producing {@link io.micronaut.core.beans.BeanIntrospection} instances.
+ *
+ * @author graemerocher
+ * @since 1.1
+ */
+@NullMarked
+
+Source files: io/micronaut/inject/configuration/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains classes for reading and writing Configuration metadata at compile time.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/inject/processing/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Injection process handling.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/inject/processing/definition/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Element-based bean definition builder implementations used by Micronaut annotation processors.
+ *
+ * @author Graeme Rocher
+ * @since 5.1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/inject/utils/NativeElementsHelper.java, io/micronaut/inject/writer/ArgumentExpUtils.java, io/micronaut/inject/writer/BeanDefinitionWriter.java, io/micronaut/inject/writer/GenUtils.java, io/micronaut/inject/writer/MethodGenUtils.java
+
+/*
+ * Copyright 2017-2024 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/inject/visitor/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains interfaces for defining type visitors that work across languages.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/inject/writer/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains classes responsible for using ASM to write bean metadata to disk.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/validation/visitor/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * This package includes visitors specific to compile time validation and checks for async related elements.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */

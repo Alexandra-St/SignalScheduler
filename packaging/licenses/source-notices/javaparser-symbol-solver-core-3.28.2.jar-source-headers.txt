@@ -1,0 +1,175 @@
+Source files: com/github/javaparser/symbolsolver/cache/DefaultCacheStats.java, com/github/javaparser/symbolsolver/core/resolution/SymbolResolutionCapability.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/BinaryExprContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/EnclosedExprContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/IfStatementContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/InstanceOfExprContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/UnaryExprContext.java, com/github/javaparser/symbolsolver/resolution/promotion/BooleanConditionalExprHandler.java, com/github/javaparser/symbolsolver/resolution/promotion/ConditionalExprResolver.java, com/github/javaparser/symbolsolver/resolution/promotion/NumericConditionalExprHandler.java, com/github/javaparser/symbolsolver/resolution/promotion/ReferenceConditionalExprHandler.java, com/github/javaparser/symbolsolver/resolution/typeinference/LeastUpperBoundLogic.java, com/github/javaparser/symbolsolver/utils/FileUtils.java
+
+/*
+ * Copyright (C) 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/symbolsolver/cache/GuavaCache.java, com/github/javaparser/symbolsolver/cache/InMemoryCache.java, com/github/javaparser/symbolsolver/cache/NoCache.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/ClassOrInterfaceDeclarationExtendsContext.java
+
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/symbolsolver/core/resolution/MethodUsageResolutionCapability.java, com/github/javaparser/symbolsolver/core/resolution/TypeVariableResolutionCapability.java, com/github/javaparser/symbolsolver/declarations/common/MethodDeclarationCommonLogic.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/AbstractJavaParserContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/AbstractMethodLikeDeclarationContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/AnnotationDeclarationContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/AnonymousClassDeclarationContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/ArrayAccessExprContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/BlockStmtContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/CatchClauseContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/ClassOrInterfaceDeclarationContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/CompilationUnitContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/ConditionalExprContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/ConstructorContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/ContextHelper.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/DoStatementContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/EnumDeclarationContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/ExpressionContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/FieldAccessContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/ForEachStatementContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/ForStatementContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/JavaParserTypeDeclarationAdapter.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/LambdaExprContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/MethodCallExprContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/MethodContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/MethodReferenceExprContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/ObjectCreationContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/RecordDeclarationContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/StatementContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/SwitchEntryContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/TryWithResourceContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/VariableDeclarationExprContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/VariableDeclaratorContext.java, com/github/javaparser/symbolsolver/javaparsermodel/contexts/WhileStatementContext.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/AstResolutionUtils.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/DefaultConstructorDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserAnnotationDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserAnnotationMemberDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserAnonymousClassDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserClassDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserConstructorDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserEnumConstantDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserEnumDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserFieldDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserInterfaceDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserMethodDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserParameterDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserRecordDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserSymbolDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserTypeAdapter.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserTypeParameter.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserTypePatternDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserTypeVariableDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserVariableDeclaration.java, com/github/javaparser/symbolsolver/javaparsermodel/declarators/AbstractSymbolDeclarator.java, com/github/javaparser/symbolsolver/javaparsermodel/declarators/FieldSymbolDeclarator.java, com/github/javaparser/symbolsolver/javaparsermodel/declarators/NoSymbolDeclarator.java, com/github/javaparser/symbolsolver/javaparsermodel/declarators/ParameterSymbolDeclarator.java, com/github/javaparser/symbolsolver/javaparsermodel/declarators/TypePatternSymbolDeclarator.java, com/github/javaparser/symbolsolver/javaparsermodel/declarators/VariableSymbolDeclarator.java, com/github/javaparser/symbolsolver/javaparsermodel/DefaultVisitorAdapter.java, com/github/javaparser/symbolsolver/javaparsermodel/FailureHandler.java, com/github/javaparser/symbolsolver/javaparsermodel/JavaParserFacade.java, com/github/javaparser/symbolsolver/javaparsermodel/JavaParserFactory.java, com/github/javaparser/symbolsolver/javaparsermodel/NormalCompletionVisitor.java, com/github/javaparser/symbolsolver/javaparsermodel/PatternVariableResult.java, com/github/javaparser/symbolsolver/javaparsermodel/PatternVariableVisitor.java, com/github/javaparser/symbolsolver/javaparsermodel/TypeExtractor.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistAnnotationDeclaration.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistAnnotationMemberDeclaration.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistClassDeclaration.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistConstructorDeclaration.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistEnumConstantDeclaration.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistEnumDeclaration.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistFactory.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistFieldDeclaration.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistInterfaceDeclaration.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistMethodDeclaration.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistMethodLikeDeclarationAdapter.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistParameterDeclaration.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistRecordDeclaration.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistTypeDeclarationAdapter.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistTypeParameter.java, com/github/javaparser/symbolsolver/javassistmodel/JavassistUtils.java, com/github/javaparser/symbolsolver/JavaSymbolSolver.java, com/github/javaparser/symbolsolver/logic/AbstractClassDeclaration.java, com/github/javaparser/symbolsolver/logic/AbstractTypeDeclaration.java, com/github/javaparser/symbolsolver/logic/ObjectProvider.java, com/github/javaparser/symbolsolver/reflectionmodel/comparators/ClassComparator.java, com/github/javaparser/symbolsolver/reflectionmodel/comparators/MethodComparator.java, com/github/javaparser/symbolsolver/reflectionmodel/comparators/ParameterComparator.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionAnnotationDeclaration.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionAnnotationMemberDeclaration.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionClassAdapter.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionClassDeclaration.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionConstructorDeclaration.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionEnumConstantDeclaration.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionEnumDeclaration.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionFactory.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionFieldDeclaration.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionInterfaceDeclaration.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionMethodDeclaration.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionMethodResolutionLogic.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionParameterDeclaration.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionPatternDeclaration.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionRecordDeclaration.java, com/github/javaparser/symbolsolver/reflectionmodel/ReflectionTypeParameter.java, com/github/javaparser/symbolsolver/resolution/naming/NameCategory.java, com/github/javaparser/symbolsolver/resolution/naming/NameLogic.java, com/github/javaparser/symbolsolver/resolution/naming/NameRole.java, com/github/javaparser/symbolsolver/resolution/SymbolSolver.java, com/github/javaparser/symbolsolver/resolution/typeinference/Bound.java, com/github/javaparser/symbolsolver/resolution/typeinference/bounds/CapturesBound.java, com/github/javaparser/symbolsolver/resolution/typeinference/bounds/FalseBound.java, com/github/javaparser/symbolsolver/resolution/typeinference/bounds/SameAsBound.java, com/github/javaparser/symbolsolver/resolution/typeinference/bounds/SubtypeOfBound.java, com/github/javaparser/symbolsolver/resolution/typeinference/bounds/ThrowsBound.java, com/github/javaparser/symbolsolver/resolution/typeinference/BoundSet.java, com/github/javaparser/symbolsolver/resolution/typeinference/ConstraintFormula.java, com/github/javaparser/symbolsolver/resolution/typeinference/constraintformulas/ExpressionCompatibleWithType.java, com/github/javaparser/symbolsolver/resolution/typeinference/constraintformulas/LambdaThrowsCompatibleWithType.java, com/github/javaparser/symbolsolver/resolution/typeinference/constraintformulas/MethodReferenceThrowsCompatibleWithType.java, com/github/javaparser/symbolsolver/resolution/typeinference/constraintformulas/TypeCompatibleWithType.java, com/github/javaparser/symbolsolver/resolution/typeinference/constraintformulas/TypeContainedByType.java, com/github/javaparser/symbolsolver/resolution/typeinference/constraintformulas/TypeSameAsType.java, com/github/javaparser/symbolsolver/resolution/typeinference/constraintformulas/TypeSubtypeOfType.java, com/github/javaparser/symbolsolver/resolution/typeinference/ConstraintFormulaSet.java, com/github/javaparser/symbolsolver/resolution/typeinference/ControlFlowLogic.java, com/github/javaparser/symbolsolver/resolution/typeinference/InferenceVariable.java, com/github/javaparser/symbolsolver/resolution/typeinference/InferenceVariableSubstitution.java, com/github/javaparser/symbolsolver/resolution/typeinference/Instantiation.java, com/github/javaparser/symbolsolver/resolution/typeinference/InstantiationSet.java, com/github/javaparser/symbolsolver/resolution/typeinference/MethodType.java, com/github/javaparser/symbolsolver/resolution/typeinference/ProperLowerBound.java, com/github/javaparser/symbolsolver/resolution/typeinference/ProperUpperBound.java, com/github/javaparser/symbolsolver/resolution/typeinference/Substitution.java, com/github/javaparser/symbolsolver/resolution/typeinference/TypeHelper.java, com/github/javaparser/symbolsolver/resolution/typeinference/TypeInference.java, com/github/javaparser/symbolsolver/resolution/typeinference/TypeInferenceCache.java, com/github/javaparser/symbolsolver/resolution/typesolvers/AarTypeSolver.java, com/github/javaparser/symbolsolver/resolution/typesolvers/ClassLoaderTypeSolver.java, com/github/javaparser/symbolsolver/resolution/typesolvers/CombinedTypeSolver.java, com/github/javaparser/symbolsolver/resolution/typesolvers/JarTypeSolver.java, com/github/javaparser/symbolsolver/resolution/typesolvers/JavaParserTypeSolver.java, com/github/javaparser/symbolsolver/resolution/typesolvers/MemoryTypeSolver.java, com/github/javaparser/symbolsolver/resolution/typesolvers/ReflectionTypeSolver.java, com/github/javaparser/symbolsolver/resolution/typesolvers/TypeSolverBuilder.java, com/github/javaparser/symbolsolver/SourceFileInfoExtractor.java, com/github/javaparser/symbolsolver/utils/JavassistModuleHelper.java, com/github/javaparser/symbolsolver/utils/ModuleLayerHelper.java, com/github/javaparser/symbolsolver/utils/SymbolSolverCollectionStrategy.java
+
+/*
+ * Copyright (C) 2015-2016 Federico Tomassetti
+ * Copyright (C) 2017-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/symbolsolver/javaparser/package-info.java
+
+/*
+ * Copyright (C) 2015-2016 Federico Tomassetti
+ * Copyright (C) 2017-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+/**
+ * This package contains utility to use JavaParser.
+ */
+
+Source files: com/github/javaparser/symbolsolver/javaparsermodel/package-info.java
+
+/*
+ * Copyright (C) 2015-2016 Federico Tomassetti
+ * Copyright (C) 2017-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+/**
+ * Implementation of model based on JavaParser.
+ */
+
+Source files: com/github/javaparser/symbolsolver/javassistmodel/package-info.java
+
+/*
+ * Copyright (C) 2015-2016 Federico Tomassetti
+ * Copyright (C) 2017-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+/**
+ * Implementation of model based on Javassist.
+ */
+
+Source files: com/github/javaparser/symbolsolver/reflectionmodel/package-info.java
+
+/*
+ * Copyright (C) 2015-2016 Federico Tomassetti
+ * Copyright (C) 2017-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+/**
+ * Implementation of model based on reflection.
+ */

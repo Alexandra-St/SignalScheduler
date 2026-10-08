@@ -1,0 +1,15 @@
+{
+  "jdk_commit": "520406d871955300957ef01e406ac2acd0f9b75c",
+  "jdk_source": {
+    "url": "https://codeload.github.com/adoptium/jdk25u/tar.gz/520406d871955300957ef01e406ac2acd0f9b75c",
+    "file": "temurin-exact-jdk-source.tar.gz",
+    "sha256": "83ee12f7a58904436f04fd9179aa1286c7e5a98d1113671b08b64aebf9865444"
+  },
+  "binary_source": "SOURCE=.:git:520406d87195",
+  "boring_commit": "1405df0a23a0335618f88ed328c76f67646b088f",
+  "boringssl_commit": "e2a57cfb4d915b4ba820585aef9fdee7bca13fe5",
+  "verification_urls": [
+    "https://api.github.com/repos/adoptium/jdk25u/commits/520406d87195",
+    "https://api.github.com/repos/signalapp/boring/contents/boring-sys/deps/boringssl?ref=1405df0a23a0335618f88ed328c76f67646b088f"
+  ]
+}

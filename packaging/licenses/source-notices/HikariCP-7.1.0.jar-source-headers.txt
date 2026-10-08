@@ -1,0 +1,213 @@
+Source files: com/zaxxer/hikari/metrics/micrometer/MicrometerMetricsTracker.java, com/zaxxer/hikari/metrics/micrometer/MicrometerMetricsTrackerFactory.java, com/zaxxer/hikari/metrics/prometheus/HikariCPCollector.java, com/zaxxer/hikari/metrics/dropwizard/Dropwizard5MetricsTracker.java, com/zaxxer/hikari/metrics/dropwizard/Dropwizard5MetricsTrackerFactory.java, com/zaxxer/hikari/util/JavassistProxyFactory.java, com/zaxxer/hikari/util/Credentials.java, com/zaxxer/hikari/util/SuspendResumeLock.java, com/zaxxer/hikari/util/ConcurrentBag.java, com/zaxxer/hikari/util/FastList.java, com/zaxxer/hikari/util/DriverDataSource.java, com/zaxxer/hikari/HikariConfig.java, com/zaxxer/hikari/SQLExceptionOverride.java, com/zaxxer/hikari/pool/ProxyLeakTask.java, com/zaxxer/hikari/pool/ProxyFactory.java, com/zaxxer/hikari/pool/ProxyConnection.java, com/zaxxer/hikari/pool/ProxyResultSet.java, com/zaxxer/hikari/pool/ProxyLeakTaskFactory.java, com/zaxxer/hikari/pool/ProxyDatabaseMetaData.java
+
+/*
+ * Copyright (C) 2013, 2014 Brett Wooldridge
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: com/zaxxer/hikari/metrics/MetricsTrackerFactory.java, com/zaxxer/hikari/metrics/dropwizard/CodaHaleMetricsTracker.java, com/zaxxer/hikari/metrics/MetricsTracker.java, com/zaxxer/hikari/HikariJNDIFactory.java, com/zaxxer/hikari/pool/HikariPool.java
+
+/*
+ * Copyright (C) 2013,2014 Brett Wooldridge
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: com/zaxxer/hikari/metrics/PoolStats.java, com/zaxxer/hikari/util/ClockSource.java
+
+/*
+ * Copyright (C) 2015 Brett Wooldridge
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: com/zaxxer/hikari/metrics/prometheus/PrometheusMetricsTracker.java, com/zaxxer/hikari/metrics/prometheus/PrometheusHistogramMetricsTracker.java, com/zaxxer/hikari/metrics/dropwizard/CodahaleMetricsTrackerFactory.java, com/zaxxer/hikari/util/PropertyElf.java, com/zaxxer/hikari/util/UtilityElf.java, com/zaxxer/hikari/HikariPoolMXBean.java, com/zaxxer/hikari/HikariConfigMXBean.java, com/zaxxer/hikari/hibernate/HikariConfigurationUtil.java, com/zaxxer/hikari/hibernate/HikariConnectionProvider.java, com/zaxxer/hikari/HikariDataSource.java, com/zaxxer/hikari/pool/ProxyPreparedStatement.java, com/zaxxer/hikari/pool/ProxyStatement.java, com/zaxxer/hikari/pool/ProxyCallableStatement.java
+
+/*
+ * Copyright (C) 2013 Brett Wooldridge
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: com/zaxxer/hikari/metrics/prometheus/PrometheusHistogramMetricsTrackerFactory.java
+
+/*
+ * Copyright (C) 2016 Brett Wooldridge
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+
+Source files: com/zaxxer/hikari/metrics/prometheus/PrometheusMetricsTrackerFactory.java
+
+/*
+ * Copyright (C) 2016 Brett Wooldridge
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: com/zaxxer/hikari/metrics/dropwizard/DropwizardCommon.java
+
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: com/zaxxer/hikari/metrics/dropwizard/CodahaleHealthChecker.java, com/zaxxer/hikari/pool/PoolEntry.java
+
+/*
+ * Copyright (C) 2014 Brett Wooldridge
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: com/zaxxer/hikari/metrics/IMetricsTracker.java
+
+/*
+ * Copyright (C) 2017 Brett Wooldridge
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: com/zaxxer/hikari/util/IsolationLevel.java
+
+/*
+ * Copyright (C) 2019 Brett Wooldridge
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: com/zaxxer/hikari/HikariCredentialsProvider.java
+
+/*
+ * Copyright (C) 2025 Brett Wooldridge
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: com/zaxxer/hikari/pool/PoolBase.java
+
+/*
+ * Copyright (C) 2013, 2014 Brett Wooldridge
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/

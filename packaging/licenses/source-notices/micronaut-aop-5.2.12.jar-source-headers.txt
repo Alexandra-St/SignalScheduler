@@ -1,0 +1,228 @@
+Source files: io/micronaut/aop/Adapter.java, io/micronaut/aop/Around.java, io/micronaut/aop/HotSwappableInterceptedProxy.java, io/micronaut/aop/InterceptPhase.java, io/micronaut/aop/Intercepted.java, io/micronaut/aop/InterceptedMethod.java, io/micronaut/aop/InterceptedProxy.java, io/micronaut/aop/Interceptor.java, io/micronaut/aop/Introduced.java, io/micronaut/aop/Introduction.java, io/micronaut/aop/InvocationContext.java, io/micronaut/aop/MethodInterceptor.java, io/micronaut/aop/MethodInvocationContext.java, io/micronaut/aop/beandefinition/InterceptedMethod.java, io/micronaut/aop/chain/AdapterIntroduction.java, io/micronaut/aop/chain/InterceptorChain.java, io/micronaut/aop/chain/MethodInterceptorChain.java, io/micronaut/aop/exceptions/UnimplementedAdviceException.java, io/micronaut/aop/internal/intercepted/CompletionStageInterceptedMethod.java, io/micronaut/aop/internal/intercepted/InterceptedMethodUtil.java, io/micronaut/aop/internal/intercepted/KotlinInterceptedMethodImpl.java, io/micronaut/aop/internal/intercepted/PublisherInterceptedMethod.java, io/micronaut/aop/internal/intercepted/SynchronousInterceptedMethod.java, io/micronaut/aop/util/CompletableFutureContinuation.kt, io/micronaut/aop/util/DelegatingContextContinuation.kt, io/micronaut/aop/util/KotlinInterceptedMethodHelper.kt
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/aop/AroundConstruct.java, io/micronaut/aop/ConstructorInterceptor.java, io/micronaut/aop/ConstructorInvocationContext.java, io/micronaut/aop/InterceptorBean.java, io/micronaut/aop/InterceptorBinding.java, io/micronaut/aop/InterceptorBindingDefinitions.java, io/micronaut/aop/InterceptorKind.java, io/micronaut/aop/InterceptorRegistry.java, io/micronaut/aop/chain/AbstractInterceptorChain.java, io/micronaut/aop/chain/ConstructorInterceptorChain.java, io/micronaut/aop/chain/DefaultInterceptorRegistry.java, io/micronaut/aop/internal/InterceptorRegistryBean.java, io/micronaut/aop/kotlin/KotlinInterceptedMethod.java
+
+/*
+ * Copyright 2017-2021 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/aop/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The main classes implementing cross-cutting behavior in Micronaut.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/aop/beandefinition/DisposableIntercepted.java, io/micronaut/aop/beandefinition/InitializableIntercepted.java, io/micronaut/aop/beandefinition/InitializableInterceptedMethod.java, io/micronaut/aop/beandefinition/InterceptedBeanDefinition.java, io/micronaut/aop/beandefinition/InterceptedConstructor.java, io/micronaut/aop/beandefinition/InterceptedDisposeMethod.java, io/micronaut/aop/beandefinition/InterceptedParametrizedConstructor.java, io/micronaut/aop/beandefinition/LifecycleCallbacks.java, io/micronaut/aop/beandefinition/ParameterizedInterceptedBeanDefinition.java, io/micronaut/aop/beandefinition/ParameterizedProxyBeanDefinition.java, io/micronaut/aop/beandefinition/ProxyInterceptedBeanDefinition.java, io/micronaut/aop/beandefinition/SharedInterceptorRegistrations.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/aop/beandefinition/package-info.java
+
+/*
+ * Copyright 2017-2025 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The lifecycle interceptors.
+ */
+@Internal
+@NullMarked
+
+Source files: io/micronaut/aop/chain/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The interception chain for AOP.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@Internal
+@NullMarked
+
+Source files: io/micronaut/aop/exceptions/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * AOP Advise exceptions.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/aop/internal/package-info.java, io/micronaut/aop/internal/intercepted/package-info.java, io/micronaut/aop/kotlin/package-info.java, io/micronaut/aop/runtime/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The package info.
+ */
+@NullMarked
+
+Source files: io/micronaut/aop/internal/intercepted/ReactorInterceptedMethod.java
+
+/*
+ * Copyright 2017-2023 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/aop/runtime/DefaultRuntimeProxyDefinition.java, io/micronaut/aop/runtime/RuntimeProxy.java, io/micronaut/aop/runtime/RuntimeProxyCreator.java, io/micronaut/aop/runtime/RuntimeProxyDefinition.java
+
+/*
+ * Copyright 2017-2025 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/aop/util/MicronautPropagatedContext.kt
+
+/*
+ * Copyright 2017-2022 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */

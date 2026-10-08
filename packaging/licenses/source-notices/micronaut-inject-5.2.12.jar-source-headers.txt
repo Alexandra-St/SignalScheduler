@@ -1,0 +1,550 @@
+Source files: io/micronaut/context/AbstractBeanConfiguration.java, io/micronaut/context/AbstractBeanContextConditional.java, io/micronaut/context/AbstractBeanResolutionContext.java, io/micronaut/context/AbstractExecutable.java, io/micronaut/context/AbstractExecutableMethod.java, io/micronaut/context/AbstractInitializableBeanDefinition.java, io/micronaut/context/AbstractInitializableBeanDefinitionReference.java, io/micronaut/context/AbstractMessageSource.java, io/micronaut/context/ApplicationContext.java, io/micronaut/context/ApplicationContextBuilder.java, io/micronaut/context/ApplicationContextConfiguration.java, io/micronaut/context/ApplicationContextLifeCycle.java, io/micronaut/context/ApplicationContextProvider.java, io/micronaut/context/BeanContext.java, io/micronaut/context/BeanContextConfiguration.java, io/micronaut/context/BeanDefinitionDelegate.java, io/micronaut/context/BeanDefinitionProcessorListener.java, io/micronaut/context/BeanDefinitionRegistry.java, io/micronaut/context/BeanLocator.java, io/micronaut/context/BeanRegistration.java, io/micronaut/context/BeanResolutionContext.java, io/micronaut/context/BeanResolutionCustomizer.java, io/micronaut/context/CustomScopeRegistryFactory.java, io/micronaut/context/DefaultApplicationContext.java, io/micronaut/context/DefaultApplicationContextBuilder.java, io/micronaut/context/DefaultBeanResolutionContext.java, io/micronaut/context/DefaultConditionContext.java, io/micronaut/context/DefaultConstructorInjectionPoint.java, io/micronaut/context/DefaultCustomScopeRegistry.java, io/micronaut/context/DefaultFieldInjectionPoint.java, io/micronaut/context/DefaultMessageContext.java, io/micronaut/context/DefaultMethodConstructorInjectionPoint.java, io/micronaut/context/DefaultMethodInjectionPoint.java, io/micronaut/context/DependentBeanProvider.java, io/micronaut/context/EnvironmentAwareArgument.java, io/micronaut/context/EnvironmentConfigurable.java, io/micronaut/context/ExecutionHandleLocator.java, io/micronaut/context/LifeCycle.java, io/micronaut/context/MessageSource.java, io/micronaut/context/ProviderUtils.java, io/micronaut/context/Qualifier.java, io/micronaut/context/RequiresCondition.java, io/micronaut/context/SingletonScope.java, io/micronaut/context/StaticMessageSource.java, io/micronaut/context/annotation/AliasFor.java, io/micronaut/context/annotation/Aliases.java, io/micronaut/context/annotation/Bean.java, io/micronaut/context/annotation/BeanProperties.java, io/micronaut/context/annotation/BootstrapContextCompatible.java, io/micronaut/context/annotation/Configuration.java, io/micronaut/context/annotation/ConfigurationBuilder.java, io/micronaut/context/annotation/ConfigurationInject.java, io/micronaut/context/annotation/ConfigurationProperties.java, io/micronaut/context/annotation/ConfigurationReader.java, io/micronaut/context/annotation/Context.java, io/micronaut/context/annotation/DefaultImplementation.java, io/micronaut/context/annotation/DefaultScope.java, io/micronaut/context/annotation/EachBean.java, io/micronaut/context/annotation/EachProperty.java, io/micronaut/context/annotation/Executable.java, io/micronaut/context/annotation/Factory.java, io/micronaut/context/annotation/Infrastructure.java, io/micronaut/context/annotation/Parallel.java, io/micronaut/context/annotation/Parameter.java, io/micronaut/context/annotation/Primary.java, io/micronaut/context/annotation/Property.java, io/micronaut/context/annotation/PropertySource.java, io/micronaut/context/annotation/Prototype.java, io/micronaut/context/annotation/Provided.java, io/micronaut/context/annotation/Replaces.java, io/micronaut/context/annotation/Requirements.java, io/micronaut/context/annotation/Requires.java, io/micronaut/context/annotation/Secondary.java, io/micronaut/context/annotation/Type.java, io/micronaut/context/annotation/Value.java, io/micronaut/context/banner/Banner.java, io/micronaut/context/banner/MicronautBanner.java, io/micronaut/context/banner/ResourceBanner.java, io/micronaut/context/condition/Condition.java, io/micronaut/context/condition/ConditionContext.java, io/micronaut/context/condition/Failure.java, io/micronaut/context/condition/OperatingSystem.java, io/micronaut/context/condition/TrueCondition.java, io/micronaut/context/converters/ContextConverterRegistrar.java, io/micronaut/context/env/AbstractPropertySourceLoader.java, io/micronaut/context/env/ActiveEnvironment.java, io/micronaut/context/env/BootstrapPropertySourceLocator.java, io/micronaut/context/env/ClasspathPropertySourceImporter.java, io/micronaut/context/env/ClasspathWildcardPropertySourceImporter.java, io/micronaut/context/env/CommandLinePropertySource.java, io/micronaut/context/env/ComputePlatform.java, io/micronaut/context/env/ConfigImportIdentity.java, io/micronaut/context/env/ConfigTreePropertySourceImporter.java, io/micronaut/context/env/ConfigurationPath.java, io/micronaut/context/env/DefaultConfigurationPath.java, io/micronaut/context/env/DefaultPropertyPlaceholderResolver.java, io/micronaut/context/env/EmptyPropertySource.java, io/micronaut/context/env/EnvPropertySourceImporter.java, io/micronaut/context/env/EnvironmentPropertySource.java, io/micronaut/context/env/FilePropertySourceImporter.java, io/micronaut/context/env/ImportedPropertySourceFactory.java, io/micronaut/context/env/MapPropertySource.java, io/micronaut/context/env/PropertiesPropertySourceLoader.java, io/micronaut/context/env/PropertyPlaceholderResolver.java, io/micronaut/context/env/PropertySource.java, io/micronaut/context/env/PropertySourceImporter.java, io/micronaut/context/env/PropertySourceLoader.java, io/micronaut/context/env/PropertySourceLocator.java, io/micronaut/context/env/PropertySourcePropertyResolver.java, io/micronaut/context/env/PropertySourceReader.java, io/micronaut/context/env/SystemPropertiesPropertySource.java, io/micronaut/context/env/yaml/CustomSafeConstructor.java, io/micronaut/context/env/yaml/YamlPropertySourceLoader.java, io/micronaut/context/event/ApplicationEvent.java, io/micronaut/context/event/ApplicationEventListener.java, io/micronaut/context/event/ApplicationEventPublisher.java, io/micronaut/context/event/BeanContextEvent.java, io/micronaut/context/event/BeanCreatedEvent.java, io/micronaut/context/event/BeanCreatedEventListener.java, io/micronaut/context/event/BeanEvent.java, io/micronaut/context/event/BeanInitializedEventListener.java, io/micronaut/context/event/BeanInitializingEvent.java, io/micronaut/context/event/NoOpApplicationEventPublisher.java, io/micronaut/context/event/ShutdownEvent.java, io/micronaut/context/event/StartupEvent.java, io/micronaut/context/exceptions/BeanContextException.java, io/micronaut/context/exceptions/BeanCreationException.java, io/micronaut/context/exceptions/BeanInstantiationException.java, io/micronaut/context/exceptions/CircularDependencyException.java, io/micronaut/context/exceptions/ConfigurationException.java, io/micronaut/context/exceptions/DependencyInjectionException.java, io/micronaut/context/exceptions/DisabledBeanException.java, io/micronaut/context/exceptions/MessageUtils.java, io/micronaut/context/exceptions/NoSuchBeanException.java, io/micronaut/context/exceptions/NoSuchMessageException.java, io/micronaut/context/exceptions/NonUniqueBeanException.java, io/micronaut/context/expressions/AbstractEvaluatedExpression.java, io/micronaut/context/expressions/ConfigurableExpressionEvaluationContext.java, io/micronaut/context/expressions/DefaultExpressionEvaluationContext.java, io/micronaut/context/i18n/ResourceBundleMessageSource.java, io/micronaut/context/processor/BeanDefinitionProcessor.java, io/micronaut/context/processor/ExecutableMethodProcessor.java, io/micronaut/context/scope/CustomScope.java, io/micronaut/context/scope/CustomScopeRegistry.java, io/micronaut/inject/AdvisedBeanType.java, io/micronaut/inject/ArgumentBeanType.java, io/micronaut/inject/ArgumentInjectionPoint.java, io/micronaut/inject/BeanConfiguration.java, io/micronaut/inject/BeanContextConditional.java, io/micronaut/inject/BeanDefinition.java, io/micronaut/inject/BeanDefinitionMethodReference.java, io/micronaut/inject/BeanDefinitionReference.java, io/micronaut/inject/BeanIdentifier.java, io/micronaut/inject/BeanType.java, io/micronaut/inject/CallableInjectionPoint.java, io/micronaut/inject/ConstructorInjectionPoint.java, io/micronaut/inject/DefaultBeanDefinitionMethodReference.java, io/micronaut/inject/DefaultBeanIdentifier.java, io/micronaut/inject/DelegatingBeanDefinition.java, io/micronaut/inject/DelegatingExecutableMethod.java, io/micronaut/inject/DisposableBeanDefinition.java, io/micronaut/inject/ExecutableMethod.java, io/micronaut/inject/ExecutionHandle.java, io/micronaut/inject/FieldInjectionPoint.java, io/micronaut/inject/InitializingBeanDefinition.java, io/micronaut/inject/InjectionPoint.java, io/micronaut/inject/MethodExecutionHandle.java, io/micronaut/inject/MethodInjectionPoint.java, io/micronaut/inject/MethodReference.java, io/micronaut/inject/ProxyBeanDefinition.java, io/micronaut/inject/UnsafeExecutionHandle.java, io/micronaut/inject/ValidatedBeanDefinition.java, io/micronaut/inject/annotation/AbstractAnnotationMetadata.java, io/micronaut/inject/annotation/AbstractEnvironmentAnnotationMetadata.java, io/micronaut/inject/annotation/AnnotatedElementValidator.java, io/micronaut/inject/annotation/AnnotationMetadataException.java, io/micronaut/inject/annotation/AnnotationMetadataHierarchy.java, io/micronaut/inject/annotation/AnnotationMetadataReference.java, io/micronaut/inject/annotation/AnnotationMetadataSupport.java, io/micronaut/inject/annotation/DefaultAnnotationMetadata.java, io/micronaut/inject/annotation/EnvironmentAnnotationMetadata.java, io/micronaut/inject/annotation/EnvironmentAnnotationValue.java, io/micronaut/inject/annotation/EnvironmentConvertibleValuesMap.java, io/micronaut/inject/annotation/EnvironmentOptionalValuesMap.java, io/micronaut/inject/annotation/EvaluatedAnnotationMetadata.java, io/micronaut/inject/annotation/EvaluatedAnnotationValue.java, io/micronaut/inject/annotation/MutableAnnotationMetadata.java, io/micronaut/inject/beans/AbstractExecutableBeanMethod.java, io/micronaut/inject/beans/KotlinExecutableMethodUtils.java, io/micronaut/inject/proxy/InterceptedBean.java, io/micronaut/inject/proxy/InterceptedBeanProxy.java, io/micronaut/inject/qualifiers/AnnotationMetadataQualifier.java, io/micronaut/inject/qualifiers/AnnotationQualifier.java, io/micronaut/inject/qualifiers/ClosestTypeArgumentQualifier.java, io/micronaut/inject/qualifiers/CompositeQualifier.java, io/micronaut/inject/qualifiers/NameQualifier.java, io/micronaut/inject/qualifiers/Qualified.java, io/micronaut/inject/qualifiers/QualifierUtils.java, io/micronaut/inject/qualifiers/Qualifiers.java, io/micronaut/inject/qualifiers/TypeAnnotationQualifier.java, io/micronaut/inject/qualifiers/TypeArgumentQualifier.java, io/micronaut/inject/validation/BeanDefinitionValidator.java, io/micronaut/inject/validation/RequiresValidation.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/context/AbstractBeanDefinitionBeanConstructor.java, io/micronaut/context/AbstractExecutableMethodsDefinition.java, io/micronaut/context/ApplicationContextConfigurer.java, io/micronaut/context/BeanProvider.java, io/micronaut/context/DefaultFieldConstructorInjectionPoint.java, io/micronaut/context/annotation/Any.java, io/micronaut/context/annotation/ContextConfigurer.java, io/micronaut/context/annotation/Import.java, io/micronaut/context/annotation/InjectScope.java, io/micronaut/context/annotation/NonBinding.java, io/micronaut/context/env/CachedEnvironment.java, io/micronaut/context/env/ConstantPropertySources.java, io/micronaut/context/env/KubernetesEnvironmentPropertySource.java, io/micronaut/context/event/ApplicationEventPublisherFactory.java, io/micronaut/context/event/BeanDestroyedEvent.java, io/micronaut/context/event/BeanDestroyedEventListener.java, io/micronaut/context/event/BeanPreDestroyEvent.java, io/micronaut/context/event/BeanPreDestroyEventListener.java, io/micronaut/context/exceptions/BeanDestructionException.java, io/micronaut/context/scope/AbstractConcurrentCustomScope.java, io/micronaut/context/scope/BeanCreationContext.java, io/micronaut/context/scope/CreatedBean.java, io/micronaut/inject/ExecutableMethodsDefinition.java, io/micronaut/inject/beans/AbstractInitializableBeanIntrospection.java, io/micronaut/inject/provider/AbstractProviderDefinition.java, io/micronaut/inject/provider/BeanProviderDefinition.java, io/micronaut/inject/provider/JakartaProviderBeanDefinition.java, io/micronaut/inject/provider/JavaxProviderBeanDefinition.java, io/micronaut/inject/provider/ProviderTypeInformationProvider.java, io/micronaut/inject/qualifiers/AnnotationStereotypeQualifier.java, io/micronaut/inject/qualifiers/AnyQualifier.java, io/micronaut/inject/qualifiers/ExactTypeArgumentNameQualifier.java, io/micronaut/inject/qualifiers/InterceptorBindingQualifier.java, io/micronaut/inject/qualifiers/NoneQualifier.java, io/micronaut/inject/qualifiers/PrimaryQualifier.java, io/micronaut/inject/qualifiers/RepeatableAnnotationQualifier.java
+
+/*
+ * Copyright 2017-2021 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/context/AbstractInitializableBeanDefinitionAndReference.java, io/micronaut/context/AnnotationReflectionUtils.java, io/micronaut/context/BeanResolutionTraceMode.java, io/micronaut/context/BootstrapContextAccess.java, io/micronaut/context/ConfigurableApplicationContext.java, io/micronaut/context/ConfigurableBeanContext.java, io/micronaut/context/condition/NotInNativeImage.java, io/micronaut/context/conditions/MatchesAbsenceOfBeansCondition.java, io/micronaut/context/conditions/MatchesAbsenceOfClassNamesCondition.java, io/micronaut/context/conditions/MatchesAbsenceOfClassesCondition.java, io/micronaut/context/conditions/MatchesConditionUtils.java, io/micronaut/context/conditions/MatchesConfigurationCondition.java, io/micronaut/context/conditions/MatchesCurrentNotOsCondition.java, io/micronaut/context/conditions/MatchesCurrentOsCondition.java, io/micronaut/context/conditions/MatchesCustomCondition.java, io/micronaut/context/conditions/MatchesDynamicCondition.java, io/micronaut/context/conditions/MatchesEnvironmentCondition.java, io/micronaut/context/conditions/MatchesMissingPropertyCondition.java, io/micronaut/context/conditions/MatchesNotEnvironmentCondition.java, io/micronaut/context/conditions/MatchesPresenceOfBeansCondition.java, io/micronaut/context/conditions/MatchesPresenceOfClassesCondition.java, io/micronaut/context/conditions/MatchesPresenceOfEntitiesCondition.java, io/micronaut/context/conditions/MatchesPresenceOfResourcesCondition.java, io/micronaut/context/conditions/MatchesPropertyCondition.java, io/micronaut/context/conditions/MatchesSdkCondition.java, io/micronaut/inject/beans/AbstractEnumBeanIntrospectionAndReference.java, io/micronaut/inject/beans/AbstractInitializableBeanIntrospectionAndReference.java, io/micronaut/inject/qualifiers/EachBeanQualifier.java, io/micronaut/inject/qualifiers/MatchArgumentQualifier.java
+
+/*
+ * Copyright 2017-2024 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/context/AbstractLocalizedMessageSource.java, io/micronaut/context/BeanContextConfigurable.java, io/micronaut/context/BeanDefinitionAware.java, io/micronaut/context/BeanDisposingRegistration.java, io/micronaut/context/DefaultBeanContext.java, io/micronaut/context/DefaultRuntimeBeanDefinition.java, io/micronaut/context/DisabledBean.java, io/micronaut/context/ExpressionsAwareArgument.java, io/micronaut/context/LocalizedMessageSource.java, io/micronaut/context/MessageSourceUtils.java, io/micronaut/context/RuntimeBeanDefinition.java, io/micronaut/context/annotation/AnnotationExpressionContext.java, io/micronaut/context/env/PropertyExpressionResolver.java, io/micronaut/context/env/yaml/ConstructIsoTimestampString.java, io/micronaut/context/exceptions/ExpressionEvaluationException.java, io/micronaut/inject/InjectableBeanDefinition.java, io/micronaut/inject/InstantiatableBeanDefinition.java, io/micronaut/inject/ParametrizedInstantiatableBeanDefinition.java, io/micronaut/inject/QualifiedBeanType.java, io/micronaut/inject/annotation/AnnotationConvertersRegistrar.java, io/micronaut/inject/annotation/EvaluatedConvertibleValuesMap.java, io/micronaut/inject/annotation/MappingAnnotationMetadataDelegate.java
+
+/*
+ * Copyright 2017-2022 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/context/ApplicationContextConfigurationDelegate.java, io/micronaut/context/BeanDefinitionsProvider.java, io/micronaut/context/BeanResolutionTraceConfiguration.java, io/micronaut/context/BeanResolutionTracer.java, io/micronaut/context/ConsoleBeanResolutionTracer.java, io/micronaut/context/DefaultBeanDefinitionsProvider.java, io/micronaut/context/DefaultReplacesDefinition.java, io/micronaut/context/ExecutableMethodProcessorListener.java, io/micronaut/context/PropertyResolverDelegate.java, io/micronaut/context/annotation/ClassImport.java, io/micronaut/context/annotation/Mixin.java, io/micronaut/context/beans/BeanDefinitionService.java, io/micronaut/context/beans/DefaultBeanDefinitionService.java, io/micronaut/context/env/ConstantPropertySourceLoader.java, io/micronaut/context/env/DefaultEnvironmentAndPackageDeducer.java, io/micronaut/context/env/DefaultOrigin.java, io/micronaut/context/env/DefaultPropertyEntry.java, io/micronaut/context/env/EnvironmentNamesDeducer.java, io/micronaut/context/env/EnvironmentPackagesDeducer.java, io/micronaut/context/env/PropertyEntry.java, io/micronaut/context/env/PropertySourcesLocator.java, io/micronaut/inject/ConditionalBeanConfiguration.java, io/micronaut/inject/ReplacesDefinition.java
+
+/*
+ * Copyright 2017-2025 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/context/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * This package contains the core classes for starting a {@link io.micronaut.context.BeanContext}.
+ *
+ * @author graemerocher
+ * @see io.micronaut.context.BeanContext
+ * @see io.micronaut.context.ApplicationContext
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/context/annotation/DependsOn.java, io/micronaut/context/beans/definition/AnnotationMetadataAccessor.java, io/micronaut/context/beans/definition/BeanDefinitionBuilder.java, io/micronaut/context/beans/definition/BeanDefinitionBuilderFactory.java, io/micronaut/context/beans/definition/BeanDefinitionInjectionPoint.java, io/micronaut/context/beans/definition/ConstructorDefinition.java, io/micronaut/context/beans/definition/FieldDefinition.java, io/micronaut/context/beans/definition/MemberDefinition.java, io/micronaut/context/beans/definition/MethodDefinition.java, io/micronaut/context/beans/definition/ProxyBuilder.java, io/micronaut/context/env/BootstrapLocatorMarker.java, io/micronaut/context/env/ConfigImportPropertySourcesLocator.java, io/micronaut/context/env/ImportCapablePropertySource.java, io/micronaut/context/exceptions/ConstructorAdviceException.java, io/micronaut/inject/annotation/AnnotationDefaults.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/context/annotation/Mapper.java, io/micronaut/context/bind/DefaultExecutableBeanContextBinder.java, io/micronaut/context/bind/ExecutableBeanContextBinder.java, io/micronaut/context/env/DefaultEnvironment.java, io/micronaut/context/env/Environment.java, io/micronaut/context/env/exp/RandomPropertyExpressionResolver.java, io/micronaut/inject/qualifiers/FilteringCompositeQualifier.java, io/micronaut/inject/qualifiers/FilteringQualifier.java
+
+/*
+ * Copyright 2017-2023 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/context/annotation/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains core annotations related to Dependency Injection and the Bean Container.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/context/banner/package-info.java, io/micronaut/context/beans/package-info.java, io/micronaut/context/bind/package-info.java, io/micronaut/context/conditions/package-info.java, io/micronaut/context/env/exp/package-info.java, io/micronaut/context/expressions/package-info.java, io/micronaut/context/i18n/package-info.java, io/micronaut/context/processor/package-info.java, io/micronaut/inject/proxy/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The package info.
+ */
+@NullMarked
+
+Source files: io/micronaut/context/beans/definition/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Builder model APIs for describing bean definitions, injection points, lifecycle methods, and proxy definitions.
+ *
+ * @author Denis Stepanov
+ * @since 5.1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/context/condition/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains classes and interfaces related to conditional beans.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/context/converters/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Additional {@link io.micronaut.core.convert.TypeConverter} instances related to the
+ * {@link io.micronaut.context.BeanContext}.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/context/env/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Classes related to the Micronaut environment.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/context/env/yaml/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Property loading for YAML formatted files.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/context/event/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains classes related to {@link io.micronaut.context.ApplicationContext} event publishing and consuming.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/context/exceptions/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains common exceptions thrown from the {@link io.micronaut.context.BeanContext}.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/context/scope/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains interfaces related to the definition of custom scopes.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/inject/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ *
+ * Contains the core dependency injection interfaces.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/inject/annotation/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains classes for reading and writing annotation metadata at compile time.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/inject/beans/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains implementations for compile time bean introspection.
+ *
+ * @author graemerocher
+ * @since 1.1
+ */
+@NullMarked
+
+Source files: io/micronaut/inject/provider/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Internal package to support injection providers of various types.
+ */
+@NullMarked
+
+Source files: io/micronaut/inject/qualifiers/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains support classes for creating Bean {@link jakarta.inject.Qualifier} instances.
+ *
+ * @see io.micronaut.context.Qualifier
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/inject/validation/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Interfaces and types specific to validating {@link io.micronaut.inject.BeanDefinition} instances.
+ *
+ * @see io.micronaut.inject.ValidatedBeanDefinition
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked

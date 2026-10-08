@@ -1,0 +1,283 @@
+Source files: io/micronaut/serde/support/AbstractDecoderPerStructureStreamDecoder.java, io/micronaut/serde/support/deserializers/DemuxingObjectDecoder.java, io/micronaut/serde/support/deserializers/HealthResultDeserializer.java, io/micronaut/serde/support/deserializers/SerdeDeserializationPreInstantiateCallback.java, io/micronaut/serde/support/deserializers/SubtypedExternalPropertyObjectDeserializer.java, io/micronaut/serde/support/deserializers/WrappedArraySubtypedDeserializer.java, io/micronaut/serde/support/deserializers/WrappedObjectDeserializer.java, io/micronaut/serde/support/deserializers/WrappedObjectSubtypedDeserializer.java, io/micronaut/serde/support/deserializers/collect/ArrayDequeDeserializer.java, io/micronaut/serde/support/deserializers/collect/ArrayListDeserializer.java, io/micronaut/serde/support/deserializers/collect/CollectionDeserializer.java, io/micronaut/serde/support/deserializers/collect/ConvertibleValuesDeserializer.java, io/micronaut/serde/support/deserializers/collect/HashMapDeserializer.java, io/micronaut/serde/support/deserializers/collect/HashSetDeserializer.java, io/micronaut/serde/support/deserializers/collect/LinkedHashMapDeserializer.java, io/micronaut/serde/support/deserializers/collect/LinkedHashSetDeserializer.java, io/micronaut/serde/support/deserializers/collect/LinkedListDeserializer.java, io/micronaut/serde/support/deserializers/collect/MapDeserializer.java, io/micronaut/serde/support/deserializers/collect/StringListDeserializer.java, io/micronaut/serde/support/deserializers/collect/TreeMapDeserializer.java, io/micronaut/serde/support/deserializers/collect/TreeSetDeserializer.java, io/micronaut/serde/support/serdes/ByteBufferSerde.java, io/micronaut/serde/support/serdes/InetAddressSerde.java, io/micronaut/serde/support/serdes/NumericSupportTemporalSerde.java, io/micronaut/serde/support/serializers/JsonValueSerializer.java, io/micronaut/serde/support/serializers/RuntimeTypeSerializer.java, io/micronaut/serde/support/serializers/WrappedArraySerializer.java, io/micronaut/serde/support/serializers/WrappedObjectSerializer.java, io/micronaut/serde/support/util/JsonArrayNodeDecoder.java, io/micronaut/serde/support/util/JsonObjectNodeDecoder.java
+
+/*
+ * Copyright 2017-2023 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/serde/support/AbstractStreamDecoder.java, io/micronaut/serde/support/AdditionalSerdes.java, io/micronaut/serde/support/DefaultDecoderContext.java, io/micronaut/serde/support/DefaultEncoderContext.java, io/micronaut/serde/support/DefaultSerdeIntrospections.java, io/micronaut/serde/support/DefaultSerdeRegistry.java, io/micronaut/serde/support/LegacyBeansFactory.java, io/micronaut/serde/support/bind/SerdeJsonBeanPropertyBinderExceptionHandler.java, io/micronaut/serde/support/config/SerdeJsonConfiguration.java, io/micronaut/serde/support/deserializers/DelegatingObjectDeserializer.java, io/micronaut/serde/support/deserializers/DeserBean.java, io/micronaut/serde/support/deserializers/DeserBeanKey.java, io/micronaut/serde/support/deserializers/DeserBeanRegistry.java, io/micronaut/serde/support/deserializers/DeserBeanSubtypeInfo.java, io/micronaut/serde/support/deserializers/DeserializerSubtypeInfo.java, io/micronaut/serde/support/deserializers/ErrorCatchingDeserializer.java, io/micronaut/serde/support/deserializers/ErrorCatchingUpdatingDeserializer.java, io/micronaut/serde/support/deserializers/JsonValueDeserializer.java, io/micronaut/serde/support/deserializers/ObjectDeserializer.java, io/micronaut/serde/support/deserializers/PropertiesBag.java, io/micronaut/serde/support/deserializers/ResolvedDeserializerSubtypeInfo.java, io/micronaut/serde/support/deserializers/SimpleObjectDeserializer.java, io/micronaut/serde/support/deserializers/SimpleRecordLikeObjectDeserializer.java, io/micronaut/serde/support/deserializers/SpecificObjectDeserializer.java, io/micronaut/serde/support/deserializers/SubtypedPropertyObjectDeserializer.java, io/micronaut/serde/support/deserializers/collect/CoreCollectionsDeserializers.java, io/micronaut/serde/support/serdes/CustomizedObjectArrayDeserializer.java, io/micronaut/serde/support/serdes/CustomizedObjectArraySerializer.java, io/micronaut/serde/support/serdes/DateSerde.java, io/micronaut/serde/support/serdes/DefaultFormattedTemporalSerde.java, io/micronaut/serde/support/serdes/EnumSerde.java, io/micronaut/serde/support/serdes/FormattedNumberSerde.java, io/micronaut/serde/support/serdes/FormattedTemporalSerde.java, io/micronaut/serde/support/serdes/HealthStatusSerde.java, io/micronaut/serde/support/serdes/InstantSerde.java, io/micronaut/serde/support/serdes/LocalDateSerde.java, io/micronaut/serde/support/serdes/LocalDateTimeSerde.java, io/micronaut/serde/support/serdes/LocalTimeSerde.java, io/micronaut/serde/support/serdes/NumberSerde.java, io/micronaut/serde/support/serdes/ObjectArraySerde.java, io/micronaut/serde/support/serdes/OffsetDateTimeSerde.java, io/micronaut/serde/support/serdes/OptionalSerde.java, io/micronaut/serde/support/serdes/SqlDateSerde.java, io/micronaut/serde/support/serdes/SqlTimestampSerde.java, io/micronaut/serde/support/serdes/TemporalArrayShapeSupport.java, io/micronaut/serde/support/serdes/TemporalSerde.java, io/micronaut/serde/support/serdes/YearSerde.java, io/micronaut/serde/support/serdes/ZonedDateTimeSerde.java, io/micronaut/serde/support/serializers/CoreSerializers.java, io/micronaut/serde/support/serializers/CustomizedObjectSerializer.java, io/micronaut/serde/support/serializers/IterableSerializer.java, io/micronaut/serde/support/serializers/ObjectSerializer.java, io/micronaut/serde/support/serializers/OptionalMultiValuesSerializer.java, io/micronaut/serde/support/serializers/OptionalValuesSerializer.java, io/micronaut/serde/support/serializers/SerBean.java, io/micronaut/serde/support/serializers/SerBeanKey.java, io/micronaut/serde/support/serializers/SimpleObjectSerializer.java, io/micronaut/serde/support/serializers/StreamSerializer.java, io/micronaut/serde/support/util/BeanDefKey.java, io/micronaut/serde/support/util/BufferingJsonNodeProcessor.java, io/micronaut/serde/support/util/JsonNodeDecoder.java, io/micronaut/serde/support/util/JsonNodeEncoder.java, io/micronaut/serde/support/util/SerdeAnnotationUtil.java, io/micronaut/serde/support/util/SerdeArgumentConf.java, io/micronaut/serde/support/util/SpreadProcessor.java, io/micronaut/serde/support/util/SubtypeInfo.java, io/micronaut/serde/support/util/TypeKey.java
+
+/*
+ * Copyright 2017-2021 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/serde/support/DeserializerRegistrar.java, io/micronaut/serde/support/SerdeRegistrar.java, io/micronaut/serde/support/SerializerRegistrar.java, io/micronaut/serde/support/deserializers/collect/EnumMapDeserializer.java, io/micronaut/serde/support/deserializers/collect/EnumSetDeserializer.java, io/micronaut/serde/support/deserializers/collect/SpecificOnlyCollectionDeserializer.java, io/micronaut/serde/support/deserializers/collect/SpecificOnlyMapDeserializer.java, io/micronaut/serde/support/serdes/BigDecimalSerde.java, io/micronaut/serde/support/serdes/BigIntegerSerde.java, io/micronaut/serde/support/serdes/BooleanArraySerde.java, io/micronaut/serde/support/serdes/BooleanSerde.java, io/micronaut/serde/support/serdes/ByteArraySerde.java, io/micronaut/serde/support/serdes/ByteSerde.java, io/micronaut/serde/support/serdes/CharArraySerde.java, io/micronaut/serde/support/serdes/CharSequenceSerde.java, io/micronaut/serde/support/serdes/CharSerde.java, io/micronaut/serde/support/serdes/CharsetSerde.java, io/micronaut/serde/support/serdes/DoubleArraySerde.java, io/micronaut/serde/support/serdes/DoubleSerde.java, io/micronaut/serde/support/serdes/DurationSerde.java, io/micronaut/serde/support/serdes/FloatArraySerde.java, io/micronaut/serde/support/serdes/FloatSerde.java, io/micronaut/serde/support/serdes/IntArraySerde.java, io/micronaut/serde/support/serdes/IntegerSerde.java, io/micronaut/serde/support/serdes/JacksonJsonNodeSerde.java, io/micronaut/serde/support/serdes/JsonNodeSerde.java, io/micronaut/serde/support/serdes/LocaleSerde.java, io/micronaut/serde/support/serdes/LongArraySerde.java, io/micronaut/serde/support/serdes/LongSerde.java, io/micronaut/serde/support/serdes/NumberTypeSerde.java, io/micronaut/serde/support/serdes/OptionalDoubleSerde.java, io/micronaut/serde/support/serdes/OptionalIntSerde.java, io/micronaut/serde/support/serdes/OptionalLongSerde.java, io/micronaut/serde/support/serdes/PeriodSerde.java, io/micronaut/serde/support/serdes/Serdes.java, io/micronaut/serde/support/serdes/ShortArraySerde.java, io/micronaut/serde/support/serdes/ShortSerde.java, io/micronaut/serde/support/serdes/StringArraySerde.java, io/micronaut/serde/support/serdes/StringSerde.java, io/micronaut/serde/support/serdes/TimeZoneSerde.java, io/micronaut/serde/support/serdes/URISerde.java, io/micronaut/serde/support/serdes/URLSerde.java, io/micronaut/serde/support/serdes/UUIDSerde.java, io/micronaut/serde/support/serializers/ErrorCatchingObjectSerializer.java, io/micronaut/serde/support/serializers/ErrorCatchingSerializer.java, io/micronaut/serde/support/util/JsonViewUtil.java
+
+/*
+ * Copyright 2017-2024 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/serde/support/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Runtime support for Micronaut Serialization registries, contexts, and stream processing.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/support/bind/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * HTTP binding integration for reporting serde errors during bean binding.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/support/config/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Runtime configuration beans for JSON serialization support.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/support/deserializers/SubtypedDeductionDeserializer.java, io/micronaut/serde/support/serdes/ZoneIdSerde.java, io/micronaut/serde/support/serializers/AbstractMapObjectSerializer.java, io/micronaut/serde/support/serializers/CharSequenceKeyMapSerializer.java, io/micronaut/serde/support/serializers/RuntimeMapSerializer.java
+
+/*
+ * Copyright 2017-2025 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/serde/support/deserializers/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Runtime deserializers for objects, subtypes, and property-based binding.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/support/deserializers/collect/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Runtime deserializers for collection and map types.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/support/serdes/AbstractArraySerde.java, io/micronaut/serde/support/serdes/CalendarSerde.java, io/micronaut/serde/support/serdes/GregorianCalendarSerde.java, io/micronaut/serde/support/serdes/MapEntrySerde.java, io/micronaut/serde/support/serdes/MonthDaySerde.java, io/micronaut/serde/support/serdes/MonthSerde.java, io/micronaut/serde/support/serdes/OffsetTimeSerde.java, io/micronaut/serde/support/serdes/PriorityQueueSerde.java, io/micronaut/serde/support/serdes/SingleElementArraySerde.java, io/micronaut/serde/support/serdes/SqlTimeSerde.java, io/micronaut/serde/support/serdes/StrictIJsonDateTimeFormat.java, io/micronaut/serde/support/serdes/YearMonthSerde.java, io/micronaut/serde/support/serdes/ZoneOffsetSerde.java, io/micronaut/serde/support/serializers/AbstractIterableSerializer.java, io/micronaut/serde/support/serializers/DynamicWrappedArraySerializer.java, io/micronaut/serde/support/serializers/DynamicWrappedObjectSerializer.java, io/micronaut/serde/support/util/DecoderValueKind.java, io/micronaut/serde/support/util/ObjectShapeSerdeHelper.java, io/micronaut/serde/support/util/SerdeFeatures.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/serde/support/serdes/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Built-in serializers and deserializers for common JDK and Micronaut value types.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/support/serializers/CustomizedIterableSerializer.java, io/micronaut/serde/support/serializers/CustomizedMapSerializer.java, io/micronaut/serde/support/serializers/RuntimeValueIterableSerializer.java, io/micronaut/serde/support/serializers/StringIterableSerializer.java, io/micronaut/serde/support/serializers/StringKeyMapSerializer.java
+
+/*
+ * Copyright 2017-2022 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/serde/support/serializers/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Runtime serializers for objects, collections, maps, and dynamic values.
+ */
+@NullMarked
+
+Source files: io/micronaut/serde/support/util/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Runtime helper types for serde metadata, JSON tree processing, and subtype handling.
+ */
+@NullMarked

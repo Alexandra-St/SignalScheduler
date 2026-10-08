@@ -1,0 +1,57 @@
+Source files: io/micronaut/sourcegen/model/AbstractElement.java, io/micronaut/sourcegen/model/AbstractElementBuilder.java, io/micronaut/sourcegen/model/AnnotationDef.java, io/micronaut/sourcegen/model/AnnotationObjectDef.java, io/micronaut/sourcegen/model/ClassDef.java, io/micronaut/sourcegen/model/ClassTypeDef.java, io/micronaut/sourcegen/model/ConstructorMethodReferenceExpression.java, io/micronaut/sourcegen/model/EnumDef.java, io/micronaut/sourcegen/model/ExpressionDef.java, io/micronaut/sourcegen/model/FieldDef.java, io/micronaut/sourcegen/model/InstanceMethodReferenceExpression.java, io/micronaut/sourcegen/model/InterfaceDef.java, io/micronaut/sourcegen/model/Invocations.java, io/micronaut/sourcegen/model/LambdaDef.java, io/micronaut/sourcegen/model/MethodDef.java, io/micronaut/sourcegen/model/MethodReferenceExpression.java, io/micronaut/sourcegen/model/MethodReferences.java, io/micronaut/sourcegen/model/ObjectDef.java, io/micronaut/sourcegen/model/ObjectDefBuilder.java, io/micronaut/sourcegen/model/ParameterDef.java, io/micronaut/sourcegen/model/PropertyDef.java, io/micronaut/sourcegen/model/RecordDef.java, io/micronaut/sourcegen/model/StatementDef.java, io/micronaut/sourcegen/model/StaticMethodReferenceExpression.java, io/micronaut/sourcegen/model/TypeDef.java, io/micronaut/sourcegen/model/VariableDef.java
+
+/*
+ * Copyright 2017-2023 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/sourcegen/model/JavaIdioms.java, io/micronaut/sourcegen/model/SuperType.java, io/micronaut/sourcegen/model/ThisType.java
+
+/*
+ * Copyright 2017-2024 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/sourcegen/model/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The model.
+ */
+@NullMarked

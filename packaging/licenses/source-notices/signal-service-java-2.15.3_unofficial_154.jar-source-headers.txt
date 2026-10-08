@@ -1,0 +1,108 @@
+Source files: com/squareup/wire/internal/CountNonDefault.kt, org/whispersystems/signalservice/api/InvalidPreKeyException.kt, org/whispersystems/signalservice/api/account/PreKeyCollection.kt, org/whispersystems/signalservice/api/account/PreKeyUpload.kt, org/whispersystems/signalservice/api/archive/ArchiveCredentialPresentation.kt, org/whispersystems/signalservice/api/crypto/AttachmentCipherStreamUtil.kt, org/whispersystems/signalservice/api/kbs/PinHashUtil.kt, org/whispersystems/signalservice/api/kbs/PinString.java, org/whispersystems/signalservice/api/messages/SignalServiceAttachment.kt, org/whispersystems/signalservice/api/push/UsernameLinkComponents.kt, org/whispersystems/signalservice/api/remoteconfig/RemoteConfigResult.kt, org/whispersystems/signalservice/api/svr/SecureValueRecovery.kt, org/whispersystems/signalservice/internal/crypto/AttachmentDigest.kt, org/whispersystems/signalservice/internal/push/BankMandate.kt, org/whispersystems/signalservice/internal/push/CreateCallLinkAuthRequest.kt, org/whispersystems/signalservice/internal/push/CreateCallLinkAuthResponse.kt, org/whispersystems/signalservice/internal/push/GcmRegistrationId.kt, org/whispersystems/signalservice/internal/push/exceptions/InAppPaymentProcessorError.kt, org/whispersystems/signalservice/internal/push/exceptions/InAppPaymentReceiptCredentialError.kt
+
+/*
+ * Copyright 2023 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/whispersystems/signalservice/api/NetworkResultExtensions.kt, org/whispersystems/signalservice/api/donations/DonationPermitProvider.kt, org/whispersystems/signalservice/api/keys/PreKeyRepository.kt, org/whispersystems/signalservice/api/push/exceptions/RetryNetworkException.kt, org/whispersystems/signalservice/api/push/exceptions/UnknownGroupSendException.kt, org/whispersystems/signalservice/internal/push/MismatchedDevices.kt, org/whispersystems/signalservice/internal/push/StaleDevices.kt
+
+/*
+ * Copyright 2026 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/whispersystems/signalservice/api/NetworkResultUtil.kt, org/whispersystems/signalservice/api/account/AccountApi.kt, org/whispersystems/signalservice/api/account/ChangePhoneNumberRequest.kt, org/whispersystems/signalservice/api/account/DeviceAttributes.kt, org/whispersystems/signalservice/api/cds/CdsiV2Service.java, org/whispersystems/signalservice/api/crypto/BetterCipherInputStream.kt, org/whispersystems/signalservice/api/crypto/MacValidatingInputStream.kt, org/whispersystems/signalservice/api/donations/BoostReceiptCredentialRequestJson.kt, org/whispersystems/signalservice/api/donations/DonationsApi.kt, org/whispersystems/signalservice/api/donations/PayPalConfirmOneTimePaymentIntentPayload.kt, org/whispersystems/signalservice/api/donations/PayPalCreateOneTimePaymentIntentPayload.kt, org/whispersystems/signalservice/api/donations/PayPalCreatePaymentMethodPayload.kt, org/whispersystems/signalservice/api/donations/ReceiptCredentialRequestJson.kt, org/whispersystems/signalservice/api/donations/ReceiptCredentialResponseJson.kt, org/whispersystems/signalservice/api/donations/RedeemArchivesReceiptRequest.kt, org/whispersystems/signalservice/api/donations/RedeemDonationReceiptRequest.kt, org/whispersystems/signalservice/api/donations/StripeOneTimePaymentIntentPayload.kt, org/whispersystems/signalservice/api/groupsv2/CredentialResponse.kt, org/whispersystems/signalservice/api/groupsv2/GroupsV2ApiHelper.kt, org/whispersystems/signalservice/api/groupsv2/TemporalCredential.kt, org/whispersystems/signalservice/api/keys/OneTimePreKeyCounts.kt, org/whispersystems/signalservice/api/link/TransferArchiveResponse.kt, org/whispersystems/signalservice/api/message/MessageApi.kt, org/whispersystems/signalservice/api/message/SpamTokenMessage.kt, org/whispersystems/signalservice/api/messages/calls/TurnServerInfo.kt, org/whispersystems/signalservice/api/messages/multidevice/DeviceInfo.kt, org/whispersystems/signalservice/api/messages/multidevice/RegisterAsSecondaryDeviceResponse.kt, org/whispersystems/signalservice/api/payments/CurrencyConversion.kt, org/whispersystems/signalservice/api/payments/CurrencyConversions.kt, org/whispersystems/signalservice/api/profiles/ProfileApi.kt, org/whispersystems/signalservice/api/profiles/ProfileRepository.kt, org/whispersystems/signalservice/api/profiles/SignalServiceProfile.kt, org/whispersystems/signalservice/api/provisioning/ProvisioningMessage.kt, org/whispersystems/signalservice/api/provisioning/ProvisioningSocket.kt, org/whispersystems/signalservice/api/push/SignedPreKeyEntity.kt, org/whispersystems/signalservice/api/push/exceptions/ChallengeRequiredException.kt, org/whispersystems/signalservice/api/push/exceptions/InvalidRegistrationSessionIdException.kt, org/whispersystems/signalservice/api/push/exceptions/NonNormalizedPhoneNumberException.kt, org/whispersystems/signalservice/api/push/exceptions/RequestVerificationCodeRateLimitException.kt, org/whispersystems/signalservice/api/push/exceptions/SubmitVerificationCodeRateLimitException.kt, org/whispersystems/signalservice/api/storage/StorageAuthResponse.kt, org/whispersystems/signalservice/api/subscriptions/ActiveSubscription.kt, org/whispersystems/signalservice/api/subscriptions/PayPalConfirmPaymentIntentResponse.kt, org/whispersystems/signalservice/api/subscriptions/PayPalCreatePaymentIntentResponse.kt, org/whispersystems/signalservice/api/subscriptions/PayPalCreatePaymentMethodResponse.kt, org/whispersystems/signalservice/api/subscriptions/StripeClientSecret.kt, org/whispersystems/signalservice/api/websocket/SignalWebSocket.kt, org/whispersystems/signalservice/internal/push/AuthCredentials.kt, org/whispersystems/signalservice/internal/push/CdsiAuthResponse.kt, org/whispersystems/signalservice/internal/push/ConfirmUsernameRequest.kt, org/whispersystems/signalservice/internal/push/DeviceInfoList.kt, org/whispersystems/signalservice/internal/push/DeviceLimit.kt, org/whispersystems/signalservice/internal/push/DonationIntentResult.kt, org/whispersystems/signalservice/internal/push/GroupMismatchedDevices.kt, org/whispersystems/signalservice/internal/push/GroupPatchResponse.kt, org/whispersystems/signalservice/internal/push/GroupStaleDevices.kt, org/whispersystems/signalservice/internal/push/IdentityCheckRequest.kt, org/whispersystems/signalservice/internal/push/IdentityCheckResponse.kt, org/whispersystems/signalservice/internal/push/KyberPreKeyEntity.kt, org/whispersystems/signalservice/internal/push/OutgoingPushMessage.kt, org/whispersystems/signalservice/internal/push/OutgoingPushMessageList.kt, org/whispersystems/signalservice/internal/push/PreKeyEntity.kt, org/whispersystems/signalservice/internal/push/PreKeyResponse.kt, org/whispersystems/signalservice/internal/push/PreKeyResponseItem.kt, org/whispersystems/signalservice/internal/push/PreKeyState.kt, org/whispersystems/signalservice/internal/push/ProfileAvatarUploadAttributes.kt, org/whispersystems/signalservice/internal/push/ProofRequiredResponse.kt, org/whispersystems/signalservice/internal/push/RegisterAsSecondaryDeviceRequest.kt, org/whispersystems/signalservice/internal/push/RegistrationLockFailure.kt, org/whispersystems/signalservice/internal/push/SendMessageResponse.kt, org/whispersystems/signalservice/internal/push/SubscriptionsConfiguration.kt, org/whispersystems/signalservice/internal/push/VerifyAccountResponse.kt, org/whispersystems/signalservice/internal/websocket/LibSignalResponseExtension.kt
+
+/*
+ * Copyright 2025 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/whispersystems/signalservice/api/RequestResultExtensions.kt
+
+/*
+ * Copyright 2026 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+@file:JvmName("RequestResultUtil")
+
+Source files: org/whispersystems/signalservice/api/SignalServiceAccountManager.java, org/whispersystems/signalservice/api/crypto/UntrustedIdentityException.java, org/whispersystems/signalservice/api/messages/SignalServiceAttachmentStream.kt, org/whispersystems/signalservice/api/messages/SignalServiceGroup.java, org/whispersystems/signalservice/api/messages/multidevice/DeviceGroup.java, org/whispersystems/signalservice/api/messages/multidevice/DeviceGroupsOutputStream.java, org/whispersystems/signalservice/api/messages/multidevice/ReadMessage.java, org/whispersystems/signalservice/api/messages/multidevice/RequestMessage.java, org/whispersystems/signalservice/api/messages/multidevice/SentTranscriptMessage.java, org/whispersystems/signalservice/api/push/SignalServiceAddress.java, org/whispersystems/signalservice/api/push/exceptions/AuthorizationFailedException.java, org/whispersystems/signalservice/api/push/exceptions/ExpectationFailedException.java, org/whispersystems/signalservice/api/push/exceptions/NoContentException.java, org/whispersystems/signalservice/api/push/exceptions/NotFoundException.java, org/whispersystems/signalservice/api/push/exceptions/RateLimitException.java, org/whispersystems/signalservice/api/push/exceptions/UnregisteredUserException.java, org/whispersystems/signalservice/api/util/CredentialsProvider.java, org/whispersystems/signalservice/api/util/InvalidNumberException.java, org/whispersystems/signalservice/internal/crypto/PrimaryProvisioningCipher.java, org/whispersystems/signalservice/internal/push/PushAttachmentData.kt, org/whispersystems/signalservice/internal/push/PushTransportDetails.java, org/whispersystems/signalservice/internal/push/exceptions/MismatchedDevicesException.java, org/whispersystems/signalservice/internal/push/exceptions/StaleDevicesException.java, org/whispersystems/signalservice/internal/util/BlacklistingTrustManager.java, org/whispersystems/signalservice/internal/util/StaticCredentialsProvider.java, org/whispersystems/signalservice/internal/util/Util.java
+
+/**
+ * Copyright (C) 2014-2016 Open Whisper Systems
+ *
+ * Licensed according to the LICENSE file in this repository.
+ */
+
+Source files: org/whispersystems/signalservice/api/SignalServiceMessageReceiver.java, org/whispersystems/signalservice/api/SignalServiceMessageSender.java, org/whispersystems/signalservice/api/account/AccountAttributes.kt, org/whispersystems/signalservice/api/crypto/SignalServiceCipher.java, org/whispersystems/signalservice/api/messages/SignalServiceContent.kt, org/whispersystems/signalservice/api/messages/SignalServiceDataMessage.kt, org/whispersystems/signalservice/api/messages/SignalServiceEnvelope.kt, org/whispersystems/signalservice/api/messages/multidevice/SignalServiceSyncMessage.java
+
+/*
+ * Copyright (C) 2014-2016 Open Whisper Systems
+ *
+ * Licensed according to the LICENSE file in this repository.
+ */
+
+Source files: org/whispersystems/signalservice/api/SignalUrlExtensions.kt, org/whispersystems/signalservice/api/archive/ArchiveServiceAccess.kt, org/whispersystems/signalservice/api/archive/ArchiveServiceAccessPair.kt, org/whispersystems/signalservice/api/archive/GetArchiveCdnCredentialsResponse.kt, org/whispersystems/signalservice/api/crypto/Crypto.kt, org/whispersystems/signalservice/api/crypto/IncrementalMacAdditionalValidationsInputStream.kt, org/whispersystems/signalservice/api/crypto/SealedSenderAccess.kt, org/whispersystems/signalservice/api/groupsv2/DecryptChangeVerificationMode.kt, org/whispersystems/signalservice/api/groupsv2/DecryptedGroupResponse.kt, org/whispersystems/signalservice/api/groupsv2/GroupSendEndorsements.kt, org/whispersystems/signalservice/api/groupsv2/ReceivedGroupSendEndorsements.kt, org/whispersystems/signalservice/api/keys/KeysApi.kt, org/whispersystems/signalservice/api/link/LinkedDeviceVerificationCodeResponse.kt, org/whispersystems/signalservice/api/link/SetLinkedDeviceTransferArchiveRequest.kt, org/whispersystems/signalservice/api/link/TransferArchiveError.kt, org/whispersystems/signalservice/api/link/WaitForLinkedDeviceResponse.kt, org/whispersystems/signalservice/api/messages/multidevice/DeviceContactAvatar.kt, org/whispersystems/signalservice/api/provisioning/RestoreMethod.kt, org/whispersystems/signalservice/api/registration/RegistrationApi.kt, org/whispersystems/signalservice/api/registration/RestoreMethodBody.kt, org/whispersystems/signalservice/api/storage/AccountRecordExtensions.kt, org/whispersystems/signalservice/api/storage/ContactRecordExtensions.kt, org/whispersystems/signalservice/api/storage/IAPSubscriptionId.kt, org/whispersystems/signalservice/api/storage/ManifestRecordIdentifierExtensions.kt, org/whispersystems/signalservice/api/storage/RecordIkm.kt, org/whispersystems/signalservice/api/storage/SignalCallLinkRecord.kt, org/whispersystems/signalservice/api/storage/StorageRecordConverters.kt, org/whispersystems/signalservice/api/storage/StorageServiceApi.kt, org/whispersystems/signalservice/api/storage/StoryDistributionListRecordExtensions.kt, org/whispersystems/signalservice/api/svr/SecureValueRecoveryV3.kt, org/whispersystems/signalservice/api/svr/SetShareSetRequest.kt, org/whispersystems/signalservice/api/svr/Svr3Credentials.kt, org/whispersystems/signalservice/api/util/UsernameExtensions.kt, org/whispersystems/signalservice/api/util/Usernames.kt, org/whispersystems/signalservice/internal/crypto/SecondaryProvisioningCipher.kt, org/whispersystems/signalservice/internal/push/BackupV2AuthCheckResponse.kt, org/whispersystems/signalservice/internal/push/BackupV3AuthCheckResponse.kt, org/whispersystems/signalservice/internal/push/ByteArrayDeserializerBase64.kt, org/whispersystems/signalservice/internal/push/ByteArraySerializerBase64NoPadding.kt, org/whispersystems/signalservice/internal/push/CheckRepeatedUsedPreKeysRequest.kt, org/whispersystems/signalservice/internal/push/GetCallingRelaysResponse.kt, org/whispersystems/signalservice/internal/push/exceptions/CaptchaRejectedException.kt, org/whispersystems/signalservice/internal/util/CompletableFutureExtensions.kt, org/whispersystems/signalservice/internal/websocket/LibSignalChatConnection.kt
+
+/*
+ * Copyright 2024 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/whispersystems/signalservice/api/crypto/AttachmentCipherInputStream.kt, org/whispersystems/signalservice/api/crypto/AttachmentCipherOutputStream.kt, org/whispersystems/signalservice/api/messages/SignalServiceAttachmentPointer.kt, org/whispersystems/signalservice/internal/push/PushServiceSocket.java
+
+/*
+ * Copyright (C) 2014-2017 Open Whisper Systems
+ *
+ * Licensed according to the LICENSE file in this repository.
+ */
+
+Source files: org/whispersystems/signalservice/api/crypto/DigestValidatingInputStream.kt
+
+/*
+ * Copyright (C) 2024 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/whispersystems/signalservice/api/groupsv2/DecryptedGroupExtensions.kt
+
+/*
+ * Copyright 2023 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@file:JvmName("DecryptedGroupExtensions")
+
+Source files: org/whispersystems/signalservice/api/messages/multidevice/DeviceContact.java, org/whispersystems/signalservice/api/push/exceptions/RangeException.java
+
+/**
+ * Copyright (C) 2014-2016 Open Whisper Systems
+ * <p>
+ * Licensed according to the LICENSE file in this repository.
+ */
+
+Source files: org/whispersystems/signalservice/api/messages/multidevice/DeviceContactsInputStream.java, org/whispersystems/signalservice/api/messages/multidevice/DeviceContactsOutputStream.java, org/whispersystems/signalservice/api/messages/multidevice/DeviceGroupsInputStream.java
+
+/*
+ * Copyright (C) 2014-2018 Open Whisper Systems
+ *
+ * Licensed according to the LICENSE file in this repository.
+ */
+
+Source files: org/whispersystems/signalservice/api/push/exceptions/RemoteAttestationResponseExpiredException.java
+
+/*
+ * Copyright (C) 2019 Open Whisper Systems
+ *
+ * Licensed according to the LICENSE file in this repository.
+ */
+
+Source files: org/whispersystems/signalservice/api/storage/StorageRecordProtoUtil.kt
+
+/*
+ * Copyright 2023 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@file:JvmName("StorageRecordProtoUtil")

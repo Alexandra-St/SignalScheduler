@@ -1,0 +1,30 @@
+Source files: tools/jackson/core/Base64Variant.java, tools/jackson/core/Base64Variants.java, tools/jackson/core/FormatSchema.java, tools/jackson/core/JsonEncoding.java, tools/jackson/core/JsonGenerator.java, tools/jackson/core/JsonParser.java, tools/jackson/core/JsonToken.java, tools/jackson/core/PrettyPrinter.java, tools/jackson/core/SerializableString.java, tools/jackson/core/TokenStreamContext.java, tools/jackson/core/TokenStreamFactory.java, tools/jackson/core/TokenStreamLocation.java, tools/jackson/core/TreeNode.java, tools/jackson/core/Version.java, tools/jackson/core/Versioned.java, tools/jackson/core/json/JsonFactory.java, tools/jackson/core/util/ByteArrayBuilder.java
+
+/* Jackson JSON-processor.
+ *
+ * Copyright (c) 2007- Tatu Saloranta, tatu.saloranta@iki.fi
+ */
+
+Source files: tools/jackson/core/io/schubfach/DoubleToDecimal.java, tools/jackson/core/io/schubfach/FloatToDecimal.java, tools/jackson/core/io/schubfach/MathUtils.java
+
+/*
+ * Copyright 2018-2020 Raffaello Giulietti
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */

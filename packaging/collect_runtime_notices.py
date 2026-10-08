@@ -30,6 +30,13 @@ def collect(resources):
     if destination.exists():
         shutil.rmtree(destination)
     destination.mkdir()
+    supplemental = ROOT / 'packaging/licenses/source-notices/inventory.json'
+    evidence = json.loads(supplemental.read_text())
+    for item in evidence:
+        binary = resources / 'signal-cli/lib' / item['binary']
+        import hashlib
+        if hashlib.sha256(binary.read_bytes()).hexdigest() != item['binary_sha256']:
+            raise ValueError('Source notices no longer match bundled binary: ' + item['binary'])
     shutil.copytree(ROOT / 'packaging/licenses', destination / 'upstream')
     assets = json.loads((ROOT / 'obj/project.assets.json').read_text())
     cache = Path(next(iter(assets['packageFolders'])))

@@ -1,0 +1,5 @@
+Source files: org/reactivestreams/Processor.java, org/reactivestreams/Publisher.java, org/reactivestreams/Subscription.java, org/reactivestreams/Subscriber.java, org/reactivestreams/FlowAdapters.java
+
+/***************************************************
+ * Licensed under MIT No Attribution (SPDX: MIT-0) *
+ ***************************************************/

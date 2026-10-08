@@ -215,11 +215,19 @@ def main():
     shutil.copytree(java / 'legal', OUT / 'java-legal', symlinks=True)
     shutil.copy2(java / 'NOTICE', OUT / 'java-NOTICE')
     assets.append(fetch('https://codeload.github.com/google/boringssl/tar.gz/e2a57cfb4d915b4ba820585aef9fdee7bca13fe5', 'boringssl-source.tar.gz'))
+    provenance = json.loads((ROOT / 'packaging/native-sources.lock.json').read_text())
+    release = dict(re.findall(r'^(\w+)=\"([^\"]*)\"', (java / 'release').read_text(), re.M))
+    if not release['SOURCE'].endswith(provenance['jdk_commit'][:12]):
+        raise ValueError('Exact JDK source provenance differs from bundled Java')
+    if release['BUILD_SOURCE'] != 'git:e6ba7dec3d07654074559310376a3ae89da5f4ac':
+        raise ValueError('Temurin build source provenance changed')
+    assets.append(fetch(provenance['jdk_source']['url'], provenance['jdk_source']['file'], provenance['jdk_source']['sha256']))
     rust_assets, rust_errors = collect_rust_sources()
     errors.extend(rust_errors)
     shutil.copytree(ROOT / 'packaging/licenses', OUT / 'licenses', dirs_exist_ok=True)
     shutil.copy2(ROOT / 'THIRD_PARTY_NOTICES.md', OUT / 'THIRD_PARTY_NOTICES.md')
     shutil.copy2(ROOT / 'packaging/dependencies.lock.json', OUT / 'dependencies.lock.json')
+    shutil.copy2(ROOT / 'packaging/native-sources.lock.json', OUT / 'native-provenance.json')
     shutil.copy2(app / 'Contents/Resources/jre/Contents/Home/release', OUT / 'temurin-build-provenance.txt')
     report = {'status': 'REVIEW_REQUIRED', 'assets': assets, 'rust_assets': rust_assets, 'nuget': nuget, 'dependencies': dependencies, 'errors': errors,
         'review_required': ['Verify native submodules/build prerequisites (including BoringSSL), inherited license choices and complete corresponding source coverage.',

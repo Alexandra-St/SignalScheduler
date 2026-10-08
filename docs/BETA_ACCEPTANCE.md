@@ -104,3 +104,34 @@ empty account discovery using a temporary config, mounted DMG verification and
 79 matching bundled JAR hashes with no integrity errors. Full license/source
 review is still open; see SOURCE_REVIEW.md. Installation/update and data
 preservation on a clean Mac remain pending.
+
+## Packaging and source review follow-up: 0.2.1 build 6
+
+Build 6 retains supplemental Java copyright/NOTICE files and native libsignal
+acknowledgments. The review identified and added the exact Temurin JDK commit
+rather than relying only on the same-version tag. Native source restoration
+passed, including BoringSSL. The audit verified 754 source/POM assets, 79 JAR
+binaries and supplemental coverage for all 77 external JARs with no errors.
+14 packaging tests passed. Native binaries were not rebuilt bit-for-bit.
+A clean Mac and real Finder Replace update remain pending.
+
+## Manual Replace update: build 4 to build 6 (2026-10-08)
+
+The operator followed the DMG Replace update procedure on the development Mac
+and reported that the sending account, message history, and pending scheduled
+message with caption and attachment were preserved. Screenshots corroborate
+Account ready and the restored pending message. Personal account identifiers,
+message text and attachment filenames are intentionally not recorded here.
+
+The test message is scheduled for 02:44 Europe/Lisbon. Actual receipt of the photo
+and caption exactly once is still pending; Pending is not evidence of delivery.
+This check does not establish clean-Mac acceptance.
+
+## Manual post-update delivery confirmed (2026-10-08)
+
+The operator confirmed successful receipt of the scheduled image and caption
+exactly once after the Replace update from build 4 to build 6. Screenshots show
+Status: Sent in the scheduler and the received image/caption in Signal Note to
+Self. This closes post-update delivery and attachment preservation on the
+development Mac. Clean-Mac acceptance remains pending. Personal message text,
+account identifiers and screenshots are not stored in this report.

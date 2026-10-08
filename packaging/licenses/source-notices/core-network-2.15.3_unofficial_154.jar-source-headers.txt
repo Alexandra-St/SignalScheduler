@@ -1,0 +1,44 @@
+Source files: org/signal/network/NetworkResult.kt, org/signal/network/exceptions/MalformedRequestException.kt
+
+/*
+ * Copyright 2023 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/signal/network/RequestResultClassification.kt, org/signal/network/config/NetworkProxyState.kt, org/signal/network/config/ProxyConfig.kt, org/signal/network/config/SignalProxy.kt, org/signal/network/rest/RequestResultExtensions.kt, org/signal/network/rest/RestStatusCodeError.kt
+
+/*
+ * Copyright 2026 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+Source files: org/signal/network/config/LibSignalNetworkExtensions.kt
+
+/*
+ * Copyright 2024 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+@file:JvmName("LibSignalNetworkExtensions")
+
+Source files: org/signal/network/config/TrustStore.java, org/signal/network/exceptions/NonSuccessfulResponseCodeException.kt, org/signal/network/exceptions/PushNetworkException.java
+
+/**
+ * Copyright (C) 2014-2016 Open Whisper Systems
+ *
+ * Licensed according to the LICENSE file in this repository.
+ */
+
+Source files: org/signal/network/util/JsonUtil.java
+
+/*
+ * Copyright (C) 2014-2016 Open Whisper Systems
+ *
+ * Licensed according to the LICENSE file in this repository.
+ */
+
+Source files: org/signal/network/websocket/WebSocketRequestExt.kt
+
+/*
+ * Copyright 2025 Signal Messenger, LLC
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */

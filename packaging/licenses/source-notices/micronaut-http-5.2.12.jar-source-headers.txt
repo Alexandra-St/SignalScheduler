@@ -1,0 +1,690 @@
+Source files: io/micronaut/http/BasicAuth.java, io/micronaut/http/DefaultHttpFactories.java, io/micronaut/http/FullHttpRequest.java, io/micronaut/http/HttpAttributes.java, io/micronaut/http/HttpHeaderValues.java, io/micronaut/http/HttpHeaders.java, io/micronaut/http/HttpMessage.java, io/micronaut/http/HttpMessageWrapper.java, io/micronaut/http/HttpMethod.java, io/micronaut/http/HttpParameters.java, io/micronaut/http/HttpRequest.java, io/micronaut/http/HttpRequestFactory.java, io/micronaut/http/HttpRequestWrapper.java, io/micronaut/http/HttpResponse.java, io/micronaut/http/HttpResponseFactory.java, io/micronaut/http/HttpResponseProvider.java, io/micronaut/http/HttpResponseWrapper.java, io/micronaut/http/HttpStatus.java, io/micronaut/http/HttpVersion.java, io/micronaut/http/MediaType.java, io/micronaut/http/MutableHttpHeaders.java, io/micronaut/http/MutableHttpMessage.java, io/micronaut/http/MutableHttpParameters.java, io/micronaut/http/MutableHttpRequest.java, io/micronaut/http/MutableHttpResponse.java, io/micronaut/http/annotation/Body.java, io/micronaut/http/annotation/Consumes.java, io/micronaut/http/annotation/Controller.java, io/micronaut/http/annotation/CookieValue.java, io/micronaut/http/annotation/CustomHttpMethod.java, io/micronaut/http/annotation/Delete.java, io/micronaut/http/annotation/Error.java, io/micronaut/http/annotation/Filter.java, io/micronaut/http/annotation/FilterMatcher.java, io/micronaut/http/annotation/Get.java, io/micronaut/http/annotation/Head.java, io/micronaut/http/annotation/Header.java, io/micronaut/http/annotation/Headers.java, io/micronaut/http/annotation/HttpMethodMapping.java, io/micronaut/http/annotation/Options.java, io/micronaut/http/annotation/Part.java, io/micronaut/http/annotation/Patch.java, io/micronaut/http/annotation/PathVariable.java, io/micronaut/http/annotation/Post.java, io/micronaut/http/annotation/Produces.java, io/micronaut/http/annotation/Put.java, io/micronaut/http/annotation/QueryValue.java, io/micronaut/http/annotation/RequestAttribute.java, io/micronaut/http/annotation/RequestAttributes.java, io/micronaut/http/annotation/RequestBean.java, io/micronaut/http/annotation/Status.java, io/micronaut/http/annotation/Trace.java, io/micronaut/http/annotation/UriMapping.java, io/micronaut/http/bind/DefaultRequestBinderRegistry.java, io/micronaut/http/bind/RequestBinderRegistry.java, io/micronaut/http/bind/binders/AnnotatedRequestArgumentBinder.java, io/micronaut/http/bind/binders/BodyArgumentBinder.java, io/micronaut/http/bind/binders/CookieAnnotationBinder.java, io/micronaut/http/bind/binders/DefaultBodyAnnotationBinder.java, io/micronaut/http/bind/binders/DefaultUnmatchedRequestArgumentBinder.java, io/micronaut/http/bind/binders/HeaderAnnotationBinder.java, io/micronaut/http/bind/binders/NonBlockingBodyArgumentBinder.java, io/micronaut/http/bind/binders/PathVariableAnnotationBinder.java, io/micronaut/http/bind/binders/QueryValueArgumentBinder.java, io/micronaut/http/bind/binders/RequestArgumentBinder.java, io/micronaut/http/bind/binders/RequestAttributeAnnotationBinder.java, io/micronaut/http/bind/binders/RequestBeanAnnotationBinder.java, io/micronaut/http/bind/binders/TypedRequestArgumentBinder.java, io/micronaut/http/codec/CodecConfiguration.java, io/micronaut/http/codec/CodecException.java, io/micronaut/http/codec/DefaultMediaTypeCodecRegistry.java, io/micronaut/http/codec/MediaTypeCodec.java, io/micronaut/http/codec/MediaTypeCodecRegistry.java, io/micronaut/http/context/ClientContextPathProvider.java, io/micronaut/http/context/ServerContextPathProvider.java, io/micronaut/http/context/ServerRequestContext.java, io/micronaut/http/context/ServerRequestTracingPublisher.java, io/micronaut/http/context/event/HttpRequestReceivedEvent.java, io/micronaut/http/context/event/HttpRequestTerminatedEvent.java, io/micronaut/http/converters/HttpConverterRegistrar.java, io/micronaut/http/converters/SharedHttpConvertersRegistrar.java, io/micronaut/http/cookie/Cookie.java, io/micronaut/http/cookie/CookieConfiguration.java, io/micronaut/http/cookie/CookieFactory.java, io/micronaut/http/cookie/CookieSizeExceededException.java, io/micronaut/http/cookie/Cookies.java, io/micronaut/http/cookie/SameSite.java, io/micronaut/http/exceptions/BufferLengthExceededException.java, io/micronaut/http/exceptions/ConnectionClosedException.java, io/micronaut/http/exceptions/ContentLengthExceededException.java, io/micronaut/http/exceptions/HttpException.java, io/micronaut/http/exceptions/HttpStatusException.java, io/micronaut/http/exceptions/UriSyntaxException.java, io/micronaut/http/filter/ClientFilterChain.java, io/micronaut/http/filter/DefaultFilterEntry.java, io/micronaut/http/filter/FilterChain.java, io/micronaut/http/filter/HttpClientFilter.java, io/micronaut/http/filter/HttpClientFilterResolver.java, io/micronaut/http/filter/HttpFilter.java, io/micronaut/http/filter/HttpFilterResolver.java, io/micronaut/http/filter/HttpServerFilter.java, io/micronaut/http/filter/HttpServerFilterResolver.java, io/micronaut/http/filter/ServerFilterChain.java, io/micronaut/http/filter/ServerFilterPhase.java, io/micronaut/http/hateoas/DefaultLink.java, io/micronaut/http/hateoas/JsonError.java, io/micronaut/http/hateoas/Link.java, io/micronaut/http/hateoas/Resource.java, io/micronaut/http/hateoas/VndError.java, io/micronaut/http/multipart/CompletedFileUpload.java, io/micronaut/http/multipart/CompletedPart.java, io/micronaut/http/multipart/MultipartException.java, io/micronaut/http/multipart/PartData.java, io/micronaut/http/multipart/StreamingFileUpload.java, io/micronaut/http/resource/ResourceLoaderFactory.java, io/micronaut/http/simple/SimpleHttpHeaders.java, io/micronaut/http/simple/SimpleHttpParameters.java, io/micronaut/http/simple/SimpleHttpRequest.java, io/micronaut/http/simple/SimpleHttpRequestFactory.java, io/micronaut/http/simple/SimpleHttpResponse.java, io/micronaut/http/simple/SimpleHttpResponseFactory.java, io/micronaut/http/simple/cookies/SimpleCookie.java, io/micronaut/http/simple/cookies/SimpleCookieFactory.java, io/micronaut/http/simple/cookies/SimpleCookies.java, io/micronaut/http/sse/DefaultEvent.java, io/micronaut/http/sse/Event.java, io/micronaut/http/ssl/ClientAuthentication.java, io/micronaut/http/ssl/DefaultSslConfiguration.java, io/micronaut/http/ssl/SslBuilder.java, io/micronaut/http/ssl/SslConfigurationException.java, io/micronaut/http/uri/DefaultUriBuilder.java, io/micronaut/http/uri/UriBuilder.java, io/micronaut/http/uri/UriMatchInfo.java, io/micronaut/http/uri/UriMatchTemplate.java, io/micronaut/http/uri/UriMatchVariable.java, io/micronaut/http/uri/UriMatcher.java, io/micronaut/http/uri/UriTemplate.java, io/micronaut/http/uri/UriTypeMatchTemplate.java, io/micronaut/http/util/HttpUtil.java, io/micronaut/http/util/OutgoingHttpRequestProcessor.java, io/micronaut/http/util/OutgoingHttpRequestProcessorImpl.java, io/micronaut/http/util/OutgoingRequestProcessorMatcher.java, io/micronaut/runtime/http/codec/MediaTypeCodecRegistryFactory.java, io/micronaut/runtime/http/codec/TextPlainCodec.java, io/micronaut/runtime/http/scope/RequestAware.java, io/micronaut/runtime/http/scope/RequestCustomScope.java, io/micronaut/runtime/http/scope/RequestScope.java, io/micronaut/http/bind/binders/ContinuationArgumentBinder.kt
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/http/BasicHttpAttributes.java, io/micronaut/http/LifecycleHttpRequest.java, io/micronaut/http/body/ByteBodyWriter.java, io/micronaut/http/body/stream/BaseStreamingByteBody.java, io/micronaut/http/body/stream/LazyUpstream.java, io/micronaut/http/body/stream/PublisherAsStream.java, io/micronaut/http/cachecontrol/CacheControl.java, io/micronaut/http/cachecontrol/ResponseDirective.java, io/micronaut/http/cookie/CookieUtils.java, io/micronaut/http/form/FormCapableHttpRequest.java, io/micronaut/http/multipart/CompletedAttribute.java, io/micronaut/http/multipart/FormFieldMetadata.java, io/micronaut/http/multipart/RawFormField.java, io/micronaut/http/ssl/AbstractCertificateFileConfig.java, io/micronaut/http/ssl/CertificateProvider.java, io/micronaut/http/ssl/FileCertificateProvider.java, io/micronaut/http/ssl/PemParser.java, io/micronaut/http/ssl/ResourceCertificateProvider.java, io/micronaut/http/ssl/SelfSignedCertificateProvider.java
+
+/*
+ * Copyright 2017-2025 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/http/ByteBodyHttpResponse.java, io/micronaut/http/ByteBodyHttpResponseWrapper.java, io/micronaut/http/ServerHttpRequest.java, io/micronaut/http/bind/binders/CookieObjectArgumentBinder.java, io/micronaut/http/body/AbstractBodyAdapter.java, io/micronaut/http/body/AvailableByteBody.java, io/micronaut/http/body/ByteArrayBodyHandler.java, io/micronaut/http/body/ByteBody.java, io/micronaut/http/body/ByteBodyFactory.java, io/micronaut/http/body/ByteBufferBodyAdapter.java, io/micronaut/http/body/ByteBufferBodyHandler.java, io/micronaut/http/body/CloseableAvailableByteBody.java, io/micronaut/http/body/CloseableByteBody.java, io/micronaut/http/body/ConcatenatingSubscriber.java, io/micronaut/http/body/InternalByteBody.java, io/micronaut/http/body/ReactiveByteBufferByteBody.java, io/micronaut/http/body/ResponseBodyWriter.java, io/micronaut/http/body/ResponseBodyWriterWrapper.java, io/micronaut/http/body/StringBodyReader.java, io/micronaut/http/body/TypedMessageBodyHandler.java, io/micronaut/http/body/TypedMessageBodyReader.java, io/micronaut/http/body/TypedMessageBodyWriter.java, io/micronaut/http/body/stream/AvailableByteArrayBody.java, io/micronaut/http/body/stream/BaseSharedBuffer.java, io/micronaut/http/body/stream/BodySizeLimits.java, io/micronaut/http/body/stream/BufferConsumer.java, io/micronaut/http/body/stream/ByteQueue.java, io/micronaut/http/body/stream/ExtendedInputStream.java, io/micronaut/http/body/stream/InputStreamByteBody.java, io/micronaut/http/body/stream/StreamPair.java, io/micronaut/http/body/stream/UpstreamBalancer.java, io/micronaut/http/cookie/ClientCookieEncoder.java, io/micronaut/http/cookie/CookieComparator.java, io/micronaut/http/cookie/CookieHttpCookieAdapter.java, io/micronaut/http/cookie/DefaultClientCookieEncoder.java, io/micronaut/http/cookie/DefaultServerCookieDecoder.java, io/micronaut/http/cookie/DefaultServerCookieEncoder.java, io/micronaut/http/cookie/HttpCookieFactory.java, io/micronaut/http/cookie/ServerCookieDecoder.java, io/micronaut/http/cookie/ServerCookieEncoder.java, io/micronaut/http/filter/FilterArgumentBinderPredicate.java, io/micronaut/http/form/FormConfiguration.java, io/micronaut/http/form/FormConfigurationProperties.java, io/micronaut/http/form/FormUrlEncodedDecoder.java, io/micronaut/http/hateoas/AbstractResource.java, io/micronaut/http/reactive/execution/FlowAsMono.java, io/micronaut/http/uri/DefaultFormUrlEncodedDecoder.java, io/micronaut/http/uri/DefaultUriMatchInfo.java, io/micronaut/http/uri/UriTemplateExpander.java, io/micronaut/http/uri/UriTemplateMatcher.java, io/micronaut/http/uri/UriTemplateParser.java, io/micronaut/http/util/HtmlEntityEncodingHtmlSanitizer.java, io/micronaut/http/util/HtmlSanitizer.java
+
+/*
+ * Copyright 2017-2024 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/http/CaseInsensitiveMutableHttpHeaders.java, io/micronaut/http/annotation/RouteCondition.java, io/micronaut/http/bind/binders/MappedPendingRequestBindingResult.java, io/micronaut/http/bind/binders/PendingRequestBindingResult.java, io/micronaut/http/bind/binders/PostponedRequestArgumentBinder.java, io/micronaut/http/bind/binders/UnmatchedRequestArgumentBinder.java, io/micronaut/http/body/AbstractMessageBodyHandlerRegistry.java, io/micronaut/http/body/CharSequenceBodyWriter.java, io/micronaut/http/body/ChunkedMessageBodyReader.java, io/micronaut/http/body/ContextlessMessageBodyHandlerRegistry.java, io/micronaut/http/body/ConversionTextPlainHandler.java, io/micronaut/http/body/DefaultMessageBodyHandlerRegistry.java, io/micronaut/http/body/MediaTypeProvider.java, io/micronaut/http/body/MessageBodyHandler.java, io/micronaut/http/body/MessageBodyHandlerRegistry.java, io/micronaut/http/body/MessageBodyReader.java, io/micronaut/http/body/MessageBodyWriter.java, io/micronaut/http/body/TextPlainObjectBodyReader.java, io/micronaut/http/body/TextPlainObjectBodyWriter.java, io/micronaut/http/body/TextStreamBodyWriter.java, io/micronaut/http/body/WritableBodyWriter.java, io/micronaut/http/body/stream/PublisherAsBlocking.java, io/micronaut/http/context/ContextPathUtils.java, io/micronaut/http/exceptions/MessageBodyException.java, io/micronaut/http/filter/AroundLegacyFilter.java, io/micronaut/http/filter/BaseFilterProcessor.java, io/micronaut/http/filter/ConditionalFilter.java, io/micronaut/http/filter/FilterContext.java, io/micronaut/http/filter/MethodFilter.java
+
+/*
+ * Copyright 2017-2023 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/http/Destination.java, io/micronaut/http/HttpHeaderEntry.java, io/micronaut/http/Mode.java, io/micronaut/http/SecFetch.java, io/micronaut/http/Site.java, io/micronaut/http/annotation/Query.java, io/micronaut/http/body/stream/SizeLimitTracker.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/http/HttpTypeConverterRegistrar.java, io/micronaut/http/MutableHttpRequestWrapper.java, io/micronaut/http/annotation/ClientFilter.java, io/micronaut/http/annotation/RequestFilter.java, io/micronaut/http/annotation/ResponseFilter.java, io/micronaut/http/annotation/ServerFilter.java, io/micronaut/http/bind/binders/PartAnnotationBinder.java, io/micronaut/http/context/ServerHttpRequestContext.java, io/micronaut/http/expression/RequestConditionContext.java, io/micronaut/http/filter/FilterContinuation.java, io/micronaut/http/filter/FilterOrder.java, io/micronaut/http/filter/FilterRunner.java, io/micronaut/http/filter/GenericHttpFilter.java, io/micronaut/http/filter/InternalHttpFilter.java, io/micronaut/http/hateoas/GenericResource.java, io/micronaut/http/reactive/execution/ReactiveExecutionFlow.java, io/micronaut/http/reactive/execution/ReactorExecutionFlowImpl.java, io/micronaut/http/ssl/ClientSslConfiguration.java, io/micronaut/http/ssl/ServerSslConfiguration.java, io/micronaut/http/ssl/SslConfiguration.java, io/micronaut/http/util/HttpHeadersUtil.java
+
+/*
+ * Copyright 2017-2022 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/http/PushCapableHttpRequest.java, io/micronaut/http/filter/FilterPatternStyle.java, io/micronaut/http/ssl/AbstractClientSslConfiguration.java, io/micronaut/http/util/HttpTypeInformationProvider.java, io/micronaut/http/bind/binders/HttpCoroutineContextFactory.kt
+
+/*
+ * Copyright 2017-2021 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/http/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * HTTP classes to represent methods, responses and attributes.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/annotation/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * HTTP annotations representing various requests types that are received.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/bind/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Classes specific to binding request data to methods.
+ *
+ * @author graemerocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/bind/binders/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * HTTP server request binding annotation for various request types.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/body/package-info.java, io/micronaut/http/body/stream/package-info.java, io/micronaut/http/cachecontrol/package-info.java, io/micronaut/http/expression/package-info.java, io/micronaut/http/form/package-info.java, io/micronaut/http/reactive/execution/package-info.java, io/micronaut/runtime/http/scope/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The package info.
+ */
+@NullMarked
+
+Source files: io/micronaut/http/codec/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Classes representing HTTP decoding.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/context/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains classes for resolving and handling the current server {@link io.micronaut.http.HttpRequest}.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/context/event/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains classes for relates to events {@link io.micronaut.http.HttpRequest}.
+ *
+ * @author Graeme Rocher
+ * @since 1.2.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/converters/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Contains converters specific to HTTP.
+ *
+ * @author Graeme Rocher
+ * @since 2.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/cookie/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * HTTP cookies classes.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/exceptions/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * HTTP exceptions.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/filter/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * HTTP filter chain.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/hateoas/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * hateoas.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/multipart/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * HTTP multipart requests and file upload.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/resource/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Resource loader factory.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/simple/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Simple HTTP request and response classes.
+ *
+ * @author Vladimir Orany
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/simple/cookies/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Simple HTTP cookies classes.
+ *
+ * @author Vladimir Orany
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/sse/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Default server sent request.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/ssl/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * HTTP SSL Authentication.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/uri/QueryStringDecoder.java
+
+/*
+ * Copyright 2012 The Netty Project
+ *
+ * The Netty Project licenses this file to you under the Apache License,
+ * version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at:
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+
+Source files: io/micronaut/http/uri/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * HTTP URI Matching.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/http/util/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * HTTP Util classes.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
+
+Source files: io/micronaut/runtime/http/codec/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Runtime HTTP decoding.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked

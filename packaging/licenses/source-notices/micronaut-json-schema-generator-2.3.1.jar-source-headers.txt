@@ -1,0 +1,53 @@
+Source files: io/micronaut/jsonschema/generator/GeneratorMain.java, io/micronaut/jsonschema/generator/aggregator/AnnotationsAggregator.java, io/micronaut/jsonschema/generator/utils/GeneratorContext.java
+
+/*
+ * Copyright 2017-2024 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/jsonschema/generator/SchemaReferenceCompositionSupport.java, io/micronaut/jsonschema/generator/discovery/DiscoveredSchema.java, io/micronaut/jsonschema/generator/discovery/DiscoveryResult.java, io/micronaut/jsonschema/generator/discovery/DiscoverySkipped.java, io/micronaut/jsonschema/generator/discovery/DiscoveryStep.java, io/micronaut/jsonschema/generator/discovery/DiscoveryWarning.java, io/micronaut/jsonschema/generator/discovery/JdbcConnectionProvider.java, io/micronaut/jsonschema/generator/discovery/JsonSchemaRecordsLogger.java, io/micronaut/jsonschema/generator/discovery/SchemaDiscoveryContext.java, io/micronaut/jsonschema/generator/discovery/SchemaDiscoveryProvider.java, io/micronaut/jsonschema/generator/discovery/SchemaDiscoveryProviders.java, io/micronaut/jsonschema/generator/discovery/SchemaRetrievalException.java, io/micronaut/jsonschema/generator/discovery/SourceSpec.java, io/micronaut/jsonschema/generator/discovery/SourceUnavailableException.java, io/micronaut/jsonschema/generator/oracle/OracleDiscoveryScope.java, io/micronaut/jsonschema/generator/oracle/OracleDiscoverySupport.java, io/micronaut/jsonschema/generator/oracle/OracleDomainSchemaDiscoveryProvider.java, io/micronaut/jsonschema/generator/oracle/OracleDualityViewSchemaDiscoveryProvider.java, io/micronaut/jsonschema/generator/records/JsonSchemaRecordsGeneration.java, io/micronaut/jsonschema/generator/records/JsonSchemaRecordsGeneratorConfig.java, io/micronaut/jsonschema/generator/records/JsonSchemaRecordsManifest.java, io/micronaut/jsonschema/generator/records/JsonSchemaRecordsPipeline.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/jsonschema/generator/SourceGenerator.java, io/micronaut/jsonschema/generator/aggregator/TypeAggregator.java, io/micronaut/jsonschema/generator/loaders/FileLoader.java, io/micronaut/jsonschema/generator/loaders/FileProcessor.java, io/micronaut/jsonschema/generator/loaders/SchemaLoader.java, io/micronaut/jsonschema/generator/loaders/StreamLoader.java, io/micronaut/jsonschema/generator/loaders/UrlLoader.java, io/micronaut/jsonschema/generator/utils/SourceGeneratorConfig.java, io/micronaut/jsonschema/generator/utils/SourceGeneratorConfigBuilder.java
+
+/*
+ * Copyright 2017-2023 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */

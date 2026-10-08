@@ -1,0 +1,88 @@
+Source files: tools/jackson/databind/ext/javatime/JavaTimeInitializer.java, tools/jackson/databind/ext/javatime/deser/DurationDeserializer.java, tools/jackson/databind/ext/javatime/deser/InstantDeserializer.java, tools/jackson/databind/ext/javatime/deser/JSR310DeserializerBase.java, tools/jackson/databind/ext/javatime/deser/JSR310StringParsableDeserializer.java, tools/jackson/databind/ext/javatime/deser/LocalDateDeserializer.java, tools/jackson/databind/ext/javatime/deser/LocalDateTimeDeserializer.java, tools/jackson/databind/ext/javatime/deser/LocalTimeDeserializer.java, tools/jackson/databind/ext/javatime/deser/OffsetTimeDeserializer.java, tools/jackson/databind/ext/javatime/deser/YearDeserializer.java, tools/jackson/databind/ext/javatime/deser/YearMonthDeserializer.java, tools/jackson/databind/ext/javatime/ser/DurationSerializer.java, tools/jackson/databind/ext/javatime/ser/InstantSerializer.java, tools/jackson/databind/ext/javatime/ser/InstantSerializerBase.java, tools/jackson/databind/ext/javatime/ser/JSR310FormattedSerializerBase.java, tools/jackson/databind/ext/javatime/ser/LocalDateSerializer.java, tools/jackson/databind/ext/javatime/ser/LocalDateTimeSerializer.java, tools/jackson/databind/ext/javatime/ser/LocalTimeSerializer.java, tools/jackson/databind/ext/javatime/ser/MonthDaySerializer.java, tools/jackson/databind/ext/javatime/ser/OffsetTimeSerializer.java, tools/jackson/databind/ext/javatime/ser/YearMonthSerializer.java, tools/jackson/databind/ext/javatime/ser/YearSerializer.java, tools/jackson/databind/ext/javatime/util/DecimalUtils.java
+
+/*
+ * Copyright 2013 FasterXML.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License. You may obtain
+ * a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the license for the specific language governing permissions and
+ * limitations under the license.
+ */
+
+Source files: tools/jackson/databind/util/internal/LinkedDeque.java
+
+/*
+ * Copyright 2011 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: tools/jackson/databind/util/internal/PrivateMaxEntriesMap.java
+
+/*
+ * Copyright 2010 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: tools/jackson/databind/util/internal/package-info.java
+
+/*
+ * Copyright 2011 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * This package contains an implementation of a bounded
+ * {@link java.util.concurrent.ConcurrentMap} data structure.
+ * <p>
+ * This package is intended only for use internally by Jackson libraries and has
+ * missing features compared to the full <a href="http://code.google.com/p/concurrentlinkedhashmap/">
+ * http://code.google.com/p/concurrentlinkedhashmap/</a> implementation.
+ * <p>
+ * The {@link tools.jackson.databind.util.internal.PrivateMaxEntriesMap}
+ * class supplies an efficient, scalable, thread-safe, bounded map. As with the
+ * {@code Java Collections Framework} the "Concurrent" prefix is used to
+ * indicate that the map is not governed by a single exclusion lock.
+ *
+ * @see <a href="http://code.google.com/p/concurrentlinkedhashmap/">
+ *      http://code.google.com/p/concurrentlinkedhashmap/</a>
+ */

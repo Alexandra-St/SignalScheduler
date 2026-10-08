@@ -1,0 +1,411 @@
+Source files: com/github/javaparser/ast/AccessSpecifier.java, com/github/javaparser/ast/AllFieldsConstructor.java, com/github/javaparser/ast/ArrayCreationLevel.java, com/github/javaparser/ast/body/AnnotationDeclaration.java, com/github/javaparser/ast/body/AnnotationMemberDeclaration.java, com/github/javaparser/ast/body/BodyDeclaration.java, com/github/javaparser/ast/body/CallableDeclaration.java, com/github/javaparser/ast/body/ClassOrInterfaceDeclaration.java, com/github/javaparser/ast/body/CompactConstructorDeclaration.java, com/github/javaparser/ast/body/ConstructorDeclaration.java, com/github/javaparser/ast/body/EnumConstantDeclaration.java, com/github/javaparser/ast/body/EnumDeclaration.java, com/github/javaparser/ast/body/FieldDeclaration.java, com/github/javaparser/ast/body/InitializerDeclaration.java, com/github/javaparser/ast/body/MethodDeclaration.java, com/github/javaparser/ast/body/Parameter.java, com/github/javaparser/ast/body/ReceiverParameter.java, com/github/javaparser/ast/body/RecordDeclaration.java, com/github/javaparser/ast/body/TypeDeclaration.java, com/github/javaparser/ast/body/VariableDeclarator.java, com/github/javaparser/ast/comments/BlockComment.java, com/github/javaparser/ast/comments/Comment.java, com/github/javaparser/ast/comments/CommentsCollection.java, com/github/javaparser/ast/comments/JavadocComment.java, com/github/javaparser/ast/comments/LineComment.java, com/github/javaparser/ast/comments/MarkdownComment.java, com/github/javaparser/ast/comments/TraditionalJavadocComment.java, com/github/javaparser/ast/CompilationUnit.java, com/github/javaparser/ast/DataKey.java, com/github/javaparser/ast/expr/AnnotationExpr.java, com/github/javaparser/ast/expr/ArrayAccessExpr.java, com/github/javaparser/ast/expr/ArrayCreationExpr.java, com/github/javaparser/ast/expr/ArrayInitializerExpr.java, com/github/javaparser/ast/expr/AssignExpr.java, com/github/javaparser/ast/expr/BinaryExpr.java, com/github/javaparser/ast/expr/BooleanLiteralExpr.java, com/github/javaparser/ast/expr/CastExpr.java, com/github/javaparser/ast/expr/CharLiteralExpr.java, com/github/javaparser/ast/expr/ClassExpr.java, com/github/javaparser/ast/expr/ComponentPatternExpr.java, com/github/javaparser/ast/expr/ConditionalExpr.java, com/github/javaparser/ast/expr/DoubleLiteralExpr.java, com/github/javaparser/ast/expr/EnclosedExpr.java, com/github/javaparser/ast/expr/Expression.java, com/github/javaparser/ast/expr/FieldAccessExpr.java, com/github/javaparser/ast/expr/InstanceOfExpr.java, com/github/javaparser/ast/expr/IntegerLiteralExpr.java, com/github/javaparser/ast/expr/LambdaExpr.java, com/github/javaparser/ast/expr/LiteralExpr.java, com/github/javaparser/ast/expr/LiteralStringValueExpr.java, com/github/javaparser/ast/expr/LongLiteralExpr.java, com/github/javaparser/ast/expr/MarkerAnnotationExpr.java, com/github/javaparser/ast/expr/MemberValuePair.java, com/github/javaparser/ast/expr/MethodCallExpr.java, com/github/javaparser/ast/expr/MethodReferenceExpr.java, com/github/javaparser/ast/expr/Name.java, com/github/javaparser/ast/expr/NameExpr.java, com/github/javaparser/ast/expr/NormalAnnotationExpr.java, com/github/javaparser/ast/expr/NullLiteralExpr.java, com/github/javaparser/ast/expr/ObjectCreationExpr.java, com/github/javaparser/ast/expr/SimpleName.java, com/github/javaparser/ast/expr/SingleMemberAnnotationExpr.java, com/github/javaparser/ast/expr/StringLiteralExpr.java, com/github/javaparser/ast/expr/SuperExpr.java, com/github/javaparser/ast/expr/SwitchExpr.java, com/github/javaparser/ast/expr/TextBlockLiteralExpr.java, com/github/javaparser/ast/expr/ThisExpr.java, com/github/javaparser/ast/expr/TypeExpr.java, com/github/javaparser/ast/expr/TypePatternExpr.java, com/github/javaparser/ast/expr/UnaryExpr.java, com/github/javaparser/ast/expr/VariableDeclarationExpr.java, com/github/javaparser/ast/Generated.java, com/github/javaparser/ast/ImportDeclaration.java, com/github/javaparser/ast/Modifier.java, com/github/javaparser/ast/modules/ModuleDeclaration.java, com/github/javaparser/ast/modules/ModuleDirective.java, com/github/javaparser/ast/modules/ModuleExportsDirective.java, com/github/javaparser/ast/modules/ModuleOpensDirective.java, com/github/javaparser/ast/modules/ModuleProvidesDirective.java, com/github/javaparser/ast/modules/ModuleRequiresDirective.java, com/github/javaparser/ast/modules/ModuleUsesDirective.java, com/github/javaparser/ast/Node.java, com/github/javaparser/ast/NodeList.java, com/github/javaparser/ast/nodeTypes/modifiers/NodeWithAbstractModifier.java, com/github/javaparser/ast/nodeTypes/modifiers/NodeWithAccessModifiers.java, com/github/javaparser/ast/nodeTypes/modifiers/NodeWithFinalModifier.java, com/github/javaparser/ast/nodeTypes/modifiers/NodeWithPrivateModifier.java, com/github/javaparser/ast/nodeTypes/modifiers/NodeWithProtectedModifier.java, com/github/javaparser/ast/nodeTypes/modifiers/NodeWithPublicModifier.java, com/github/javaparser/ast/nodeTypes/modifiers/NodeWithStaticModifier.java, com/github/javaparser/ast/nodeTypes/modifiers/NodeWithStrictfpModifier.java, com/github/javaparser/ast/nodeTypes/NodeWithAnnotations.java, com/github/javaparser/ast/nodeTypes/NodeWithArguments.java, com/github/javaparser/ast/nodeTypes/NodeWithBlockStmt.java, com/github/javaparser/ast/nodeTypes/NodeWithBody.java, com/github/javaparser/ast/nodeTypes/NodeWithCondition.java, com/github/javaparser/ast/nodeTypes/NodeWithDeclaration.java, com/github/javaparser/ast/nodeTypes/NodeWithExpression.java, com/github/javaparser/ast/nodeTypes/NodeWithExtends.java, com/github/javaparser/ast/nodeTypes/NodeWithIdentifier.java, com/github/javaparser/ast/nodeTypes/NodeWithImplements.java, com/github/javaparser/ast/nodeTypes/NodeWithJavadoc.java, com/github/javaparser/ast/nodeTypes/NodeWithMembers.java, com/github/javaparser/ast/nodeTypes/NodeWithModifiers.java, com/github/javaparser/ast/nodeTypes/NodeWithName.java, com/github/javaparser/ast/nodeTypes/NodeWithOptionalBlockStmt.java, com/github/javaparser/ast/nodeTypes/NodeWithOptionalLabel.java, com/github/javaparser/ast/nodeTypes/NodeWithOptionalScope.java, com/github/javaparser/ast/nodeTypes/NodeWithParameters.java, com/github/javaparser/ast/nodeTypes/NodeWithRange.java, com/github/javaparser/ast/nodeTypes/NodeWithScope.java, com/github/javaparser/ast/nodeTypes/NodeWithSimpleName.java, com/github/javaparser/ast/nodeTypes/NodeWithStatements.java, com/github/javaparser/ast/nodeTypes/NodeWithThrownExceptions.java, com/github/javaparser/ast/nodeTypes/NodeWithTokenRange.java, com/github/javaparser/ast/nodeTypes/NodeWithTraversableScope.java, com/github/javaparser/ast/nodeTypes/NodeWithType.java, com/github/javaparser/ast/nodeTypes/NodeWithTypeArguments.java, com/github/javaparser/ast/nodeTypes/NodeWithTypeParameters.java, com/github/javaparser/ast/nodeTypes/NodeWithVariables.java, com/github/javaparser/ast/nodeTypes/SwitchNode.java, com/github/javaparser/ast/observer/AstObserver.java, com/github/javaparser/ast/observer/AstObserverAdapter.java, com/github/javaparser/ast/observer/Observable.java, com/github/javaparser/ast/observer/ObservableProperty.java, com/github/javaparser/ast/observer/PropagatingAstObserver.java, com/github/javaparser/ast/PackageDeclaration.java, com/github/javaparser/ast/stmt/AssertStmt.java, com/github/javaparser/ast/stmt/BlockStmt.java, com/github/javaparser/ast/stmt/BreakStmt.java, com/github/javaparser/ast/stmt/CatchClause.java, com/github/javaparser/ast/stmt/ContinueStmt.java, com/github/javaparser/ast/stmt/DoStmt.java, com/github/javaparser/ast/stmt/EmptyStmt.java, com/github/javaparser/ast/stmt/ExplicitConstructorInvocationStmt.java, com/github/javaparser/ast/stmt/ExpressionStmt.java, com/github/javaparser/ast/stmt/ForEachStmt.java, com/github/javaparser/ast/stmt/ForStmt.java, com/github/javaparser/ast/stmt/IfStmt.java, com/github/javaparser/ast/stmt/LabeledStmt.java, com/github/javaparser/ast/stmt/LocalClassDeclarationStmt.java, com/github/javaparser/ast/stmt/LocalRecordDeclarationStmt.java, com/github/javaparser/ast/stmt/ReturnStmt.java, com/github/javaparser/ast/stmt/Statement.java, com/github/javaparser/ast/stmt/SwitchEntry.java, com/github/javaparser/ast/stmt/SwitchStmt.java, com/github/javaparser/ast/stmt/SynchronizedStmt.java, com/github/javaparser/ast/stmt/ThrowStmt.java, com/github/javaparser/ast/stmt/TryStmt.java, com/github/javaparser/ast/stmt/UnparsableStmt.java, com/github/javaparser/ast/stmt/WhileStmt.java, com/github/javaparser/ast/stmt/YieldStmt.java, com/github/javaparser/ast/type/ArrayType.java, com/github/javaparser/ast/type/ClassOrInterfaceType.java, com/github/javaparser/ast/type/IntersectionType.java, com/github/javaparser/ast/type/PrimitiveType.java, com/github/javaparser/ast/type/ReferenceType.java, com/github/javaparser/ast/type/Type.java, com/github/javaparser/ast/type/TypeParameter.java, com/github/javaparser/ast/type/UnionType.java, com/github/javaparser/ast/type/UnknownType.java, com/github/javaparser/ast/type/VarType.java, com/github/javaparser/ast/type/VoidType.java, com/github/javaparser/ast/type/WildcardType.java, com/github/javaparser/ast/validator/language_level_validations/chunks/CommonValidators.java, com/github/javaparser/ast/validator/language_level_validations/chunks/ModifierValidator.java, com/github/javaparser/ast/validator/language_level_validations/chunks/NoBinaryIntegerLiteralsValidator.java, com/github/javaparser/ast/validator/language_level_validations/chunks/NoUnderscoresInIntegerLiteralsValidator.java, com/github/javaparser/ast/validator/language_level_validations/chunks/UnderscoreKeywordValidator.java, com/github/javaparser/ast/validator/language_level_validations/chunks/VarValidator.java, com/github/javaparser/ast/validator/language_level_validations/Java10PreviewValidator.java, com/github/javaparser/ast/validator/language_level_validations/Java10Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java11PreviewValidator.java, com/github/javaparser/ast/validator/language_level_validations/Java11Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java12PreviewValidator.java, com/github/javaparser/ast/validator/language_level_validations/Java12Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java13PreviewValidator.java, com/github/javaparser/ast/validator/language_level_validations/Java13Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java14PreviewValidator.java, com/github/javaparser/ast/validator/language_level_validations/Java14Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java15PreviewValidator.java, com/github/javaparser/ast/validator/language_level_validations/Java15Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java16PreviewValidator.java, com/github/javaparser/ast/validator/language_level_validations/Java16Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java17PreviewValidator.java, com/github/javaparser/ast/validator/language_level_validations/Java17Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java1_0Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java1_1Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java1_2Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java1_3Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java1_4Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java23Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java24Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java25Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java26Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java5Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java6Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java7Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java8Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java9Validator.java, com/github/javaparser/ast/validator/language_level_validations/UpgradeJavaMessage.java, com/github/javaparser/ast/validator/postprocessors/Java10PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java11PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java12PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java13PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java14PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java15PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java16PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java17PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java23PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java24PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java25PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java26PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/PostProcessors.java, com/github/javaparser/ast/validator/ProblemReporter.java, com/github/javaparser/ast/validator/ReservedKeywordValidator.java, com/github/javaparser/ast/validator/SimpleValidator.java, com/github/javaparser/ast/validator/SingleNodeTypeValidator.java, com/github/javaparser/ast/validator/TreeVisitorValidator.java, com/github/javaparser/ast/validator/TypedValidator.java, com/github/javaparser/ast/validator/Validator.java, com/github/javaparser/ast/validator/Validators.java, com/github/javaparser/ast/validator/VisitorValidator.java, com/github/javaparser/ast/visitor/CloneVisitor.java, com/github/javaparser/ast/visitor/EqualsVisitor.java, com/github/javaparser/ast/visitor/GenericListVisitorAdapter.java, com/github/javaparser/ast/visitor/GenericVisitor.java, com/github/javaparser/ast/visitor/GenericVisitorAdapter.java, com/github/javaparser/ast/visitor/GenericVisitorWithDefaults.java, com/github/javaparser/ast/visitor/HashCodeVisitor.java, com/github/javaparser/ast/visitor/ModifierVisitor.java, com/github/javaparser/ast/visitor/NoCommentEqualsVisitor.java, com/github/javaparser/ast/visitor/NoCommentHashCodeVisitor.java, com/github/javaparser/ast/visitor/ObjectIdentityEqualsVisitor.java, com/github/javaparser/ast/visitor/ObjectIdentityHashCodeVisitor.java, com/github/javaparser/ast/visitor/TreeVisitor.java, com/github/javaparser/ast/visitor/Visitable.java, com/github/javaparser/ast/visitor/VoidVisitor.java, com/github/javaparser/ast/visitor/VoidVisitorAdapter.java, com/github/javaparser/ast/visitor/VoidVisitorWithDefaults.java, com/github/javaparser/CommentsInserter.java, com/github/javaparser/HasParentNode.java, com/github/javaparser/javadoc/description/JavadocDescription.java, com/github/javaparser/javadoc/description/JavadocDescriptionElement.java, com/github/javaparser/javadoc/description/JavadocInlineTag.java, com/github/javaparser/javadoc/description/JavadocSnippet.java, com/github/javaparser/javadoc/Javadoc.java, com/github/javaparser/javadoc/JavadocBlockTag.java, com/github/javaparser/JavadocParser.java, com/github/javaparser/JavaParser.java, com/github/javaparser/JavaToken.java, com/github/javaparser/LineEndingProcessingProvider.java, com/github/javaparser/metamodel/AnnotationDeclarationMetaModel.java, com/github/javaparser/metamodel/AnnotationExprMetaModel.java, com/github/javaparser/metamodel/AnnotationMemberDeclarationMetaModel.java, com/github/javaparser/metamodel/ArrayAccessExprMetaModel.java, com/github/javaparser/metamodel/ArrayCreationExprMetaModel.java, com/github/javaparser/metamodel/ArrayCreationLevelMetaModel.java, com/github/javaparser/metamodel/ArrayInitializerExprMetaModel.java, com/github/javaparser/metamodel/ArrayTypeMetaModel.java, com/github/javaparser/metamodel/AssertStmtMetaModel.java, com/github/javaparser/metamodel/AssignExprMetaModel.java, com/github/javaparser/metamodel/BaseNodeMetaModel.java, com/github/javaparser/metamodel/BinaryExprMetaModel.java, com/github/javaparser/metamodel/BlockCommentMetaModel.java, com/github/javaparser/metamodel/BlockStmtMetaModel.java, com/github/javaparser/metamodel/BodyDeclarationMetaModel.java, com/github/javaparser/metamodel/BooleanLiteralExprMetaModel.java, com/github/javaparser/metamodel/BreakStmtMetaModel.java, com/github/javaparser/metamodel/CallableDeclarationMetaModel.java, com/github/javaparser/metamodel/CastExprMetaModel.java, com/github/javaparser/metamodel/CatchClauseMetaModel.java, com/github/javaparser/metamodel/CharLiteralExprMetaModel.java, com/github/javaparser/metamodel/ClassExprMetaModel.java, com/github/javaparser/metamodel/ClassOrInterfaceDeclarationMetaModel.java, com/github/javaparser/metamodel/ClassOrInterfaceTypeMetaModel.java, com/github/javaparser/metamodel/CommentMetaModel.java, com/github/javaparser/metamodel/CompactConstructorDeclarationMetaModel.java, com/github/javaparser/metamodel/CompilationUnitMetaModel.java, com/github/javaparser/metamodel/ComponentPatternExprMetaModel.java, com/github/javaparser/metamodel/ConditionalExprMetaModel.java, com/github/javaparser/metamodel/ConstructorDeclarationMetaModel.java, com/github/javaparser/metamodel/ContinueStmtMetaModel.java, com/github/javaparser/metamodel/DerivedProperty.java, com/github/javaparser/metamodel/DoStmtMetaModel.java, com/github/javaparser/metamodel/DoubleLiteralExprMetaModel.java, com/github/javaparser/metamodel/EmptyStmtMetaModel.java, com/github/javaparser/metamodel/EnclosedExprMetaModel.java, com/github/javaparser/metamodel/EnumConstantDeclarationMetaModel.java, com/github/javaparser/metamodel/EnumDeclarationMetaModel.java, com/github/javaparser/metamodel/ExplicitConstructorInvocationStmtMetaModel.java, com/github/javaparser/metamodel/ExpressionMetaModel.java, com/github/javaparser/metamodel/ExpressionStmtMetaModel.java, com/github/javaparser/metamodel/FieldAccessExprMetaModel.java, com/github/javaparser/metamodel/FieldDeclarationMetaModel.java, com/github/javaparser/metamodel/ForEachStmtMetaModel.java, com/github/javaparser/metamodel/ForStmtMetaModel.java, com/github/javaparser/metamodel/IfStmtMetaModel.java, com/github/javaparser/metamodel/ImportDeclarationMetaModel.java, com/github/javaparser/metamodel/InitializerDeclarationMetaModel.java, com/github/javaparser/metamodel/InstanceOfExprMetaModel.java, com/github/javaparser/metamodel/IntegerLiteralExprMetaModel.java, com/github/javaparser/metamodel/InternalProperty.java, com/github/javaparser/metamodel/IntersectionTypeMetaModel.java, com/github/javaparser/metamodel/JavadocCommentMetaModel.java, com/github/javaparser/metamodel/JavaParserMetaModel.java, com/github/javaparser/metamodel/LabeledStmtMetaModel.java, com/github/javaparser/metamodel/LambdaExprMetaModel.java, com/github/javaparser/metamodel/LineCommentMetaModel.java, com/github/javaparser/metamodel/LiteralExprMetaModel.java, com/github/javaparser/metamodel/LiteralStringValueExprMetaModel.java, com/github/javaparser/metamodel/LocalClassDeclarationStmtMetaModel.java, com/github/javaparser/metamodel/LocalRecordDeclarationStmtMetaModel.java, com/github/javaparser/metamodel/LongLiteralExprMetaModel.java, com/github/javaparser/metamodel/MarkdownCommentMetaModel.java, com/github/javaparser/metamodel/MarkerAnnotationExprMetaModel.java, com/github/javaparser/metamodel/MatchAllPatternExprMetaModel.java, com/github/javaparser/metamodel/MemberValuePairMetaModel.java, com/github/javaparser/metamodel/MethodCallExprMetaModel.java, com/github/javaparser/metamodel/MethodDeclarationMetaModel.java, com/github/javaparser/metamodel/MethodReferenceExprMetaModel.java, com/github/javaparser/metamodel/ModifierMetaModel.java, com/github/javaparser/metamodel/ModuleDeclarationMetaModel.java, com/github/javaparser/metamodel/ModuleDirectiveMetaModel.java, com/github/javaparser/metamodel/ModuleExportsDirectiveMetaModel.java, com/github/javaparser/metamodel/ModuleOpensDirectiveMetaModel.java, com/github/javaparser/metamodel/ModuleProvidesDirectiveMetaModel.java, com/github/javaparser/metamodel/ModuleRequiresDirectiveMetaModel.java, com/github/javaparser/metamodel/ModuleUsesDirectiveMetaModel.java, com/github/javaparser/metamodel/NameExprMetaModel.java, com/github/javaparser/metamodel/NameMetaModel.java, com/github/javaparser/metamodel/NodeMetaModel.java, com/github/javaparser/metamodel/NonEmptyProperty.java, com/github/javaparser/metamodel/NormalAnnotationExprMetaModel.java, com/github/javaparser/metamodel/NullLiteralExprMetaModel.java, com/github/javaparser/metamodel/ObjectCreationExprMetaModel.java, com/github/javaparser/metamodel/OptionalProperty.java, com/github/javaparser/metamodel/PackageDeclarationMetaModel.java, com/github/javaparser/metamodel/ParameterMetaModel.java, com/github/javaparser/metamodel/PatternExprMetaModel.java, com/github/javaparser/metamodel/PrimitiveTypeMetaModel.java, com/github/javaparser/metamodel/PropertyMetaModel.java, com/github/javaparser/metamodel/ReceiverParameterMetaModel.java, com/github/javaparser/metamodel/RecordDeclarationMetaModel.java, com/github/javaparser/metamodel/RecordPatternExprMetaModel.java, com/github/javaparser/metamodel/ReferenceTypeMetaModel.java, com/github/javaparser/metamodel/ReturnStmtMetaModel.java, com/github/javaparser/metamodel/SimpleNameMetaModel.java, com/github/javaparser/metamodel/SingleMemberAnnotationExprMetaModel.java, com/github/javaparser/metamodel/StatementMetaModel.java, com/github/javaparser/metamodel/StringLiteralExprMetaModel.java, com/github/javaparser/metamodel/SuperExprMetaModel.java, com/github/javaparser/metamodel/SwitchEntryMetaModel.java, com/github/javaparser/metamodel/SwitchExprMetaModel.java, com/github/javaparser/metamodel/SwitchStmtMetaModel.java, com/github/javaparser/metamodel/SynchronizedStmtMetaModel.java, com/github/javaparser/metamodel/TextBlockLiteralExprMetaModel.java, com/github/javaparser/metamodel/ThisExprMetaModel.java, com/github/javaparser/metamodel/ThrowStmtMetaModel.java, com/github/javaparser/metamodel/TraditionalJavadocCommentMetaModel.java, com/github/javaparser/metamodel/TryStmtMetaModel.java, com/github/javaparser/metamodel/TypeDeclarationMetaModel.java, com/github/javaparser/metamodel/TypeExprMetaModel.java, com/github/javaparser/metamodel/TypeMetaModel.java, com/github/javaparser/metamodel/TypeParameterMetaModel.java, com/github/javaparser/metamodel/TypePatternExprMetaModel.java, com/github/javaparser/metamodel/UnaryExprMetaModel.java, com/github/javaparser/metamodel/UnionTypeMetaModel.java, com/github/javaparser/metamodel/UnknownTypeMetaModel.java, com/github/javaparser/metamodel/UnparsableStmtMetaModel.java, com/github/javaparser/metamodel/VariableDeclarationExprMetaModel.java, com/github/javaparser/metamodel/VariableDeclaratorMetaModel.java, com/github/javaparser/metamodel/VarTypeMetaModel.java, com/github/javaparser/metamodel/VoidTypeMetaModel.java, com/github/javaparser/metamodel/WhileStmtMetaModel.java, com/github/javaparser/metamodel/WildcardTypeMetaModel.java, com/github/javaparser/metamodel/YieldStmtMetaModel.java, com/github/javaparser/ParseProblemException.java, com/github/javaparser/ParserConfiguration.java, com/github/javaparser/ParseResult.java, com/github/javaparser/ParseStart.java, com/github/javaparser/Position.java, com/github/javaparser/printer/concretesyntaxmodel/CsmAttribute.java, com/github/javaparser/printer/concretesyntaxmodel/CsmChar.java, com/github/javaparser/printer/concretesyntaxmodel/CsmComment.java, com/github/javaparser/printer/concretesyntaxmodel/CsmConditional.java, com/github/javaparser/printer/concretesyntaxmodel/CsmElement.java, com/github/javaparser/printer/concretesyntaxmodel/CsmIndent.java, com/github/javaparser/printer/concretesyntaxmodel/CsmList.java, com/github/javaparser/printer/concretesyntaxmodel/CsmMix.java, com/github/javaparser/printer/concretesyntaxmodel/CsmNone.java, com/github/javaparser/printer/concretesyntaxmodel/CsmOrphanCommentsEnding.java, com/github/javaparser/printer/concretesyntaxmodel/CsmSequence.java, com/github/javaparser/printer/concretesyntaxmodel/CsmSingleReference.java, com/github/javaparser/printer/concretesyntaxmodel/CsmString.java, com/github/javaparser/printer/concretesyntaxmodel/CsmTextBlock.java, com/github/javaparser/printer/concretesyntaxmodel/CsmToken.java, com/github/javaparser/printer/concretesyntaxmodel/CsmUnindent.java, com/github/javaparser/printer/concretesyntaxmodel/PrintingHelper.java, com/github/javaparser/printer/ConcreteSyntaxModel.java, com/github/javaparser/printer/configuration/PrettyPrinterConfiguration.java, com/github/javaparser/printer/DefaultPrettyPrinter.java, com/github/javaparser/printer/DotPrinter.java, com/github/javaparser/printer/lexicalpreservation/Added.java, com/github/javaparser/printer/lexicalpreservation/changes/Change.java, com/github/javaparser/printer/lexicalpreservation/changes/ListAdditionChange.java, com/github/javaparser/printer/lexicalpreservation/changes/ListRemovalChange.java, com/github/javaparser/printer/lexicalpreservation/changes/ListReplacementChange.java, com/github/javaparser/printer/lexicalpreservation/changes/NoChange.java, com/github/javaparser/printer/lexicalpreservation/changes/PropertyChange.java, com/github/javaparser/printer/lexicalpreservation/ChildTextElement.java, com/github/javaparser/printer/lexicalpreservation/Difference.java, com/github/javaparser/printer/lexicalpreservation/DifferenceElement.java, com/github/javaparser/printer/lexicalpreservation/DifferenceElementCalculator.java, com/github/javaparser/printer/lexicalpreservation/IndexTrackingIterator.java, com/github/javaparser/printer/lexicalpreservation/Kept.java, com/github/javaparser/printer/lexicalpreservation/LexicalDifferenceCalculator.java, com/github/javaparser/printer/lexicalpreservation/LexicalPreservingPrinter.java, com/github/javaparser/printer/lexicalpreservation/NodeText.java, com/github/javaparser/printer/lexicalpreservation/PhantomNodeLogic.java, com/github/javaparser/printer/lexicalpreservation/Removed.java, com/github/javaparser/printer/lexicalpreservation/RemovedGroup.java, com/github/javaparser/printer/lexicalpreservation/Reshuffled.java, com/github/javaparser/printer/lexicalpreservation/TextElement.java, com/github/javaparser/printer/lexicalpreservation/TextElementIteratorsFactory.java, com/github/javaparser/printer/lexicalpreservation/TextElementList.java, com/github/javaparser/printer/lexicalpreservation/TextElementMatcher.java, com/github/javaparser/printer/lexicalpreservation/TextElementMatchers.java, com/github/javaparser/printer/lexicalpreservation/TextElementSequence.java, com/github/javaparser/printer/lexicalpreservation/TokenOwnerDetector.java, com/github/javaparser/printer/lexicalpreservation/TokenTextElement.java, com/github/javaparser/printer/lexicalpreservation/TypeOwnerStrategy.java, com/github/javaparser/printer/PrettyPrinter.java, com/github/javaparser/printer/PrettyPrintVisitor.java, com/github/javaparser/printer/SourcePrinter.java, com/github/javaparser/printer/Stringable.java, com/github/javaparser/printer/XmlPrinter.java, com/github/javaparser/printer/YamlPrinter.java, com/github/javaparser/Problem.java, com/github/javaparser/Providers.java, com/github/javaparser/quality/NotNull.java, com/github/javaparser/quality/Nullable.java, com/github/javaparser/quality/Preconditions.java, com/github/javaparser/Range.java, com/github/javaparser/resolution/declarations/AssociableToAST.java, com/github/javaparser/resolution/declarations/HasAccessSpecifier.java, com/github/javaparser/resolution/declarations/ResolvedAnnotationDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedAnnotationMemberDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedClassDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedConstructorDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedEnumConstantDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedEnumDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedFieldDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedInterfaceDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedMethodDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedMethodLikeDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedParameterDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedRecordDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedReferenceTypeDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedTypeDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedTypeParameterDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedTypeParametrizable.java, com/github/javaparser/resolution/declarations/ResolvedTypePatternDeclaration.java, com/github/javaparser/resolution/declarations/ResolvedValueDeclaration.java, com/github/javaparser/resolution/MethodAmbiguityException.java, com/github/javaparser/resolution/MethodUsage.java, com/github/javaparser/resolution/Resolvable.java, com/github/javaparser/resolution/SymbolResolver.java, com/github/javaparser/resolution/types/parametrization/ResolvedTypeParametersMap.java, com/github/javaparser/resolution/types/parametrization/ResolvedTypeParameterValueProvider.java, com/github/javaparser/resolution/types/parametrization/ResolvedTypeParametrized.java, com/github/javaparser/resolution/types/ResolvedArrayType.java, com/github/javaparser/resolution/types/ResolvedIntersectionType.java, com/github/javaparser/resolution/types/ResolvedLambdaConstraintType.java, com/github/javaparser/resolution/types/ResolvedPrimitiveType.java, com/github/javaparser/resolution/types/ResolvedReferenceType.java, com/github/javaparser/resolution/types/ResolvedType.java, com/github/javaparser/resolution/types/ResolvedTypeTransformer.java, com/github/javaparser/resolution/types/ResolvedTypeVariable.java, com/github/javaparser/resolution/types/ResolvedUnionType.java, com/github/javaparser/resolution/types/ResolvedVoidType.java, com/github/javaparser/resolution/types/ResolvedWildcard.java, com/github/javaparser/resolution/UnsolvedSymbolException.java, com/github/javaparser/StaticJavaParser.java, com/github/javaparser/TokenRange.java, com/github/javaparser/TokenTypes.java, com/github/javaparser/UnicodeEscapeProcessingProvider.java, com/github/javaparser/utils/ClassUtils.java, com/github/javaparser/utils/CodeGenerationUtils.java, com/github/javaparser/utils/CollectionStrategy.java, com/github/javaparser/utils/Log.java, com/github/javaparser/utils/Optionals.java, com/github/javaparser/utils/Pair.java, com/github/javaparser/utils/ParserCollectionStrategy.java, com/github/javaparser/utils/PositionUtils.java, com/github/javaparser/utils/ProjectRoot.java, com/github/javaparser/utils/SeparatedItemStringBuilder.java, com/github/javaparser/utils/SourceRoot.java, com/github/javaparser/utils/SourceZip.java, com/github/javaparser/utils/StringEscapeUtils.java, com/github/javaparser/utils/TypeUtils.java, com/github/javaparser/utils/Utils.java, com/github/javaparser/utils/VisitorList.java, com/github/javaparser/utils/VisitorMap.java, com/github/javaparser/utils/VisitorSet.java, com/github/javaparser/GeneratedJavaParserBase.java, com/github/javaparser/GeneratedJavaParserTokenManagerBase.java, com/github/javaparser/ModifierHolder.java, com/github/javaparser/RangedList.java, com/github/javaparser/TokenBase.java
+
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/ast/expr/MatchAllPatternExpr.java, com/github/javaparser/ast/expr/PatternExpr.java, com/github/javaparser/ast/expr/RecordPatternExpr.java, com/github/javaparser/ast/validator/language_level_validations/Java18Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java19Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java20Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java21Validator.java, com/github/javaparser/ast/validator/language_level_validations/Java22Validator.java, com/github/javaparser/ast/validator/postprocessors/Java18PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java19PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java20PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java21PostProcessor.java, com/github/javaparser/ast/validator/postprocessors/Java22PostProcessor.java, com/github/javaparser/printer/ConfigurablePrinter.java, com/github/javaparser/printer/configuration/DefaultConfigurationOption.java, com/github/javaparser/printer/configuration/DefaultPrinterConfiguration.java, com/github/javaparser/printer/configuration/Indentation.java, com/github/javaparser/printer/DefaultPrettyPrinterVisitor.java, com/github/javaparser/printer/lexicalpreservation/DefaultLexicalPreservingPrinter.java, com/github/javaparser/printer/lexicalpreservation/IndentationCalculator.java, com/github/javaparser/printer/lexicalpreservation/IndentationConstants.java, com/github/javaparser/printer/lexicalpreservation/IndentationContext.java, com/github/javaparser/printer/lexicalpreservation/PeekingIterator.java, com/github/javaparser/printer/lexicalpreservation/TextElementIterator.java, com/github/javaparser/resolution/cache/Cache.java
+
+/*
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/ast/type/ConvertibleToUsage.java, com/github/javaparser/ast/validator/language_level_validations/chunks/RecordDeclarationValidator.java, com/github/javaparser/ast/validator/language_level_validations/chunks/SwitchExprValidator.java, com/github/javaparser/ast/visitor/NodeFinderVisitor.java, com/github/javaparser/JavaParserAdapter.java, com/github/javaparser/printer/configuration/ConfigurationOption.java, com/github/javaparser/printer/configuration/ImportOrderingStrategy.java, com/github/javaparser/printer/configuration/imports/DefaultImportOrderingStrategy.java, com/github/javaparser/printer/configuration/imports/EclipseImportOrderingStrategy.java, com/github/javaparser/printer/configuration/imports/IntelliJImportOrderingStrategy.java, com/github/javaparser/printer/configuration/PrinterConfiguration.java, com/github/javaparser/printer/lexicalpreservation/LexicalPreservingVisitor.java, com/github/javaparser/printer/lexicalpreservation/LookaheadIterator.java, com/github/javaparser/printer/lexicalpreservation/PrintableTextElement.java, com/github/javaparser/printer/lexicalpreservation/ReshuffledDiffElementExtractor.java, com/github/javaparser/printer/Printer.java, com/github/javaparser/Processor.java, com/github/javaparser/resolution/cache/CacheStats.java, com/github/javaparser/resolution/promotion/ConditionalExprHandler.java, com/github/javaparser/resolution/Solver.java, com/github/javaparser/utils/LineSeparator.java, com/github/javaparser/JavaParserBuild.java
+
+/*
+ * Copyright (C) 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/ast/validator/RecordAsTypeIdentifierNotAllowed.java
+
+/*
+ * Copyright (C) 2021 The JavaParser Team.
+ * Copyright (C) 2021 Oliver Kopp
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/resolution/Context.java, com/github/javaparser/resolution/logic/ConflictingGenericTypesException.java, com/github/javaparser/resolution/logic/ConstructorResolutionLogic.java, com/github/javaparser/resolution/logic/FunctionalInterfaceLogic.java, com/github/javaparser/resolution/logic/InferenceContext.java, com/github/javaparser/resolution/logic/InferenceVariableType.java, com/github/javaparser/resolution/logic/MethodResolutionCapability.java, com/github/javaparser/resolution/logic/MethodResolutionLogic.java, com/github/javaparser/resolution/model/LambdaArgumentTypePlaceholder.java, com/github/javaparser/resolution/model/SymbolReference.java, com/github/javaparser/resolution/model/typesystem/LazyType.java, com/github/javaparser/resolution/model/typesystem/NullType.java, com/github/javaparser/resolution/model/typesystem/ReferenceTypeImpl.java, com/github/javaparser/resolution/model/Value.java, com/github/javaparser/resolution/Navigator.java, com/github/javaparser/resolution/SymbolDeclarator.java, com/github/javaparser/resolution/TypeSolver.java
+
+/*
+ * Copyright (C) 2015-2016 Federico Tomassetti
+ * Copyright (C) 2017-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/AbstractCharStream.java
+
+/* Generated by: ParserGeneratorCC: Do not edit this line. AbstractCharStream.java Version 1.1 */
+/* ParserGeneratorCCOptions:SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/CharStream.java
+
+/* Generated by: ParserGeneratorCC: Do not edit this line. CharStream.java Version 1.1 */
+/* ParserGeneratorCCOptions:SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/GeneratedJavaParser.java
+
+/* GeneratedJavaParser.java */
+/* Generated by: ParserGeneratorCC: Do not edit this line. GeneratedJavaParser.java */
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/GeneratedJavaParserConstants.java
+
+/* Generated by: ParserGeneratorCC: Do not edit this line. GeneratedJavaParserConstants.java */
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/GeneratedJavaParserTokenManager.java
+
+/* GeneratedJavaParserTokenManager.java */
+/* Generated by: ParserGeneratorCC: Do not edit this line. GeneratedJavaParserTokenManager.java */
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/ParseException.java
+
+/* Generated by: ParserGeneratorCC: Do not edit this line. ParseException.java Version 1.1 */
+/* ParserGeneratorCCOptions:KEEP_LINE_COLUMN=true */
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/Provider.java
+
+/* Generated by: ParserGeneratorCC: Do not edit this line. Provider.java Version 1.1 */
+/* ParserGeneratorCCOptions:KEEP_LINE_COLUMN=true */
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/SimpleCharStream.java
+
+/* Generated by: ParserGeneratorCC: Do not edit this line. SimpleCharStream.java Version 1.1 */
+/* ParserGeneratorCCOptions:SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/StreamProvider.java
+
+/* Generated by: ParserGeneratorCC: Do not edit this line. StreamProvider.java Version 1.1 */
+/* ParserGeneratorCCOptions:KEEP_LINE_COLUMN=true */
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/StringProvider.java
+
+/* Generated by: ParserGeneratorCC: Do not edit this line. StringProvider.java Version 1.1 */
+/* ParserGeneratorCCOptions:KEEP_LINE_COLUMN=true */
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/Token.java
+
+/* Generated by: ParserGeneratorCC: Do not edit this line. Token.java Version 1.1 */
+/* ParserGeneratorCCOptions:TOKEN_EXTENDS=TokenBase,KEEP_LINE_COLUMN=true,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */
+
+Source files: com/github/javaparser/TokenMgrException.java
+
+/* Generated by: ParserGeneratorCC: Do not edit this line. TokenMgrException.java Version 1.1 */
+/* ParserGeneratorCCOptions: */
+/*
+ * Copyright (C) 2007-2010 Júlio Vilmar Gesser.
+ * Copyright (C) 2011, 2013-2026 The JavaParser Team.
+ *
+ * This file is part of JavaParser.
+ *
+ * JavaParser can be used either under the terms of
+ * a) the GNU Lesser General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ * b) the terms of the Apache License
+ *
+ * You should have received a copy of both licenses in LICENCE.LGPL and
+ * LICENCE.APACHE. Please refer to those files for details.
+ *
+ * JavaParser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ */

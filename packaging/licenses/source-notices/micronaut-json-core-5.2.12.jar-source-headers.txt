@@ -1,0 +1,118 @@
+Source files: io/micronaut/json/JsonConfiguration.java, io/micronaut/json/JsonFeatures.java, io/micronaut/json/JsonMapper.java, io/micronaut/json/JsonStreamConfig.java, io/micronaut/json/bind/JsonBeanPropertyBinderExceptionHandler.java, io/micronaut/json/convert/JsonConverterRegistrar.java, io/micronaut/json/tree/JsonArray.java, io/micronaut/json/tree/JsonBoolean.java, io/micronaut/json/tree/JsonContainer.java, io/micronaut/json/tree/JsonNode.java, io/micronaut/json/tree/JsonNull.java, io/micronaut/json/tree/JsonNumber.java, io/micronaut/json/tree/JsonObject.java, io/micronaut/json/tree/JsonScalar.java, io/micronaut/json/tree/JsonString.java
+
+/*
+ * Copyright 2017-2021 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/json/JsonMapperSupplier.java
+
+/*
+ * Copyright 2017-2022 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/json/JsonObjectSerializer.java, io/micronaut/json/bind/JsonBeanPropertyBinder.java, io/micronaut/json/codec/JsonMediaTypeCodec.java, io/micronaut/json/codec/JsonStreamMediaTypeCodec.java, io/micronaut/json/codec/MapperMediaTypeCodec.java, io/micronaut/json/convert/JsonNodeConvertibleValues.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/json/JsonSyntaxException.java, io/micronaut/json/body/CustomizableJsonHandler.java, io/micronaut/json/body/JsonMessageHandler.java, io/micronaut/json/convert/LazyJsonNode.java
+
+/*
+ * Copyright 2017-2023 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Source files: io/micronaut/json/package-info.java, io/micronaut/json/body/package-info.java, io/micronaut/json/codec/package-info.java, io/micronaut/json/convert/package-info.java, io/micronaut/json/tree/package-info.java
+
+/*
+ * Copyright 2017-2026 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * The package info.
+ */
+@NullMarked
+
+Source files: io/micronaut/json/bind/package-info.java
+
+/*
+ * Copyright 2017-2020 original authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Jackson bean binding to properties.
+ *
+ * @author Graeme Rocher
+ * @since 1.0
+ */
+@NullMarked
