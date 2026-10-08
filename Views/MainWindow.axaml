@@ -4,7 +4,7 @@
         xmlns:models="using:SignalScheduler.Models"
         x:Class="SignalScheduler.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel" x:CompileBindings="True"
-        Title="Signal Scheduler" Width="640" Height="760"
+        Title="Signal Scheduler" Icon="avares://SignalScheduler/Assets/app-icon.png" Width="640" Height="760"
         Opened="OnOpened" Closing="OnClosing">
   <Window.Styles>
     <StyleInclude Source="avares://SignalScheduler/Views/PresentationStyles.axaml" />

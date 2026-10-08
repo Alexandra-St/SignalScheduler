@@ -18,7 +18,7 @@ def metadata(version_file):
     if not re.fullmatch(r'[1-9][0-9]*', build) or int(build) > 65535:
         raise ValueError('BuildNumber must be between 1 and 65535.')
     return {'CFBundleExecutable': 'SignalScheduler', 'CFBundleIdentifier': 'local.SignalScheduler',
-        'CFBundleName': 'Signal Scheduler', 'CFBundleVersion': build,
+        'CFBundleName': 'Signal Scheduler', 'CFBundleIconFile': 'SignalScheduler.icns', 'CFBundleVersion': build,
         'CFBundleShortVersionString': version, 'CFBundlePackageType': 'APPL',
         'NSHighResolutionCapable': True}
 

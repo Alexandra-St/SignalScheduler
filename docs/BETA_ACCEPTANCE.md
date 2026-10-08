@@ -68,8 +68,9 @@ The updated source passed 109 .NET tests. This follow-up applies to the rebuilt
 
 - Incorporate the verified Send at fix into the final DMG; the earlier tested beta
   DMG does not contain it.
-- Replace the default placeholder with a proper custom application icon before
-  public release.
+- Manually check the supplied custom icon in Finder, Dock and search after installing
+  0.2.1 build 3. Artwork and icon packaging are implemented; appearance is not yet
+  manually confirmed.
 - Finish independent review of third-party corresponding-source and license
   materials, including outstanding source-manifest review items.
 - Record clean-Mac verification separately; do not conflate it with this Mac.

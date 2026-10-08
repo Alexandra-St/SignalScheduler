@@ -3,6 +3,7 @@
 import argparse
 import json
 import os
+import plistlib
 from pathlib import Path
 import subprocess
 import tempfile
@@ -10,6 +11,10 @@ import tempfile
 
 def verify(app):
     resources = app / "Contents/Resources"
+    info = plistlib.loads((app / "Contents/Info.plist").read_bytes())
+    icon_name = info.get("CFBundleIconFile")
+    if icon_name != "SignalScheduler.icns" or (resources / icon_name).read_bytes()[:4] != b"icns":
+        raise ValueError("The application icon is missing or invalid.")
     lock = json.loads((resources / "dependencies.lock.json").read_text())
     subprocess.run(["/usr/bin/codesign", "--verify", "--deep", "--strict", str(app)], check=True)
     with tempfile.TemporaryDirectory(prefix="SignalScheduler-bundle-check-") as directory:

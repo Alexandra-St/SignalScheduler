@@ -133,5 +133,14 @@ and `docs/BETA_ACCEPTANCE.md`.
 DMG filename reads version/build from that plist. Increment BuildNumber before
 each new test/distribution build; increment Version for each released update.
 This policy is enforced by project instructions and the release checklist;
-automatic build-number allocation is not implemented. The next build is 0.2.1,
-build 2, distinct from the previously verified 0.2.0 artifact.
+automatic build-number allocation is not implemented. The current icon build is 0.2.1,
+build 3, distinct from the previously verified 0.2.0 artifact.
+
+## Application icon
+
+The user-supplied artwork is kept unchanged at `Assets/app-icon.png`.
+`packaging/build_icon.py` uses macOS sips/iconutil to generate all standard
+16–1024 pixel representations into Resources/SignalScheduler.icns before signing.
+Info.plist names that resource; the main Avalonia window uses the same PNG.
+Bundle verification checks the icon resource. Finder/Dock/search appearance must
+still be confirmed manually after installing the new build.
