@@ -35,7 +35,7 @@ and any JNI extraction remain separate and are discarded after the check.
 - Validate Intel binaries on Intel hardware (or a suitable separately verified environment).
 - Complete corresponding-source distribution materials for bundled covered components and
   dependencies; upstream links alone are not the release's compliance mechanism.
-- Fix the known Send at validation/feedback bug and replace the placeholder icon.
+- Send at feedback and the approved custom icon are implemented; validate the final package.
 - Current beta DMGs are ad hoc signed and not notarized. Developer ID signing and
   notarization are optional future work, not requirements for the initial public beta.
 
@@ -133,8 +133,8 @@ and `docs/BETA_ACCEPTANCE.md`.
 DMG filename reads version/build from that plist. Increment BuildNumber before
 each new test/distribution build; increment Version for each released update.
 This policy is enforced by project instructions and the release checklist;
-automatic build-number allocation is not implemented. The current icon build is 0.2.1,
-build 3, distinct from the previously verified 0.2.0 artifact.
+automatic build-number allocation is not implemented. Current candidate: 0.3.0
+build 26. Earlier acceptance records retain their original version/build.
 
 ## Application icon
 
@@ -142,5 +142,5 @@ The user-supplied artwork is kept unchanged at `Assets/app-icon.png`.
 `packaging/build_icon.py` uses macOS sips/iconutil to generate all standard
 16–1024 pixel representations into Resources/SignalScheduler.icns before signing.
 Info.plist names that resource; the main Avalonia window uses the same PNG.
-Bundle verification checks the icon resource. Finder/Dock/search appearance must
-still be confirmed manually after installing the new build.
+Bundle verification checks the icon resource. Finder/Dock/search appearance was confirmed on the development Mac.
+Clean-Mac and final-candidate installation remain separate checks.

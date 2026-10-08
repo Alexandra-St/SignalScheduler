@@ -3,6 +3,7 @@
 For an Apple Silicon Mac that has no Homebrew, Java, .NET or previous signal-cli setup.
 Do not install these prerequisites for the test. Use the DMG supplied with this checklist.
 Record the macOS version, Mac model, application Version and BuildNumber.
+Current prepared candidate: **0.3.0 build 26** (Apple Silicon).
 
 ## Installation and first launch
 
@@ -24,6 +25,23 @@ Record the macOS version, Mac model, application Version and BuildNumber.
 - [ ] Cancel a pending test and confirm it never arrives.
 - [ ] Enter an invalid Send at value (extra minute digit); confirm inline error and disabled scheduling.
 - [ ] If available, verify a full username and full username link with a consenting test recipient.
+
+## UI and missed-message checks
+
+Use only synthetic messages to yourself; cancel any test that should not send.
+
+- [ ] Check a small, standard and wide window: fields stay inside panels and buttons do not overlap.
+- [ ] Enter date as dd.MM.yyyy and time as HH:mm; verify malformed and past inputs show consistent errors.
+- [ ] Paste screenshot with no image in the clipboard: a visible red error appears near attachment controls.
+- [ ] Open full message details; verify complete text and all attachments.
+- [ ] Edit a Pending message's text; verify the exact saved text after reopening.
+- [ ] Leave a synthetic Pending test overdue by more than five minutes with the app closed.
+      Reopen: it becomes Missed, with a notice. Review messages shows only this startup batch.
+- [ ] Show all missed displays older Missed messages as well; all history filters work.
+- [ ] Reschedule a Missed message: a new Pending appears and the original remains in History.
+      Its notice count decreases, and the notice disappears after its last item is handled.
+- [ ] Dismiss closes the notice; deleting a notified message also updates its count.
+- [ ] History deletion confirmation hides prior actions and offers Cancel plus one red Delete.
 
 ## Update without losing data
 

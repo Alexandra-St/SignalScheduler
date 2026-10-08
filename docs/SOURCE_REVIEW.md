@@ -1,6 +1,10 @@
-# Source and license review — candidate 0.2.1 build 6
+# Source and license review — candidate 0.3.0 build 26
 
 Status: technical source/notice coverage checks passed, 2026-10-08.
+
+The original review was completed for 0.2.1 build 6. Dependencies and pinned
+provenance are unchanged; the audit was rerun against 0.3.0 build 26 with zero
+integrity or license-evidence errors (754 assets, 79 JARs, 77 notice mappings).
 
 ## Evidence
 
@@ -33,4 +37,5 @@ Increment BuildNumber before producing changed app contents. The archived app so
 
 ## Practical limits
 
-This is a technical review of source correspondence and retained notices, not a legal opinion. Third-party binaries were not rebuilt or compared bit-for-bit. Compiler/toolchain installation and an offline rebuild were not exercised. Original upstream build scripts and instructions are supplied with the source trees. Clean-Mac acceptance and the real Finder Replace update are separate, still-pending checks. Publication requires user approval.
+This is a technical review of source correspondence and retained notices, not a legal opinion. Third-party binaries were not rebuilt or compared bit-for-bit. Compiler/toolchain installation and an offline rebuild were not exercised. Original upstream build scripts and instructions are supplied with the source trees. Clean-Mac acceptance and this candidate's real Finder Replace update remain pending; the historical build 4 → 6 Replace
+check passed. Publication requires user approval.

@@ -1,4 +1,4 @@
-# Signal Scheduler 0.2.1 beta — draft release notes
+# Signal Scheduler 0.3.0 beta — draft release notes
 
 Schedule Signal messages and photos from your Mac. Connect your phone by scanning
 an in-app QR code, choose the sending account, and set a local send time.
@@ -32,6 +32,11 @@ than an unidentified developer, stop and report the exact warning before proceed
 - A detected-account selector; no manual sender-account input.
 - Local encrypted queue, with its key stored in macOS Keychain.
 - QR connection, cancellation and a fresh attempt after expiration.
+- Upcoming and History lists, status filters, full message details and attachment previews.
+- Text editing for Pending messages, cancellation, reuse and guarded history deletion.
+- Reschedule for Missed messages creates a new Pending copy and preserves the original history.
+- Startup missed-message notification with Review messages, Show all missed and Dismiss.
+- Numeric keyboard inputs for local date (dd.MM.yyyy) and time (HH:mm), with future-time and DST validation.
 - Explicit message statuses and conservative recovery after uncertain sends.
 - Settings for choosing a custom signal-cli executable when needed.
 
@@ -42,6 +47,10 @@ than an unidentified developer, stop and report the exact warning before proceed
   or reset links may no longer resolve; stable recipient UUID storage is not included.
 - Real username/link delivery was verified on the development Mac.
 - **Sent** records successful signal-cli completion; it does not confirm delivery or reading.
+- A message more than five minutes overdue becomes Missed without a send attempt.
+  A message within that window may send after the app resumes; a three-minute delay
+  was manually verified on the development Mac.
+- Blocked means the CLI file was unavailable before sending. Check Settings before reusing it.
 - Uncertain sends are not retried automatically. Check Signal before scheduling a copy.
 - The beta is not notarized. Installation, delivery and real phone linking passed
   on an Apple Silicon development Mac; clean-Mac and browser-download first-launch
@@ -60,16 +69,14 @@ linking URIs, Signal account directories, queue files, Keychain data or real con
 
 ## Release-owner checklist — remove from published notes
 
-- [ ] Increment Version for the release and BuildNumber for the new build in Version.props.
-- [ ] Verify .NET metadata, Info.plist and DMG filename share the same version/build.
-
-- [x] Record operator-reported installation, QR and Note to Self checks on the development Mac.
-- [ ] Record clean-Mac verification separately.
-- [x] Manually verify the Send at validation/feedback fix in the rebuilt app (2026-10-08).
-- [x] Include the verified fix in the candidate DMG (0.2.1 build 5).
-- [x] Verify custom icon appearance on the development Mac; final build packaging verified separately.
-- [x] Complete technical source/license coverage review; include exact JDK commit and native acknowledgments.
-- [ ] Obtain approval to commit, push, tag and publish.
-- [ ] Build from the approved commit and rerun package verification.
-- [ ] Attach the DMG, matching SHA-256 and complete matching source materials.
-- [ ] Use a prerelease tag, for example `v0.2.1-beta.1`; replace this draft's pending claims.
+- [x] Candidate version/build: 0.3.0 build 26, sourced from Version.props.
+- [x] Development-Mac installation, real QR, delivery and build 4 → 6 Replace checks recorded separately.
+- [x] UI redesign and Missed improvements approved, committed and pushed through 319509b.
+- [x] Technical dependency source/notice review completed; dependency versions unchanged.
+- [x] Verify candidate build 26 .app, DMG, source archive, hashes and metadata (2026-10-08).
+- [ ] Record Replace acceptance for this candidate separately from build 6.
+- [ ] Record real QR linking after redesign and clean-Mac/browser-download acceptance separately.
+- [ ] Complete native synthetic screenshots and the current UI acceptance report.
+- [ ] Obtain approval to commit the release-preparation changes and push them.
+- [ ] Obtain separate approval for a prerelease tag and GitHub Release publication.
+- [ ] Attach matching DMG, SHA-256 files and complete source materials; update pending claims.

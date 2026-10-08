@@ -86,8 +86,8 @@ Apple Developer membership, Developer ID signing and notarization are not beta
 release requirements at this stage. The public beta will disclose its current
 ad hoc signed, non-notarized status and document first launch.
 
-No commit, push, tag or publication has been approved. Obtain explicit approval
-before any of those actions; release assets must match the final approved source.
+Historical authorization state at the initial acceptance: no commit, push, tag or
+publication had been approved. Current authorization is recorded in the follow-up below.
 
 ## Follow-up: recipient formats and icon (2026-10-08)
 
@@ -135,3 +135,49 @@ Status: Sent in the scheduler and the received image/caption in Signal Note to
 Self. This closes post-update delivery and attachment preservation on the
 development Mac. Clean-Mac acceptance remains pending. Personal message text,
 account identifiers and screenshots are not stored in this report.
+
+## UI and scheduling follow-up — 2026-10-08
+
+The operator approved the redesigned UI and follow-up fixes. Application source
+through 0.2.1 build 25 was committed and pushed to main at 319509b. This approval
+covers those commits and that push; it does not authorize a tag or GitHub Release.
+
+Build 25 passed 163 .NET tests and Release build-mac.sh checks for signature,
+relocation, private Java and isolated account discovery. Headless tests cover
+small/standard/wide layouts, old encrypted queue loading, numeric date/time fields,
+DST, Pending editing, cancellation, reuse, deletion, status actions, account
+selection, settings and synthetic QR linking. They do not establish native visual
+acceptance, clean-Mac behavior or a new real phone-linking result.
+
+Missed Reschedule preserves the original history and creates a new Pending copy.
+The startup notice tracks its own newly missed IDs; Review messages shows those IDs,
+Show all missed shows every Missed record. No reviewed message status is stored.
+Filtering regression is covered through the ComboBox's actual two-way binding.
+
+The operator reported reopening about three minutes after the scheduled time:
+the message was delivered correctly and appeared Sent. More than five minutes
+late remains Missed without sending. No personal message content is retained here.
+
+## New release candidate — 0.3.0 build 26
+
+The candidate advances the minor version for the new UI and compatible features.
+Build 6 packaging/Replace evidence remains historical; it must not be attributed
+to this candidate. Final package verification, current-candidate Replace acceptance,
+real QR linking after redesign, clean-Mac/browser-download acceptance and native
+screenshots with synthetic data remain separate checks. Release preparation
+changes require their own commit/push approval; tag/publication require separate approval.
+
+## Automated candidate verification — 0.3.0 build 26
+
+163 Release .NET tests and 14 packaging tests passed. build-mac.sh passed signing,
+relocation, private-Java and isolated account-discovery checks. The source/notice
+audit verified 754 assets, 79 bundled JARs and 77 supplemental notice mappings,
+with no integrity or missing-license-evidence errors. Dependency versions and
+source provenance are unchanged. Real Signal sending was not performed during
+these automated checks. DMG/archive verification is recorded separately below.
+
+The 0.3.0 build 26 DMG passed image-integrity verification, read-only mounting,
+bundle signature/relocation/private-Java/isolated-account checks, and was ejected.
+Its versioned SHA-256 sidecar was generated. The source-material archive includes
+the working release-preparation source; these changes are not yet committed.
+Do not attribute the archive to 319509b alone or publish before approval.
