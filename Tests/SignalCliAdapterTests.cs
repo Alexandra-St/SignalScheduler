@@ -30,13 +30,13 @@ public sealed class SignalCliAdapterTests
                 "#!/bin/sh\nprintf '%s\\n' \"$@\"\ncat \"$7\" | shasum -a 256\ncat\n");
             File.SetUnixFileMode(executable, UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute);
             var bytes = new byte[] { 1, 2, 3, 4 };
-            var message = new ScheduledMessage(Guid.NewGuid(), "recipient-placeholder", "Synthetic caption",
+            var message = new ScheduledMessage(Guid.NewGuid(), "+12025550123", "Synthetic caption",
                 DateTimeOffset.UtcNow, MessageStatus.Pending, "account-placeholder", executable,
                 new() { new ImageAttachment("synthetic image.png", bytes) });
             var result = await new SignalCliAdapter().SendAsync(message);
             Assert.Equal(0, result.Code);
             var lines = result.Output.Split('\n');
-            Assert.Equal(new[] { "-a", "account-placeholder", "send", "--message-from-stdin", "recipient-placeholder", "--attachment" }, lines[..6]);
+            Assert.Equal(new[] { "-a", "account-placeholder", "send", "--message-from-stdin", "+12025550123", "--attachment" }, lines[..6]);
             Assert.EndsWith("0-synthetic image.png", lines[6]);
             Assert.StartsWith(Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant(), lines[7]);
             Assert.EndsWith(message.Text, result.Output);

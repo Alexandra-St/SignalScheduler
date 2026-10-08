@@ -33,7 +33,11 @@
           <Button Content="Refresh accounts" Command="{Binding Signal.RefreshAccountsCommand}" />
           <TextBlock Text="{Binding Signal.AccountDiscoveryStatus}" />
           <TextBlock Classes="field" Text="To" />
-          <TextBox Text="{Binding Recipient, Mode=TwoWay}" Watermark="Phone number with country code" />
+          <TextBox x:Name="RecipientInput" Text="{Binding Recipient, Mode=TwoWay}"
+                   Watermark="Phone number, Signal username, or Signal link" Classes.invalid="{Binding HasRecipientError}" />
+          <TextBlock Classes="muted" Text="Phone number, Signal username, or Signal link" FontSize="12" />
+          <TextBlock x:Name="RecipientError" Text="{Binding RecipientError}" IsVisible="{Binding HasRecipientError}"
+                     Foreground="#D05050" FontWeight="SemiBold" />
           <TextBlock Classes="field" Text="Message" />
           <TextBox Text="{Binding Body, Mode=TwoWay}" Watermark="Write a message…"
                    AcceptsReturn="True" Height="100" TextWrapping="Wrap" />

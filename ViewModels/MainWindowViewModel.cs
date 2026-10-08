@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using SignalScheduler.Infrastructure;
@@ -22,10 +21,25 @@ public sealed class MainWindowViewModel : ObservableObject
     private string recipient = "", body = "";
     private string when = DateTime.Now.AddMinutes(30).ToString("yyyy-MM-dd HH:mm");
     private string status = "Opening encrypted queue…";
-    private string sendTimeError = "";
+    private string sendTimeError = "", recipientError = "";
     private bool canSchedule;
     public SignalCliConfiguration Signal { get; } = new();
-    public string Recipient { get => recipient; set => Set(ref recipient, value); }
+    public string Recipient
+    {
+        get => recipient;
+        set { if (Set(ref recipient, value ?? "")) ValidateRecipient(out _); }
+    }
+    public string RecipientError
+    {
+        get => recipientError;
+        private set
+        {
+            if (!Set(ref recipientError, value)) return;
+            Notify(nameof(HasRecipientError));
+            NotifyScheduling();
+        }
+    }
+    public bool HasRecipientError => RecipientError.Length > 0;
     public string Body { get => body; set => Set(ref body, value); }
     public string When
     {
@@ -44,7 +58,7 @@ public sealed class MainWindowViewModel : ObservableObject
     }
     public bool HasSendTimeError => SendTimeError.Length > 0;
     public string Status { get => status; private set => Set(ref status, value); }
-    public bool CanSchedule => canSchedule && !IsBusy && Signal.HasSelectedAccount && !HasSendTimeError;
+    public bool CanSchedule => canSchedule && !IsBusy && Signal.HasSelectedAccount && !HasSendTimeError && !HasRecipientError;
     public bool IsBusy => dispatcher?.IsBusy ?? false;
     public IReadOnlyList<MessageViewModel> Messages { get; private set; } = Array.Empty<MessageViewModel>();
     public string QueueSummary => Messages.Count == 0 ? "No messages yet. Schedule your first message above."
@@ -60,6 +74,7 @@ public sealed class MainWindowViewModel : ObservableObject
         PasteImageCommand = new(PasteImageAsync);
         Signal.PropertyChanged += (_, _) => NotifyScheduling();
         ValidateSendTime(out _);
+        ValidateRecipient(out _);
         timer.Tick += async (_, _) =>
         {
             ValidateSendTime(out _);
@@ -124,6 +139,13 @@ public sealed class MainWindowViewModel : ObservableObject
         return true;
     }
 
+    private bool ValidateRecipient(out SignalRecipient? target)
+    {
+        var valid = SignalRecipient.TryParse(Recipient, out target);
+        RecipientError = valid ? "" : SignalRecipient.Error;
+        return valid;
+    }
+
     private bool ValidateSendTime(out DateTimeOffset due)
     {
         var valid = SendTimeValidation.TryGetDue(When, DateTimeOffset.Now, TimeZoneInfo.Local, out due, out var error);
@@ -134,19 +156,19 @@ public sealed class MainWindowViewModel : ObservableObject
     public void Schedule()
     {
         // Recheck at activation: a time can become past after the last timer tick.
-        if (!ValidateSendTime(out var due)) return;
+        var recipientValid = ValidateRecipient(out var target);
+        var timeValid = ValidateSendTime(out var due);
+        if (!recipientValid || !timeValid) return;
         if (store == null || IsBusy || !canSchedule) return;
         if (Signal.IsWorking)
         { Status = "Wait for account detection to finish."; return; }
-        if (!Regex.IsMatch(Recipient ?? "", @"^\+[1-9]\d{6,14}$"))
-        { Status = "Enter recipient in international format."; return; }
         if (!File.Exists(Signal.Cli) || !Signal.HasSelectedAccount)
         { Status = "Set executable path and linked account before scheduling."; return; }
         if (string.IsNullOrWhiteSpace(Body) && attachments.Count == 0)
         { Status = "Add text or a photo."; return; }
         try
         {
-            store.Add(new ScheduledMessage(Guid.NewGuid(), Recipient!, Body!, due,
+            store.Add(new ScheduledMessage(Guid.NewGuid(), target!.Value, Body!, due,
                 MessageStatus.Pending, Signal.Account.Trim(), Signal.Cli, attachments.Select(item => item.Attachment).ToList()));
             Body = "";
             ClearAttachments();

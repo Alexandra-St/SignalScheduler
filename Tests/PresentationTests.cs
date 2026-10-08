@@ -165,6 +165,31 @@ public sealed class PresentationTests
         model.TryClose();
     }
 
+    [AvaloniaFact]
+    public void RecipientErrorClearsForAllSupportedFormatsAndRejectsNicknameWithoutSuffix()
+    {
+        var view = new MainWindow();
+        var model = (MainWindowViewModel)view.DataContext!;
+        using var host = new WindowScope(Host(view));
+        var input = view.FindControl<TextBox>("RecipientInput")!;
+        var error = view.FindControl<TextBlock>("RecipientError")!;
+        input.Text = "Test_User";
+        Dispatcher.UIThread.RunJobs();
+        Assert.True(error.IsVisible);
+        Assert.Equal(SignalScheduler.Integrations.Signal.SignalRecipient.Error, error.Text);
+        Assert.False(model.ScheduleCommand.CanExecute(null));
+        foreach (var value in new[] { "+12025550123", "Test_User.27", "https://signal.me/#eu/synthetic_link" })
+        {
+            input.Text = value;
+            Dispatcher.UIThread.RunJobs();
+            Assert.Equal(value, model.Recipient);
+            Assert.False(error.IsVisible);
+            Assert.False(model.HasRecipientError);
+            Assert.DoesNotContain("invalid", input.Classes);
+        }
+        model.TryClose();
+    }
+
     private sealed class WindowScope(Window window) : IDisposable
     {
         public Window Window => window;

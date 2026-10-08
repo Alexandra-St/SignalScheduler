@@ -28,6 +28,7 @@ than an unidentified developer, stop and report the exact warning before proceed
 ## What's included
 
 - Scheduled text, photos and clipboard screenshots.
+- One To field for phone numbers, full Signal usernames or username links.
 - A detected-account selector; no manual sender-account input.
 - Local encrypted queue, with its key stored in macOS Keychain.
 - QR connection, cancellation and a fresh attempt after expiration.
@@ -37,6 +38,9 @@ than an unidentified developer, stop and report the exact warning before proceed
 ## Known limitations
 
 - The app must remain open and the Mac awake. Scheduling is approximate.
+- Usernames and username links are resolved at send time. Changed/deleted usernames
+  or reset links may no longer resolve; stable recipient UUID storage is not included.
+- Username/link delivery awaits manual verification in the new build.
 - **Sent** records successful signal-cli completion; it does not confirm delivery or reading.
 - Uncertain sends are not retried automatically. Check Signal before scheduling a copy.
 - The beta is not notarized. Installation, delivery and real phone linking passed

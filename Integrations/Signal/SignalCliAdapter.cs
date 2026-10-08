@@ -7,17 +7,18 @@ public sealed class SignalCliAdapter : ISignalSender
 {
     public async Task<(int Code, string Output)> SendAsync(ScheduledMessage message)
     {
+        if (!SignalRecipient.TryParse(message.Recipient, out var recipient))
+            throw new ArgumentException(SignalRecipient.Error);
+        var arguments = new List<string> { "-a", message.Account, "send", "--message-from-stdin" };
+        if (recipient!.UseUsername) arguments.Add("--username");
+        arguments.Add(recipient.Value);
         if (message.Attachments == null || message.Attachments.Count == 0)
-            return await ProcessRunner.RunAsync(message.Cli,
-                new[] { "-a", message.Account, "send", "--message-from-stdin", message.Recipient }, message.Text);
+            return await ProcessRunner.RunAsync(message.Cli, arguments, message.Text);
 
         var folder = MacApplicationPaths.CreateTemporaryDirectory();
         try
         {
-            var arguments = new List<string>
-            {
-                "-a", message.Account, "send", "--message-from-stdin", message.Recipient, "--attachment"
-            };
+            arguments.Add("--attachment");
             for (var i = 0; i < message.Attachments.Count; i++)
             {
                 var attachment = message.Attachments[i];

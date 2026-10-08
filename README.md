@@ -8,7 +8,7 @@ Built with C#, .NET 8 and Avalonia.
 
 ## Features
 
-- Schedule text messages and image attachments.
+- Schedule text messages and image attachments to phone numbers, full Signal usernames or username links.
 - Use bundled `signal-cli` and Java; detect existing linked accounts automatically.
 - Connect a new account through an in-app QR code.
 - Attach images from disk or paste a screenshot directly from the macOS clipboard.

@@ -95,7 +95,7 @@ public sealed class SignalExecutableTests
         using var queue = new TestQueue();
         Script(queue.Executable, "[ \"$1\" = '-a' ] || exit 2\ncat >/dev/null\nprintf 'synthetic-result'");
         var sender = new ConfiguredSignalSender(() => Task.FromResult<SignalExecutable?>(new(queue.Executable, "0.14.1")));
-        var result = await sender.SendAsync(queue.Add(TimeSpan.Zero) with { Cli = "/missing/historical-cli" });
+        var result = await sender.SendAsync(queue.Add(TimeSpan.Zero) with { Cli = "/missing/historical-cli", Recipient = "+12025550123" });
         Assert.Equal(0, result.Code);
         Assert.Equal("synthetic-result", result.Output);
         await Assert.ThrowsAsync<IOException>(() => new ConfiguredSignalSender(() => Task.FromResult<SignalExecutable?>(null)).SendAsync(queue.Add(TimeSpan.Zero)));

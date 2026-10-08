@@ -64,6 +64,13 @@ displays properly. Result: **PASS** for the reported validation/feedback issue.
 The updated source passed 109 .NET tests. This follow-up applies to the rebuilt
 .app, not the earlier DMG, and does not extend clean-Mac verification.
 
+## Recipient support follow-up — manual checks pending
+
+The To field now accepts phone numbers, full Signal usernames and username links.
+No new queue schema is introduced; the saved recipient is resolved by signal-cli
+at send time. Verify real text and photo sends via username and link in the new
+build; prior phone-number tests do not validate these new routes.
+
 ## Remaining release work
 
 - Incorporate the verified Send at fix into the final DMG; the earlier tested beta
