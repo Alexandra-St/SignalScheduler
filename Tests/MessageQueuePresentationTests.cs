@@ -33,16 +33,16 @@ public sealed class MessageQueuePresentationTests
         var messages = Enum.GetValues<MessageStatus>().Select((status, index) => new MessageViewModel(
             new ScheduledMessage(Guid.NewGuid(), "+12025550123", "Synthetic", DateTimeOffset.Now.AddHours(index),
                 status, "fixture", "fixture-cli"), owner)).ToArray();
-        var history = MessageQueuePresentation.History(messages, "All statuses");
+        var history = MessageQueuePresentation.History(messages, HistoryFilterKind.All);
         Assert.Equal(6, history.Count);
         Assert.Equal(history.OrderByDescending(message => message.Message.Due), history);
         Assert.DoesNotContain(history, message => message.Message.State is MessageStatus.Pending or MessageStatus.Sending);
-        foreach (var filter in new[] { "Sent", "Cancelled", "Missed", "Blocked" })
+        foreach (var filter in new[] { HistoryFilterKind.Sent, HistoryFilterKind.Cancelled, HistoryFilterKind.Missed, HistoryFilterKind.Blocked })
             Assert.Single(MessageQueuePresentation.History(messages, filter));
-        var uncertain = MessageQueuePresentation.History(messages, "Unknown / Failed");
+        var uncertain = MessageQueuePresentation.History(messages, HistoryFilterKind.Uncertain);
         Assert.Equal(2, uncertain.Count);
         Assert.All(uncertain, message => Assert.True(message.HasStatusHint));
-        Assert.Empty(MessageQueuePresentation.History(Array.Empty<MessageViewModel>(), "All statuses"));
+        Assert.Empty(MessageQueuePresentation.History(Array.Empty<MessageViewModel>(), HistoryFilterKind.All));
         owner.TryClose();
     }
 

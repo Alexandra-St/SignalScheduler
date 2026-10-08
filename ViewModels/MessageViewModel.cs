@@ -26,7 +26,7 @@ public sealed class MessageViewModel : IDisposable
         MessageStatus.Blocked => "#684C36",
         _ => "#753E45"
     });
-    public bool HasActions => CanCancel || CanReuse || CanDelete;
+    public bool HasActions => CanCancel || CanReuse || CanReschedule || CanDelete;
     public IReadOnlyList<AttachmentViewModel> PreviewAttachments => previews ??= Attachments.Take(3)
         .Select(attachment => new AttachmentViewModel(attachment, _ => { })).ToArray();
     public bool HasMoreAttachments => Attachments.Count > 3;

@@ -14,15 +14,15 @@ public static class MessageQueuePresentation
                 : m.Message.Due.LocalDateTime.Date == today.Date.AddDays(1) ? "Tomorrow" : "Later")
             .Select(group => new MessageGroup(group.Key, group.ToArray())).ToArray();
 
-    public static IReadOnlyList<MessageViewModel> History(IEnumerable<MessageViewModel> messages, string filter)
+    public static IReadOnlyList<MessageViewModel> History(IEnumerable<MessageViewModel> messages, HistoryFilterKind filter)
         => messages.Where(m => m.Message.State is not (MessageStatus.Pending or MessageStatus.Sending))
             .Where(m => filter switch
             {
-                "Sent" => m.Message.State == MessageStatus.Sent,
-                "Cancelled" => m.Message.State == MessageStatus.Cancelled,
-                "Missed" => m.Message.State == MessageStatus.Missed,
-                "Unknown / Failed" => m.Message.State is MessageStatus.Unknown or MessageStatus.UnknownOrFailed,
-                "Blocked" => m.Message.State == MessageStatus.Blocked,
+                HistoryFilterKind.Sent => m.Message.State == MessageStatus.Sent,
+                HistoryFilterKind.Cancelled => m.Message.State == MessageStatus.Cancelled,
+                HistoryFilterKind.Missed or HistoryFilterKind.NewMissed => m.Message.State == MessageStatus.Missed,
+                HistoryFilterKind.Uncertain => m.Message.State is MessageStatus.Unknown or MessageStatus.UnknownOrFailed,
+                HistoryFilterKind.Blocked => m.Message.State == MessageStatus.Blocked,
                 _ => true
             }).OrderByDescending(m => m.Message.Due).ToArray();
 }
