@@ -181,3 +181,23 @@ bundle signature/relocation/private-Java/isolated-account checks, and was ejecte
 Its versioned SHA-256 sidecar was generated. The source-material archive includes
 the working release-preparation source; these changes are not yet committed.
 Do not attribute the archive to 319509b alone or publish before approval.
+
+## Candidate verification and Replace acceptance — 0.3.0 build 27
+
+The cleanup source was committed and pushed at 98aead1. Build 27 passed 164
+Release .NET tests and build-mac.sh bundle checks. The packaging suite passed
+14 tests. The dependency source/notice audit verified 754 assets, 79 JARs and
+77 supplemental mappings without errors. The DMG passed integrity, read-only
+mounting, signature, relocation, private Java and isolated account checks.
+Both SHA-256 sidecars were verified. All 257 tracked source files in the matching
+source-material archive were compared with commit 98aead1.
+
+The operator confirmed the requested Replace-update check was successful:
+the app was updated from the build 27 DMG and the linked account, history,
+Pending text and attachment were preserved. This is development-Mac manual
+acceptance reported on 2026-10-08, not clean-Mac or real QR acceptance.
+No new actual-delivery result is inferred from this preservation check.
+
+The build 27 source archive remains the exact snapshot of 98aead1. This later
+acceptance documentation does not change the packaged application. Tag and
+GitHub Release publication remain separately unapproved.
