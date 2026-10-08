@@ -88,3 +88,19 @@ ad hoc signed, non-notarized status and document first launch.
 
 No commit, push, tag or publication has been approved. Obtain explicit approval
 before any of those actions; release assets must match the final approved source.
+
+## Follow-up: recipient formats and icon (2026-10-08)
+
+The operator confirmed real delivery using the full Signal username and full
+username link, and confirmed the custom icon appears correctly. This records
+manual acceptance of those features; it does not claim clean-Mac acceptance.
+The previous modified-link attempt resulted in Unknown/failed with no delivery.
+
+## Packaging follow-up: 0.2.1 build 5
+
+This build adds runtime license/notice files. Automated relocation, private Java,
+empty account discovery using a temporary config, mounted DMG verification and
+12 packaging tests passed. The source audit verified 753 source/POM assets and
+79 matching bundled JAR hashes with no integrity errors. Full license/source
+review is still open; see SOURCE_REVIEW.md. Installation/update and data
+preservation on a clean Mac remain pending.

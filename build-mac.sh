@@ -9,6 +9,7 @@ app='build/Signal Scheduler.app'
 mkdir -p "$app/Contents/MacOS"
 cp -R build/publish/. "$app/Contents/MacOS/"
 python3 packaging/bundle_dependencies.py --resources "$app/Contents/Resources" --architecture "$bundle_arch"
+python3 packaging/collect_runtime_notices.py --resources "$app/Contents/Resources"
 python3 packaging/build_icon.py "$app/Contents/Resources/SignalScheduler.icns"
 python3 packaging/write_app_info.py "$app/Contents/Info.plist"
 codesign --force --deep --sign - "$app"

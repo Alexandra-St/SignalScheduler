@@ -1,4 +1,4 @@
-# Signal Scheduler 0.2.0 beta — draft release notes
+# Signal Scheduler 0.2.1 beta — draft release notes
 
 Schedule Signal messages and photos from your Mac. Connect your phone by scanning
 an in-app QR code, choose the sending account, and set a local send time.
@@ -40,13 +40,13 @@ than an unidentified developer, stop and report the exact warning before proceed
 - The app must remain open and the Mac awake. Scheduling is approximate.
 - Usernames and username links are resolved at send time. Changed/deleted usernames
   or reset links may no longer resolve; stable recipient UUID storage is not included.
-- Username/link delivery awaits manual verification in the new build.
+- Real username/link delivery was verified on the development Mac.
 - **Sent** records successful signal-cli completion; it does not confirm delivery or reading.
 - Uncertain sends are not retried automatically. Check Signal before scheduling a copy.
 - The beta is not notarized. Installation, delivery and real phone linking passed
   on an Apple Silicon development Mac; clean-Mac and browser-download first-launch
   verification remain pending. Developer ID/notarization are optional at this stage.
-- Custom icon packaging is implemented; installed Finder/Dock/search appearance awaits verification.
+- Custom icon appearance was verified on the development Mac.
 - Intel hardware is not validated. No automatic updates are included.
 - Corresponding-source materials are being assembled. This draft is not publication-ready
   until the source checklist and live acceptance checks are complete.
@@ -65,10 +65,10 @@ linking URIs, Signal account directories, queue files, Keychain data or real con
 - [x] Record operator-reported installation, QR and Note to Self checks on the development Mac.
 - [ ] Record clean-Mac verification separately.
 - [x] Manually verify the Send at validation/feedback fix in the rebuilt app (2026-10-08).
-- [ ] Include the verified fix in the final DMG.
-- [ ] Verify the supplied custom icon in Finder, Dock and search in the final installed build.
+- [x] Include the verified fix in the candidate DMG (0.2.1 build 5).
+- [x] Verify custom icon appearance on the development Mac; final build packaging verified separately.
 - [ ] Complete and review source/license materials; resolve manifest gaps.
 - [ ] Obtain approval to commit, push, tag and publish.
 - [ ] Build from the approved commit and rerun package verification.
 - [ ] Attach the DMG, matching SHA-256 and complete matching source materials.
-- [ ] Use a prerelease tag, for example `v0.2.0-beta.1`; replace this draft's pending claims.
+- [ ] Use a prerelease tag, for example `v0.2.1-beta.1`; replace this draft's pending claims.

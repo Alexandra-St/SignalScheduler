@@ -34,3 +34,20 @@ QRCoder 1.6.0 generates device-link QR images locally in memory.
 Copyright (c) 2013-2018 Raffael Herrmann. Licensed under MIT; the exact upstream
 license is included as `Contents/Resources/QRCoder-LICENSE.txt`.
 Source: https://github.com/codebude/QRCoder/tree/bd980577640c47f8bb881cf24c8443415a579d36
+
+## .NET and presentation dependencies
+
+Every bundle includes `Contents/Resources/ThirdPartyLicenses`: the exact .NET
+runtime LICENSE and THIRD-PARTY-NOTICES, NuGet package metadata and embedded
+notices, upstream MIT license texts for Avalonia, MicroCom, Tmds.DBus and QRCoder,
+and license/notice entries from the bundled Java JARs. `inventory.json` identifies
+the runtime and package versions. This inventory includes restore dependencies
+for other platforms as well; their inclusion does not mean those binaries ship
+in the macOS app. Corresponding-source review remains a separate release check.
+
+Upstream supplemental texts:
+- Avalonia: https://github.com/AvaloniaUI/Avalonia/blob/d6edb46ce04f983892a61d3abf906014d3f5ec8d/licence.md
+- MicroCom: https://github.com/kekekeks/MicroCom/blob/master/LICENSE
+- Tmds.DBus: https://github.com/tmds/Tmds.DBus/blob/f0b2c29f57bdc7efaeccaa61ca9f13e9a0eebff7/COPYING
+
+The checked-in MicroCom license text is retained even if the upstream branch changes.

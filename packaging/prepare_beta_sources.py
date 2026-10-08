@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Collect version-matched source assets and inventory; never declares legal completeness."""
 from concurrent.futures import ThreadPoolExecutor
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -71,6 +72,31 @@ def coordinate(jar):
     raise ValueError('Unresolved Maven coordinate')
 
 
+def pom_licenses(path, visited=None):
+    """Resolve license inheritance using exact parent coordinates, keeping POM evidence."""
+    visited = set() if visited is None else visited
+    ns = {'m': 'http://maven.apache.org/POM/4.0.0'}
+    root = ET.parse(path).getroot()
+    licenses = [{child.tag.split('}')[-1]: child.text for child in item}
+                for item in root.findall('m:licenses/m:license', ns)]
+    if licenses:
+        return licenses, []
+    parent = root.find('m:parent', ns)
+    if parent is None:
+        return [], []
+    group, artifact, version = [parent.findtext('m:' + key, namespaces=ns)
+                              for key in ('groupId', 'artifactId', 'version')]
+    coordinate = (group, artifact, version)
+    if not all(coordinate) or coordinate in visited or any('${' in value for value in coordinate):
+        raise ValueError('Unresolved Maven parent license inheritance')
+    visited.add(coordinate)
+    filename = 'maven-parents/' + group + '/' + artifact + '-' + version + '.pom'
+    url = 'https://repo.maven.apache.org/maven2/' + group.replace('.', '/') + '/' + artifact + '/' + version + '/' + artifact + '-' + version + '.pom'
+    asset = fetch(url, filename)
+    inherited, evidence = pom_licenses(OUT / filename, visited)
+    return inherited, [asset] + evidence
+
+
 def collect_jar(jar):
     result = {'binary': jar.name, 'binary_sha256': digest(jar), 'assets': [], 'errors': []}
     if jar.name.startswith(('signal-cli-', 'libsignal-cli-')):
@@ -87,7 +113,7 @@ def collect_jar(jar):
                 if suffix == '.pom':
                     pom = ET.parse(OUT / asset['file'])
                     ns = {'m': 'http://maven.apache.org/POM/4.0.0'}
-                    result['licenses'] = [{child.tag.split('}')[-1]: child.text for child in license} for license in pom.findall('m:licenses/m:license', ns)]
+                    result['licenses'], result['license_parents'] = pom_licenses(OUT / asset['file'])
                     result['scm'] = pom.findtext('m:scm/m:url', namespaces=ns)
             except Exception as error:
                 result['errors'].append(str(error) + ': ' + base + suffix)
@@ -139,7 +165,7 @@ def collect_nuget_notices():
             with zipfile.ZipFile(archive) as package:
                 for entry in package.namelist():
                     leaf = Path(entry).name.lower()
-                    if entry.endswith('.nuspec') or ('license' in leaf or 'notice' in leaf) and leaf.endswith(('.txt', '.md', '.html')):
+                    if entry.endswith('.nuspec') or ('license' in leaf or 'notice' in leaf):
                         target = OUT / 'nuget-notices' / name / Path(entry).name
                         target.parent.mkdir(parents=True, exist_ok=True)
                         target.write_bytes(package.read(entry))
@@ -156,6 +182,10 @@ def collect_nuget_notices():
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--app', type=Path, default=ROOT / 'build/Signal Scheduler.app')
+    args = parser.parse_args()
+    app = args.app.resolve()
     OUT.mkdir(parents=True, exist_ok=True)
     assets, errors = [], []
     lock = json.loads((ROOT / 'packaging/dependencies.lock.json').read_text())
@@ -168,7 +198,7 @@ def main():
     ]
     with ThreadPoolExecutor(max_workers=6) as pool:
         futures = [pool.submit(fetch, *args) for args in urls]
-        jars = list((ROOT / 'build/Signal Scheduler.app/Contents/Resources/signal-cli/lib').glob('*.jar'))
+        jars = list((app / 'Contents/Resources/signal-cli/lib').glob('*.jar'))
         if not jars:
             raise ValueError('Build the app before collecting beta materials.')
         dependencies = list(pool.map(collect_jar, sorted(jars)))
@@ -178,8 +208,11 @@ def main():
             except Exception as error:
                 errors.append({'url': args[0], 'error': str(error)})
     nuget = collect_nuget_notices()
-    java = ROOT / 'build/Signal Scheduler.app/Contents/Resources/jre/Contents/Home'
-    shutil.copytree(java / 'legal', OUT / 'java-legal', symlinks=True, dirs_exist_ok=True)
+    java = app / 'Contents/Resources/jre/Contents/Home'
+    # Upstream legal files are read-only; rebuild this generated directory instead of overwriting.
+    if (OUT / 'java-legal').exists():
+        shutil.rmtree(OUT / 'java-legal')
+    shutil.copytree(java / 'legal', OUT / 'java-legal', symlinks=True)
     shutil.copy2(java / 'NOTICE', OUT / 'java-NOTICE')
     assets.append(fetch('https://codeload.github.com/google/boringssl/tar.gz/e2a57cfb4d915b4ba820585aef9fdee7bca13fe5', 'boringssl-source.tar.gz'))
     rust_assets, rust_errors = collect_rust_sources()
@@ -187,7 +220,7 @@ def main():
     shutil.copytree(ROOT / 'packaging/licenses', OUT / 'licenses', dirs_exist_ok=True)
     shutil.copy2(ROOT / 'THIRD_PARTY_NOTICES.md', OUT / 'THIRD_PARTY_NOTICES.md')
     shutil.copy2(ROOT / 'packaging/dependencies.lock.json', OUT / 'dependencies.lock.json')
-    shutil.copy2(ROOT / 'build/Signal Scheduler.app/Contents/Resources/jre/Contents/Home/release', OUT / 'temurin-build-provenance.txt')
+    shutil.copy2(app / 'Contents/Resources/jre/Contents/Home/release', OUT / 'temurin-build-provenance.txt')
     report = {'status': 'REVIEW_REQUIRED', 'assets': assets, 'rust_assets': rust_assets, 'nuget': nuget, 'dependencies': dependencies, 'errors': errors,
         'review_required': ['Verify native submodules/build prerequisites (including BoringSSL), inherited license choices and complete corresponding source coverage.',
             'Resolve any missing source assets and inherited Maven licenses.',
