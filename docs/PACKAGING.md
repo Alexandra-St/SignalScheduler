@@ -71,10 +71,23 @@ python3 packaging/distribute.py
 ```
 
 The local image is written under `build/distribution/` with `local` in its name,
-a SHA-256 sidecar, the app, an Applications shortcut and short installation instructions.
+a SHA-256 sidecar, the app and an Applications shortcut. The installer uses a
+code-rendered dark background, a drag arrow and an embedded short instruction;
+Install.txt is no longer visible.
 The image is compressed/read-only. Checks verify its integrity, mount it read-only,
 verify the app signature and exercise its private CLI against temporary empty account data.
 This does not install or replace the user's existing app or query their account.
+
+The packaging step uses a temporary writable image, generates a 600×360-point
+Retina background with Swift/AppKit, and saves the icon layout and 600-point-wide
+Finder window using packaging/layout_dmg.applescript. It then detaches the image
+and converts it to compressed read-only format. It requires macOS Finder and
+permission for osascript to automate Finder; a missing saved .DS_Store fails
+packaging rather than producing an unstyled installer. The mounted image is
+always detached on layout failure. No global Finder preferences are changed.
+The .background directory and .DS_Store are hidden. App is placed at (160,170),
+Applications at (440,170), with 96-point icons. Installation/update and Gatekeeper
+instructions remain in BETA_TESTER.md and BETA_RELEASE.md.
 
 ## Optional future Developer ID workflow (prepared, not yet exercised)
 
@@ -134,7 +147,7 @@ DMG filename reads version/build from that plist. Increment BuildNumber before
 each new test/distribution build; increment Version for each released update.
 This policy is enforced by project instructions and the release checklist;
 automatic build-number allocation is not implemented. Current candidate: 0.3.0
-build 26. Earlier acceptance records retain their original version/build.
+build 28 with the styled installer. Earlier acceptance records retain their original version/build.
 
 ## Application icon
 

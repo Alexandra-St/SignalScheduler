@@ -12,6 +12,34 @@ spec.loader.exec_module(module)
 
 
 class DistributionTests(unittest.TestCase):
+    def test_installer_layout_is_saved_before_compression_and_legacy_text_is_absent(self):
+        with tempfile.TemporaryDirectory() as work:
+            app = Path(work) / 'Signal Scheduler.app'
+            app.mkdir()
+            commands = []
+            def fake_run(*args, **kwargs):
+                commands.append(tuple(str(arg) for arg in args))
+                if str(args[0]) == '/usr/bin/osascript':
+                    mount = Path(args[-1])
+                    (mount / '.DS_Store').write_bytes(b'fixture')
+                    self.assertFalse((mount.parent / 'image/Install.txt').exists())
+                    self.assertTrue((mount.parent / 'image/Applications').is_symlink())
+            with patch.object(module, 'run', side_effect=fake_run):
+                module.make_dmg(app, Path(work) / 'output.dmg', local=True)
+            operations = [command[1] if len(command) > 1 else '' for command in commands]
+            self.assertLess(operations.index('detach'), operations.index('convert'))
+            self.assertIn('-format', commands[-2])
+            self.assertIn('UDZO', commands[-2])
+
+    def test_missing_finder_layout_fails_and_detaches_writable_image(self):
+        with tempfile.TemporaryDirectory() as work:
+            app = Path(work) / 'Signal Scheduler.app'
+            app.mkdir()
+            with patch.object(module, 'run') as run:
+                with self.assertRaisesRegex(ValueError, 'Finder did not save'):
+                    module.make_dmg(app, Path(work) / 'output.dmg', local=True)
+            self.assertEqual(str(run.call_args.args[1]), 'detach')
+
     def test_native_detection_does_not_follow_symlinks_or_treat_managed_dll_as_macho(self):
         with tempfile.TemporaryDirectory() as work:
             native = Path(work) / 'native'

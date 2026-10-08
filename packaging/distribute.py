@@ -94,13 +94,22 @@ def make_dmg(app, output, local):
         stage.mkdir()
         run("/usr/bin/ditto", app, stage / app.name)
         (stage / "Applications").symlink_to("/Applications")
-        text = "Drag Signal Scheduler to Applications, then eject the DMG and open the app from Applications.\n"
-        text += "Updating: quit the app first and choose Replace. Keep your queue, Keychain data and linked account.\n"
-        if local:
-            text += "Local development build: not Developer ID signed or notarized.\n"
-        (stage / "Install.txt").write_text(text)
-        run("/usr/bin/hdiutil", "create", "-ov", "-format", "UDZO", "-fs", "HFS+",
-            "-volname", "Signal Scheduler", "-srcfolder", stage, output)
+        background = stage / ".background"
+        background.mkdir()
+        run("/usr/bin/swift", ROOT / "packaging/dmg_background.swift", background / "installer.png")
+        writable = Path(work) / "writable.dmg"
+        mount = Path(work) / "volume"
+        mount.mkdir()
+        run("/usr/bin/hdiutil", "create", "-ov", "-format", "UDRW", "-fs", "HFS+",
+            "-volname", "Signal Scheduler", "-srcfolder", stage, writable)
+        run("/usr/bin/hdiutil", "attach", "-nobrowse", "-mountpoint", mount, writable)
+        try:
+            run("/usr/bin/osascript", ROOT / "packaging/layout_dmg.applescript", mount)
+            if not (mount / ".DS_Store").is_file():
+                raise ValueError("Finder did not save the installer layout.")
+        finally:
+            run("/usr/bin/hdiutil", "detach", mount)
+        run("/usr/bin/hdiutil", "convert", writable, "-format", "UDZO", "-ov", "-o", output)
     run("/usr/bin/hdiutil", "verify", output)
 
 
@@ -113,6 +122,10 @@ def verify_dmg(path):
             app = mount / "Signal Scheduler.app"
             if not (mount / "Applications").is_symlink() or (mount / "Applications").readlink() != Path("/Applications"):
                 raise ValueError("Missing Applications shortcut.")
+            if (mount / "Install.txt").exists():
+                raise ValueError("Legacy installation text should not appear in the installer window.")
+            if not (mount / ".background/installer.png").is_file() or not (mount / ".DS_Store").is_file():
+                raise ValueError("Missing installer background or Finder layout.")
             run("python3", ROOT / "packaging/verify_bundle.py", app)
         finally:
             run("/usr/bin/hdiutil", "detach", mount)

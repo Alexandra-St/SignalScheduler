@@ -3,7 +3,7 @@
 For an Apple Silicon Mac that has no Homebrew, Java, .NET or previous signal-cli setup.
 Do not install these prerequisites for the test. Use the DMG supplied with this checklist.
 Record the macOS version, Mac model, application Version and BuildNumber.
-Current prepared candidate: **0.3.0 build 26** (Apple Silicon).
+Current prepared candidate: **0.3.0 build 28** (Apple Silicon).
 
 ## Installation and first launch
 
