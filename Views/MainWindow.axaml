@@ -213,7 +213,12 @@
                           IsVisible="{Binding IsReviewingNewMissed}" HorizontalAlignment="Right" />
                   <TextBlock Text="Showing only messages from the current startup notification." Classes="muted" FontSize="12"
                              IsVisible="{Binding IsReviewingNewMissed}" />
-                  <ComboBox x:Name="HistoryFilter" ItemsSource="{Binding HistoryFilters}" SelectedItem="{Binding HistoryFilter, Mode=TwoWay}" MinWidth="160" HorizontalAlignment="Left" />
+                  <ComboBox x:Name="HistoryFilter" ItemsSource="{Binding HistoryFilters}" SelectedItem="{Binding HistoryFilter, Mode=TwoWay}" MinWidth="160" HorizontalAlignment="Left">
+                    <ComboBox.ItemTemplate>
+                      <DataTemplate x:DataType="presentation:HistoryFilterOption"><TextBlock Text="{Binding Label}" /></DataTemplate>
+                    </ComboBox.ItemTemplate>
+                  </ComboBox>
+                  <TextBlock Text="Saved history is available even when no Signal account is selected." Classes="muted" FontSize="12" IsVisible="{Binding ShowSavedHistoryNotice}" />
                   <TextBlock Text="Scheduled times · Mac local time" Classes="muted" FontSize="12" />
                 </StackPanel>
                 <ScrollViewer x:Name="HistoryScroll" Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">

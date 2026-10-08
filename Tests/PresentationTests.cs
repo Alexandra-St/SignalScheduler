@@ -178,6 +178,18 @@ public sealed class PresentationTests
     }
 
     [AvaloniaFact]
+    public void AutomaticDetectionCheckboxIsInteractiveAndUsesResetCommand()
+    {
+        var configuration = new SignalCliConfiguration();
+        var window = new SignalScheduler.Views.SignalCliSettingsWindow(configuration);
+        var checkbox = window.FindControl<CheckBox>("AutomaticDetectionCheckBox")!;
+        Assert.True(checkbox.IsHitTestVisible);
+        Assert.True(checkbox.Focusable);
+        Assert.Same(configuration.UseAutomaticDetectionCommand, checkbox.Command);
+        window.Close(); configuration.Close();
+    }
+
+    [AvaloniaFact]
     public void SendTimeErrorIsVisibleNextToInputAndClearsAfterCorrection()
     {
         var view = new MainWindow();

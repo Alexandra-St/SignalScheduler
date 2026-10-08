@@ -164,11 +164,12 @@ public sealed class MainWindowViewModel : ObservableObject
     public bool CanSchedule => canSchedule && !IsBusy && Signal.HasSelectedAccount && !HasSendTimeError && SignalRecipient.TryParse(Recipient, out _);
     public bool IsBusy => dispatcher?.IsBusy ?? false;
     public IReadOnlyList<MessageViewModel> Messages { get; private set; } = Array.Empty<MessageViewModel>();
-    private HistoryFilterOption historyFilter = new(HistoryFilterKind.All, "All statuses");
+    private HistoryFilterOption historyFilter;
     private DateTime presentationDate = DateTime.Today;
     public bool IsReviewingNewMissed => HistoryFilter.Kind == HistoryFilterKind.NewMissed;
     public string ShowAllMissedLabel => $"Show all missed ({Messages.Count(item => item.Message.State == MessageStatus.Missed)})";
-    public IReadOnlyList<HistoryFilterOption> HistoryFilters { get; private set; } = HistoryFilterOption.Create(0, false);
+    public ObservableCollection<HistoryFilterOption> HistoryFilters { get; } = new(HistoryFilterOption.Create(0, false));
+    public bool ShowSavedHistoryNotice => !Signal.HasSelectedAccount && Messages.Count > 0;
     public HistoryFilterOption HistoryFilter
     {
         get => historyFilter;
@@ -191,14 +192,17 @@ public sealed class MainWindowViewModel : ObservableObject
     {
         presentationDate = DateTime.Today;
         UpcomingGroups = MessageQueuePresentation.Upcoming(Messages, presentationDate);
-        var filters = HistoryFilterOption.Create(startupMissedCount, startupMissedCount > 0 || IsReviewingNewMissed);
-        if (!HistoryFilters.SequenceEqual(filters))
+        var newMissed = HistoryFilters.SingleOrDefault(option => option.Kind == HistoryFilterKind.NewMissed);
+        if (startupMissedCount > 0)
         {
-            var selectedKind = HistoryFilter.Kind;
-            HistoryFilters = filters;
-            historyFilter = filters.Single(option => option.Kind == selectedKind);
-            Notify(nameof(HistoryFilters));
-            Notify(nameof(HistoryFilter));
+            if (newMissed == null)
+                HistoryFilters.Insert(3, new(HistoryFilterKind.NewMissed, $"Missed ({startupMissedCount})"));
+            else newMissed.UpdateCount(startupMissedCount);
+        }
+        else if (newMissed != null)
+        {
+            if (IsReviewingNewMissed) SelectHistoryFilter(HistoryFilterKind.All);
+            HistoryFilters.Remove(newMissed);
         }
         HistoryMessages = IsReviewingNewMissed
             ? MessageQueuePresentation.History(Messages, HistoryFilterKind.NewMissed).Where(item => startupMissedIds.Contains(item.Message.Id)).ToArray()
@@ -221,13 +225,14 @@ public sealed class MainWindowViewModel : ObservableObject
 
     public MainWindowViewModel()
     {
+        historyFilter = HistoryFilters[0];
         Attachments = new(attachments);
         ScheduleCommand = new(Schedule, () => CanSchedule);
         PasteImageCommand = new(PasteImageAsync);
         DismissMissedCommand = new(() => { startupNoticeDismissed = true; Notify(nameof(HasStartupMissed)); });
         ReviewMissedCommand = new(() => { SelectHistoryFilter(HistoryFilterKind.NewMissed); SelectedMessagesTab = 1; }, () => startupMissedCount > 0);
         ShowAllMissedCommand = new(() => { SelectHistoryFilter(HistoryFilterKind.Missed); SelectedMessagesTab = 1; });
-        Signal.PropertyChanged += (_, _) => NotifyScheduling();
+        Signal.PropertyChanged += (_, _) => { NotifyScheduling(); Notify(nameof(ShowSavedHistoryNotice)); };
         SyncPickers();
         ValidateSendTime(out _);
         ValidateRecipient(out _);
@@ -566,6 +571,7 @@ public sealed class MainWindowViewModel : ObservableObject
             .Select(message => new MessageViewModel(message, this)).ToList()
             ?? (IReadOnlyList<MessageViewModel>)Array.Empty<MessageViewModel>();
         Notify(nameof(Messages));
+        Notify(nameof(ShowSavedHistoryNotice));
         Notify(nameof(QueueSummary));
         RefreshMessageGroups();
     }

@@ -30,8 +30,19 @@ remain automated checks, not separately reported manual checks. The initial 0.2.
 
 ## Remaining verification boundaries
 
-Clean-Mac/browser-download first launch, current-candidate Replace acceptance,
-real QR linking after redesign, real QR expiry, recovery after uncertain sends and
+Clean-Mac/browser-download first launch, new phone-approved QR linking after
+redesign, window-close cancellation, recovery after uncertain sends and
 native synthetic screenshots remain pending. Intel is unvalidated and is not a
 release target. Sent indicates successful CLI completion, not a delivery receipt.
 Blocked still appears under that name; renaming it to Cannot send is not implemented.
+
+## Follow-up regressions — build 29
+
+- Blank History filter after handling the final new Missed while History was hidden:
+  fixed with stable options and a return to All statuses; covered by UI tests.
+- Automatic detection: checkbox now invokes reset; reset does not require a linked
+  account. Covered with synthetic empty-account discovery.
+- Local history without a selected account is retained intentionally; the UI now
+  explains this.
+- Operator reported the fixes working normally on the development Mac. Real QR
+  timeout and Try again also passed manual testing on 2026-10-08.

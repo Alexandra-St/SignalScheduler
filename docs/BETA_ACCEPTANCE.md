@@ -201,3 +201,24 @@ No new actual-delivery result is inferred from this preservation check.
 The build 27 source archive remains the exact snapshot of 98aead1. This later
 acceptance documentation does not change the packaged application. Tag and
 GitHub Release publication remain separately unapproved.
+
+## QR follow-up and regression fixes — 0.3.0 build 29
+
+On 2026-10-08 the operator confirmed real QR timeout and Try again after the
+redesign. New phone-approved linking and window-close cancellation are not
+inferred from that report.
+
+Build 29 fixes the blank History selection when the last startup-notice Missed
+message is handled while History is hidden. Filter options retain their identity;
+the exhausted new-Missed filter returns to All statuses. Automatic detection is
+now an interactive reset control and resets the custom executable preference
+independently of linked-account discovery. Saved local history remains available
+without a selected Signal account, with an explicit explanation in the UI.
+
+168 Release .NET tests and 16 packaging tests passed. Release build-mac.sh and
+the DMG passed signature, relocation, private-Java and isolated-account checks;
+the DMG integrity check passed. Automated tests used synthetic accounts and
+performed no real Signal sends. The operator reported that the fixes now appear
+to work normally and approved commit/push. This is development-Mac acceptance,
+not clean-Mac acceptance or proof of all QR scenarios. A matching final source
+archive, native synthetic screenshots and release publication remain separate work.

@@ -6,6 +6,8 @@ namespace SignalScheduler.ViewModels;
 
 public sealed class SignalCliConfiguration : ObservableObject
 {
+    private readonly Func<Task<SignalExecutable?>> detectExecutable;
+    private readonly Action<string?> savePreference;
     private string? customExecutable;
     private string cli = "", version = "", account = "";
     private string executableStatus = "Looking for signal-cli…", accountDiscoveryStatus = "";
@@ -32,8 +34,12 @@ public sealed class SignalCliConfiguration : ObservableObject
     public AsyncCommand RefreshAccountsCommand { get; }
     public AsyncCommand UseAutomaticDetectionCommand { get; }
 
-    public SignalCliConfiguration()
+    public SignalCliConfiguration() : this(SignalExecutable.DetectForApplicationAsync, SignalCliPreferences.Save) { }
+
+    internal SignalCliConfiguration(Func<Task<SignalExecutable?>> detectExecutable, Action<string?> savePreference)
     {
+        this.detectExecutable = detectExecutable;
+        this.savePreference = savePreference;
         RefreshAccountsCommand = new(RefreshAccountsAsync, () => CanConfigure && ExecutableReady);
         UseAutomaticDetectionCommand = new(() => ConfigureExecutableAsync(null), () => CanConfigure);
     }
@@ -50,7 +56,7 @@ public sealed class SignalCliConfiguration : ObservableObject
     }
 
     public Task<SignalExecutable?> ResolveExecutableAsync() => customExecutable == null
-        ? SignalExecutable.DetectForApplicationAsync()
+        ? detectExecutable()
         : SignalExecutable.ValidateAsync(customExecutable);
 
     public async Task ConfigureExecutableAsync(string? chosenPath, bool persist = true)
@@ -67,8 +73,15 @@ public sealed class SignalCliConfiguration : ObservableObject
         NotifyState();
         try
         {
+            // Reset the mode independently of account discovery or a disconnected custom CLI.
+            if (chosenPath == null)
+            {
+                if (persist) savePreference(null);
+                customExecutable = null;
+                Notify(nameof(AutomaticDetection));
+            }
             var executable = chosenPath == null
-                ? await SignalExecutable.DetectForApplicationAsync()
+                ? await detectExecutable()
                 : await SignalExecutable.ValidateAsync(chosenPath);
             if (closed) return;
             if (chosenPath != null && executable == null)
@@ -76,7 +89,7 @@ public sealed class SignalCliConfiguration : ObservableObject
                 ExecutableStatus = "Invalid executable. Choose a working signal-cli or use automatic detection.";
                 return;
             }
-            if (persist) SignalCliPreferences.Save(chosenPath);
+            if (persist && chosenPath != null) savePreference(chosenPath);
             customExecutable = chosenPath;
             Notify(nameof(AutomaticDetection));
             Cli = executable?.Path ?? "";

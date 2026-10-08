@@ -15,8 +15,8 @@
       <Button Content="Connect Signal" IsEnabled="{Binding CanConnect}" Click="OnConnectSignal" />
       <Border Height="1" Background="#41808080" Margin="0,6" />
       <TextBlock Classes="heading" Text="signal-cli" />
-      <CheckBox Content="Automatic detection" IsChecked="{Binding AutomaticDetection, Mode=OneWay}"
-                IsHitTestVisible="False" Focusable="False" />
+      <CheckBox x:Name="AutomaticDetectionCheckBox" Content="Automatic detection" IsChecked="{Binding AutomaticDetection, Mode=OneWay}"
+                Command="{Binding UseAutomaticDetectionCommand}" />
       <TextBlock Text="Detected / selected executable" />
       <TextBox Text="{Binding Cli, Mode=OneWay}" IsReadOnly="True" Watermark="No executable detected" />
       <TextBlock Text="{Binding ExecutableVersion, StringFormat='Version: {0}'}" />

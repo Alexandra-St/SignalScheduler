@@ -8,6 +8,48 @@ using Xunit;
 namespace SignalScheduler.Tests;
 public sealed class RescheduleTests
 {
+    [AvaloniaTheory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task HiddenHistorySelectionRemainsValidAfterLastNewMissedIsRescheduledOrDeleted(bool reschedule)
+    {
+        using var queue = new TestQueue();
+        var fresh = queue.Add(TimeSpan.FromHours(-1));
+        queue.Add(TimeSpan.FromHours(-2), MessageStatus.Sent);
+        var owner = new MainWindowViewModel(queue.Store, new FakeSignalSender());
+        File.WriteAllText(queue.Executable, "#!/bin/sh\nif [ \"$1\" = '--version' ]; then printf 'signal-cli 0.14.9'; else printf '[{\"number\":\"account-placeholder\"}]'; fi\n");
+        File.SetUnixFileMode(queue.Executable, UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute);
+        await owner.Signal.ConfigureExecutableAsync(queue.Executable, persist: false);
+        await owner.ProcessStartupOverdueAsync();
+        var combo = new ComboBox { DataContext = owner };
+        combo.Bind(ItemsControl.ItemsSourceProperty, new Avalonia.Data.Binding("HistoryFilters"));
+        combo.Bind(Avalonia.Controls.Primitives.SelectingItemsControl.SelectedItemProperty,
+            new Avalonia.Data.Binding("HistoryFilter") { Mode = Avalonia.Data.BindingMode.TwoWay });
+        var tabs = new TabControl { Items = { new TabItem { Header = "Upcoming" }, new TabItem { Header = "History", Content = combo } } };
+        var host = new Window { Content = tabs }; host.Show();
+        try
+        {
+            tabs.SelectedIndex = 1;
+            owner.ReviewMissedCommand.Execute(null);
+            Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+            tabs.SelectedIndex = 0;
+            if (reschedule)
+            {
+                var future = DateTime.Now.AddHours(1);
+                Assert.True(owner.TryReschedule(fresh.Id, future.ToString("dd.MM.yyyy"), future.ToString("HH:mm"), out var error), error);
+            }
+            else owner.Delete(queue.Store.Items.Single(item => item.Id == fresh.Id));
+            tabs.SelectedIndex = 1;
+            Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+            Assert.Equal(HistoryFilterKind.All, owner.HistoryFilter.Kind);
+            Assert.Same(owner.HistoryFilter, combo.SelectedItem);
+            Assert.False(owner.IsReviewingNewMissed);
+            Assert.Equal(reschedule ? 2 : 1, owner.HistoryMessages.Count);
+            Assert.False(owner.ShowSavedHistoryNotice);
+        }
+        finally { host.Close(); owner.TryClose(); }
+    }
+
     [AvaloniaFact]
     public async Task StartupWriteFailureStopsProcessingWithoutSendingOrClaimingSuccess()
     {
