@@ -69,14 +69,15 @@ linking URIs, Signal account directories, queue files, Keychain data or real con
 
 ## Release-owner checklist — remove from published notes
 
-- [x] Candidate version/build: 0.3.0 build 26, sourced from Version.props.
+- [x] Candidate version/build: 0.3.0 build 29, sourced from Version.props.
 - [x] Development-Mac installation, real QR, delivery and build 4 → 6 Replace checks recorded separately.
 - [x] UI redesign and Missed improvements approved, committed and pushed through 319509b.
 - [x] Technical dependency source/notice review completed; dependency versions unchanged.
-- [x] Verify candidate build 26 .app, DMG, source archive, hashes and metadata (2026-10-08).
-- [ ] Record Replace acceptance for this candidate separately from build 6.
-- [ ] Record real QR linking after redesign and clean-Mac/browser-download acceptance separately.
+- [x] Verify candidate build 29 .app, DMG, source archive, hashes and metadata (2026-10-08).
+- [x] Development-Mac Replace acceptance recorded for build 27; build 29 fixes and QR follow-up accepted separately.
+- [x] Record real QR linking after redesign, timeout/retry and window-close cancellation on build 29.
+- [ ] Complete clean-Mac/browser-download acceptance.
 - [ ] Complete native synthetic screenshots and the current UI acceptance report.
-- [ ] Obtain approval to commit the release-preparation changes and push them.
+- [x] Operator approved committing and pushing the QR acceptance and subsequent release preparation.
 - [ ] Obtain separate approval for a prerelease tag and GitHub Release publication.
 - [ ] Attach matching DMG, SHA-256 files and complete source materials; update pending claims.
