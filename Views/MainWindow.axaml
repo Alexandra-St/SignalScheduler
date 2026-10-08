@@ -117,7 +117,7 @@
           <TextBox x:Name="RecipientInput" Text="{Binding Recipient, Mode=TwoWay}"
                    Watermark="Phone number, Signal username, or Signal link" Classes.invalid="{Binding HasRecipientError}" />
           <TextBlock x:Name="RecipientError" Text="{Binding RecipientError}" IsVisible="{Binding HasRecipientError}"
-                     Foreground="#D05050" FontWeight="SemiBold" />
+                     Classes="validationError" />
           <TextBlock Classes="field" Text="Message" />
           <TextBox Text="{Binding Body, Mode=TwoWay}" Watermark="Write a message…"
                    AcceptsReturn="True" MinHeight="140" Height="140" TextWrapping="Wrap" />
@@ -125,6 +125,8 @@
             <Button Content="Attach photos…" Click="OnAttachPhotos" />
             <Button Content="Paste screenshot" Command="{Binding PasteImageCommand}" />
           </WrapPanel>
+          <TextBlock x:Name="AttachmentError" Classes="validationError" Text="{Binding ImageError}"
+                     IsVisible="{Binding HasImageError}" />
           <ItemsControl x:Name="ComposerAttachments" ItemsSource="{Binding Attachments}">
             <ItemsControl.ItemTemplate>
               <DataTemplate x:DataType="vm:AttachmentViewModel">
@@ -156,13 +158,8 @@
               </TextBox>
             </Grid>
             <TextBlock Classes="muted" Text="Mac local time" FontSize="12" />
-            <Grid ColumnDefinitions="16,*" ColumnSpacing="8" IsVisible="{Binding HasSendTimeError}">
-              <Path x:Name="SendAtErrorIcon" Data="M 8,1 A 7,7 0 1 1 7.99,1 M 8,7 L 8,12 M 8,4 L 8,5"
-                    Width="16" Height="16" Stretch="Uniform" Stroke="#E47777" StrokeThickness="1.3"
-                    VerticalAlignment="Top" Margin="0,1,0,0" />
-              <TextBlock x:Name="SendAtError" Grid.Column="1" Text="{Binding SendTimeError}" IsVisible="{Binding HasSendTimeError}"
-                         Foreground="#E47777" FontSize="12" TextWrapping="Wrap" />
-            </Grid>
+            <TextBlock x:Name="SendAtError" Classes="validationError" Text="{Binding SendTimeError}"
+                       IsVisible="{Binding HasSendTimeError}" />
             <Button x:Name="ScheduleMessageButton" Content="Schedule message" Command="{Binding ScheduleCommand}"
                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#3B6FA8" />
           </StackPanel>

@@ -3,7 +3,7 @@
         xmlns:vm="using:SignalScheduler.ViewModels"
         x:Class="SignalScheduler.Views.SignalLinkWindow"
         x:DataType="vm:SignalLinkViewModel" x:CompileBindings="True"
-        Title="Connect Signal" Width="480" Height="600"
+        Title="Connect Signal" RequestedThemeVariant="Dark" Background="#111D27" WindowStartupLocation="CenterOwner" Width="480" Height="600" MinWidth="400" MinHeight="420"
         Opened="OnOpened" Closing="OnClosing" Closed="OnClosed">
   <Window.Styles>
     <StyleInclude Source="avares://SignalScheduler/Views/PresentationStyles.axaml" />

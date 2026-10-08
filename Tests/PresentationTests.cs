@@ -239,6 +239,16 @@ public sealed class PresentationTests
         time.Text = "25:30"; Dispatcher.UIThread.RunJobs();
         Assert.DoesNotContain("invalid", date.Classes);
         Assert.Contains("invalid", time.Classes);
+        model.Recipient = "Invalid recipient";
+        Dispatcher.UIThread.RunJobs();
+        var recipientError = view.FindControl<TextBlock>("RecipientError")!;
+        var timeError = view.FindControl<TextBlock>("SendAtError")!;
+        Assert.True(recipientError.IsVisible);
+        Assert.Equal(recipientError.FontSize, timeError.FontSize);
+        Assert.Equal(recipientError.FontFamily, timeError.FontFamily);
+        Assert.Equal(recipientError.FontWeight, timeError.FontWeight);
+        Assert.Equal(recipientError.Foreground!.ToString(), timeError.Foreground!.ToString());
+        Assert.Null(view.FindControl<Avalonia.Controls.Shapes.Path>("SendAtErrorIcon"));
         Capture("invalid-time");
         model.TryClose();
         void Capture(string state)

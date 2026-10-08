@@ -49,6 +49,13 @@ public sealed class MainWindowViewModel : ObservableObject
             NotifyScheduling();
         }
     }
+    private string imageError = "";
+    public string ImageError
+    {
+        get => imageError;
+        private set { if (Set(ref imageError, value)) Notify(nameof(HasImageError)); }
+    }
+    public bool HasImageError => ImageError.Length > 0;
     public bool HasRecipientError => RecipientError.Length > 0;
     public string Body { get => body; set => Set(ref body, value); }
     public string When
@@ -382,6 +389,7 @@ public sealed class MainWindowViewModel : ObservableObject
         if (attachments.Count >= 8 || data.Length == 0 || attachments.Sum(item => (long)item.Attachment.Data.Length) + data.Length > MaxBytes)
             throw new IOException("Limit: 8 images, 20 MB total per message.");
         attachments.Add(new AttachmentViewModel(new ImageAttachment(Path.GetFileName(name), data), RemoveAttachment));
+        ImageError = "";
         Status = "Image added.";
     }
 
@@ -406,7 +414,7 @@ public sealed class MainWindowViewModel : ObservableObject
         catch (Exception exception) { ReportImageError(exception); }
     }
 
-    public void ReportImageError(Exception exception) => Status = "Could not add image: " + exception.Message;
+    public void ReportImageError(Exception exception) => ImageError = "Could not add image: " + exception.Message;
 
     public async Task PasteImageAsync()
     {
@@ -415,7 +423,7 @@ public sealed class MainWindowViewModel : ObservableObject
             var attachment = await MacClipboardImageReader.ReadAsync(MaxBytes);
             AddAttachment(attachment.Name, attachment.Data);
         }
-        catch (Exception exception) { Status = exception.Message; }
+        catch (Exception exception) { ImageError = exception.Message; }
     }
 
     private void Mutate(Action action)
@@ -451,6 +459,7 @@ public sealed class MainWindowViewModel : ObservableObject
 
     private void ClearAttachments()
     {
+        ImageError = "";
         foreach (var attachment in attachments) attachment.Dispose();
         attachments.Clear();
     }

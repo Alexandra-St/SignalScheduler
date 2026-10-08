@@ -3,7 +3,7 @@
         xmlns:vm="using:SignalScheduler.ViewModels"
         x:Class="SignalScheduler.Views.SignalCliSettingsWindow"
         x:DataType="vm:SignalCliConfiguration" x:CompileBindings="True"
-        RequestedThemeVariant="Dark" Title="Settings → signal-cli" Width="560" Height="520" MinWidth="460" MinHeight="400">
+        RequestedThemeVariant="Dark" Title="Settings → signal-cli" Background="#111D27" WindowStartupLocation="CenterOwner" Width="560" Height="520" MinWidth="460" MinHeight="400">
   <Window.Styles>
     <StyleInclude Source="avares://SignalScheduler/Views/PresentationStyles.axaml" />
   </Window.Styles>
