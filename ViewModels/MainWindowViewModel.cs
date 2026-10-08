@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Collections.ObjectModel;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
@@ -22,12 +23,21 @@ public sealed class MainWindowViewModel : ObservableObject
     private string when = DateTime.Now.AddMinutes(30).ToString("yyyy-MM-dd HH:mm");
     private string status = "Opening encrypted queue…";
     private string sendTimeError = "", recipientError = "";
-    private bool canSchedule;
+    private bool canSchedule, recipientInteracted;
+    private DateTime? selectedDate;
+    private TimeSpan? selectedTime;
+    private string dateInput = "", timeInput = "";
     public SignalCliConfiguration Signal { get; } = new();
     public string Recipient
     {
         get => recipient;
-        set { if (Set(ref recipient, value ?? "")) ValidateRecipient(out _); }
+        set
+        {
+            if (!Set(ref recipient, value ?? "")) return;
+            recipientInteracted = true;
+            ValidateRecipient(out _);
+            NotifyScheduling();
+        }
     }
     public string RecipientError
     {
@@ -44,8 +54,92 @@ public sealed class MainWindowViewModel : ObservableObject
     public string When
     {
         get => when;
-        set { if (Set(ref when, value ?? "")) ValidateSendTime(out _); }
+        set
+        {
+            if (!Set(ref when, value ?? "")) return;
+            SyncPickers();
+            ValidateSendTime(out _);
+        }
     }
+    public DateTime? SelectedDate
+    {
+        get => selectedDate;
+        set { if (Set(ref selectedDate, value)) UpdatePickerTime(); }
+    }
+    public DateTime MinimumSelectableDate => DateTime.Today;
+    public TimeSpan? SelectedTime
+    {
+        get => selectedTime;
+        set
+        {
+            if (!Set(ref selectedTime, value)) return;
+            Notify(nameof(SelectedTimeText));
+            UpdatePickerTime();
+        }
+    }
+
+    public string DateInput
+    {
+        get => dateInput;
+        set
+        {
+            if (!Set(ref dateInput, value ?? "")) return;
+            selectedDate = DateTime.TryParseExact(dateInput, new[] { "d.M.yyyy", "dd.MM.yyyy" }, CultureInfo.GetCultureInfo("en-GB"),
+                DateTimeStyles.None, out var date) ? date.Date : null;
+            Notify(nameof(SelectedDate));
+            UpdatePickerTime();
+        }
+    }
+    public string TimeInput
+    {
+        get => timeInput;
+        set
+        {
+            if (!Set(ref timeInput, value ?? "")) return;
+            selectedTime = DateTime.TryParseExact(timeInput, "HH:mm", CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out var time) ? time.TimeOfDay : null;
+            Notify(nameof(SelectedTime));
+            UpdatePickerTime();
+        }
+    }
+    public bool HasDateInputError => HasSendTimeError && (!SelectedDate.HasValue || SelectedDate.Value.Date < DateTime.Today);
+    public bool HasTimeInputError => HasSendTimeError && !HasDateInputError;
+    public void NormalizeDateInput()
+    {
+        if (SelectedDate.HasValue) { dateInput = SelectedDate.Value.ToString("dd.MM.yyyy", CultureInfo.GetCultureInfo("en-GB")); Notify(nameof(DateInput)); }
+    }
+    public void NormalizeTimeInput()
+    {
+        if (SelectedTime.HasValue) { timeInput = SelectedTime.Value.ToString(@"hh\:mm"); Notify(nameof(TimeInput)); }
+    }
+
+    public string SelectedTimeText => SelectedTime?.ToString(@"hh\:mm", CultureInfo.InvariantCulture) ?? "Choose time";
+
+    private void SyncPickers()
+    {
+        var valid = DateTime.TryParseExact(When, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture,
+            DateTimeStyles.None, out var local);
+        selectedDate = valid ? local.Date : null;
+        selectedTime = valid ? local.TimeOfDay : null;
+        Notify(nameof(SelectedDate));
+        Notify(nameof(SelectedTime));
+        Notify(nameof(SelectedTimeText));
+        dateInput = selectedDate?.ToString("dd.MM.yyyy", CultureInfo.GetCultureInfo("en-GB")) ?? "";
+        timeInput = selectedTime?.ToString(@"hh\:mm") ?? "";
+        Notify(nameof(DateInput));
+        Notify(nameof(TimeInput));
+    }
+
+    private void UpdatePickerTime()
+    {
+        // Pickers describe wall-clock time. SendTimeValidation resolves the local offset and DST.
+        var text = SelectedDate.HasValue && SelectedTime.HasValue
+            ? SelectedDate.Value.Date.Add(SelectedTime.Value).ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
+            : "";
+        Set(ref when, text, nameof(When));
+        ValidateSendTime(out _);
+    }
+
     public string SendTimeError
     {
         get => sendTimeError;
@@ -53,15 +147,44 @@ public sealed class MainWindowViewModel : ObservableObject
         {
             if (!Set(ref sendTimeError, value)) return;
             Notify(nameof(HasSendTimeError));
+            Notify(nameof(HasDateInputError));
+            Notify(nameof(HasTimeInputError));
             NotifyScheduling();
         }
     }
     public bool HasSendTimeError => SendTimeError.Length > 0;
     public string Status { get => status; private set => Set(ref status, value); }
-    public bool CanSchedule => canSchedule && !IsBusy && Signal.HasSelectedAccount && !HasSendTimeError && !HasRecipientError;
+    public bool CanSchedule => canSchedule && !IsBusy && Signal.HasSelectedAccount && !HasSendTimeError && SignalRecipient.TryParse(Recipient, out _);
     public bool IsBusy => dispatcher?.IsBusy ?? false;
     public IReadOnlyList<MessageViewModel> Messages { get; private set; } = Array.Empty<MessageViewModel>();
-    public string QueueSummary => Messages.Count == 0 ? "No messages yet. Schedule your first message above."
+    private string historyFilter = "All statuses";
+    private DateTime presentationDate = DateTime.Today;
+    public IReadOnlyList<string> HistoryFilters { get; } = new[] { "All statuses", "Sent", "Cancelled", "Missed", "Unknown / Failed", "Blocked" };
+    public string HistoryFilter
+    {
+        get => historyFilter;
+        set { if (Set(ref historyFilter, value ?? "All statuses")) RefreshMessageGroups(); }
+    }
+    public IReadOnlyList<MessageGroup> UpcomingGroups { get; private set; } = Array.Empty<MessageGroup>();
+    public IReadOnlyList<MessageViewModel> HistoryMessages { get; private set; } = Array.Empty<MessageViewModel>();
+    public bool NoUpcoming => UpcomingGroups.Count == 0;
+    public bool NoHistory => HistoryMessages.Count == 0;
+    public string UpcomingHeader => $"Upcoming ({Messages.Count(m => m.Message.State is MessageStatus.Pending or MessageStatus.Sending)})";
+    public string HistoryHeader => $"History ({Messages.Count(m => m.Message.State is not (MessageStatus.Pending or MessageStatus.Sending))})";
+    private void RefreshMessageGroups()
+    {
+        presentationDate = DateTime.Today;
+        UpcomingGroups = MessageQueuePresentation.Upcoming(Messages, presentationDate);
+        HistoryMessages = MessageQueuePresentation.History(Messages, HistoryFilter);
+        Notify(nameof(UpcomingGroups));
+        Notify(nameof(HistoryMessages));
+        Notify(nameof(NoUpcoming));
+        Notify(nameof(NoHistory));
+        Notify(nameof(UpcomingHeader));
+        Notify(nameof(HistoryHeader));
+    }
+
+    public string QueueSummary => Messages.Count == 0 ? "No messages yet. Schedule your first message on the left."
         : $"{Messages.Count} messages · newest scheduled time first";
     public ReadOnlyObservableCollection<AttachmentViewModel> Attachments { get; }
     public RelayCommand ScheduleCommand { get; }
@@ -73,11 +196,13 @@ public sealed class MainWindowViewModel : ObservableObject
         ScheduleCommand = new(Schedule, () => CanSchedule);
         PasteImageCommand = new(PasteImageAsync);
         Signal.PropertyChanged += (_, _) => NotifyScheduling();
+        SyncPickers();
         ValidateSendTime(out _);
         ValidateRecipient(out _);
         timer.Tick += async (_, _) =>
         {
             ValidateSendTime(out _);
+            if (presentationDate != DateTime.Today) RefreshMessageGroups();
             if (dispatcher != null && Signal.ExecutableReady && !Signal.IsWorking) await dispatcher.DispatchDueAsync();
         };
     }
@@ -135,6 +260,7 @@ public sealed class MainWindowViewModel : ObservableObject
         Signal.Close();
         timer.Stop();
         ClearAttachments();
+        foreach (var message in Messages) message.Dispose();
         store?.Dispose();
         return true;
     }
@@ -142,20 +268,25 @@ public sealed class MainWindowViewModel : ObservableObject
     private bool ValidateRecipient(out SignalRecipient? target)
     {
         var valid = SignalRecipient.TryParse(Recipient, out target);
-        RecipientError = valid ? "" : SignalRecipient.Error;
+        RecipientError = valid || !recipientInteracted ? "" : SignalRecipient.Error;
         return valid;
     }
 
     private bool ValidateSendTime(out DateTimeOffset due)
     {
         var valid = SendTimeValidation.TryGetDue(When, DateTimeOffset.Now, TimeZoneInfo.Local, out due, out var error);
+        if (!SelectedDate.HasValue) error = "Enter a valid date, for example 08.10.2026.";
+        else if (!SelectedTime.HasValue) error = "Enter a valid time in HH:mm format.";
         SendTimeError = error;
+        Notify(nameof(HasDateInputError));
+        Notify(nameof(HasTimeInputError));
         return valid;
     }
 
     public void Schedule()
     {
         // Recheck at activation: a time can become past after the last timer tick.
+        recipientInteracted = true;
         var recipientValid = ValidateRecipient(out var target);
         var timeValid = ValidateSendTime(out var due);
         if (!recipientValid || !timeValid) return;
@@ -179,6 +310,37 @@ public sealed class MainWindowViewModel : ObservableObject
     }
 
     public void Cancel(ScheduledMessage message) => Mutate(() => store!.ChangeStatus(message.Id, MessageStatus.Cancelled));
+
+    public event Action<ScheduledMessage>? TextEditRequested;
+    public void RequestTextEdit(ScheduledMessage message)
+    {
+        if (!IsBusy && store?.Items.Any(item => item.Id == message.Id && item.State == MessageStatus.Pending) == true)
+            TextEditRequested?.Invoke(message);
+    }
+
+    public bool SavePendingText(Guid id, string text, out string error)
+    {
+        error = "This message can no longer be edited. It may already be sending.";
+        if (IsBusy || !canSchedule || store == null) return false;
+        var message = store.Items.SingleOrDefault(item => item.Id == id);
+        if (message?.State != MessageStatus.Pending) return false;
+        if (string.IsNullOrWhiteSpace(text) && (message.Attachments?.Count ?? 0) == 0)
+        { error = "Add text or a photo."; return false; }
+        try
+        {
+            if (!store.TryEditPendingText(id, text)) return false;
+            UpdateMessages();
+            Status = "Message text updated.";
+            error = "";
+            return true;
+        }
+        catch
+        {
+            error = "Could not save the message. Reopen the app before continuing.";
+            QueueFailure(error);
+            return false;
+        }
+    }
 
     public void Delete(ScheduledMessage message) => Mutate(() => store!.Remove(message.Id));
 
@@ -236,7 +398,7 @@ public sealed class MainWindowViewModel : ObservableObject
             var attachment = await MacClipboardImageReader.ReadAsync(MaxBytes);
             AddAttachment(attachment.Name, attachment.Data);
         }
-        catch (Exception exception) { Status = "Could not paste image: " + exception.Message; }
+        catch (Exception exception) { Status = exception.Message; }
     }
 
     private void Mutate(Action action)
@@ -261,11 +423,13 @@ public sealed class MainWindowViewModel : ObservableObject
 
     private void UpdateMessages()
     {
+        foreach (var message in Messages) message.Dispose();
         Messages = store?.Items.OrderByDescending(message => message.Due)
             .Select(message => new MessageViewModel(message, this)).ToList()
             ?? (IReadOnlyList<MessageViewModel>)Array.Empty<MessageViewModel>();
         Notify(nameof(Messages));
         Notify(nameof(QueueSummary));
+        RefreshMessageGroups();
     }
 
     private void ClearAttachments()

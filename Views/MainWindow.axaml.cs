@@ -7,12 +7,16 @@ namespace SignalScheduler.Views;
 
 public sealed partial class MainWindow : Window
 {
+    private void OnDateInputLostFocus(object? sender, RoutedEventArgs args) => viewModel.NormalizeDateInput();
+    private void OnTimeInputLostFocus(object? sender, RoutedEventArgs args) => viewModel.NormalizeTimeInput();
     private readonly MainWindowViewModel viewModel = new();
 
     public MainWindow()
     {
         InitializeComponent();
         DataContext = viewModel;
+        viewModel.TextEditRequested += async message =>
+            await new EditMessageWindow(viewModel, message).ShowDialog(this);
     }
 
     private async void OnOpened(object? sender, EventArgs args) => await viewModel.OpenAsync();

@@ -19,7 +19,7 @@ public static class MacClipboardImageReader
                 + "\non error errMsg\ntry\nclose access handle\nend try\nerror errMsg\nend try";
             var result = await ProcessRunner.RunAsync("/usr/bin/osascript", new[] { "-" }, script);
             if (result.Code != 0 || !File.Exists(path))
-                throw new IOException("Copy an image first (Control + Shift + Command + 4 for a screenshot).");
+                throw new IOException("No image found in the clipboard. Copy a screenshot first, then try Paste screenshot again.");
             if (new FileInfo(path).Length > maxBytes) throw new IOException("Image exceeds 20 MB.");
             return new ImageAttachment("Screenshot-" + DateTime.Now.ToString("yyyyMMdd-HHmmss") + ".png",
                 await File.ReadAllBytesAsync(path));

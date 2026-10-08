@@ -17,7 +17,12 @@ namespace SignalScheduler.Tests;
 
 public sealed class TestApplication : Application
 {
-    public override void Initialize() => Styles.Add(new FluentTheme());
+    public override void Initialize()
+    {
+        System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("en-GB");
+        System.Globalization.CultureInfo.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("en-GB");
+        Styles.Add(new FluentTheme());
+    }
 }
 
 public static class TestAppBuilder
@@ -88,11 +93,11 @@ public sealed class PresentationTests
     }
 
     [AvaloniaTheory]
-    [InlineData(MessageStatus.Pending, "Status: Pending", true, true, false)]
-    [InlineData(MessageStatus.Sending, "Status: Sending", false, false, false)]
-    [InlineData(MessageStatus.Sent, "Status: Sent", false, true, true)]
-    [InlineData(MessageStatus.Cancelled, "Status: Canceled", false, true, true)]
-    [InlineData(MessageStatus.Unknown, "Status: Unknown", false, true, true)]
+    [InlineData(MessageStatus.Pending, "Pending", true, true, false)]
+    [InlineData(MessageStatus.Sending, "Sending", false, false, false)]
+    [InlineData(MessageStatus.Sent, "Sent", false, true, true)]
+    [InlineData(MessageStatus.Cancelled, "Cancelled", false, true, true)]
+    [InlineData(MessageStatus.Unknown, "Unknown", false, true, true)]
     public void MessageTemplateShowsStatusAndOnlyApplicableActions(MessageStatus state, string status,
         bool cancel, bool reuse, bool delete)
     {
@@ -110,16 +115,50 @@ public sealed class PresentationTests
         host.Window.Show();
         Dispatcher.UIThread.RunJobs();
         Assert.Contains(host.Window.GetVisualDescendants().OfType<TextBlock>(), text => text.Text == status);
-        var buttons = host.Window.GetVisualDescendants().OfType<Button>().ToList();
-        Assert.Equal(cancel, buttons.Single(button => Equals(button.Content, "Cancel")).IsVisible);
-        Assert.Equal(reuse, buttons.Single(button => Equals(button.Content, "Use as new message")).IsVisible);
-        Assert.Equal(delete, buttons.Single(button => Equals(button.Content, "Delete")).IsVisible);
+        var button = host.Window.GetVisualDescendants().OfType<Button>().Single();
+        Assert.Equal(cancel || reuse || delete, button.IsVisible);
+        var menu = Assert.IsType<MenuFlyout>(button.Flyout);
+        // Bindings are applied when the flyout is opened, exactly as in the application.
+        if (button.IsVisible)
+        {
+            menu.ShowAt(button);
+            Dispatcher.UIThread.RunJobs();
+            var items = menu.Items.OfType<MenuItem>().ToArray();
+            Assert.Equal(state == MessageStatus.Pending, items.Single(item => Equals(item.Header, "Edit message text…")).IsVisible);
+            Assert.Same(model.EditCommand, items.Single(item => Equals(item.Header, "Edit message text…")).Command);
+            Assert.Equal(cancel, items.Single(item => Equals(item.Header, "Cancel message")).IsVisible);
+            Assert.Equal(reuse, items.Single(item => Equals(item.Header, "Use as new message")).IsVisible);
+            Assert.Equal(delete, items.Single(item => Equals(item.Header, "Delete from history")).IsVisible);
+            Assert.Same(model.ReuseCommand, items.Single(item => Equals(item.Header, "Use as new message")).Command);
+            menu.Hide();
+        }
         if (reuse)
         {
             model.ReuseCommand.Execute(null);
             Assert.Equal(message.Text, owner.Body);
             Assert.Single(owner.Attachments);
         }
+        model.Dispose();
+        owner.TryClose();
+    }
+
+    [AvaloniaFact]
+    public void MessageCardKeepsFullMultilineTextWithoutLineLimit()
+    {
+        var view = new MainWindow();
+        var owner = (MainWindowViewModel)view.DataContext!;
+        const string body = "First line\nSecond line\nThird line\n\nFinal line";
+        using var model = new MessageViewModel(new ScheduledMessage(Guid.NewGuid(), "synthetic-recipient", body,
+            DateTimeOffset.Now.AddHours(1), MessageStatus.Pending, "synthetic-account", "synthetic-cli"), owner);
+        var card = view.FindControl<ItemsControl>("MessagesList")!.ItemTemplate!.Build(model)!;
+        card.DataContext = model;
+        using var host = new WindowScope(new Window { Content = card, Width = 640, Height = 400 });
+        host.Window.Show();
+        Dispatcher.UIThread.RunJobs();
+        var text = host.Window.GetVisualDescendants().OfType<TextBlock>().Single(item => item.Text == body);
+        Assert.Equal(0, text.MaxLines);
+        Assert.Equal(Avalonia.Media.TextTrimming.None, text.TextTrimming);
+        Assert.True(text.Bounds.Height > 60);
         owner.TryClose();
     }
 
@@ -141,27 +180,90 @@ public sealed class PresentationTests
         var view = new MainWindow();
         var model = (MainWindowViewModel)view.DataContext!;
         using var host = new WindowScope(Host(view));
-        var input = view.FindControl<TextBox>("SendAtInput")!;
+        var date = view.FindControl<TextBox>("SendDatePicker")!;
+        var time = view.FindControl<TextBox>("SendTimePicker")!;
         var error = view.FindControl<TextBlock>("SendAtError")!;
         var button = view.FindControl<Button>("ScheduleMessageButton")!;
-        var notifications = 0;
-        model.ScheduleCommand.CanExecuteChanged += (_, _) => notifications++;
-        input.Text = "2026-10-07 23:011";
+        date.Text = DateTime.Now.AddDays(-1).ToString("dd.MM.yyyy", System.Globalization.CultureInfo.GetCultureInfo("en-GB"));
+        time.Text = "12:00";
         Dispatcher.UIThread.RunJobs();
-        Assert.Equal(input.Text, model.When);
         Assert.True(error.IsVisible);
-        Assert.Contains("yyyy-MM-dd HH:mm", error.Text);
-        Assert.True(input.Classes.Contains("invalid"));
+        Assert.Contains("future", error.Text);
         Assert.False(button.IsEffectivelyEnabled);
         Assert.False(model.ScheduleCommand.CanExecute(null));
-        Assert.True(notifications > 0);
-        model.Schedule(); // Direct activation still validates even without a real queue.
+        model.Schedule(); // Direct activation still uses existing time validation.
         Assert.True(model.HasSendTimeError);
-        input.Text = DateTime.Now.AddHours(2).ToString("yyyy-MM-dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+        date.Text = DateTime.Now.AddDays(2).ToString("dd.MM.yyyy", System.Globalization.CultureInfo.GetCultureInfo("en-GB"));
+        time.Text = "14:35";
         Dispatcher.UIThread.RunJobs();
         Assert.False(error.IsVisible);
-        Assert.False(input.Classes.Contains("invalid"));
         Assert.Equal("", model.SendTimeError);
+        Assert.EndsWith("14:35", model.When);
+        Assert.Equal("14:35", time.Text);
+        time.Text = "";
+        Dispatcher.UIThread.RunJobs();
+        Assert.True(error.IsVisible);
+        time.Text = "14:36";
+        Dispatcher.UIThread.RunJobs();
+        Assert.False(error.IsVisible);
+        model.TryClose();
+    }
+
+    [AvaloniaFact]
+    public void SendAtKeyboardFieldsShowSeparateErrorAndFocusStates()
+    {
+        var view = new MainWindow();
+        var model = (MainWindowViewModel)view.DataContext!;
+        var content = view.Content;
+        view.Content = null;
+        using var host = new WindowScope(new Window { Content = content, DataContext = model,
+            Width = 1120, Height = 760, Background = view.Background, RequestedThemeVariant = Avalonia.Styling.ThemeVariant.Dark });
+        foreach (var style in view.Styles.ToArray()) { view.Styles.Remove(style); host.Window.Styles.Add(style); }
+        host.Window.Show();
+        var date = view.FindControl<TextBox>("SendDatePicker")!;
+        var time = view.FindControl<TextBox>("SendTimePicker")!;
+        date.Text = DateTime.Today.AddDays(2).ToString("dd.MM.yyyy", System.Globalization.CultureInfo.GetCultureInfo("en-GB"));
+        time.Text = "09:30";
+        Dispatcher.UIThread.RunJobs();
+        Assert.False(model.HasSendTimeError);
+        Capture("valid");
+        date.Focus(); Dispatcher.UIThread.RunJobs();
+        Assert.True(date.IsFocused); Capture("date-focus");
+        time.Focus(); Dispatcher.UIThread.RunJobs();
+        Assert.True(time.IsFocused); Capture("time-focus");
+        date.Text = "05.10.2023"; Dispatcher.UIThread.RunJobs();
+        Assert.Contains("invalid", date.Classes);
+        Assert.DoesNotContain("invalid", time.Classes);
+        Capture("past-date");
+        date.Text = DateTime.Today.AddDays(2).ToString("dd.MM.yyyy", System.Globalization.CultureInfo.GetCultureInfo("en-GB"));
+        time.Text = "25:30"; Dispatcher.UIThread.RunJobs();
+        Assert.DoesNotContain("invalid", date.Classes);
+        Assert.Contains("invalid", time.Classes);
+        Capture("invalid-time");
+        model.TryClose();
+        void Capture(string state)
+        {
+            if (Environment.GetEnvironmentVariable("SIGNALSCHEDULER_LAYOUT_PREVIEW") is not { } directory) return;
+            using var frame = host.Window.CaptureRenderedFrame();
+            Assert.NotNull(frame);
+            frame.Save(System.IO.Path.Combine(directory, "send-at-" + state + ".png"));
+        }
+    }
+
+    [AvaloniaFact]
+    public void EmptyRecipientIsQuietUntilSchedulingIsAttempted()
+    {
+        var view = new MainWindow();
+        var model = (MainWindowViewModel)view.DataContext!;
+        using var host = new WindowScope(Host(view));
+        var error = view.FindControl<TextBlock>("RecipientError")!;
+        Dispatcher.UIThread.RunJobs();
+        Assert.False(error.IsVisible);
+        Assert.False(model.HasRecipientError);
+        Assert.False(model.CanSchedule);
+        model.Schedule();
+        Dispatcher.UIThread.RunJobs();
+        Assert.True(error.IsVisible);
         model.TryClose();
     }
 

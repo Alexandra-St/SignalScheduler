@@ -3,20 +3,24 @@
         xmlns:vm="using:SignalScheduler.ViewModels"
         x:Class="SignalScheduler.Views.SignalCliSettingsWindow"
         x:DataType="vm:SignalCliConfiguration" x:CompileBindings="True"
-        Title="Settings → signal-cli" Width="560" Height="360">
+        RequestedThemeVariant="Dark" Title="Settings → signal-cli" Width="560" Height="520" MinWidth="460" MinHeight="400">
   <Window.Styles>
     <StyleInclude Source="avares://SignalScheduler/Views/PresentationStyles.axaml" />
   </Window.Styles>
   <ScrollViewer>
     <StackPanel Margin="24" Spacing="12">
-      <TextBlock Text="signal-cli" FontSize="22" />
+      <TextBlock Classes="heading" Text="Signal account" />
+      <TextBlock Text="{Binding AccountDiscoveryStatus}" />
+      <Button x:Name="RefreshAccountsButton" Content="Refresh accounts" Command="{Binding RefreshAccountsCommand}" />
+      <Button Content="Connect Signal" IsEnabled="{Binding CanConnect}" Click="OnConnectSignal" />
+      <Border Height="1" Background="#41808080" Margin="0,6" />
+      <TextBlock Classes="heading" Text="signal-cli" />
       <CheckBox Content="Automatic detection" IsChecked="{Binding AutomaticDetection, Mode=OneWay}"
                 IsHitTestVisible="False" Focusable="False" />
       <TextBlock Text="Detected / selected executable" />
       <TextBox Text="{Binding Cli, Mode=OneWay}" IsReadOnly="True" Watermark="No executable detected" />
       <TextBlock Text="{Binding ExecutableVersion, StringFormat='Version: {0}'}" />
       <TextBlock Text="{Binding ExecutableStatus}" />
-      <Button Content="Connect Signal" IsEnabled="{Binding CanConnect}" Click="OnConnectSignal" />
       <Button Content="Choose executable…" IsEnabled="{Binding CanConfigure}" Click="OnChooseExecutable" />
       <Button Content="Use automatic detection" Command="{Binding UseAutomaticDetectionCommand}" />
     </StackPanel>

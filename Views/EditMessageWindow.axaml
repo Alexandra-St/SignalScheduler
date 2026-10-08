@@ -1,0 +1,13 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="SignalScheduler.Views.EditMessageWindow" Title="Edit message text"
+        Width="540" Height="400" MinWidth="420" MinHeight="320" Background="#111D27" RequestedThemeVariant="Dark">
+  <Grid RowDefinitions="Auto,*,Auto,Auto" RowSpacing="12" Margin="20">
+    <TextBlock Text="Edit message text" FontSize="18" FontWeight="SemiBold" />
+    <TextBox x:Name="MessageText" Grid.Row="1" AcceptsReturn="True" TextWrapping="Wrap" />
+    <TextBlock x:Name="EditError" Grid.Row="2" Foreground="#E47777" TextWrapping="Wrap" IsVisible="False" />
+    <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+      <Button Content="Cancel" Click="OnCancel" />
+      <Button Content="Save changes" Background="#3B6FA8" Click="OnSave" />
+    </StackPanel>
+  </Grid>
+</Window>

@@ -1,0 +1,16 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Style Selector="TextBox.sendAt">
+    <Setter Property="Height" Value="44" />
+    <Setter Property="Background" Value="#081923" />
+    <Setter Property="BorderBrush" Value="#526775" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="7" />
+    <Setter Property="Padding" Value="0,10,8,10" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+  </Style>
+  <Style Selector="TextBox.sendAt:pointerover"><Setter Property="BorderBrush" Value="#91A8B7" /></Style>
+  <Style Selector="TextBox.sendAt:focus"><Setter Property="BorderBrush" Value="#328BD3" /><Setter Property="BorderThickness" Value="2" /></Style>
+  <Style Selector="TextBox.sendAt.invalid"><Setter Property="BorderBrush" Value="#D94848" /><Setter Property="Background" Value="#29151D" /></Style>
+  <Style Selector="TextBox.sendAt.invalid /template/ Border#PART_BorderElement"><Setter Property="BorderBrush" Value="#D94848" /></Style>
+</Styles>

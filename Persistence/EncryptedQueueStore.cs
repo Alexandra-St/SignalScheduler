@@ -50,9 +50,20 @@ public sealed class EncryptedQueueStore : IDisposable
         Save();
     }
 
-    private void Save()
+    public bool TryEditPendingText(Guid id, string text)
     {
-        var bytes = cipher.Encrypt(JsonSerializer.SerializeToUtf8Bytes(items));
+        var message = items.SingleOrDefault(item => item.Id == id);
+        if (message == null || message.State != MessageStatus.Pending ||
+            (string.IsNullOrWhiteSpace(text) && (message.Attachments?.Count ?? 0) == 0)) return false;
+        var updated = items.Select(item => item.Id == id ? item with { Text = text } : item).ToList();
+        Save(updated);
+        items = updated;
+        return true;
+    }
+
+    private void Save(IEnumerable<ScheduledMessage>? contents = null)
+    {
+        var bytes = cipher.Encrypt(JsonSerializer.SerializeToUtf8Bytes(contents ?? items));
         var temporary = path + ".tmp";
         using (var file = new FileStream(temporary, FileMode.Create, FileAccess.Write, FileShare.None))
         {

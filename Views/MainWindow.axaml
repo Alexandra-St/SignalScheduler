@@ -2,45 +2,125 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:SignalScheduler.ViewModels"
         xmlns:models="using:SignalScheduler.Models"
+        xmlns:presentation="using:SignalScheduler.Presentation"
         x:Class="SignalScheduler.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel" x:CompileBindings="True"
-        Title="Signal Scheduler" Icon="avares://SignalScheduler/Assets/app-icon.png" Width="640" Height="760"
-        Opened="OnOpened" Closing="OnClosing">
+        RequestedThemeVariant="Dark" Title="Signal Scheduler" Icon="avares://SignalScheduler/Assets/app-icon.png"
+        Width="1120" Height="760" MinWidth="960" MinHeight="640"
+        Background="#0D1720" Opened="OnOpened" Closing="OnClosing">
+  <Window.Resources>
+    <DataTemplate x:Key="MessageCard" x:DataType="vm:MessageViewModel">
+      <Border Background="#14232E" BorderBrush="#293D4D" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,8">
+        <Grid ColumnDefinitions="58,*,Auto,Auto" ColumnSpacing="10">
+          <StackPanel Spacing="4">
+            <TextBlock Text="{Binding ScheduledTime}" FontWeight="SemiBold" />
+            <TextBlock Text="{Binding ScheduledDate}" Classes="muted" FontSize="12" />
+          </StackPanel>
+          <StackPanel Grid.Column="1" Spacing="6">
+            <TextBlock Text="{Binding RecipientIdentifier}" FontWeight="SemiBold" TextWrapping="NoWrap"
+                       TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding RecipientIdentifier}" />
+            <TextBlock Text="{Binding Text}" IsVisible="{Binding HasText}" TextWrapping="Wrap" FontSize="13" />
+            <StackPanel Orientation="Horizontal" Spacing="6">
+              <ItemsControl ItemsSource="{Binding PreviewAttachments}">
+                <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" Spacing="6" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate x:DataType="vm:AttachmentViewModel">
+                    <Border Width="42" Height="42" Background="#243746" CornerRadius="4" ClipToBounds="True" ToolTip.Tip="{Binding Name}">
+                      <Image Source="{Binding Preview}" Stretch="UniformToFill" />
+                    </Border>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+              <TextBlock Text="{Binding MoreAttachments}" IsVisible="{Binding HasMoreAttachments}" VerticalAlignment="Center" FontSize="12" />
+            </StackPanel>
+            <TextBlock Text="{Binding StatusHint}" IsVisible="{Binding HasStatusHint}" FontSize="12" Foreground="#E0BFA6" />
+          </StackPanel>
+          <Border Grid.Column="2" Background="{Binding BadgeBackground}" CornerRadius="5" Padding="8,4" VerticalAlignment="Top">
+            <TextBlock Text="{Binding BadgeLabel}" FontSize="12" TextWrapping="NoWrap" Foreground="#F1F4F7" />
+          </Border>
+          <Button Grid.Column="3" Content="…" Padding="5,0" VerticalAlignment="Top" IsVisible="{Binding HasActions}" ToolTip.Tip="Message actions">
+            <Button.Flyout>
+              <MenuFlyout>
+                <MenuItem Header="Edit message text…" IsVisible="{Binding CanEdit}" Command="{Binding EditCommand}" />
+                <MenuItem Header="Cancel message" IsVisible="{Binding CanCancel}" Command="{Binding CancelCommand}" />
+                <MenuItem Header="Use as new message" IsVisible="{Binding CanReuse}" Command="{Binding ReuseCommand}" />
+                <MenuItem Header="Delete from history" IsVisible="{Binding CanDelete}" Command="{Binding DeleteCommand}" />
+              </MenuFlyout>
+            </Button.Flyout>
+          </Button>
+        </Grid>
+      </Border>
+    </DataTemplate>
+  </Window.Resources>
   <Window.Styles>
     <StyleInclude Source="avares://SignalScheduler/Views/PresentationStyles.axaml" />
+    <StyleInclude Source="avares://SignalScheduler/Views/SendTimePickerStyles.axaml" />
+    <Style Selector="TabItem">
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="Padding" Value="12,8" />
+    </Style>
+    <Style Selector="TabItem:selected">
+      <Setter Property="Background" Value="#243D5A" />
+    </Style>
+    <Style Selector="Border.workspacePanel">
+      <Setter Property="Background" Value="#111D27" />
+      <Setter Property="BorderBrush" Value="#2D3C49" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Padding" Value="16" />
+    </Style>
   </Window.Styles>
-  <ScrollViewer>
-    <StackPanel Margin="24" Spacing="20">
-      <TextBlock Text="Signal Scheduler" FontSize="26" FontWeight="SemiBold" />
-      <TextBlock Classes="muted" Text="Keep the app open and your Mac awake until messages are sent." />
-      <Border x:Name="SignalWelcome" Classes="card" IsVisible="{Binding Signal.NeedsConnection}">
-        <StackPanel Spacing="12">
-          <TextBlock Classes="heading" Text="Welcome to Signal Scheduler" />
-          <TextBlock Text="Connect your Signal account to start scheduling messages. Scan a QR code with your phone — no Terminal needed." />
-          <WrapPanel Classes="actions">
-            <Button Content="Connect Signal" Click="OnConnectSignal" IsEnabled="{Binding Signal.CanConnect}" />
-            <Button Content="Refresh accounts" Command="{Binding Signal.RefreshAccountsCommand}" />
-          </WrapPanel>
-        </StackPanel>
-      </Border>
-      <Border x:Name="MessageComposer" Classes="card" IsVisible="{Binding !Signal.NeedsConnection}">
-        <StackPanel Spacing="12">
-          <TextBlock Classes="heading" Text="New message" />
-          <TextBlock Classes="field" Text="From" />
-          <ComboBox x:Name="FromAccountSelector" ItemsSource="{Binding Signal.LinkedAccounts}"
-                    SelectedItem="{Binding Signal.Account, Mode=TwoWay}"
-                    PlaceholderText="Choose a detected account" HorizontalAlignment="Stretch" />
-          <Button Content="Refresh accounts" Command="{Binding Signal.RefreshAccountsCommand}" />
-          <TextBlock Text="{Binding Signal.AccountDiscoveryStatus}" />
+  <Grid x:Name="Workspace" RowDefinitions="Auto,*" RowSpacing="12" Margin="12">
+    <Border x:Name="ApplicationHeader" Background="#111D27" CornerRadius="8" Padding="12,10">
+      <Grid ColumnDefinitions="Auto,*,Auto,220,Auto" ColumnSpacing="12">
+        <Image Source="avares://SignalScheduler/Assets/app-icon.png" Width="32" Height="32" />
+        <TextBlock Grid.Column="1" Text="Signal Scheduler" FontSize="17" FontWeight="SemiBold"
+                   VerticalAlignment="Center" TextWrapping="NoWrap" />
+        <Border Grid.Column="2" Padding="10,6" CornerRadius="6" Background="#0D1720"
+                ToolTip.Tip="A selected linked account does not guarantee network availability or message delivery.">
+          <StackPanel Orientation="Horizontal" Spacing="7" VerticalAlignment="Center">
+            <Ellipse Width="8" Height="8" Fill="#70A687" IsVisible="{Binding Signal.HasSelectedAccount}" />
+            <TextBlock x:Name="AccountReadyLabel" Text="Account ready" IsVisible="{Binding Signal.HasSelectedAccount}"
+                       FontSize="12" VerticalAlignment="Center" TextWrapping="NoWrap" />
+            <TextBlock x:Name="NoAccountLabel" Text="Select an account" IsVisible="{Binding !Signal.HasSelectedAccount}"
+                       FontSize="12" VerticalAlignment="Center" TextWrapping="NoWrap" />
+          </StackPanel>
+        </Border>
+        <ComboBox x:Name="FromAccountSelector" Grid.Column="3" ItemsSource="{Binding Signal.LinkedAccounts}"
+                  SelectedItem="{Binding Signal.Account, Mode=TwoWay}" PlaceholderText="Choose account"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+        <Button x:Name="SettingsButton" Grid.Column="4" Content="Settings" Click="OnOpenSettings"
+                VerticalAlignment="Center" />
+      </Grid>
+    </Border>
+    <Grid Grid.Row="1" ColumnDefinitions="380,*" ColumnSpacing="12">
+      <Border x:Name="ComposePanel" Classes="workspacePanel">
+        <Grid RowDefinitions="Auto,*" RowSpacing="12">
+          <StackPanel Spacing="4">
+            <TextBlock Classes="heading" Text="New message" />
+            <TextBlock Classes="muted" Text="Schedule a Signal message or image" FontSize="12" />
+          </StackPanel>
+          <ScrollViewer x:Name="ComposeScroll" Grid.Row="1" HorizontalScrollBarVisibility="Disabled"
+                        VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="12">
+              <Border x:Name="SignalWelcome" IsVisible="{Binding Signal.NeedsConnection}">
+                <StackPanel Spacing="12">
+                  <TextBlock Classes="field" Text="Connect your Signal account" />
+                  <TextBlock Text="Scan a QR code with your phone to start scheduling messages." />
+                  <Button x:Name="ConnectSignalButton" Content="Connect Signal" Click="OnConnectSignal"
+                          IsEnabled="{Binding Signal.CanConnect}" HorizontalAlignment="Left" />
+                </StackPanel>
+              </Border>
+              <Border x:Name="MessageComposer" IsVisible="{Binding !Signal.NeedsConnection}">
+                <StackPanel Spacing="12">
           <TextBlock Classes="field" Text="To" />
           <TextBox x:Name="RecipientInput" Text="{Binding Recipient, Mode=TwoWay}"
                    Watermark="Phone number, Signal username, or Signal link" Classes.invalid="{Binding HasRecipientError}" />
-          <TextBlock Classes="muted" Text="Phone number, Signal username, or Signal link" FontSize="12" />
           <TextBlock x:Name="RecipientError" Text="{Binding RecipientError}" IsVisible="{Binding HasRecipientError}"
                      Foreground="#D05050" FontWeight="SemiBold" />
           <TextBlock Classes="field" Text="Message" />
           <TextBox Text="{Binding Body, Mode=TwoWay}" Watermark="Write a message…"
-                   AcceptsReturn="True" Height="100" TextWrapping="Wrap" />
+                   AcceptsReturn="True" MinHeight="140" Height="140" TextWrapping="Wrap" />
           <WrapPanel Classes="actions">
             <Button Content="Attach photos…" Click="OnAttachPhotos" />
             <Button Content="Paste screenshot" Command="{Binding PasteImageCommand}" />
@@ -48,9 +128,9 @@
           <ItemsControl x:Name="ComposerAttachments" ItemsSource="{Binding Attachments}">
             <ItemsControl.ItemTemplate>
               <DataTemplate x:DataType="vm:AttachmentViewModel">
-                <Grid ColumnDefinitions="90,*,Auto" ColumnSpacing="8" Margin="0,0,0,6">
-                  <Image Source="{Binding Preview}" Width="90" Height="70" Stretch="Uniform" />
-                  <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" />
+                <Grid ColumnDefinitions="56,*,Auto" ColumnSpacing="8" Margin="0,0,0,6">
+                  <Image Source="{Binding Preview}" Width="56" Height="48" Stretch="Uniform" />
+                  <TextBlock Grid.Column="1" Text="{Binding Name}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
                   <Button Grid.Column="2" Content="Remove" Command="{Binding RemoveCommand}" VerticalAlignment="Center" />
                 </Grid>
               </DataTemplate>
@@ -59,56 +139,82 @@
           <StackPanel Spacing="10" Margin="0,6,0,0">
             <Border Height="1" Background="#41808080" Margin="0,0,0,6" />
             <TextBlock Classes="field" Text="Send at" />
-            <TextBox x:Name="SendAtInput" Text="{Binding When, Mode=TwoWay}" Watermark="yyyy-MM-dd HH:mm"
-                     Classes.invalid="{Binding HasSendTimeError}" />
-            <TextBlock x:Name="SendAtError" Text="{Binding SendTimeError}" IsVisible="{Binding HasSendTimeError}"
-                       FontWeight="SemiBold" />
-            <TextBlock Classes="muted" Text="Local time · yyyy-MM-dd HH:mm" FontSize="12" />
-            <Button x:Name="ScheduleMessageButton" Content="Schedule message" Command="{Binding ScheduleCommand}" />
+            <Grid x:Name="SendAtFields" ColumnDefinitions="3*,2*" ColumnSpacing="8">
+              <TextBox x:Name="SendDatePicker" Classes="sendAt" Text="{Binding DateInput, Mode=TwoWay}"
+                       Watermark="dd.MM.yyyy" Classes.invalid="{Binding HasDateInputError}" LostFocus="OnDateInputLostFocus">
+                <TextBox.InnerLeftContent>
+                  <Path Data="M 3,5 L 21,5 L 21,22 L 3,22 Z M 3,10 L 21,10 M 7,2 L 7,7 M 17,2 L 17,7 M 7,14 L 10,14 M 14,14 L 17,14 M 7,18 L 10,18"
+                        Width="20" Height="20" Stretch="Uniform" Stroke="#D7E2ED" StrokeThickness="1.5" Margin="12,0,8,0" />
+                </TextBox.InnerLeftContent>
+              </TextBox>
+              <TextBox x:Name="SendTimePicker" Grid.Column="1" Classes="sendAt" Text="{Binding TimeInput, Mode=TwoWay}"
+                       Watermark="09:30" Classes.invalid="{Binding HasTimeInputError}" LostFocus="OnTimeInputLostFocus">
+                <TextBox.InnerLeftContent>
+                  <Path Data="M 12,2 A 10,10 0 1 1 11.99,2 M 12,6 L 12,12 L 17,15" Width="20" Height="20" Stretch="Uniform"
+                        Stroke="#D7E2ED" StrokeThickness="1.5" Margin="12,0,8,0" />
+                </TextBox.InnerLeftContent>
+              </TextBox>
+            </Grid>
+            <TextBlock Classes="muted" Text="Mac local time" FontSize="12" />
+            <Grid ColumnDefinitions="16,*" ColumnSpacing="8" IsVisible="{Binding HasSendTimeError}">
+              <Path x:Name="SendAtErrorIcon" Data="M 8,1 A 7,7 0 1 1 7.99,1 M 8,7 L 8,12 M 8,4 L 8,5"
+                    Width="16" Height="16" Stretch="Uniform" Stroke="#E47777" StrokeThickness="1.3"
+                    VerticalAlignment="Top" Margin="0,1,0,0" />
+              <TextBlock x:Name="SendAtError" Grid.Column="1" Text="{Binding SendTimeError}" IsVisible="{Binding HasSendTimeError}"
+                         Foreground="#E47777" FontSize="12" TextWrapping="Wrap" />
+            </Grid>
+            <Button x:Name="ScheduleMessageButton" Content="Schedule message" Command="{Binding ScheduleCommand}"
+                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#3B6FA8" />
           </StackPanel>
-        </StackPanel>
+                </StackPanel>
+              </Border>
+              <TextBlock x:Name="ComposerStatus" Classes="muted" Text="{Binding Status}" FontSize="12" />
+              <Border Background="#182A39" CornerRadius="6" Padding="10,8">
+                <TextBlock Classes="muted" FontSize="12"
+                           Text="Scheduled messages are sent only while the app is running and your Mac is awake." />
+              </Border>
+            </StackPanel>
+          </ScrollViewer>
+        </Grid>
       </Border>
-      <Border Classes="card">
-        <StackPanel Spacing="10">
-          <TextBlock Classes="heading" Text="App status" />
-          <Button Content="Open Settings" Click="OnOpenSettings" />
-          <TextBlock Text="{Binding Signal.ExecutableStatus}" />
-          <TextBlock Text="{Binding Status}" />
-        </StackPanel>
-      </Border>
-      <StackPanel Spacing="12">
-        <TextBlock Classes="heading" Text="Messages" />
-        <TextBlock Classes="muted" Text="{Binding QueueSummary}" />
-        <ItemsControl x:Name="MessagesList" ItemsSource="{Binding Messages}">
-          <ItemsControl.ItemTemplate>
-            <DataTemplate x:DataType="vm:MessageViewModel">
-              <Border Classes="card" Margin="0,0,0,14">
-                <StackPanel Spacing="10">
-                  <TextBlock Classes="field" Text="{Binding Recipient}" />
-                  <TextBlock Classes="muted" Text="{Binding SendAt}" FontSize="13" />
-                  <Border Padding="10,6" CornerRadius="6" Background="#18808080">
-                    <TextBlock Text="{Binding Status}" FontSize="13" />
-                  </Border>
-                  <TextBlock Text="{Binding StatusHint}" IsVisible="{Binding HasStatusHint}" FontSize="13" Opacity="0.8" />
-                  <TextBlock Text="{Binding Text}" IsVisible="{Binding HasText}" Margin="0,4,0,4" />
-                  <ItemsControl ItemsSource="{Binding Attachments}">
+      <Border x:Name="MessagesPanel" Grid.Column="1" Classes="workspacePanel">
+        <Grid RowDefinitions="Auto,*" RowSpacing="10">
+          <TextBlock Classes="heading" Text="Messages" />
+          <TabControl x:Name="MessageTabs" Grid.Row="1">
+            <TabItem Header="{Binding UpcomingHeader}">
+              <ScrollViewer x:Name="MessagesScroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="0,10,0,0">
+                  <TextBlock Text="No upcoming messages. Schedule your first message on the left." IsVisible="{Binding NoUpcoming}" Classes="muted" Margin="0,10" />
+                  <ItemsControl x:Name="UpcomingList" ItemsSource="{Binding UpcomingGroups}">
                     <ItemsControl.ItemTemplate>
-                      <DataTemplate x:DataType="models:ImageAttachment">
-                        <TextBlock Text="{Binding Name, StringFormat='📎 {0}'}" FontSize="13" Opacity="0.8" Margin="0,0,0,6" />
+                      <DataTemplate x:DataType="presentation:MessageGroup">
+                        <StackPanel Spacing="8">
+                          <TextBlock Text="{Binding Title}" FontWeight="SemiBold" Margin="0,6,0,0" />
+                          <ItemsControl ItemsSource="{Binding Items}" ItemTemplate="{StaticResource MessageCard}" />
+                        </StackPanel>
                       </DataTemplate>
                     </ItemsControl.ItemTemplate>
                   </ItemsControl>
-                  <WrapPanel Classes="actions" Margin="0,4,0,0">
-                    <Button Content="Cancel" IsVisible="{Binding CanCancel}" Command="{Binding CancelCommand}" />
-                    <Button Content="Use as new message" IsVisible="{Binding CanReuse}" Command="{Binding ReuseCommand}" />
-                    <Button Content="Delete" IsVisible="{Binding CanDelete}" Command="{Binding DeleteCommand}" />
-                  </WrapPanel>
                 </StackPanel>
-              </Border>
-            </DataTemplate>
-          </ItemsControl.ItemTemplate>
-        </ItemsControl>
-      </StackPanel>
-    </StackPanel>
-  </ScrollViewer>
+              </ScrollViewer>
+            </TabItem>
+            <TabItem Header="{Binding HistoryHeader}">
+              <Grid RowDefinitions="Auto,*" RowSpacing="10" Margin="0,10,0,0">
+                <StackPanel Spacing="5">
+                  <ComboBox x:Name="HistoryFilter" ItemsSource="{Binding HistoryFilters}" SelectedItem="{Binding HistoryFilter, Mode=TwoWay}" MinWidth="160" HorizontalAlignment="Left" />
+                  <TextBlock Text="Scheduled times · Mac local time" Classes="muted" FontSize="12" />
+                </StackPanel>
+                <ScrollViewer x:Name="HistoryScroll" Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                  <StackPanel>
+                    <TextBlock Text="No messages for this status." IsVisible="{Binding NoHistory}" Classes="muted" Margin="0,10" />
+                    <ItemsControl x:Name="MessagesList" ItemsSource="{Binding HistoryMessages}" ItemTemplate="{StaticResource MessageCard}" />
+                  </StackPanel>
+                </ScrollViewer>
+              </Grid>
+            </TabItem>
+          </TabControl>
+        </Grid>
+      </Border>
+    </Grid>
+  </Grid>
 </Window>
