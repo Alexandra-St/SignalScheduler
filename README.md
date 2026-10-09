@@ -1,21 +1,25 @@
 # SignalScheduler
 
-A small macOS app for scheduling Signal messages and image attachments.
+**Send Later for Signal on macOS.**
 
-SignalScheduler does not modify Signal Desktop. It keeps scheduled messages in a local encrypted queue and sends them through a linked [`signal-cli`](https://github.com/AsamK/signal-cli) device.
+Schedule Signal messages and images for a later time from a small desktop companion app. SignalScheduler does not replace or modify Signal Desktop.
+
+Scheduled content stays in a local encrypted queue and is sent through a linked [`signal-cli`](https://github.com/AsamK/signal-cli) device. Account linking is handled through an in-app QR code.
+
+The packaged app includes `signal-cli` and Java, so users do not need to install Homebrew, Java or .NET separately.
 
 Built with C#, .NET 8 and Avalonia.
 
 ## Features
 
-- Schedule text messages and image attachments to phone numbers, full Signal usernames or username links.
-- Use bundled `signal-cli` and Java; detect existing linked accounts automatically.
+- Schedule text messages and images for a later time.
+- Send to phone numbers, full Signal usernames or username links.
 - Connect a new account through an in-app QR code.
+- Use bundled `signal-cli` and Java without separate runtime setup; detect existing linked accounts automatically.
+- Edit Pending message text, cancel Pending messages, reschedule Missed messages as new copies, and reuse saved messages.
+- Keep scheduled messages in a local AES-256-GCM encrypted queue, with the key stored separately in macOS Keychain.
 - Attach images from disk or paste a screenshot directly from the macOS clipboard.
-- Keep the message queue encrypted locally with AES-256-GCM.
-- Store the encryption key separately in macOS Keychain.
-- Recover conservatively after interrupted sends instead of retrying blindly.
-- Build as a self-contained macOS app. Apple Silicon is manually tested; Intel is not yet validated.
+- Recover conservatively after interrupted sends without automatic retries; Sent records successful CLI completion, not recipient delivery.
 
 ## Architecture
 
@@ -48,6 +52,7 @@ Before a send starts, the message is persisted as `Sending`. If the application 
 
 To run the packaged app: macOS and Signal on a primary phone for linking.
 Homebrew, system Java and .NET are not required to run it.
+The current beta targets Apple Silicon; Intel has not been validated.
 
 To build from source: macOS, .NET 8 SDK, Python 3 and Internet access for the
 first download of the pinned runtime dependencies. With Homebrew:
@@ -84,7 +89,8 @@ python3 packaging/distribute.py
 The image is written under `build/distribution/`. Drag the app into Applications,
 eject the DMG, then launch from Applications. To update, quit the app first and
 choose **Replace**; keep your queue, Keychain key and Signal account data.
-Local builds are ad hoc signed and not notarized. First-launch guidance is in the
+The current Apple Silicon beta is ad hoc signed and not notarized; macOS Gatekeeper
+may require a one-time app-specific Terminal workaround. First-launch guidance is in the
 [draft beta notes](docs/BETA_RELEASE.md). Developer ID/notarization are not
 requirements for this beta.
 
