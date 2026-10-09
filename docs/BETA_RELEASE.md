@@ -72,8 +72,10 @@ in that VM; why it was unavailable or ineffective remains an unresolved follow-u
   Apple Developer membership, Developer ID and notarization are outside the beta plan.
 - Custom icon appearance was verified on the development Mac.
 - Intel hardware is not validated. No automatic updates are included.
-- Matching source/license materials passed technical coverage checks and accompany
-  the candidate. Replace update, attachment preservation
+- The unchanged dependency set passed technical source/license coverage checks.
+  The final matching source-material archive and SHA-256 must be regenerated after
+  the final approved test/documentation commits and attached to the release.
+  Historical Replace update, attachment preservation
   and one-time post-update delivery passed on the development Mac.
 
 ## Reporting a problem
@@ -88,7 +90,7 @@ linking URIs, Signal account directories, queue files, Keychain data or real con
 - [x] Development-Mac installation, real QR, delivery and build 4 → 6 Replace checks recorded separately.
 - [x] UI redesign and Missed improvements approved, committed and pushed through 319509b.
 - [x] Technical dependency source/notice review completed; dependency versions unchanged.
-- [x] Verify candidate build 29 .app, DMG, source archive, hashes and metadata (2026-10-08).
+- [x] Historical verification of build 29 .app, DMG, then-current source archive, hashes and metadata (2026-10-08); later source edits require a new archive.
 - [x] Development-Mac Replace acceptance recorded for build 27; build 29 fixes and QR follow-up accepted separately.
 - [x] Record real QR linking after redesign, timeout/retry and window-close cancellation on build 29.
 - [x] Record clean macOS VM/browser-download acceptance for build 29, including the quarantine workaround and its limits.
@@ -97,4 +99,4 @@ linking URIs, Signal account directories, queue files, Keychain data or real con
 - [x] Operator approved committing and pushing the QR acceptance and subsequent release preparation.
 - [ ] Obtain separate approval for a prerelease tag and GitHub Release publication.
 - [ ] Attach matching DMG, SHA-256 files and complete source materials; update pending claims.
-- [ ] Regenerate the source-material archive and its hash after the latest test/documentation commits; the earlier archive matches 86a5718.
+- [ ] Regenerate and verify the final source-material archive and its hash after the final approved test/documentation commits; earlier archives do not include this consistency pass.

@@ -33,11 +33,14 @@ and any JNI extraction remain separate and are discarded after the check.
   linking and scheduled text delivery with the documented quarantine workaround.
   A separate physical Mac, physical sleep/wake and clean-environment upgrades
   remain distinct checks; see BETA_ACCEPTANCE.md for the evidence boundaries.
-- Verify an existing linked device is recognized without relinking or changing its data.
-- Validate Intel binaries on Intel hardware (or a suitable separately verified environment).
-- Complete corresponding-source distribution materials for bundled covered components and
-  dependencies; upstream links alone are not the release's compliance mechanism.
-- Send at feedback and the approved custom icon are implemented; validate the final package.
+- Existing-account recognition and data preservation passed on the development Mac;
+  historical Replace results apply to their recorded builds.
+- Intel is unvalidated and is not a target of this Apple Silicon beta.
+- Technical source/notice coverage passed for the unchanged build 29 dependency set.
+  Regenerate the final matching source-material archive and SHA-256 after final
+  approved test/documentation commits, and attach them beside the matching DMG.
+- Send at feedback, custom icon and native build 29 layout/rendering were accepted;
+  native review does not replace production or Gatekeeper verification.
 - Current beta DMGs are ad hoc signed and not notarized. Developer ID signing and
   notarization and Apple Developer membership are outside the beta plan.
 
@@ -137,12 +140,17 @@ are recorded under ignored `build/beta-materials/manifest.json`. The script is s
 to the dependency versions pinned in this beta; changes require reviewing its source
 URLs and build provenance together with the binary lock.
 
-The manifest deliberately remains `REVIEW_REQUIRED`: fetched source archives do not
-prove complete corresponding source. In particular review native submodules/build
-prerequisites such as BoringSSL, inherited Maven licenses and NuGet notice coverage.
-Do not describe this collection as complete or publish the matching DMG until those
-items are resolved. The release draft and live test record are in `docs/BETA_RELEASE.md`
-and `docs/BETA_ACCEPTANCE.md`.
+The collection script deliberately emits `REVIEW_REQUIRED`: fetching archives does
+not itself prove complete corresponding source. A fresh collection or changed
+dependency set requires review of native submodules/build prerequisites, inherited
+Maven licenses and NuGet notices. The current dependency set has already passed
+technical source/notice coverage review; its provenance is unchanged from the
+build 26 review baseline through build 29. See [SOURCE_REVIEW.md](SOURCE_REVIEW.md).
+
+Before publication, regenerate the final matching archive and SHA-256 after the
+final approved test/documentation commits using `python3 packaging/package_beta_sources.py`,
+verify its source snapshot and attach it beside the matching DMG. Historical archive
+checks do not validate later edits. Tag/publication require separate approval.
 
 ## Version policy
 

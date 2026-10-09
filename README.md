@@ -129,8 +129,11 @@ SignalScheduler is available under the [MIT License](LICENSE).
 Bundled `signal-cli` is a separate GPL-3.0-or-later project; Java and its dependencies
 retain their own licenses. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
-Before public binary distribution, finish the separate source/license review.
+Technical source/license coverage review passed for the dependency set retained
+through the current candidate, 0.3.0 build 29; see [source review](docs/SOURCE_REVIEW.md).
 `python3 packaging/prepare_beta_sources.py` collects matching source archives,
 Maven/Rust source assets and notices under ignored `build/beta-materials/`.
-Its manifest remains REVIEW_REQUIRED until completeness has been reviewed;
-upstream links alone do not close that requirement.
+Fresh collection manifests start as REVIEW_REQUIRED; collection alone is not review.
+Before release, regenerate the final matching source-material archive and SHA-256
+after the final approved test/documentation commits, and attach them alongside the
+matching DMG. Upstream links alone do not replace those materials.

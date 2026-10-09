@@ -1,5 +1,10 @@
 # Isolated manual QR test
 
+This is a reusable development-Mac test procedure, not an outstanding acceptance
+task. The build 29 QR scenarios and separate clean VM linking results are recorded
+in [BETA_ACCEPTANCE.md](BETA_ACCEPTANCE.md). The helper isolates Signal account
+configuration, not the application's ordinary queue.
+
 Create a launcher with `python3 packaging/create_qr_test_launcher.py --app '/Applications/Signal Scheduler.app'`.
 The generated launcher and account config live in a new private temporary directory
 (mode 0700), outside the repository. Keep that directory until the test is over.

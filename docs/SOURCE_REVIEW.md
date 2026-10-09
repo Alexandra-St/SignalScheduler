@@ -1,10 +1,13 @@
-# Source and license review — candidate 0.3.0 build 26
+# Source and license review — dependency set through 0.3.0 build 29
 
 Status: technical source/notice coverage checks passed, 2026-10-08.
 
 The original review was completed for 0.2.1 build 6. Dependencies and pinned
 provenance are unchanged; the audit was rerun against 0.3.0 build 26 with zero
 integrity or license-evidence errors (754 assets, 79 JARs, 77 notice mappings).
+That reviewed dependency set and pinned provenance remained unchanged through
+the current candidate, 0.3.0 build 29. Build 26 identifies the review baseline,
+not the current candidate.
 
 ## Evidence
 
@@ -37,5 +40,16 @@ Increment BuildNumber before producing changed app contents. The archived app so
 
 ## Practical limits
 
-This is a technical review of source correspondence and retained notices, not a legal opinion. Third-party binaries were not rebuilt or compared bit-for-bit. Compiler/toolchain installation and an offline rebuild were not exercised. Original upstream build scripts and instructions are supplied with the source trees. Clean-Mac acceptance and this candidate's real Finder Replace update remain pending; the historical build 4 → 6 Replace
-check passed. Publication requires user approval.
+This is a technical review of source correspondence and retained notices, not a legal opinion. Third-party binaries were not rebuilt or compared bit-for-bit. Compiler/toolchain installation and an offline rebuild were not exercised. Original upstream build scripts and instructions are supplied with the source trees.
+
+Development-Mac Finder Replace checks passed for build 4 → 6 and build 27;
+those results do not claim a separate build 29 Replace check. Build 29 passed
+fresh Apple Silicon macOS VM acceptance with an app-specific quarantine workaround.
+Ordinary Gatekeeper/Open Anyway approval and a second physical Mac remain unverified.
+See [acceptance results](BETA_ACCEPTANCE.md) for version-specific evidence.
+
+Before release, regenerate the matching source-material archive and SHA-256 after
+the final approved test/documentation commits and attach them beside the matching
+DMG. A freshly generated collection requires review; the current unchanged
+dependency set has already passed technical review. Tag and publication require
+separate user approval.

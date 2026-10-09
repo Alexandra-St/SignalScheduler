@@ -43,7 +43,10 @@ notices, upstream MIT license texts for Avalonia, MicroCom, Tmds.DBus and QRCode
 and license/notice entries from the bundled Java JARs. `inventory.json` identifies
 the runtime and package versions. This inventory includes restore dependencies
 for other platforms as well; their inclusion does not mean those binaries ship
-in the macOS app. Corresponding-source review remains a separate release check.
+in the macOS app. Technical source/license coverage review passed for the dependency
+set unchanged through 0.3.0 build 29; see [source review](docs/SOURCE_REVIEW.md).
+Before release, regenerate the final matching source-material archive and SHA-256
+after final approved test/documentation commits and attach them alongside the DMG.
 
 Upstream supplemental texts:
 - Avalonia: https://github.com/AvaloniaUI/Avalonia/blob/d6edb46ce04f983892a61d3abf906014d3f5ec8d/licence.md

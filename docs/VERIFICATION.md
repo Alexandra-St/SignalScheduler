@@ -2,11 +2,21 @@
 
 ## Current beta verification
 
-See [the beta acceptance record](BETA_ACCEPTANCE.md) for current automated evidence
-and remaining checks. On 2026-10-07 the operator reported real installation,
-bundled CLI detection, text/photo/image-only delivery, cancellation, restart and
-phone-approved isolated QR linking on the DMG-installed Apple Silicon app.
-Clean-Mac verification remains pending; these results apply to the development Mac.
+Current candidate: **0.3.0 build 29**. The latest Release suite passed 171 .NET
+tests; packaging verification passed 16 tests. Development-Mac acceptance and
+native UI layout/rendering review are complete, with version-specific evidence in
+[the beta acceptance record](BETA_ACCEPTANCE.md).
+
+Build 29 passed Safari-download installation and production startup, phone linking
+and scheduled delivery in a fresh Apple Silicon macOS VM. An app-specific quarantine
+workaround was required; ordinary Gatekeeper/Open Anyway approval is not proven.
+A second physical Mac and Intel hardware were not tested. Recovery regression
+tests use isolated queues and fake sends; live process kill, power loss and network
+interruption are not confirmed.
+
+The 2026-10-07 installation, bundled CLI detection, text/photo/image-only delivery,
+cancellation, restart and isolated QR results apply to the earlier development-Mac
+artifact; they are historical evidence, not a new build 29 run of every scenario.
 
 Earlier development versions were reported to deliver scheduled text to self and
 another recipient, preserve the queue across restart, and cancel pending messages.
@@ -20,6 +30,9 @@ Tests use synthetic data, local subprocess fixtures and headless UI. They do not
 access a real Signal account, send messages or open the real encrypted queue.
 
 ## Acceptance checks
+
+This is a reusable scenario list, not a statement that every scenario has passed
+manually on the current candidate. Consult the dated acceptance record for results.
 
 Use synthetic messages and your own Signal account. Never attach account output or real conversations to public reports.
 

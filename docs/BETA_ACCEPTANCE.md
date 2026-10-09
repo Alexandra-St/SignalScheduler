@@ -1,5 +1,29 @@
 # Beta acceptance record
 
+## Current status — 0.3.0 build 29
+
+- Production application code: c2ee34f. Commit 6b8d391 added recovery tests;
+  44c54d2 updated documentation and the archive README generator, without changing
+  production application code.
+- Latest Release .NET suite: 171 passing tests; packaging suite: 16 passing tests.
+- Development-Mac acceptance and native build 29 layout/rendering review complete;
+  individual historical results apply only to their recorded builds and scope.
+- Fresh Apple Silicon macOS VM / Safari download / production startup acceptance
+  passed with an app-specific quarantine workaround, including real linking and delivery.
+  Ordinary Gatekeeper/Open Anyway success and a second physical Mac are not confirmed.
+- Intel, live process kill, power loss and live network interruption are unverified;
+  recovery regression coverage uses isolated encrypted queues and fake sends.
+- Technical source/license coverage passed for the dependency set unchanged through
+  build 29. Regenerate the final matching source-material archive and SHA-256 after
+  final approved test/documentation commits before release. Tag and GitHub Release
+  require separate approval.
+
+## Chronological historical record
+
+The dated entries below preserve what was known at each checkpoint. Older pending
+items describe that checkpoint, not today's status; later entries record follow-up
+results without rewriting earlier evidence.
+
 ## Artifact and evidence boundaries
 
 Version: Signal Scheduler 0.2.0. Manual report date: 2026-10-07.

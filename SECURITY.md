@@ -12,4 +12,4 @@ An uncertain send outcome requires manual review. Automatic retries are delibera
 
 ## Reporting
 
-Do not include exploit details or private data in a public issue. Once this repository is published, use GitHub's private vulnerability reporting if the maintainer has enabled it. If no private reporting channel is available, open an issue requesting one without disclosing vulnerability details or sensitive data.
+Do not include exploit details or private data in a public issue. This repository is public; use GitHub's private vulnerability reporting if the maintainer has enabled it. If no private reporting channel is available, open an issue requesting one without disclosing vulnerability details or sensitive data.
