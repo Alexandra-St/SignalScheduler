@@ -2,9 +2,8 @@
 
 ## Current status — 0.3.0 build 29
 
-- Production application code: c2ee34f. Commit 6b8d391 added recovery tests;
-  44c54d2 updated documentation and the archive README generator, without changing
-  production application code.
+- Production application code: `c2ee34f`. Subsequent commits add regression tests
+  and documentation only; they do not change the packaged application code.
 - Latest Release .NET suite: 171 passing tests; packaging suite: 16 passing tests.
 - Development-Mac acceptance and native build 29 layout/rendering review complete;
   individual historical results apply only to their recorded builds and scope.
