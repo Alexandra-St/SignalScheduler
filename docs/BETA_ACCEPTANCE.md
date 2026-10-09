@@ -232,7 +232,8 @@ automatic detection followed by removal of the test device. Combined with the
 earlier timeout/Try again report, the planned development-Mac QR scenarios are
 complete. No account identifiers, QR codes or linking secrets are recorded.
 This does not establish clean-Mac or browser-download acceptance.
-# Recovery regression verification — 2026-10-09
+
+## Recovery regression verification — 2026-10-09
 
 Three isolated recovery cases passed against the current application code, using
 an encrypted temporary queue and a fake sender; no Signal transmission occurred.
@@ -242,3 +243,45 @@ Unknown respectively after reopening; unrelated Pending work still dispatches
 once and persists as Sent. These checks validate durable recovery state and
 duplicate-send prevention, not an actual process kill, power loss, or a live
 network interruption. Production application code was unchanged.
+
+The full Release suite passed: 171 .NET tests, including these three cases.
+
+## Native UI review — build 29
+
+The operator accepted native layout/rendering review using a synthetic screenshot
+harness at 86a5718. Application code is unchanged from build 29's c2ee34f;
+intervening commits only changed documentation. This review confirms native
+layout/rendering, not browser-download installation, production startup,
+Keychain access or real scheduler execution.
+
+## Clean macOS VM acceptance — build 29, 2026-10-09
+
+Artifact: 0.3.0 build 29 arm64 local DMG. Environment: fresh macOS 27.0.1
+(26A434), virtualized on Apple Silicon using Tart, with no host shared folders.
+No Homebrew, Java or .NET prerequisites were installed for this procedure.
+Results are operator-reported manual checks, separate from automated tests.
+
+| Check | Observed result | Result |
+| --- | --- | --- |
+| Browser download and installation | Downloaded through Safari inside the VM; copied into Applications | PASS |
+| Initial Gatekeeper behavior | Unverified-app warning blocked launch; Open Anyway was not successfully completed | OBSERVED LIMITATION |
+| App-specific first-launch workaround | After `xattr -dr com.apple.quarantine "/Applications/Signal Scheduler.app"`, production UI opened with an empty local queue | PASS |
+| QR and account selection | Phone-approved linking completed; account appeared with Account ready | PASS |
+| Real scheduled text | Pending → Sent; operator confirmed correct receipt | PASS |
+| Remaining requested functional checks | Operator confirmed remaining checks successful, including pending cancellation | PASS (operator report) |
+| Queue/Keychain persistence | Operator explicitly confirmed close/reopen persistence check | PASS (operator report) |
+| Test-device cleanup | Operator explicitly confirmed removal of the temporary linked device | PASS (operator report) |
+
+Quarantine removal reported permission errors on read-only Java legal files;
+the app nevertheless launched. The bundle signature was technically valid;
+`spctl` rejection is expected for an ad hoc signature and does not by itself
+prove damage. The reason Open Anyway did not succeed is unresolved and deferred.
+Apple Developer membership, Developer ID and notarization remain outside the beta plan.
+
+This establishes the tested free beta workflow in a clean VM with an explicit
+first-launch workaround. It does not establish normal Gatekeeper approval,
+acceptance on another physical Mac, physical sleep/wake, a live crash/network
+fault, or every reusable tester-checklist item. Guest checksum verification and
+an explicit prerequisite inventory were not separately confirmed. No account
+identifiers, QR secrets or private queue data are retained in this report.
+The VM and temporary testing tools were removed after acceptance.

@@ -40,7 +40,7 @@ def package():
     if runtime.exists():
         shutil.rmtree(runtime)
     shutil.copytree(app / 'Contents/Resources/ThirdPartyLicenses', runtime)
-    (materials / 'README.txt').write_text('Signal Scheduler ' + version + ' build ' + build + ' source materials.\nTechnical source/notice coverage passed; see SOURCE_REVIEW.md for evidence and limits.\nSignalScheduler-source contains the working application source for this candidate.\nThe matching binary has not yet passed clean-Mac or manual-update acceptance.\nFor native source restoration, run SignalScheduler-source/packaging/restore_native_sources.py with --materials pointing to this directory.\nOriginal upstream build instructions and toolchain metadata are inside the source archives.\n')
+    (materials / 'README.txt').write_text('Signal Scheduler ' + version + ' build ' + build + ' source materials.\nTechnical source/notice coverage passed; see SOURCE_REVIEW.md for evidence and limits.\nSignalScheduler-source contains the working application source for this candidate.\nFor version-specific manual acceptance results and limitations, see SignalScheduler-source/docs/BETA_ACCEPTANCE.md.\nFor native source restoration, run SignalScheduler-source/packaging/restore_native_sources.py with --materials pointing to this directory.\nOriginal upstream build instructions and toolchain metadata are inside the source archives.\n')
     destination = ROOT / 'build/distribution'
     destination.mkdir(exist_ok=True)
     archive = destination / ('SignalScheduler-' + version + '-build.' + build + '-source-materials.tar.gz')

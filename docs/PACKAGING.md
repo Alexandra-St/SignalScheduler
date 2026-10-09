@@ -29,15 +29,17 @@ and any JNI extraction remain separate and are discarded after the check.
 
 ## Before public distribution
 
-- Build and test on a clean Mac without Homebrew, Java or .NET; verify GUI startup,
-  bundled account linking, text/attachments, sleep/restart recovery, and upgrades.
+- Build 29 passed fresh Apple Silicon macOS VM installation, GUI startup, account
+  linking and scheduled text delivery with the documented quarantine workaround.
+  A separate physical Mac, physical sleep/wake and clean-environment upgrades
+  remain distinct checks; see BETA_ACCEPTANCE.md for the evidence boundaries.
 - Verify an existing linked device is recognized without relinking or changing its data.
 - Validate Intel binaries on Intel hardware (or a suitable separately verified environment).
 - Complete corresponding-source distribution materials for bundled covered components and
   dependencies; upstream links alone are not the release's compliance mechanism.
 - Send at feedback and the approved custom icon are implemented; validate the final package.
 - Current beta DMGs are ad hoc signed and not notarized. Developer ID signing and
-  notarization are optional future work, not requirements for the initial public beta.
+  notarization and Apple Developer membership are outside the beta plan.
 
 ## Updating components
 
@@ -60,7 +62,7 @@ Synthetic subprocess and headless UI tests exercise early QR display, successful
 selection, cancellation, timeout, retry, window closing, failure recovery and existing
 accounts. The operator reported real phone approval and text/photo/image-only
 delivery on the DMG-installed development Mac on 2026-10-07; see
-`docs/BETA_ACCEPTANCE.md`. Clean-Mac checks remain separate and pending.
+`docs/BETA_ACCEPTANCE.md`. Later build 29 clean VM results are recorded separately there.
 
 ## Create an installation image
 
@@ -90,6 +92,9 @@ Applications at (440,170), with 96-point icons. Installation/update and Gatekeep
 instructions remain in BETA_TESTER.md and BETA_RELEASE.md.
 
 ## Optional future Developer ID workflow (prepared, not yet exercised)
+
+This existing workflow is outside the agreed beta plan. Revisit it only if the
+owner explicitly changes that decision; it is not a remaining beta task.
 
 Requires a valid **Developer ID Application** certificate and its private key on the
 build Mac, plus a notarytool Keychain profile configured locally. Do not put account
@@ -147,7 +152,7 @@ DMG filename reads version/build from that plist. Increment BuildNumber before
 each new test/distribution build; increment Version for each released update.
 This policy is enforced by project instructions and the release checklist;
 automatic build-number allocation is not implemented. Current candidate: 0.3.0
-build 28 with the styled installer. Earlier acceptance records retain their original version/build.
+build 29 with the styled installer. Earlier acceptance records retain their original version/build.
 
 ## Application icon
 
@@ -156,4 +161,4 @@ The user-supplied artwork is kept unchanged at `Assets/app-icon.png`.
 16–1024 pixel representations into Resources/SignalScheduler.icns before signing.
 Info.plist names that resource; the main Avalonia window uses the same PNG.
 Bundle verification checks the icon resource. Finder/Dock/search appearance was confirmed on the development Mac.
-Clean-Mac and final-candidate installation remain separate checks.
+Build 29 clean VM installation is recorded separately in BETA_ACCEPTANCE.md.

@@ -14,7 +14,7 @@ This beta is for **Apple Silicon Macs**. Intel builds have not been validated.
    launch from Applications. Your queue and linked account stay outside the app.
 3. Open the app from Applications. This beta is ad hoc signed, **not Developer ID
    signed or notarized**. If macOS blocks it because the developer cannot be verified,
-   open **System Settings → Privacy & Security → Open Anyway**, then confirm.
+   try **System Settings → Privacy & Security → Open Anyway**, then confirm if available.
    Follow [Apple's instructions](https://support.apple.com/en-gb/102445).
 4. If no linked account is found, choose **Connect Signal**. On your phone open
    **Signal → Settings → Linked Devices → Link New Device**, scan the QR and approve.
@@ -24,6 +24,20 @@ This beta is for **Apple Silicon Macs**. Intel builds have not been validated.
 
 Do not disable Gatekeeper globally. If macOS reports malware or a damaged app rather
 than an unidentified developer, stop and report the exact warning before proceeding.
+
+For this trusted beta, the following command in Terminal removes the download
+quarantine attribute from this app only. Then open it again from Applications:
+
+```bash
+xattr -dr com.apple.quarantine "/Applications/Signal Scheduler.app"
+```
+
+This first-launch workaround was verified in a fresh macOS VM after a Safari
+download. It does not notarize the app or change Gatekeeper globally. The command
+reported permission errors on some read-only bundled Java license files, but the
+app subsequently launched. If launch still fails, report the exact error; do not
+change system-wide security settings. Open Anyway was not successfully completed
+in that VM; why it was unavailable or ineffective remains an unresolved follow-up.
 
 ## What's included
 
@@ -52,13 +66,14 @@ than an unidentified developer, stop and report the exact warning before proceed
   was manually verified on the development Mac.
 - Blocked means the CLI file was unavailable before sending. Check Settings before reusing it.
 - Uncertain sends are not retried automatically. Check Signal before scheduling a copy.
-- The beta is not notarized. Installation, delivery and real phone linking passed
-  on an Apple Silicon development Mac; clean-Mac and browser-download first-launch
-  verification remain pending. Developer ID/notarization are optional at this stage.
+- The beta is not notarized. Build 29 installation, production startup, real phone
+  linking and scheduled delivery passed in a fresh Apple Silicon macOS VM, with
+  the first-launch command above. This is VM acceptance, not a second physical Mac.
+  Apple Developer membership, Developer ID and notarization are outside the beta plan.
 - Custom icon appearance was verified on the development Mac.
 - Intel hardware is not validated. No automatic updates are included.
 - Matching source/license materials passed technical coverage checks and accompany
-  the candidate. Clean-Mac acceptance remains pending; Replace update, attachment preservation
+  the candidate. Replace update, attachment preservation
   and one-time post-update delivery passed on the development Mac.
 
 ## Reporting a problem
@@ -76,8 +91,10 @@ linking URIs, Signal account directories, queue files, Keychain data or real con
 - [x] Verify candidate build 29 .app, DMG, source archive, hashes and metadata (2026-10-08).
 - [x] Development-Mac Replace acceptance recorded for build 27; build 29 fixes and QR follow-up accepted separately.
 - [x] Record real QR linking after redesign, timeout/retry and window-close cancellation on build 29.
-- [ ] Complete clean-Mac/browser-download acceptance.
-- [ ] Complete native synthetic screenshots and the current UI acceptance report.
+- [x] Record clean macOS VM/browser-download acceptance for build 29, including the quarantine workaround and its limits.
+- [x] Complete native synthetic layout/rendering review of the build 29 UI; this does not replace production acceptance.
+- [x] Verify recovery with isolated encrypted queues and fake sends (171 Release tests passed).
 - [x] Operator approved committing and pushing the QR acceptance and subsequent release preparation.
 - [ ] Obtain separate approval for a prerelease tag and GitHub Release publication.
 - [ ] Attach matching DMG, SHA-256 files and complete source materials; update pending claims.
+- [ ] Regenerate the source-material archive and its hash after the latest test/documentation commits; the earlier archive matches 86a5718.

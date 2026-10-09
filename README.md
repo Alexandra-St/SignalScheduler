@@ -104,8 +104,9 @@ python3 -m unittest discover -s packaging -p 'test_*.py'
 The test suite covers queue compatibility and encryption, scheduling and send-state transitions, `signal-cli` integration boundaries, executable discovery and account selection. Tests use synthetic data and do not send real Signal messages. Headless UI
 checks exercise bindings, Send at validation and QR cancellation/retry.
 [Acceptance results](docs/BETA_ACCEPTANCE.md) separately record manual installation,
-phone-approved QR linking and real delivery on the development Mac; clean-Mac
-verification remains pending.
+phone-approved QR linking and real delivery on the development Mac and a fresh
+Apple Silicon macOS VM. The VM first launch required the app-specific quarantine
+command in the [installation instructions](docs/BETA_RELEASE.md#install).
 
 ## Privacy and limitations
 

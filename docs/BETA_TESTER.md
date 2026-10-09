@@ -10,10 +10,26 @@ Current prepared candidate: **0.3.0 build 29** (Apple Silicon).
 - [ ] Download the supplied DMG and SHA-256 file; verify the checksum.
 - [ ] Open the DMG; drag Signal Scheduler to Applications, eject the disk image.
 - [ ] Launch from Applications. Record the exact first-launch warning, if any.
-- [ ] For an unidentified-developer warning, follow System Settings → Privacy & Security → Open Anyway.
+- [ ] For an unidentified-developer warning, try System Settings → Privacy & Security → Open Anyway if available.
       Do not disable Gatekeeper. If the warning says damaged or malware, report it.
 - [ ] Confirm the custom icon appears in Finder and Dock.
 - [ ] Confirm the app offers Connect Signal and does not request Homebrew, Java or .NET.
+
+For the trusted beta, if that route is unavailable, run this in Terminal and then
+open the installed app again:
+
+```bash
+xattr -dr com.apple.quarantine "/Applications/Signal Scheduler.app"
+```
+
+This removes only this app's download quarantine; it does not disable Gatekeeper
+globally. Build 29 launched after this command in the clean VM. Some read-only
+Java license files produced permission errors. Record those errors and whether
+the app opens; if it still does not, report the failure rather than changing
+system-wide security settings.
+
+The completed VM results are in [BETA_ACCEPTANCE.md](BETA_ACCEPTANCE.md). This
+checklist remains reusable: do not infer that every item below was tested in the VM.
 
 ## Connection and delivery
 
