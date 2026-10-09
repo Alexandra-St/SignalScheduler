@@ -232,3 +232,13 @@ automatic detection followed by removal of the test device. Combined with the
 earlier timeout/Try again report, the planned development-Mac QR scenarios are
 complete. No account identifiers, QR codes or linking secrets are recorded.
 This does not establish clean-Mac or browser-download acceptance.
+# Recovery regression verification — 2026-10-09
+
+Three isolated recovery cases passed against the current application code, using
+an encrypted temporary queue and a fake sender; no Signal transmission occurred.
+Persisted Sending recovers to Unknown across two reopenings and never dispatches.
+A nonzero send result and an interrupted response retain UnknownOrFailed and
+Unknown respectively after reopening; unrelated Pending work still dispatches
+once and persists as Sent. These checks validate durable recovery state and
+duplicate-send prevention, not an actual process kill, power loss, or a live
+network interruption. Production application code was unchanged.
