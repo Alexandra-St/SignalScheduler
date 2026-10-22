@@ -1,6 +1,6 @@
 namespace SignalScheduler.Presentation;
 
-public enum HistoryFilterKind { All, Sent, Cancelled, NewMissed, Missed, Uncertain, Blocked }
+public enum HistoryFilterKind { All, Sent, Cancelled, NewMissed, Missed, Uncertain, Blocked, RequiresVerification }
 
 public sealed class HistoryFilterOption(HistoryFilterKind kind, string label) : ObservableObject
 {
@@ -23,7 +23,8 @@ public sealed class HistoryFilterOption(HistoryFilterKind kind, string label) : 
         {
             new HistoryFilterOption(HistoryFilterKind.Missed, "Missed"),
             new HistoryFilterOption(HistoryFilterKind.Uncertain, "Unknown / Failed"),
-            new HistoryFilterOption(HistoryFilterKind.Blocked, "Blocked")
+            new HistoryFilterOption(HistoryFilterKind.Blocked, "Blocked"),
+            new HistoryFilterOption(HistoryFilterKind.RequiresVerification, "Requires verification")
         });
         return options;
     }

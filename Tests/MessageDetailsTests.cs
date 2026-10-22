@@ -20,6 +20,7 @@ public sealed class MessageDetailsTests
     [InlineData(MessageStatus.Cancelled)]
     [InlineData(MessageStatus.Missed)]
     [InlineData(MessageStatus.Blocked)]
+    [InlineData(MessageStatus.RequiresVerification)]
     [InlineData(MessageStatus.Unknown)]
     [InlineData(MessageStatus.UnknownOrFailed)]
     public void DetailsShowFullContentAllAttachmentsAndOnlyValidActions(MessageStatus status)
@@ -50,10 +51,14 @@ public sealed class MessageDetailsTests
                     .RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 Assert.True(window.FindControl<Border>("DeleteConfirmation")!.IsVisible);
                 Assert.False(window.FindControl<WrapPanel>("DetailsActions")!.IsVisible);
-                Assert.Equal(new[] { "Cancel", "Delete" }, buttons.Where(b => b.IsEffectivelyVisible && b.Content is string).Select(b => (string)b.Content!).OrderBy(t => t).ToArray());
+                Assert.Equal(new[] { "Cancel", "Delete" }, buttons.Where(b => b.IsEffectivelyVisible && b.Content is string
+                    && ((string)b.Content is "Cancel" or "Delete")).Select(b => (string)b.Content!).OrderBy(t => t).ToArray());
                 buttons.Single(b => Equals(b.Content, "Cancel")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 Assert.False(window.FindControl<Border>("DeleteConfirmation")!.IsVisible);
             }
+            Assert.Equal(status == MessageStatus.RequiresVerification,
+                buttons.Single(button => Equals(button.Content, "Verify identity")).IsVisible);
+            Assert.False(buttons.Single(button => Equals(button.Content, "Schedule again")).IsVisible);
             if (status == MessageStatus.Pending && Environment.GetEnvironmentVariable("SIGNALSCHEDULER_LAYOUT_PREVIEW") is { } directory)
             {
                 Directory.CreateDirectory(directory);

@@ -20,6 +20,7 @@ public sealed class MessageStatusJsonConverter : JsonConverter<MessageStatus>
                 "UnknownOrFailed" or "Unknown/failed — check Signal before rescheduling" => MessageStatus.UnknownOrFailed,
                 "Missed" or "Missed — reschedule manually" => MessageStatus.Missed,
                 "Blocked" or "Blocked — signal-cli missing; reschedule manually" => MessageStatus.Blocked,
+                "RequiresVerification" or "Requires verification" => MessageStatus.RequiresVerification,
                 _ => MessageStatus.Unknown
             };
 
@@ -39,6 +40,7 @@ public sealed class MessageStatusJsonConverter : JsonConverter<MessageStatus>
             MessageStatus.UnknownOrFailed => "Unknown/failed — check Signal before rescheduling",
             MessageStatus.Missed => "Missed — reschedule manually",
             MessageStatus.Blocked => "Blocked — signal-cli missing; reschedule manually",
+            MessageStatus.RequiresVerification => "Requires verification",
             _ => "Unknown — check Signal before rescheduling"
         });
 }

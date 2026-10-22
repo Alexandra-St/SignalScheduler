@@ -38,10 +38,10 @@ internal sealed class TestQueue : IDisposable
 internal sealed class FakeSignalSender : ISignalSender
 {
     public List<ScheduledMessage> Attempts { get; } = new();
-    public Func<ScheduledMessage, Task<(int Code, string Output)>> Send { get; set; }
-        = _ => Task.FromResult((0, ""));
+    public Func<ScheduledMessage, Task<SignalSendResult>> Send { get; set; }
+        = _ => Task.FromResult(new SignalSendResult(0));
 
-    public Task<(int Code, string Output)> SendAsync(ScheduledMessage message)
+    public Task<SignalSendResult> SendAsync(ScheduledMessage message)
     {
         Attempts.Add(message);
         return Send(message);

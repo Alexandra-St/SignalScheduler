@@ -1,3 +1,4 @@
+using SignalScheduler.Integrations.Signal;
 using SignalScheduler.Models;
 using SignalScheduler.Services;
 using Xunit;
@@ -27,7 +28,7 @@ public sealed class MessageDispatcherTests
             Send = _ =>
             {
                 Assert.Equal(MessageStatus.Sending, Assert.Single(queue.Store.Items).State);
-                return Task.FromResult((0, ""));
+                return Task.FromResult(new SignalSendResult(0));
             }
         };
         var dispatcher = new MessageDispatcher(queue.Store, sender);
@@ -72,8 +73,8 @@ public sealed class MessageDispatcherTests
         queue.Add(TimeSpan.FromMinutes(-1));
         var sender = new FakeSignalSender
         {
-            Send = _ => throws ? Task.FromException<(int, string)>(new IOException("Synthetic failure"))
-                : Task.FromResult((1, ""))
+            Send = _ => throws ? Task.FromException<SignalSendResult>(new IOException("Synthetic failure"))
+                : Task.FromResult(new SignalSendResult(1))
         };
         var dispatcher = new MessageDispatcher(queue.Store, sender);
         DispatchOutcome? outcome = null;
@@ -86,20 +87,45 @@ public sealed class MessageDispatcherTests
         Assert.False(dispatcher.IsBusy);
     }
 
+    [Theory]
+    [InlineData(4, true, MessageStatus.RequiresVerification, DispatchOutcome.RequiresVerification)]
+    [InlineData(4, false, MessageStatus.UnknownOrFailed, DispatchOutcome.Uncertain)]
+    [InlineData(3, false, MessageStatus.UnknownOrFailed, DispatchOutcome.Uncertain)]
+    public async Task OnlyCompatibleUntrustedIdentityResultRequiresVerification(int code, bool requiresVerification,
+        MessageStatus expectedState, DispatchOutcome expectedOutcome)
+    {
+        using var queue = new TestQueue();
+        queue.Add(TimeSpan.FromMinutes(-1));
+        var sender = new FakeSignalSender
+        {
+            Send = _ => Task.FromResult(new SignalSendResult(code, requiresVerification))
+        };
+        var dispatcher = new MessageDispatcher(queue.Store, sender);
+        DispatchOutcome? outcome = null;
+        dispatcher.SendingCompleted += value => outcome = value;
+
+        await dispatcher.DispatchDueAsync();
+        await dispatcher.DispatchDueAsync();
+
+        Assert.Single(sender.Attempts);
+        Assert.Equal(expectedState, Assert.Single(queue.Store.Items).State);
+        Assert.Equal(expectedOutcome, outcome);
+    }
+
     [Fact]
     public async Task OverlappingTicksDoNotStartConcurrentSends()
     {
         using var queue = new TestQueue();
         queue.Add(TimeSpan.FromMinutes(-2));
         queue.Add(TimeSpan.FromMinutes(-1));
-        var release = new TaskCompletionSource<(int, string)>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource<SignalSendResult>(TaskCreationOptions.RunContinuationsAsynchronously);
         var sender = new FakeSignalSender { Send = _ => release.Task };
         var dispatcher = new MessageDispatcher(queue.Store, sender);
         var first = dispatcher.DispatchDueAsync();
         Assert.True(dispatcher.IsBusy);
         await dispatcher.DispatchDueAsync();
         Assert.Single(sender.Attempts);
-        release.SetResult((0, ""));
+        release.SetResult(new SignalSendResult(0));
         await first;
         Assert.False(dispatcher.IsBusy);
         Assert.Single(queue.Store.Items, message => message.State == MessageStatus.Pending);

@@ -97,7 +97,23 @@ public sealed class SignalExecutableTests
         var sender = new ConfiguredSignalSender(() => Task.FromResult<SignalExecutable?>(new(queue.Executable, "0.14.1")));
         var result = await sender.SendAsync(queue.Add(TimeSpan.Zero) with { Cli = "/missing/historical-cli", Recipient = "+12025550123" });
         Assert.Equal(0, result.Code);
-        Assert.Equal("synthetic-result", result.Output);
+        Assert.False(result.RequiresVerification);
         await Assert.ThrowsAsync<IOException>(() => new ConfiguredSignalSender(() => Task.FromResult<SignalExecutable?>(null)).SendAsync(queue.Add(TimeSpan.Zero)));
+    }
+
+    [Theory]
+    [InlineData("0.14.9", true)]
+    [InlineData("0.14.8", false)]
+    [InlineData("1.0.0", false)]
+    public async Task OnlySignalCli0149ExitCodeFourIsClassifiedAsIdentityVerification(string version, bool expected)
+    {
+        using var queue = new TestQueue();
+        Script(queue.Executable, "[ \"$1\" = '-a' ] || exit 2\nexit 4");
+        var sender = new ConfiguredSignalSender(() => Task.FromResult<SignalExecutable?>(new(queue.Executable, version)));
+
+        var result = await sender.SendAsync(queue.Add(TimeSpan.Zero) with { Recipient = "+12025550123" });
+
+        Assert.Equal(4, result.Code);
+        Assert.Equal(expected, result.RequiresVerification);
     }
 }

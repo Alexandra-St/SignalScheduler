@@ -272,6 +272,7 @@ public sealed class MainWindowViewModel : ObservableObject
             {
                 DispatchOutcome.Accepted => "Message sent.",
                 DispatchOutcome.Uncertain => "Send failed. Check Signal before scheduling a copy.",
+                DispatchOutcome.RequiresVerification => "Recipient identity needs verification before sending again.",
                 _ => "Sending or saving failed. Check Signal before rescheduling; reopen the app."
             };
             if (dispatcher.IsFaulted) timer.Stop();
@@ -302,9 +303,18 @@ public sealed class MainWindowViewModel : ObservableObject
             if (!OperatingSystem.IsMacOS())
                 throw new PlatformNotSupportedException("This version requires macOS Keychain.");
             store = new EncryptedQueueStore(MacApplicationPaths.DataDirectory,
+#if MANUAL_ACCEPTANCE
+                ManualAcceptanceProfile.GetOrCreateQueueKey());
+            ManualAcceptanceProfile.SeedQueueWhenEmpty(store);
+#else
                 await MacKeychain.GetOrCreateKeyAsync());
+#endif
             MacApplicationPaths.DeleteTemporaryLeftovers();
+#if MANUAL_ACCEPTANCE
+            ConfigureQueue(store, new ManualAcceptanceProfile.NoNetworkSignalSender(), () => Signal.Cli);
+#else
             ConfigureQueue(store, new ConfiguredSignalSender(Signal.ResolveExecutableAsync), () => Signal.Cli);
+#endif
             await ProcessStartupOverdueAsync();
             canSchedule = true;
             NotifyScheduling();
@@ -383,6 +393,9 @@ public sealed class MainWindowViewModel : ObservableObject
     }
 
     public event Action<ScheduledMessage>? RescheduleRequested;
+    private readonly object scheduleAgainLock = new();
+    private readonly HashSet<Guid> scheduleAgainInProgress = new();
+    private readonly HashSet<Guid> scheduleAgainCompleted = new();
     public void RequestReschedule(ScheduledMessage message)
     {
         var current = store?.Items.SingleOrDefault(item => item.Id == message.Id);
@@ -412,6 +425,68 @@ public sealed class MainWindowViewModel : ObservableObject
             return true;
         }
         catch { error = "Queue write failed. Reopen the app."; QueueFailure(error); return false; }
+    }
+
+    public async Task<(bool Success, string Error)> TryScheduleAgainAsync(
+        Guid id, string date, string time, Func<Task<bool>> identityStillVerified)
+    {
+        var original = store?.Items.SingleOrDefault(item => item.Id == id);
+        if (original?.State != MessageStatus.RequiresVerification)
+            return (false, "This message is no longer available to schedule again.");
+        lock (scheduleAgainLock)
+        {
+            if (scheduleAgainCompleted.Contains(id) || !scheduleAgainInProgress.Add(id))
+                return (false, "A new attempt has already been scheduled for this message.");
+        }
+
+        try
+        {
+            if (!DateTime.TryParseExact(date, new[] { "d.M.yyyy", "dd.MM.yyyy" }, CultureInfo.InvariantCulture,
+                    DateTimeStyles.None, out var day))
+                return (false, "Enter a valid date, for example 08.10.2026.");
+            var canonical = day.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) + " " + time;
+            if (!SendTimeValidation.TryGetDue(canonical, DateTimeOffset.Now, TimeZoneInfo.Local, out var due, out var error))
+                return (false, error);
+            if (IsBusy || !canSchedule || Signal.IsWorking)
+                return (false, "Wait until Signal Scheduler is ready.");
+            if (!File.Exists(Signal.Cli) || !Signal.LinkedAccounts.Contains(original.Account, StringComparer.Ordinal))
+                return (false, "Connect the original sending account in Settings before scheduling again.");
+
+            bool verified;
+            try { verified = await identityStillVerified(); }
+            catch { verified = false; }
+            if (!verified) return (false, "The recipient's identity is no longer verified. Verify it again before scheduling.");
+
+            // Re-read the queue after the asynchronous identity check; the source must still be unchanged.
+            var current = store?.Items.SingleOrDefault(item => item.Id == id);
+            if (current != original || current?.State != MessageStatus.RequiresVerification)
+                return (false, "The original message changed while scheduling. No new message was created.");
+            var newAttempt = original with { Id = Guid.NewGuid(), Due = due, State = MessageStatus.Pending, Cli = Signal.Cli };
+            try { store!.Add(newAttempt); }
+            catch
+            {
+                // Add mutates the in-memory queue before its atomic disk write; do not allow a second copy
+                // if persistence failed after the new ID was already inserted in memory.
+                if (store!.Items.Any(item => item.Id == newAttempt.Id))
+                    lock (scheduleAgainLock) scheduleAgainCompleted.Add(id);
+                throw;
+            }
+            lock (scheduleAgainLock) scheduleAgainCompleted.Add(id);
+            UpdateMessages();
+            SelectedMessagesTab = 0;
+            Status = "Message scheduled again. The original remains in History.";
+            return (true, "");
+        }
+        catch
+        {
+            const string error = "Queue write failed. Reopen the app.";
+            QueueFailure(error);
+            return (false, error);
+        }
+        finally
+        {
+            lock (scheduleAgainLock) scheduleAgainInProgress.Remove(id);
+        }
     }
     private HashSet<Guid> startupOverdue = new();
     private readonly HashSet<Guid> startupMissedIds = new();

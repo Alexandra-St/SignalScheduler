@@ -34,7 +34,7 @@ public sealed class MessageQueuePresentationTests
             new ScheduledMessage(Guid.NewGuid(), "+12025550123", "Synthetic", DateTimeOffset.Now.AddHours(index),
                 status, "fixture", "fixture-cli"), owner)).ToArray();
         var history = MessageQueuePresentation.History(messages, HistoryFilterKind.All);
-        Assert.Equal(6, history.Count);
+        Assert.Equal(7, history.Count);
         Assert.Equal(history.OrderByDescending(message => message.Message.Due), history);
         Assert.DoesNotContain(history, message => message.Message.State is MessageStatus.Pending or MessageStatus.Sending);
         foreach (var filter in new[] { HistoryFilterKind.Sent, HistoryFilterKind.Cancelled, HistoryFilterKind.Missed, HistoryFilterKind.Blocked })
@@ -42,6 +42,11 @@ public sealed class MessageQueuePresentationTests
         var uncertain = MessageQueuePresentation.History(messages, HistoryFilterKind.Uncertain);
         Assert.Equal(2, uncertain.Count);
         Assert.All(uncertain, message => Assert.True(message.HasStatusHint));
+        var verification = Assert.Single(MessageQueuePresentation.History(messages, HistoryFilterKind.RequiresVerification));
+        Assert.Equal("Requires verification", verification.BadgeLabel);
+        Assert.Equal("Status: Requires verification", verification.Status);
+        Assert.Equal("The recipient's safety number may have changed. Verify their identity before sending again.", verification.StatusHint);
+        Assert.Contains(HistoryFilterOption.Create(0, false), option => option.Kind == HistoryFilterKind.RequiresVerification && option.Label == "Requires verification");
         Assert.Empty(MessageQueuePresentation.History(Array.Empty<MessageViewModel>(), HistoryFilterKind.All));
         owner.TryClose();
     }

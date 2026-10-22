@@ -1,3 +1,4 @@
+using SignalScheduler.Integrations.Signal;
 using SignalScheduler.Models;
 using SignalScheduler.Persistence;
 using SignalScheduler.Services;
@@ -40,8 +41,8 @@ public sealed class RecoveryTests
         var sender = new FakeSignalSender
         {
             Send = _ => throws
-                ? Task.FromException<(int, string)>(new IOException("Synthetic interrupted response"))
-                : Task.FromResult((1, "Synthetic uncertain response"))
+                ? Task.FromException<SignalSendResult>(new IOException("Synthetic interrupted response"))
+                : Task.FromResult(new SignalSendResult(1))
         };
         await new MessageDispatcher(queue.Store, sender).DispatchDueAsync();
         Assert.Equal(uncertain.Id, Assert.Single(sender.Attempts).Id);

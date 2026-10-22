@@ -128,6 +128,88 @@ public sealed class RescheduleTests
     }
 
     [AvaloniaFact]
+    public void ScheduleAgainDialogCancelLeavesHistoryUntouched()
+    {
+        using var queue = new TestQueue();
+        var original = queue.Add(TimeSpan.FromHours(-1), MessageStatus.RequiresVerification);
+        var owner = new MainWindowViewModel(queue.Store, new FakeSignalSender());
+        var dialog = new SignalScheduler.Views.RescheduleWindow(owner, original, () => Task.FromResult(true));
+        dialog.Show(); Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+        Assert.Equal("Schedule message again", dialog.Title);
+        Assert.Equal("Schedule again", dialog.FindControl<Avalonia.Controls.Button>("ConfirmButton")!.Content);
+        dialog.Close(false);
+        Assert.Equal(original, Assert.Single(queue.Store.Items));
+        owner.TryClose();
+    }
+
+    [Fact]
+    public async Task ScheduleAgainCreatesNewPendingRecordAndPreservesSourceWithoutSending()
+    {
+        using var queue = new TestQueue();
+        var original = queue.Add(TimeSpan.FromHours(-1), MessageStatus.RequiresVerification) with
+        {
+            Recipient = "+12025550123", Text = "original text", Account = "+12025550100",
+            Attachments = new() { new("synthetic.png", new byte[] { 1, 2, 3 }) }
+        };
+        queue.Store.Remove(original.Id); queue.Store.Add(original);
+        var sender = new FakeSignalSender();
+        var owner = new MainWindowViewModel(queue.Store, sender);
+        File.WriteAllText(queue.Executable,
+            "#!/bin/sh\nif [ \"$1\" = '--version' ]; then printf 'signal-cli 0.14.9'; else printf '[{\"number\":\"+12025550100\"}]'; fi\n");
+        File.SetUnixFileMode(queue.Executable, UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute);
+        await owner.Signal.ConfigureExecutableAsync(queue.Executable, persist: false);
+        var originalSnapshot = queue.Store.Items.Single();
+        var due = DateTime.Now.AddHours(2);
+        var result = await owner.TryScheduleAgainAsync(original.Id, due.ToString("dd.MM.yyyy"), due.ToString("HH:mm"),
+            () => Task.FromResult(true));
+        Assert.True(result.Success, result.Error);
+        var items = queue.Store.Items;
+        Assert.Equal(2, items.Count);
+        var preserved = items.Single(item => item.Id == original.Id);
+        var created = items.Single(item => item.Id != original.Id);
+        Assert.Equal(originalSnapshot, preserved);
+        Assert.NotEqual(original.Id, created.Id);
+        Assert.Equal(MessageStatus.Pending, created.State);
+        Assert.Equal(original.Text, created.Text);
+        Assert.Equal(original.Account, created.Account);
+        Assert.Equal(original.Recipient, created.Recipient);
+        Assert.Equal(original.Attachments, created.Attachments);
+        Assert.Equal(queue.Executable, created.Cli);
+        Assert.Equal(due.ToString("yyyy-MM-dd HH:mm"), created.Due.LocalDateTime.ToString("yyyy-MM-dd HH:mm"));
+        Assert.Empty(sender.Attempts);
+        var duplicate = await owner.TryScheduleAgainAsync(original.Id, due.ToString("dd.MM.yyyy"), due.ToString("HH:mm"),
+            () => Task.FromResult(true));
+        Assert.False(duplicate.Success);
+        Assert.Equal(2, queue.Store.Items.Count);
+        owner.TryClose();
+    }
+
+    [Fact]
+    public async Task ScheduleAgainReservesSourceWhileIdentityIsCheckedAndRejectsUntrustedResult()
+    {
+        using var queue = new TestQueue();
+        var original = queue.Add(TimeSpan.FromHours(-1), MessageStatus.RequiresVerification);
+        var owner = new MainWindowViewModel(queue.Store, new FakeSignalSender());
+        File.WriteAllText(queue.Executable,
+            "#!/bin/sh\nif [ \"$1\" = '--version' ]; then printf 'signal-cli 0.14.9'; else printf '[{\"number\":\"account-placeholder\"}]'; fi\n");
+        File.SetUnixFileMode(queue.Executable, UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute);
+        await owner.Signal.ConfigureExecutableAsync(queue.Executable, persist: false);
+        var due = DateTime.Now.AddHours(2);
+        var entered = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var release = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+        async Task<bool> CheckIdentity() { entered.SetResult(); return await release.Task; }
+        var first = owner.TryScheduleAgainAsync(original.Id, due.ToString("dd.MM.yyyy"), due.ToString("HH:mm"), CheckIdentity);
+        await entered.Task;
+        var second = await owner.TryScheduleAgainAsync(original.Id, due.ToString("dd.MM.yyyy"), due.ToString("HH:mm"), CheckIdentity);
+        Assert.False(second.Success);
+        release.SetResult(false);
+        var failed = await first;
+        Assert.False(failed.Success);
+        Assert.Equal(original, Assert.Single(queue.Store.Items));
+        owner.TryClose();
+    }
+
+    [AvaloniaFact]
     public async Task ConfirmCreatesNewPendingAndPreservesMissedContentAndAccount()
     {
         using var queue = new TestQueue();

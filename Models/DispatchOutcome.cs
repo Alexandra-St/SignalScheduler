@@ -4,5 +4,6 @@ public enum DispatchOutcome
 {
     Accepted,
     Uncertain,
-    Interrupted
+    Interrupted,
+    RequiresVerification
 }

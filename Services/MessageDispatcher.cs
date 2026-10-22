@@ -44,8 +44,11 @@ public sealed class MessageDispatcher(EncryptedQueueStore store, ISignalSender s
             QueueChanged?.Invoke();
             started = true;
             var result = await sender.SendAsync(message);
-            store.ChangeStatus(message.Id, result.Code == 0 ? MessageStatus.Sent : MessageStatus.UnknownOrFailed);
-            outcome = result.Code == 0 ? DispatchOutcome.Accepted : DispatchOutcome.Uncertain;
+            var state = result.RequiresVerification ? MessageStatus.RequiresVerification
+                : result.Code == 0 ? MessageStatus.Sent : MessageStatus.UnknownOrFailed;
+            store.ChangeStatus(message.Id, state);
+            outcome = result.RequiresVerification ? DispatchOutcome.RequiresVerification
+                : result.Code == 0 ? DispatchOutcome.Accepted : DispatchOutcome.Uncertain;
         }
         catch
         {

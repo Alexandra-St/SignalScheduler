@@ -10,6 +10,7 @@ public partial class MessageDetailsWindow : Window
     private readonly MainWindowViewModel owner = null!;
     private readonly Guid id;
     private readonly List<AttachmentViewModel> attachments = new();
+    private MessageViewModel? displayedMessage;
     public MessageDetailsWindow() => InitializeComponent();
     public MessageDetailsWindow(MainWindowViewModel owner, MessageViewModel message) : this()
     {
@@ -17,7 +18,12 @@ public partial class MessageDetailsWindow : Window
         id = message.Message.Id;
         Display(message);
         owner.PropertyChanged += OnOwnerChanged;
-        Closed += (_, _) => { owner.PropertyChanged -= OnOwnerChanged; ClearAttachments(); };
+        Closed += (_, _) =>
+        {
+            owner.PropertyChanged -= OnOwnerChanged;
+            displayedMessage?.ClearVerificationData();
+            ClearAttachments();
+        };
     }
     private void OnOwnerChanged(object? sender, PropertyChangedEventArgs args)
     {
@@ -28,6 +34,9 @@ public partial class MessageDetailsWindow : Window
     }
     private void Display(MessageViewModel message)
     {
+        if (displayedMessage != null && !ReferenceEquals(displayedMessage, message))
+            displayedMessage.ClearVerificationData();
+        displayedMessage = message;
         DataContext = message;
         ClearAttachments();
         attachments.AddRange(message.Attachments.Select(item => new AttachmentViewModel(item, _ => { })));
@@ -44,6 +53,13 @@ public partial class MessageDetailsWindow : Window
         var message = (MessageViewModel)DataContext!;
         if (!message.RescheduleCommand.CanExecute(null)) return;
         var dialog = new RescheduleWindow(owner, message.Message);
+        if (await dialog.ShowDialog<bool>(this)) Close();
+    }
+    private async void OnScheduleAgain(object? sender, RoutedEventArgs args)
+    {
+        if (DataContext is not MessageViewModel message || !message.CanScheduleAgain) return;
+        if (!await message.RecheckIdentityForScheduleAsync()) return;
+        var dialog = new RescheduleWindow(owner, message.Message, message.RecheckIdentityForScheduleAsync);
         if (await dialog.ShowDialog<bool>(this)) Close();
     }
     private async void OnEdit(object? sender, RoutedEventArgs args)

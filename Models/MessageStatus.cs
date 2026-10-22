@@ -13,5 +13,6 @@ public enum MessageStatus
     Sent,
     UnknownOrFailed,
     Missed,
-    Blocked
+    Blocked,
+    RequiresVerification
 }

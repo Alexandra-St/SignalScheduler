@@ -18,6 +18,29 @@
                 IsVisible="{Binding HasStatusHint}">
           <TextBlock x:Name="DetailsWarning" Text="{Binding StatusHint}" TextWrapping="Wrap" Foreground="#E0BFA6" />
         </Border>
+        <Button Content="Verify identity" IsVisible="{Binding CanVerifyIdentity}"
+                Command="{Binding VerifyIdentityCommand}" HorizontalAlignment="Left" />
+        <Border IsVisible="{Binding VerificationPanelVisible}" Background="#132B3A" BorderBrush="#2D79A8"
+                BorderThickness="1" CornerRadius="6" Padding="12">
+          <StackPanel Spacing="10">
+            <TextBlock Text="Identity verification" FontWeight="SemiBold" />
+            <TextBlock Text="{Binding VerificationMessage}" TextWrapping="Wrap" />
+            <StackPanel Orientation="Horizontal" Spacing="5" IsVisible="{Binding HasTrustStatus}">
+              <TextBlock Text="Current trust status:" />
+              <TextBlock Text="{Binding VerificationTrustStatus}" />
+            </StackPanel>
+            <TextBlock Text="Safety number" Foreground="#AABCCA" IsVisible="{Binding HasSafetyNumber}" />
+            <SelectableTextBlock x:Name="SafetyNumberText" Text="{Binding SafetyNumber}" TextWrapping="Wrap" FontSize="16"
+                                 IsVisible="{Binding HasSafetyNumber}" />
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Button Content="I've verified the safety number" IsVisible="{Binding HasSafetyNumber}"
+                      IsEnabled="{Binding CanConfirmIdentity}" Command="{Binding ConfirmIdentityCommand}" />
+              <Button Content="Check identity again" IsVisible="{Binding CanCheckIdentityAgain}"
+                      Command="{Binding CheckIdentityAgainCommand}" />
+              <Button Content="Close" Command="{Binding CloseVerificationCommand}" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
         <TextBlock Text="Message" Foreground="#AABCCA" FontSize="12" />
         <SelectableTextBlock x:Name="FullMessageText" Text="{Binding Text}" TextWrapping="Wrap" />
         <ItemsControl x:Name="DetailsAttachments">
@@ -45,6 +68,7 @@
         </StackPanel>
       </Border>
       <WrapPanel x:Name="DetailsActions" HorizontalAlignment="Right">
+        <Button Content="Schedule again" IsVisible="{Binding CanScheduleAgain}" Click="OnScheduleAgain" Margin="0,0,8,6" />
         <Button Content="Edit text…" IsVisible="{Binding CanEdit}" Click="OnEdit" Margin="0,0,8,6" />
         <Button Content="Cancel message" IsVisible="{Binding CanCancel}" Command="{Binding CancelCommand}" Margin="0,0,8,6" />
         <Button Content="Reschedule…" IsVisible="{Binding CanReschedule}" Click="OnReschedule" Margin="0,0,8,6" />

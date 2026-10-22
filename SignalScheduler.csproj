@@ -7,6 +7,9 @@
     <Nullable>enable</Nullable>
     <DefaultItemExcludes>$(DefaultItemExcludes);build/**</DefaultItemExcludes>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(ManualAcceptance)' == 'true'">
+    <DefineConstants>$(DefineConstants);MANUAL_ACCEPTANCE</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="QRCoder" Version="1.6.0" />
     <PackageReference Include="Avalonia.Desktop" Version="11.3.0" />

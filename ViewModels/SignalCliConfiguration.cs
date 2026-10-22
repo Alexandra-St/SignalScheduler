@@ -1,5 +1,6 @@
 using SignalScheduler.Infrastructure;
 using SignalScheduler.Integrations.Signal;
+using SignalScheduler.Models;
 using SignalScheduler.Presentation;
 
 namespace SignalScheduler.ViewModels;
@@ -8,11 +9,12 @@ public sealed class SignalCliConfiguration : ObservableObject
 {
     private readonly Func<Task<SignalExecutable?>> detectExecutable;
     private readonly Action<string?> savePreference;
+    private readonly SignalCliAdapter identityAdapter;
     private string? customExecutable;
     private string cli = "", version = "", account = "";
     private string executableStatus = "Looking for signal-cli…", accountDiscoveryStatus = "";
     private IReadOnlyList<string> linkedAccounts = Array.Empty<string>();
-    private bool resolving, discovering, linking, locked, closed, accountsKnown;
+    private bool resolving, discovering, linking, verifyingIdentity, locked, closed, accountsKnown;
 
     public string Cli { get => cli; private set => Set(ref cli, value); }
     public string ExecutableVersion { get => version; private set => Set(ref version, value); }
@@ -26,7 +28,7 @@ public sealed class SignalCliConfiguration : ObservableObject
     }
     public bool AutomaticDetection => customExecutable == null;
     public bool ExecutableReady => Cli.Length > 0 && !resolving;
-    public bool IsWorking => resolving || discovering || linking;
+    public bool IsWorking => resolving || discovering || linking || verifyingIdentity;
     public bool CanConfigure => !closed && !locked && !IsWorking;
     public bool HasSelectedAccount => ExecutableReady && !IsWorking && LinkedAccounts.Contains(Account, StringComparer.Ordinal);
     public bool CanConnect => CanConfigure && ExecutableReady;
@@ -34,12 +36,23 @@ public sealed class SignalCliConfiguration : ObservableObject
     public AsyncCommand RefreshAccountsCommand { get; }
     public AsyncCommand UseAutomaticDetectionCommand { get; }
 
-    public SignalCliConfiguration() : this(SignalExecutable.DetectForApplicationAsync, SignalCliPreferences.Save) { }
+    public SignalCliConfiguration() : this(
+#if MANUAL_ACCEPTANCE
+        ManualAcceptanceProfile.DetectExecutableAsync,
+#else
+        SignalExecutable.DetectForApplicationAsync,
+#endif
+        SignalCliPreferences.Save, new()) { }
 
     internal SignalCliConfiguration(Func<Task<SignalExecutable?>> detectExecutable, Action<string?> savePreference)
+        : this(detectExecutable, savePreference, new()) { }
+
+    internal SignalCliConfiguration(Func<Task<SignalExecutable?>> detectExecutable, Action<string?> savePreference,
+        SignalCliAdapter identityAdapter)
     {
         this.detectExecutable = detectExecutable;
         this.savePreference = savePreference;
+        this.identityAdapter = identityAdapter;
         RefreshAccountsCommand = new(RefreshAccountsAsync, () => CanConfigure && ExecutableReady);
         UseAutomaticDetectionCommand = new(() => ConfigureExecutableAsync(null), () => CanConfigure);
     }
@@ -59,9 +72,91 @@ public sealed class SignalCliConfiguration : ObservableObject
         ? detectExecutable()
         : SignalExecutable.ValidateAsync(customExecutable);
 
+    public async Task<SignalIdentitySnapshot> ReadIdentityForVerificationAsync(ScheduledMessage message)
+    {
+        if (message.State != MessageStatus.RequiresVerification)
+            throw new InvalidOperationException("This message does not require identity verification.");
+        return await WithIdentityVerificationAsync(async () =>
+        {
+            var executable = await ResolveVerificationExecutableAsync();
+            var identities = await identityAdapter.ListIdentitiesAsync(executable.Path, message.Account, message.Recipient);
+            var untrusted = identities.Where(identity => identity.TrustStatus == "UNTRUSTED").ToArray();
+            if (untrusted.Length == 1) return untrusted[0];
+            if (untrusted.Length > 1 || identities.Count != 1)
+                throw new IOException("Signal returned ambiguous identity details.");
+            return identities[0];
+        });
+    }
+
+    public async Task<bool> IsVerifiedIdentityForMessageAsync(ScheduledMessage message, string safetyNumber)
+    {
+        if (message.State != MessageStatus.RequiresVerification || string.IsNullOrWhiteSpace(safetyNumber))
+            return false;
+        return await WithIdentityVerificationAsync(async () =>
+        {
+            var executable = await ResolveVerificationExecutableAsync();
+            var identities = await identityAdapter.ListIdentitiesAsync(executable.Path, message.Account, message.Recipient);
+            return identities.Count == 1
+                && identities[0].TrustStatus == "TRUSTED_VERIFIED"
+                && identities[0].SafetyNumber == safetyNumber;
+        });
+    }
+
+    public async Task<bool> TrustVerifiedIdentityForMessageAsync(ScheduledMessage message, string safetyNumber)
+    {
+        if (message.State != MessageStatus.RequiresVerification || string.IsNullOrWhiteSpace(safetyNumber))
+            throw new InvalidOperationException("Identity verification is not available for this message.");
+        return await WithIdentityVerificationAsync(async () =>
+        {
+            var executable = await ResolveVerificationExecutableAsync();
+            var before = await identityAdapter.ListIdentitiesAsync(executable.Path, message.Account, message.Recipient);
+            var untrusted = before.Where(identity => identity.TrustStatus == "UNTRUSTED").ToArray();
+            if (untrusted.Length != 1 || untrusted[0].SafetyNumber != safetyNumber)
+                return false;
+
+            await identityAdapter.TrustVerifiedIdentityAsync(executable.Path, message.Account, message.Recipient, safetyNumber);
+            var after = await identityAdapter.ListIdentitiesAsync(executable.Path, message.Account, message.Recipient);
+            return after.Count(identity => identity.TrustStatus == "UNTRUSTED") == 0
+                && after.Any(identity => identity.TrustStatus == "TRUSTED_VERIFIED" && identity.SafetyNumber == safetyNumber);
+        });
+    }
+
+    private async Task<T> WithIdentityVerificationAsync<T>(Func<Task<T>> action)
+    {
+        if (IsWorking || locked || closed) throw new IOException("Signal is busy or unavailable.");
+        verifyingIdentity = true;
+        NotifyState();
+        try { return await action(); }
+        finally { verifyingIdentity = false; NotifyState(); }
+    }
+
+    private async Task<SignalExecutable> ResolveVerificationExecutableAsync()
+    {
+        var executable = await ResolveExecutableAsync();
+        if (executable == null) throw new IOException("signal-cli is unavailable.");
+        if (executable.Version != "0.14.9")
+            throw new NotSupportedException("Identity verification requires the compatible signal-cli version.");
+#if MANUAL_ACCEPTANCE
+        if (!string.Equals(Path.GetFullPath(executable.Path), Path.GetFullPath(ManualAcceptanceProfile.FakeCliPath), StringComparison.Ordinal))
+            throw new NotSupportedException("Manual acceptance mode only permits its isolated fake CLI.");
+#endif
+        if (SignalExecutable.BundledPath(AppContext.BaseDirectory) is { } bundled
+            && !string.Equals(Path.GetFullPath(executable.Path), Path.GetFullPath(bundled), StringComparison.Ordinal))
+            throw new NotSupportedException("Identity verification requires the app's bundled signal-cli.");
+        return executable;
+    }
+
     public async Task ConfigureExecutableAsync(string? chosenPath, bool persist = true)
     {
         if (!CanConfigure) return;
+#if MANUAL_ACCEPTANCE
+        if (chosenPath != null && !string.Equals(Path.GetFullPath(chosenPath),
+                Path.GetFullPath(ManualAcceptanceProfile.FakeCliPath), StringComparison.Ordinal))
+        {
+            ExecutableStatus = "Manual acceptance mode only permits its isolated fake CLI.";
+            return;
+        }
+#endif
         resolving = true;
         Cli = "";
         LinkedAccounts = Array.Empty<string>();

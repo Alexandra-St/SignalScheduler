@@ -19,6 +19,7 @@ public sealed class QueueCompatibilityTests
     [InlineData(MessageStatus.UnknownOrFailed, "Unknown/failed — check Signal before rescheduling")]
     [InlineData(MessageStatus.Missed, "Missed — reschedule manually")]
     [InlineData(MessageStatus.Blocked, "Blocked — signal-cli missing; reschedule manually")]
+    [InlineData(MessageStatus.RequiresVerification, "Requires verification")]
     public void StatusWritesOriginalWireStringAndReadsItBack(MessageStatus status, string wireValue)
     {
         var json = JsonSerializer.Serialize(status);
@@ -60,6 +61,21 @@ public sealed class QueueCompatibilityTests
         => UnrecognizedOrMissingStateLoadsAndNeverDispatches(null);
 
     [Fact]
+    public void RequiresVerificationAndOriginalMessageSurviveQueueReopen()
+    {
+        using var queue = new TestQueue();
+        var original = queue.Add(TimeSpan.FromHours(-1), MessageStatus.RequiresVerification);
+        queue.Store.Dispose();
+
+        using var reopened = new EncryptedQueueStore(queue.DirectoryPath, queue.Key.ToArray());
+        var loaded = Assert.Single(reopened.Items);
+        Assert.Equal(MessageStatus.RequiresVerification, loaded.State);
+        Assert.Equal(original.Id, loaded.Id);
+        Assert.Equal(original.Recipient, loaded.Recipient);
+        Assert.Equal(original.Text, loaded.Text);
+    }
+
+    [Fact]
     public void NewCipherReadsLegacyEnvelopeAndLegacyCipherReadsNewEnvelope()
     {
         var key = RandomNumberGenerator.GetBytes(32);
@@ -94,11 +110,13 @@ public sealed class QueueCompatibilityTests
     [InlineData("Unknown/failed — check Signal before rescheduling", MessageStatus.UnknownOrFailed)]
     [InlineData("Missed — reschedule manually", MessageStatus.Missed)]
     [InlineData("Blocked — signal-cli missing; reschedule manually", MessageStatus.Blocked)]
+    [InlineData("Requires verification", MessageStatus.RequiresVerification)]
     [InlineData("Sent", MessageStatus.Sent)]
     [InlineData("Unknown", MessageStatus.Unknown)]
     [InlineData("UnknownOrFailed", MessageStatus.UnknownOrFailed)]
     [InlineData("Missed", MessageStatus.Missed)]
     [InlineData("Blocked", MessageStatus.Blocked)]
+    [InlineData("RequiresVerification", MessageStatus.RequiresVerification)]
     [InlineData("LegacyUnexpectedStatus", MessageStatus.Unknown)]
     public void LegacyTextOnlyQueueLoadsWithoutMigration(string state, MessageStatus expected)
     {

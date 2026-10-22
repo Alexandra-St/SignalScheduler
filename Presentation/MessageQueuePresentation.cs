@@ -23,6 +23,7 @@ public static class MessageQueuePresentation
                 HistoryFilterKind.Missed or HistoryFilterKind.NewMissed => m.Message.State == MessageStatus.Missed,
                 HistoryFilterKind.Uncertain => m.Message.State is MessageStatus.Unknown or MessageStatus.UnknownOrFailed,
                 HistoryFilterKind.Blocked => m.Message.State == MessageStatus.Blocked,
+                HistoryFilterKind.RequiresVerification => m.Message.State == MessageStatus.RequiresVerification,
                 _ => true
             }).OrderByDescending(m => m.Message.Due).ToArray();
 }

@@ -2,9 +2,19 @@ namespace SignalScheduler.Infrastructure;
 
 public static class MacApplicationPaths
 {
-    public static string DataDirectory => Path.Combine(
+    public static string DataDirectory
+    {
+        get
+        {
+#if MANUAL_ACCEPTANCE
+            return ManualAcceptanceProfile.DataDirectory;
+#else
+            return Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
         "Library", "Application Support", "SignalScheduler");
+#endif
+        }
+    }
 
     public static string TemporaryDirectory => Path.Combine(DataDirectory, "temporary");
 

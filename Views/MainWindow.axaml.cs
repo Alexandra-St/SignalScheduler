@@ -32,6 +32,9 @@ public sealed partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+#if MANUAL_ACCEPTANCE
+        Title = "Signal Scheduler — MANUAL TEST (no sends)";
+#endif
         DataContext = viewModel;
         viewModel.RescheduleRequested += async message =>
             await new RescheduleWindow(viewModel, message).ShowDialog(this);

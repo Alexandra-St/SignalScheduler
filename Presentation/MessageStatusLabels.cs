@@ -13,6 +13,7 @@ internal static class MessageStatusLabels
         MessageStatus.UnknownOrFailed => "Unknown/failed",
         MessageStatus.Missed => "Missed",
         MessageStatus.Blocked => "Blocked",
+        MessageStatus.RequiresVerification => "Requires verification",
         _ => "Unknown"
     };
 
@@ -21,6 +22,7 @@ internal static class MessageStatusLabels
         MessageStatus.Unknown or MessageStatus.UnknownOrFailed => "Check Signal before scheduling again to avoid sending a duplicate.",
         MessageStatus.Missed => "The scheduled time was missed. Choose a new time to send this message.",
         MessageStatus.Blocked => "signal-cli was unavailable. Check Settings, then choose a new send time.",
+        MessageStatus.RequiresVerification => "The recipient's safety number may have changed. Verify their identity before sending again.",
         _ => null
     };
 }
