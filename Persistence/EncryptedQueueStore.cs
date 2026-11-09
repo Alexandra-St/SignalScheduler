@@ -34,20 +34,23 @@ public sealed class EncryptedQueueStore : IDisposable
 
     public void Add(ScheduledMessage message)
     {
-        items.Add(message);
-        Save();
+        var updated = items.Append(message).ToList();
+        Save(updated);
+        items = updated;
     }
 
     public void Remove(Guid id)
     {
-        items.RemoveAll(message => message.Id == id);
-        Save();
+        var updated = items.Where(message => message.Id != id).ToList();
+        Save(updated);
+        items = updated;
     }
 
     public void ChangeStatus(Guid id, MessageStatus state)
     {
-        items = items.Select(message => message.Id == id ? message with { State = state } : message).ToList();
-        Save();
+        var updated = items.Select(message => message.Id == id ? message with { State = state } : message).ToList();
+        Save(updated);
+        items = updated;
     }
 
     public bool TryEditPendingText(Guid id, string text)
