@@ -6,6 +6,15 @@ namespace SignalScheduler.Integrations.Signal;
 
 public sealed class SignalCliAdapter
 {
+    private readonly Action<string, bool> deleteDirectory;
+
+    public SignalCliAdapter() : this(Directory.Delete) { }
+
+    internal SignalCliAdapter(Action<string, bool> deleteDirectory)
+    {
+        this.deleteDirectory = deleteDirectory;
+    }
+
     public async Task<IReadOnlyList<SignalIdentitySnapshot>> ListIdentitiesAsync(
         string executable, string account, string recipient)
     {
@@ -63,7 +72,11 @@ public sealed class SignalCliAdapter
             }
             return await ProcessRunner.RunAsync(message.Cli, arguments, message.Text);
         }
-        finally { Directory.Delete(folder, true); }
+        finally
+        {
+            try { deleteDirectory(folder, true); }
+            catch (Exception) { /* Temporary-file cleanup must not replace the send result. */ }
+        }
     }
 }
 

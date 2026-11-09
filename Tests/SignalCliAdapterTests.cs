@@ -45,4 +45,102 @@ public sealed class SignalCliAdapterTests
         }
         finally { Directory.Delete(directory, true); }
     }
+
+    [Fact]
+    public async Task CleanupFailureDoesNotReplaceSuccessfulSendResult()
+    {
+        var directory = Path.Combine(Path.GetTempPath(), "signal-scheduler-tests", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(directory);
+        var executable = await CreateFakeCliAsync(directory, "cat >/dev/null\nprintf 'accepted'\nexit 0\n");
+        string? cleanupPath = null;
+        var adapter = new SignalCliAdapter((path, _) =>
+        {
+            cleanupPath = path;
+            throw new IOException("Synthetic cleanup failure");
+        });
+
+        try
+        {
+            var result = await adapter.SendAsync(CreateMessage(executable));
+
+            Assert.Equal(0, result.Code);
+            Assert.Equal("accepted", result.Output);
+            Assert.NotNull(cleanupPath);
+            Assert.True(Directory.Exists(cleanupPath));
+        }
+        finally
+        {
+            if (cleanupPath != null && Directory.Exists(cleanupPath)) Directory.Delete(cleanupPath, true);
+            Directory.Delete(directory, true);
+        }
+    }
+
+    [Fact]
+    public async Task CleanupFailureDoesNotReplaceFailedSendResult()
+    {
+        var directory = Path.Combine(Path.GetTempPath(), "signal-scheduler-tests", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(directory);
+        var executable = await CreateFakeCliAsync(directory, "cat >/dev/null\nprintf 'send failed'\nexit 23\n");
+        string? cleanupPath = null;
+        var adapter = new SignalCliAdapter((path, _) =>
+        {
+            cleanupPath = path;
+            throw new IOException("Synthetic cleanup failure");
+        });
+
+        try
+        {
+            var result = await adapter.SendAsync(CreateMessage(executable));
+
+            Assert.Equal(23, result.Code);
+            Assert.Equal("send failed", result.Output);
+            Assert.NotNull(cleanupPath);
+            Assert.True(Directory.Exists(cleanupPath));
+        }
+        finally
+        {
+            if (cleanupPath != null && Directory.Exists(cleanupPath)) Directory.Delete(cleanupPath, true);
+            Directory.Delete(directory, true);
+        }
+    }
+
+    [Fact]
+    public async Task CleanupFailureDoesNotReplaceSendException()
+    {
+        var directory = Path.Combine(Path.GetTempPath(), "signal-scheduler-tests", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(directory);
+        var missingExecutable = Path.Combine(directory, "missing-cli");
+        string? cleanupPath = null;
+        var adapter = new SignalCliAdapter((path, _) =>
+        {
+            cleanupPath = path;
+            throw new IOException("Synthetic cleanup failure");
+        });
+
+        try
+        {
+            await Assert.ThrowsAsync<System.ComponentModel.Win32Exception>(
+                () => adapter.SendAsync(CreateMessage(missingExecutable)));
+
+            Assert.NotNull(cleanupPath);
+        }
+        finally
+        {
+            if (cleanupPath != null && Directory.Exists(cleanupPath)) Directory.Delete(cleanupPath, true);
+            Directory.Delete(directory, true);
+        }
+    }
+
+    private static ScheduledMessage CreateMessage(string executable)
+        => new(Guid.NewGuid(), "+12025550123", "Synthetic caption", DateTimeOffset.UtcNow,
+            MessageStatus.Pending, "account-placeholder", executable,
+            new() { new ImageAttachment("synthetic.png", new byte[] { 1, 2, 3 }) });
+
+    private static async Task<string> CreateFakeCliAsync(string directory, string script)
+    {
+        var executable = Path.Combine(directory, "fake-cli");
+        await File.WriteAllTextAsync(executable, "#!/bin/sh\n" + script);
+        File.SetUnixFileMode(executable, UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute);
+        return executable;
+    }
 }
