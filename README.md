@@ -21,6 +21,16 @@ Built with C#, .NET 8 and Avalonia.
 - Attach images from disk or paste a screenshot directly from the macOS clipboard.
 - Recover conservatively after interrupted sends without automatic retries; Sent records successful CLI completion, not recipient delivery.
 
+## Screenshots
+
+**Scheduling and upcoming messages**
+
+![Scheduling and upcoming messages](docs/screenshots/upcoming.png)
+
+**Message history**
+
+![Message history](docs/screenshots/history.png)
+
 ## Architecture
 
 ```mermaid
