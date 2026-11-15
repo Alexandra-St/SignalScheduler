@@ -77,11 +77,11 @@ def check_root(root: Path) -> Path:
     return root
 
 
-def build(_: argparse.Namespace) -> None:
+def create_build() -> tuple[Path, Path, Path]:
     root = Path(tempfile.mkdtemp(prefix="SignalScheduler-manual-acceptance-"))
     root.chmod(0o700)
-    profile = create_profile(root)
     (root / MARKER).write_text("Signal Scheduler manual acceptance build v1\n")
+    profile = create_profile(root)
     app = root / "app"
     app.mkdir(mode=0o700)
     try:
@@ -97,6 +97,12 @@ def build(_: argparse.Namespace) -> None:
                       f"export {PROFILE_ENV}={shlex.quote(str(profile))}\n"
                       f"exec dotnet {shlex.quote(str(app / 'SignalScheduler.dll'))} \"$@\"\n")
     launch.chmod(0o700)
+    return root, profile, app
+
+
+def build(_: argparse.Namespace) -> None:
+    root, profile, app = create_build()
+    launch = root / "launch.command"
     print(f"Build: {app}")
     print(f"Profile: {profile}")
     print(f"Launch: {launch}")
@@ -104,13 +110,20 @@ def build(_: argparse.Namespace) -> None:
 
 
 def launch(args: argparse.Namespace) -> None:
-    root = check_root(args.root)
-    app = root / "app" / "SignalScheduler.dll"
+    if args.root is None:
+        root, profile, app_directory = create_build()
+    else:
+        root = check_root(args.root)
+        profile = root / "profile"
+        app_directory = root / "app"
+    app = app_directory / "SignalScheduler.dll"
     if not app.is_file():
-        raise SystemExit("Build output is missing; run the build command first.")
+        raise SystemExit("Build output is missing; create the isolated manual-acceptance build first.")
     env = os.environ.copy()
     env["SIGNALSCHEDULER_MANUAL_ACCEPTANCE"] = "1"
-    env[PROFILE_ENV] = str(root / "profile")
+    env[PROFILE_ENV] = str(profile)
+    print(f"Launching isolated manual-acceptance build: {app_directory}")
+    print("Synthetic queue, fake CLI, and no-network sender are enabled.")
     subprocess.run(["dotnet", str(app)], cwd=root, env=env, check=False)
 
 
@@ -133,8 +146,8 @@ parser = argparse.ArgumentParser(description=__doc__)
 commands = parser.add_subparsers(required=True)
 build_parser = commands.add_parser("build", help="Create an isolated local build and fake profile")
 build_parser.set_defaults(run=build)
-launch_parser = commands.add_parser("launch", help="Launch an existing isolated build/profile")
-launch_parser.add_argument("--root", required=True, type=Path)
+launch_parser = commands.add_parser("launch", help="Build and launch an isolated demo (or use an existing --root)")
+launch_parser.add_argument("--root", type=Path, help="Use an existing generated manual-acceptance build")
 launch_parser.set_defaults(run=launch)
 identity_parser = commands.add_parser("set-identity", help="Change only a synthetic fixture trust state")
 identity_parser.add_argument("--root", required=True, type=Path)
