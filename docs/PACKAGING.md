@@ -36,7 +36,7 @@ and any JNI extraction remain separate and are discarded after the check.
 - Existing-account recognition and data preservation passed on the development Mac;
   historical Replace results apply to their recorded builds.
 - Intel is unvalidated and is not a target of this Apple Silicon beta.
-- Technical source/notice coverage passed for the unchanged build 29 dependency set.
+- Technical source/notice coverage passed for the unchanged dependency set carried into build 31.
   Regenerate the final matching source-material archive and SHA-256 after final
   approved test/documentation commits, and attach them beside the matching DMG.
 - Send at feedback, custom icon and native build 29 layout/rendering were accepted;
@@ -160,7 +160,7 @@ DMG filename reads version/build from that plist. Increment BuildNumber before
 each new test/distribution build; increment Version for each released update.
 This policy is enforced by project instructions and the release checklist;
 automatic build-number allocation is not implemented. Current candidate: 0.3.0
-build 29 with the styled installer. Earlier acceptance records retain their original version/build.
+build 31 with the styled installer. Earlier acceptance records retain their original version/build.
 
 ## Application icon
 

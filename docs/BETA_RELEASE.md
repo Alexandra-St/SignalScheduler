@@ -1,4 +1,11 @@
-# Signal Scheduler 0.3.0 beta — draft release notes
+# Signal Scheduler 0.3.0 beta — build 31 release notes
+
+## Changes since beta.30
+
+- Queue state remains consistent when persistence fails.
+- Cleanup failures no longer mask the actual Signal send result or error.
+- README now includes application screenshots.
+- The manual acceptance launcher is improved.
 
 Schedule Signal messages and photos from your Mac. Connect your phone by scanning
 an in-app QR code, choose the sending account, and set a local send time.

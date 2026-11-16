@@ -1,11 +1,17 @@
 # Beta acceptance record
 
-## Current status — 0.3.0 build 29
+## Current status — 0.3.0 build 31
+
+Build 31 includes queue consistency when persistence fails, preserves the real
+Signal send result/error when cleanup fails, adds README screenshots and improves
+the manual acceptance launcher. No new manual, VM or physical-Mac acceptance is
+claimed for build 31; the dated results below remain historical.
 
 - Production application code: `c2ee34f`. Subsequent commits add regression tests
   and documentation only; they do not change the packaged application code.
-- Latest Release .NET suite: 171 passing tests; packaging suite: 16 passing tests.
-- Development-Mac acceptance and native build 29 layout/rendering review complete;
+- Build 31 Release .NET suite: 198 passing tests; packaging suite: 22 passing tests;
+  Release build succeeded. No real Signal account read or send was performed.
+- Historical development-Mac acceptance and native build 29 layout/rendering review complete;
   individual historical results apply only to their recorded builds and scope.
 - Fresh Apple Silicon macOS VM / Safari download / production startup acceptance
   passed with an app-specific quarantine workaround, including real linking and delivery.
@@ -13,9 +19,7 @@
 - Intel, live process kill, power loss and live network interruption are unverified;
   recovery regression coverage uses isolated encrypted queues and fake sends.
 - Technical source/license coverage passed for the dependency set unchanged through
-  build 29. Regenerate the final matching source-material archive and SHA-256 after
-  final approved test/documentation commits before release. Tag and GitHub Release
-  require separate approval.
+  build 31; matching source materials and artifact hashes are prepared separately.
 
 ## Chronological historical record
 

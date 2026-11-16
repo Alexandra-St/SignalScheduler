@@ -2,9 +2,10 @@
 
 ## Current beta verification
 
-Current candidate: **0.3.0 build 29**. The latest Release suite passed 171 .NET
-tests; packaging verification passed 16 tests. Development-Mac acceptance and
-native UI layout/rendering review are complete, with version-specific evidence in
+Current candidate: **0.3.0 build 31**. The Release suite passed 198 .NET tests,
+packaging verification passed 22 tests and the Release build succeeded. No new
+manual, VM or physical-Mac acceptance is claimed for this candidate; historical
+acceptance results below remain tied to their recorded builds. See
 [the beta acceptance record](BETA_ACCEPTANCE.md).
 
 Build 29 passed Safari-download installation and production startup, phone linking

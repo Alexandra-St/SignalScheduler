@@ -1,4 +1,4 @@
-# Source and license review — dependency set through 0.3.0 build 29
+# Source and license review — dependency set carried through 0.3.0 build 31
 
 Status: technical source/notice coverage checks passed, 2026-10-08.
 
@@ -6,7 +6,7 @@ The original review was completed for 0.2.1 build 6. Dependencies and pinned
 provenance are unchanged; the audit was rerun against 0.3.0 build 26 with zero
 integrity or license-evidence errors (754 assets, 79 JARs, 77 notice mappings).
 That reviewed dependency set and pinned provenance remained unchanged through
-the current candidate, 0.3.0 build 29. Build 26 identifies the review baseline,
+the current candidate, 0.3.0 build 31. Build 26 identifies the review baseline,
 not the current candidate.
 
 ## Evidence

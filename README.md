@@ -146,7 +146,7 @@ Bundled `signal-cli` is a separate GPL-3.0-or-later project; Java and its depend
 retain their own licenses. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
 Technical source/license coverage review passed for the dependency set retained
-through the current candidate, 0.3.0 build 29; see [source review](docs/SOURCE_REVIEW.md).
+through the current candidate, 0.3.0 build 31; see [source review](docs/SOURCE_REVIEW.md).
 `python3 packaging/prepare_beta_sources.py` collects matching source archives,
 Maven/Rust source assets and notices under ignored `build/beta-materials/`.
 Fresh collection manifests start as REVIEW_REQUIRED; collection alone is not review.
