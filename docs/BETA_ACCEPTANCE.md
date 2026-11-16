@@ -7,15 +7,16 @@ Signal send result/error when cleanup fails, adds README screenshots and improve
 the manual acceptance launcher. No new manual, VM or physical-Mac acceptance is
 claimed for build 31; the dated results below remain historical.
 
-- Production application code: `c2ee34f`. Subsequent commits add regression tests
-  and documentation only; they do not change the packaged application code.
+- Build 31 includes application fixes `486be90` (queue persistence failure handling)
+  and `2e4c075` (preserving the Signal send result when cleanup fails).
 - Build 31 Release .NET suite: 198 passing tests; packaging suite: 22 passing tests;
   Release build succeeded. No real Signal account read or send was performed.
 - Historical development-Mac acceptance and native build 29 layout/rendering review complete;
   individual historical results apply only to their recorded builds and scope.
-- Fresh Apple Silicon macOS VM / Safari download / production startup acceptance
-  passed with an app-specific quarantine workaround, including real linking and delivery.
-  Ordinary Gatekeeper/Open Anyway success and a second physical Mac are not confirmed.
+- Historical build 29 Fresh Apple Silicon macOS VM / Safari download / production
+  startup acceptance passed with an app-specific quarantine workaround, including
+  real linking and delivery. No build 31 VM acceptance was performed. Ordinary
+  Gatekeeper/Open Anyway success and a second physical Mac are not confirmed.
 - Intel, live process kill, power loss and live network interruption are unverified;
   recovery regression coverage uses isolated encrypted queues and fake sends.
 - Technical source/license coverage passed for the dependency set unchanged through

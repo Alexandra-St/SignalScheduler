@@ -39,8 +39,8 @@ quarantine attribute from this app only. Then open it again from Applications:
 xattr -dr com.apple.quarantine "/Applications/Signal Scheduler.app"
 ```
 
-This first-launch workaround was verified in a fresh macOS VM after a Safari
-download. It does not notarize the app or change Gatekeeper globally. The command
+This first-launch workaround was verified for build 29 in a fresh macOS VM after a
+Safari download; it was not retested on build 31. It does not notarize the app or change Gatekeeper globally. The command
 reported permission errors on some read-only bundled Java license files, but the
 app subsequently launched. If launch still fails, report the exact error; do not
 change system-wide security settings. Open Anyway was not successfully completed
