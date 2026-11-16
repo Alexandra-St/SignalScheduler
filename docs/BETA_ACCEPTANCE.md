@@ -19,7 +19,7 @@ claimed for build 31; the dated results below remain historical.
 - Intel, live process kill, power loss and live network interruption are unverified;
   recovery regression coverage uses isolated encrypted queues and fake sends.
 - Technical source/license coverage passed for the dependency set unchanged through
-  build 31; matching source materials and artifact hashes are prepared separately.
+  build 31; the matching source materials and artifact hashes accompany this prerelease.
 
 ## Chronological historical record
 

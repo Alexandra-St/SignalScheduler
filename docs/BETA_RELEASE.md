@@ -80,8 +80,8 @@ in that VM; why it was unavailable or ineffective remains an unresolved follow-u
 - Custom icon appearance was verified on the development Mac.
 - Intel hardware is not validated. No automatic updates are included.
 - The unchanged dependency set passed technical source/license coverage checks.
-  The final matching source-material archive and SHA-256 must be regenerated after
-  the final approved test/documentation commits and attached to the release.
+  The matching build 31 source-material archive and SHA-256 are attached to this
+  prerelease.
   Historical Replace update, attachment preservation
   and one-time post-update delivery passed on the development Mac.
 
